@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Física interactiva</title>
+<meta name="description" content="Apuntes animados, ejercicios resueltos paso a paso y simuladores de física para 1.º de Bachillerato.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/base.css">
+<style>
+header.top{display:grid;gap:8px;margin:12px 0 28px}
+header.top h1{font-size:clamp(2rem,1.2rem + 3.4vw,3.1rem)}
+.topic{display:grid;gap:12px;margin-bottom:28px}
+.topic-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--rule);padding-bottom:6px}
+.topic-head p{margin:0;color:var(--ink-2);font-size:14.5px}
+.items{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr))}
+a.item{display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;align-items:start;text-decoration:none;color:inherit;transition:border-color .15s}
+a.item:hover{border-color:var(--ink-2)}
+a.item h3{font-size:1.08rem;line-height:1.25}
+a.item p{margin:4px 0 0;font-size:14.5px;color:var(--ink-2)}
+.badge{display:inline-block;font:600 11px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:999px;border:1px solid var(--rule);color:var(--ink-2);margin-bottom:6px}
+.badge.sim{border-color:var(--c-p);color:var(--c-p)}
+.thumb{border-radius:8px;border:1px solid var(--rule)}
+.thumb svg{display:block;width:100%;height:auto}
+.thumb .pl{fill:var(--plane);stroke:var(--plane-edge);stroke-width:1.5}
+.thumb .bk{fill:var(--sheet);stroke:var(--ink);stroke-width:1.8}
+.thumb .ap{stroke:var(--c-p)} .thumb .an{stroke:var(--c-n)} .thumb .af{stroke:var(--c-fr)} .thumb .av{stroke:var(--c-v)}
+.thumb line{stroke-width:2.4;stroke-linecap:round}
+.thumb .slider{stroke:var(--ink-2);stroke-width:2}
+.thumb .knob{fill:var(--c-p)}
+.colors{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13.5px;color:var(--ink-2);margin-top:6px}
+.colors span{display:inline-flex;gap:6px;align-items:center}
+.colors i{width:12px;height:12px;border-radius:3px;display:inline-block}
+footer{margin-top:36px;color:var(--ink-2);font-size:13px}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <div class="eyebrow">1.º de Bachillerato · Bachillerato Internacional</div>
+    <h1>Física interactiva</h1>
+    <p class="lead">Ejercicios resueltos paso a paso, con el porqué de cada fórmula, y simuladores para cambiar las condiciones de un problema y ver qué pasa.</p>
+    <div class="colors" aria-label="Código de colores">
+      <span><i style="background:var(--c-p)"></i>Peso y energía potencial</span>
+      <span><i style="background:var(--c-fr)"></i>Rozamiento y calor</span>
+      <span><i style="background:var(--c-v)"></i>Velocidad y energía cinética</span>
+      <span><i style="background:var(--c-n)"></i>Normal</span>
+    </div>
+  </header>
+
+  <section class="topic" aria-labelledby="t-energia">
+    <div class="topic-head"><h2 id="t-energia">Trabajo y energía</h2><p>Planos inclinados con rozamiento, ecuación de trabajo y balance de energía</p></div>
+    <div class="items">
+      <a class="item card" href="temas/energia/plano-inclinado-ejercicio-4/">
+        <div class="thumb grid-paper" aria-hidden="true"><svg viewBox="0 0 96 72"><polygon class="pl" points="8,12 8,62 90,62"/><rect class="bk" x="-7" y="-7" width="14" height="14" rx="2" transform="translate(46 30) rotate(31)"/><line class="ap" x1="46" y1="30" x2="46" y2="50"/><line class="an" x1="46" y1="30" x2="54" y2="17"/><line class="av" x1="60" y1="22" x2="72" y2="29"/></svg></div>
+        <div><span class="badge">Ejercicio resuelto</span><h3>Cuerpo lanzado hacia arriba por un plano inclinado</h3><p>Ejercicio 4 (Selectividad 2020): altura máxima y velocidad al volver, en 10 pasos animados.</p></div>
+      </a>
+      <a class="item card" href="simuladores/plano-inclinado/">
+        <div class="thumb grid-paper" aria-hidden="true"><svg viewBox="0 0 96 72"><polygon class="pl" points="8,18 8,50 90,50"/><rect class="bk" x="-6" y="-6" width="12" height="12" rx="2" transform="translate(52 28) rotate(21)"/><line class="slider" x1="12" y1="62" x2="84" y2="62"/><circle class="knob" cx="40" cy="62" r="4.5"/></svg></div>
+        <div><span class="badge sim">Simulador</span><h3>Plano inclinado con rozamiento</h3><p>Cambia masa, ángulo, rozamiento y velocidad, y mira el efecto en la altura, la vuelta y la energía.</p></div>
+      </a>
+    </div>
+  </section>
+
+  <footer>Material de estudio. Cada página funciona en el navegador del ordenador, la tableta o el móvil.</footer>
+</div>
+</body>
+</html>

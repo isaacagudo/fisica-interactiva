@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Simulador del plano inclinado</title>
+<meta name="description" content="Simulador interactivo: cuerpo lanzado hacia arriba por un plano inclinado con rozamiento. Cambia masa, ángulo, coeficiente de rozamiento y velocidad inicial.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Caveat:wght@500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../../assets/base.css">
+<style>
+header.top{display:grid;gap:6px;margin-bottom:18px}
+.sim{display:grid;gap:18px;grid-template-columns:minmax(0,1fr)}
+.sim>*,.colL>*,.colR>*{min-width:0}
+@media (max-width:959px){
+  .sim{grid-template-areas:"stage" "params" "results" "chart" "exp"}
+  .colL,.colR{display:contents}
+  .stage{grid-area:stage} .params{grid-area:params} .results{grid-area:results} .chart{grid-area:chart} .exp{grid-area:exp}
+}
+@media (min-width:960px){
+  .sim{grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);align-items:start}
+  .colL,.colR{display:grid;gap:18px;align-content:start;min-width:0}
+  .exp{grid-column:1 / -1}
+}
+@media (max-width:959px) and (min-height:640px){
+  .stage{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;border-radius:0 0 12px 12px;margin-left:calc(-1 * max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px,env(safe-area-inset-right,0px)));box-shadow:0 8px 18px -14px rgba(10,20,40,.4)}
+  body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--sheet)}
+}
+.stage{display:grid;gap:8px;padding:10px 12px 12px}
+.scene-wrap{border-radius:8px}
+#scene{display:block;width:100%;height:auto}
+#scene text{font-family:var(--f-body)}
+.plane{fill:var(--plane);stroke:var(--plane-edge);stroke-width:1.3}
+.floor{stroke:var(--plane-edge);stroke-width:1.3}
+.band{fill:var(--plane)}
+.ref{stroke:var(--ink-2);stroke-width:1.2;stroke-dasharray:6 5;fill:none}
+.lbl{fill:var(--ink-2);font-size:13px}
+.lbl-ink{fill:var(--ink);font-size:14px;font-weight:700}
+.block{fill:var(--sheet);stroke:var(--ink);stroke-width:1.8}
+.ghost{fill:none;stroke:var(--ink-2);stroke-width:1.3;stroke-dasharray:4 4}
+.dim{stroke:var(--ink-2);stroke-width:1.2;fill:none}
+.arrow line{stroke-width:2.6;stroke-linecap:round}
+.arrow text{font-size:15px;font-weight:700;dominant-baseline:middle}
+.a-p line{stroke:var(--c-p)} .a-p polygon,.a-p text{fill:var(--c-p)}
+.a-n line{stroke:var(--c-n)} .a-n polygon,.a-n text{fill:var(--c-n)}
+.a-fr line{stroke:var(--c-fr)} .a-fr polygon,.a-fr text{fill:var(--c-fr)}
+.a-v line{stroke:var(--c-v)} .a-v polygon,.a-v text{fill:var(--c-v)}
+.annot{fill:var(--ink);font-size:14px;font-weight:700}
+.readouts{display:flex;flex-wrap:wrap;gap:2px 14px;font-family:var(--f-mono);font-size:12.5px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.readouts b{color:var(--ink);font-weight:600}
+.readouts .phase{font-family:var(--f-body);font-weight:700;color:var(--ink)}
+.ebar{display:flex;height:14px;border-radius:7px;overflow:hidden;background:var(--grid)}
+.seg.ec{background:var(--c-v)} .seg.ep{background:var(--c-p)} .seg.q{background:var(--c-fr)}
+.legend{display:flex;flex-wrap:wrap;gap:2px 14px;font-size:12.5px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.legend b{font-family:var(--f-mono);font-weight:600;color:var(--ink)}
+.controls{display:flex;align-items:center;gap:8px}
+#time{flex:1;min-width:40px;accent-color:var(--c-p)}
+.speed{display:inline-flex;border:1px solid var(--rule);border-radius:9px;overflow:hidden}
+.speed button{appearance:none;border:0;background:var(--sheet);color:var(--ink-2);font:600 12.5px var(--f-mono);padding:0 8px;min-height:36px;cursor:pointer}
+.speed button[aria-pressed="true"]{background:var(--ink);color:var(--sheet)}
+@media (max-width:480px){#playLabel{display:none}.readouts{font-size:11.5px;gap:0 10px}.controls{gap:6px}.speed button{padding:0 6px}}
+
+.params{display:grid;gap:12px}
+.param{display:grid;gap:2px}
+.param label{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-weight:700}
+.param output{font-family:var(--f-mono);font-weight:600;font-variant-numeric:tabular-nums}
+.param small{color:var(--ink-2);font-size:12.5px}
+.param input{width:100%;accent-color:var(--c-p)}
+.toggle{display:flex;gap:8px;align-items:center;font-size:14px;color:var(--ink-2)}
+.toggle input{accent-color:var(--c-p);width:18px;height:18px}
+
+.results dl{margin:8px 0 0;display:grid;gap:0}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding:9px 0;border-top:1px solid var(--rule)}
+.row:first-child{border-top:0}
+.row dt{font-weight:700}
+.row dd{margin:0;font-family:var(--f-mono);font-weight:600;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.row .f{grid-column:1 / -1;color:var(--ink-2);font-size:13.5px}
+.row.off dd{color:var(--ink-2)}
+.verdict{padding:10px 12px;border-radius:9px;background:var(--paper);margin-top:10px;font-size:14.5px}
+
+.chart h2,.results h2,.params h2,.exp>h2{margin-bottom:4px}
+#chart{display:block;width:100%;height:auto}
+#chart text{font-family:var(--f-mono);font-size:11px;fill:var(--ink-2)}
+.axis{stroke:var(--ink-2);stroke-width:1}
+.gridline{stroke:var(--grid);stroke-width:1}
+.curve{fill:none;stroke-width:2.4;stroke-linejoin:round}
+.c-ec{stroke:var(--c-v)} .c-ep{stroke:var(--c-p)} .c-q{stroke:var(--c-fr)} .c-tot{stroke:var(--ink);stroke-dasharray:5 4;stroke-width:1.5}
+.cursor{stroke:var(--ink);stroke-width:1}
+.small{font-size:13.5px;color:var(--ink-2);margin:6px 0 0}
+
+.exp{display:grid;gap:10px}
+.cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}
+.xcard{display:grid;gap:8px;align-content:start}
+.xcard p{margin:0;font-size:14.5px}
+.xcard .btn{justify-self:start}
+</style>
+</head>
+<body>
+<div class="page">
+  <nav class="crumbs" aria-label="Ruta"><a href="../../">Física interactiva</a><span aria-hidden="true">›</span><span>Trabajo y energía</span></nav>
+  <header class="top">
+    <div class="eyebrow">Simulador · Trabajo y energía</div>
+    <h1>Plano inclinado con rozamiento</h1>
+    <p class="lead">Un cuerpo se lanza hacia arriba por un plano inclinado. Cambia la masa, el ángulo, el rozamiento y la velocidad inicial y observa qué les pasa al movimiento, a las fuerzas y a la energía. El problema resuelto paso a paso está en el <a href="../../temas/energia/plano-inclinado-ejercicio-4/">ejercicio 4</a>.</p>
+  </header>
+
+  <div class="sim">
+    <div class="colL">
+    <section class="stage card" aria-label="Animación">
+      <div class="scene-wrap grid-paper"><svg id="scene" viewBox="0 0 640 330" role="img" aria-label="Plano inclinado con el cuerpo, sus fuerzas y su velocidad"></svg></div>
+      <div class="readouts" id="readouts" aria-live="off"></div>
+      <div class="ebar" aria-hidden="true"><div class="seg ec" id="segEc"></div><div class="seg ep" id="segEp"></div><div class="seg q" id="segQ"></div></div>
+      <div class="legend" id="legend"></div>
+      <div class="controls">
+        <button class="btn" id="reset" type="button" aria-label="Volver al instante inicial"><svg viewBox="0 0 16 16"><path d="M2.5 2.5h2v11h-2zM14 2.5v11L6 8z"/></svg></button>
+        <button class="btn primary" id="play" type="button" aria-pressed="false" aria-label="Reproducir"><svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg><span id="playLabel">Reproducir</span></button>
+        <input type="range" id="time" min="0" max="1000" step="1" value="0" aria-label="Tiempo">
+        <div class="speed" role="group" aria-label="Velocidad de reproducción">
+          <button type="button" data-speed="0.25" aria-pressed="false">×¼</button>
+          <button type="button" data-speed="0.5" aria-pressed="true">×½</button>
+          <button type="button" data-speed="1" aria-pressed="false">×1</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="chart card" aria-labelledby="h-chart">
+      <h2 id="h-chart">Energía frente al tiempo</h2>
+      <div class="legend" style="margin:4px 0 6px"><span><i style="background:var(--c-v)"></i>Cinética</span><span><i style="background:var(--c-p)"></i>Potencial</span><span><i style="background:var(--c-fr)"></i>Calor</span><span><i style="background:var(--ink);height:2px;width:14px;border-radius:0"></i>Total</span></div>
+      <svg id="chart" viewBox="0 0 640 230" role="img" aria-label="Energía cinética, potencial y calor frente al tiempo"></svg>
+      <p class="small">La línea discontinua es la suma de las tres: se mantiene constante porque la energía no se pierde, se transforma.</p>
+    </section>
+    </div>
+
+    <div class="colR">
+    <section class="params card" aria-labelledby="h-params">
+      <h2 id="h-params">Condiciones iniciales</h2>
+      <div class="param"><label for="m">Masa, m <output id="mOut" for="m"></output></label><input type="range" id="m" min="0.1" max="10" step="0.1"></div>
+      <div class="param"><label for="alpha">Ángulo del plano, α <output id="alphaOut" for="alpha"></output></label><input type="range" id="alpha" min="5" max="60" step="1"></div>
+      <div class="param"><label for="mu">Coeficiente de rozamiento, μ <output id="muOut" for="mu"></output></label><input type="range" id="mu" min="0" max="0.8" step="0.01"></div>
+      <div class="param"><label for="v0">Velocidad inicial, vA <output id="v0Out" for="v0"></output></label><input type="range" id="v0" min="0.5" max="10" step="0.1"></div>
+      <label class="toggle"><input type="checkbox" id="comps"> Mostrar las componentes del peso (Px y Py)</label>
+      <p class="small">Las flechas de fuerza están a escala entre sí. g = 9,8 m/s².</p>
+    </section>
+
+    <section class="results card" aria-labelledby="h-res">
+      <h2 id="h-res">Resultados</h2>
+      <dl id="results"></dl>
+      <div class="verdict" id="verdict"></div>
+    </section>
+    </div>
+
+    <section class="exp" aria-labelledby="h-exp">
+      <h2 id="h-exp">Experimenta</h2>
+      <div class="cards">
+        <div class="xcard card"><h3>¿Influye la masa?</h3><p>Multiplica la masa por 4 y compara la altura máxima y la velocidad de vuelta. Fíjate en que solo cambian los julios.</p><button class="btn" type="button" data-try="masa">Masa × 4</button></div>
+        <div class="xcard card"><h3>Sin rozamiento</h3><p>Con μ = 0 la energía mecánica se conserva: no aparece calor y el cuerpo vuelve con la misma rapidez con la que salió.</p><button class="btn" type="button" data-try="liso">Quitar el rozamiento</button></div>
+        <div class="xcard card"><h3>Se queda arriba</h3><p>Con α = 15° y μ = 0,35 se cumple tg α &lt; μ: el rozamiento puede sujetar al cuerpo y no vuelve a bajar.</p><button class="btn" type="button" data-try="queda">Probar α = 15°, μ = 0,35</button></div>
+        <div class="xcard card"><h3>El doble de velocidad</h3><p>La distancia depende de vA², así que al duplicar la velocidad la altura máxima se multiplica por 4.</p><button class="btn" type="button" data-try="rapido">Duplicar vA</button></div>
+        <div class="xcard card"><h3>Volver al ejercicio 4</h3><p>m = 0,5 kg, α = 30°, μ = 0,2 y vA = 5 m/s: altura máxima 0,95 m y vuelta a 3,48 m/s.</p><button class="btn" type="button" data-try="ej4">Valores del ejercicio 4</button></div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+(() => {
+  const g = 9.8, DEF = { m: 0.5, alpha: 30, mu: 0.2, v0: 5 };
+  const P = { ...DEF };
+  const $ = id => document.getElementById(id);
+  const fmt = (x, n = 2) => { const r = Number(x.toFixed(n)); return (Object.is(r, -0) ? 0 : r).toFixed(n).replace('.', ','); };
+  const clamp = (x, a, b) => Math.min(Math.max(x, a), b);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---------- Física ----------
+  function compute(p) {
+    const a = p.alpha * Math.PI / 180, sa = Math.sin(a), ca = Math.cos(a);
+    const a1 = g * (sa + p.mu * ca), t1 = p.v0 / a1, d = p.v0 * p.v0 / (2 * a1);
+    const returns = Math.tan(a) > p.mu + 1e-9;
+    const a2 = returns ? g * (sa - p.mu * ca) : 0;
+    const t2 = returns ? Math.sqrt(2 * d / a2) : 0;
+    const vf = returns ? a2 * t2 : 0;
+    const Tend = returns ? t1 + t2 : t1 * 1.4;
+    return { ...p, sa, ca, tan: Math.tan(a), a1, t1, d, h: d * sa, returns, a2, t2, vf, Tend,
+             Fr: p.mu * p.m * g * ca, E0: 0.5 * p.m * p.v0 * p.v0 };
+  }
+  function state(M, t) {
+    t = clamp(t, 0, M.Tend);
+    let s, v, path;
+    if (t <= M.t1) { s = M.v0 * t - 0.5 * M.a1 * t * t; v = M.v0 - M.a1 * t; path = s; }
+    else if (M.returns) { const u = t - M.t1; s = M.d - 0.5 * M.a2 * u * u; v = -M.a2 * u; path = 2 * M.d - s; }
+    else { s = M.d; v = 0; path = M.d; }
+    s = Math.max(0, s);
+    return { t, s, v, h: s * M.sa, Ec: 0.5 * M.m * v * v, Ep: M.m * g * s * M.sa, Q: M.Fr * path };
+  }
+
+  // ---------- Dibujo ----------
+  const NS = 'http://www.w3.org/2000/svg';
+  const scene = $('scene'), chart = $('chart');
+  const mk = (tag, attrs = {}, parent = scene) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent.appendChild(e); return e; };
+  const add = (p, q, k = 1) => ({ x: p.x + q.x * k, y: p.y + q.y * k });
+  const O = { x: 0, y: 0 };
+  const F = { x: 606, y: 296 }, BS = 26, PREF = 58;
+  let M, G, staticLayer, dyn = {};
+
+  function arrow(cls, label, parent) {
+    const g = mk('g', { class: 'arrow ' + cls }, parent);
+    return { g, line: mk('line', {}, g), head: mk('polygon', {}, g), tx: Object.assign(mk('text', { 'text-anchor': 'middle' }, g), { textContent: label }) };
+  }
+  function setArrow(a, p, dir, len, show, off = O, opts = {}) {
+    if (!show || len < 5) { a.g.style.display = 'none'; return; }
+    a.g.style.display = '';
+    const hl = Math.min(9, len * 0.45), tip = add(p, dir, len), base = add(tip, dir, -hl), perp = { x: -dir.y, y: dir.x };
+    a.line.setAttribute('x1', p.x); a.line.setAttribute('y1', p.y); a.line.setAttribute('x2', base.x); a.line.setAttribute('y2', base.y);
+    a.line.setAttribute('stroke-dasharray', opts.dash ? '5 4' : 'none');
+    const h1 = add(base, perp, 5), h2 = add(base, perp, -5);
+    a.head.setAttribute('points', `${tip.x},${tip.y} ${h1.x},${h1.y} ${h2.x},${h2.y}`);
+    const lp = add(add(tip, dir, 11), off);
+    a.tx.setAttribute('x', lp.x); a.tx.setAttribute('y', lp.y);
+    if (opts.text) a.tx.textContent = opts.text;
+  }
+  function niceStep(raw) { const p = 10 ** Math.floor(Math.log10(raw)), f = raw / p; return (f < 1.5 ? 1 : f < 3.5 ? 2 : f < 7.5 ? 5 : 10) * p; }
+
+  function buildScene() {
+    scene.textContent = '';
+    const U = { x: -M.ca, y: -M.sa }, D = { x: M.ca, y: M.sa }, N = { x: M.sa, y: -M.ca }, NI = { x: -M.sa, y: M.ca };
+    const Lpx = Math.min(540 / M.ca, 250 / M.sa);
+    const Lreal = Math.max(M.d * 1.15, 0.4), a0 = 0.13 * Lreal, K = Lpx / (Lreal + a0);
+    const S = s => add(F, U, (a0 + s) * K);
+    const TOP = add(F, U, Lpx), SA = S(0), SB = S(M.d);
+    G = { U, D, N, NI, K, S, SA, SB };
+
+    mk('rect', { class: 'band', x: 0, y: F.y, width: 640, height: 14 });
+    mk('polygon', { class: 'plane', points: `${TOP.x},${TOP.y} ${TOP.x},${F.y} ${F.x},${F.y}` });
+    mk('line', { class: 'floor', x1: 0, y1: F.y, x2: 640, y2: F.y });
+    const r = 34; mk('path', { class: 'dim', d: `M${F.x - r} ${F.y}A${r} ${r} 0 0 1 ${F.x - r * M.ca} ${F.y - r * M.sa}` });
+    mk('text', { class: 'lbl', x: F.x - r - 6, y: F.y - 6, 'text-anchor': 'end' }).textContent = `${M.alpha}°`;
+    mk('line', { class: 'ref', x1: 6, y1: SA.y, x2: 634, y2: SA.y });
+    mk('text', { class: 'lbl', x: 8, y: SA.y - 6 }).textContent = 'h = 0';
+    mk('circle', { cx: SA.x, cy: SA.y, r: 3, fill: 'var(--ink)' });
+    mk('text', { class: 'lbl-ink', x: SA.x + 9, y: SA.y + 17 }).textContent = 'A';
+    // Punto más alto
+    const CB = add(SB, N, BS / 2);
+    mk('rect', { class: 'ghost', x: -BS / 2, y: -BS / 2, width: BS, height: BS, rx: 3, transform: `translate(${CB.x} ${CB.y}) rotate(${M.alpha})` });
+    mk('line', { class: 'ref', x1: SB.x, y1: SB.y, x2: SB.x, y2: SA.y });
+    const lab = mk('text', { class: 'lbl', x: SB.x + 6, y: SA.y - 7 }); lab.textContent = `h máx = ${fmt(M.h)} m`;
+    const tB = add(add(CB, U, BS + 4), N, 8); mk('text', { class: 'lbl-ink', x: tB.x, y: tB.y + 5, 'text-anchor': 'middle' }).textContent = 'B';
+    // Escala
+    const step = niceStep(70 / K), w = step * K;
+    mk('line', { class: 'dim', x1: 12, y1: 322, x2: 12 + w, y2: 322 });
+    mk('line', { class: 'dim', x1: 12, y1: 317, x2: 12, y2: 327 }); mk('line', { class: 'dim', x1: 12 + w, y1: 317, x2: 12 + w, y2: 327 });
+    mk('text', { class: 'lbl', x: 18 + w, y: 326 }).textContent = `${fmt(step, step < 1 ? (step < 0.1 ? 2 : 1) : 0)} m sobre el plano`;
+    // Elementos móviles
+    dyn.hLine = mk('line', { class: 'ref' }); dyn.hTxt = mk('text', { class: 'lbl' });
+    dyn.block = mk('rect', { class: 'block', x: -BS / 2, y: -BS / 2, width: BS, height: BS, rx: 3 });
+    const layer = mk('g');
+    dyn.P = arrow('a-p', 'P', layer); dyn.N = arrow('a-n', 'N', layer); dyn.Fr = arrow('a-fr', 'Fr', layer);
+    dyn.Px = arrow('a-p', 'Px', layer); dyn.Py = arrow('a-p', 'Py', layer); dyn.V = arrow('a-v', 'v', layer);
+    dyn.annot = mk('text', { class: 'annot', x: 630, y: 24, 'text-anchor': 'end' });
+  }
+
+  function buildChart() {
+    chart.textContent = '';
+    const x0 = 52, x1 = 624, y0 = 196, yTop = 16;
+    const X = t => x0 + (t / M.Tend) * (x1 - x0), Y = e => y0 - (e / M.E0) * (y0 - yTop);
+    for (const f of [0, 0.5, 1]) {
+      mk('line', { class: 'gridline', x1: x0, y1: Y(f * M.E0), x2: x1, y2: Y(f * M.E0) }, chart);
+      mk('text', { x: x0 - 6, y: Y(f * M.E0) + 4, 'text-anchor': 'end' }, chart).textContent = fmt(f * M.E0, M.E0 < 10 ? 2 : 1);
+    }
+    const st = niceStep(M.Tend / 6);
+    for (let t = 0; t <= M.Tend + 1e-9; t += st) {
+      mk('line', { class: 'axis', x1: X(t), y1: y0, x2: X(t), y2: y0 + 4 }, chart);
+      mk('text', { x: X(t), y: y0 + 16, 'text-anchor': 'middle' }, chart).textContent = fmt(t, st < 1 ? (st < 0.1 ? 2 : 1) : 0);
+    }
+    mk('line', { class: 'axis', x1: x0, y1: yTop, x2: x0, y2: y0 }, chart);
+    mk('line', { class: 'axis', x1: x0, y1: y0, x2: x1, y2: y0 }, chart);
+    mk('text', { x: x1, y: y0 + 32, 'text-anchor': 'end' }, chart).textContent = 't (s)';
+    mk('text', { x: x0 - 6, y: yTop - 4, 'text-anchor': 'end' }, chart).textContent = 'E (J)';
+    if (M.returns) { mk('line', { class: 'gridline', x1: X(M.t1), y1: yTop, x2: X(M.t1), y2: y0, 'stroke-dasharray': '3 3' }, chart); mk('text', { x: X(M.t1) + 4, y: yTop + 10 }, chart).textContent = 'B'; }
+    const n = 180, pts = { ec: [], ep: [], q: [], tot: [] };
+    for (let i = 0; i <= n; i++) {
+      const s = state(M, M.Tend * i / n), x = X(s.t);
+      pts.ec.push(`${x},${Y(s.Ec)}`); pts.ep.push(`${x},${Y(s.Ep)}`); pts.q.push(`${x},${Y(s.Q)}`); pts.tot.push(`${x},${Y(s.Ec + s.Ep + s.Q)}`);
+    }
+    for (const [k, cls] of [['tot', 'c-tot'], ['q', 'c-q'], ['ep', 'c-ep'], ['ec', 'c-ec']]) mk('polyline', { class: 'curve ' + cls, points: pts[k].join(' ') }, chart);
+    dyn.cursor = mk('line', { class: 'cursor', y1: yTop, y2: y0 }, chart);
+    dyn.X = X; dyn.Y = Y;
+    dyn.dots = ['c-v', 'c-p', 'c-fr'].map(c => mk('circle', { r: 4, fill: `var(--${c})` }, chart));
+  }
+
+  function renderResults() {
+    const r = [
+      ['Aceleración al subir', 'a = −g·(sen α + μ·cos α)', `${fmt(-M.a1)} m/s²`, false],
+      ['Distancia sobre el plano', 'd = vA² / [2·g·(sen α + μ·cos α)]', `${fmt(M.d)} m`, false],
+      ['Altura máxima', 'h = d·sen α', `${fmt(M.h)} m`, false],
+      ['Aceleración al bajar', 'a = g·(sen α − μ·cos α)', M.returns ? `${fmt(M.a2)} m/s²` : '—', !M.returns],
+      ['Velocidad al volver', 'v = √[2·g·d·(sen α − μ·cos α)]', M.returns ? `${fmt(M.vf)} m/s` : '—', !M.returns],
+      ['Tiempos', 'subida y bajada', M.returns ? `${fmt(M.t1)} s · ${fmt(M.t2)} s` : `${fmt(M.t1)} s · —`, false],
+      ['Calor total', 'Q = μ·m·g·cos α · (d de subida + d de bajada)', `${fmt(M.Fr * (M.returns ? 2 : 1) * M.d)} J`, false],
+    ];
+    $('results').innerHTML = r.map(([t, f, v, off]) => `<div class="row${off ? ' off' : ''}"><dt>${t}</dt><dd>${v}</dd><div class="f">${f}</div></div>`).join('');
+    const pct = M.E0 > 0 ? 100 * M.Fr * (M.returns ? 2 : 1) * M.d / M.E0 : 0;
+    $('verdict').innerHTML = M.returns
+      ? `<strong>Vuelve a bajar</strong> porque tg α = ${fmt(M.tan, 3)} es mayor que μ = ${fmt(M.mu)}. Regresa con ${fmt(M.vf)} m/s y el rozamiento se ha quedado el ${fmt(pct, 0)} % de la energía inicial.`
+      : `<strong>Se queda parado en B</strong> porque tg α = ${fmt(M.tan, 3)} no supera a μ = ${fmt(M.mu)}: el rozamiento puede sujetarlo.`;
+  }
+
+  // ---------- Fotograma ----------
+  let t = 0, playing = false, speed = 0.5, last = 0;
+  const range = $('time');
+  function render() {
+    const s = state(M, t), { U, D, N, NI, S } = G;
+    const C = add(S(s.s), N, BS / 2), contact = add(S(s.s), N, 3);
+    dyn.block.setAttribute('transform', `translate(${C.x} ${C.y}) rotate(${M.alpha})`);
+    const up = s.v > 1e-6, down = s.v < -1e-6, stopped = !up && !down && s.t > 0;
+    setArrow(dyn.P, C, { x: 0, y: 1 }, PREF, true, { x: 0, y: 2 });
+    setArrow(dyn.N, C, N, PREF * M.ca, true);
+    if (up) setArrow(dyn.Fr, contact, D, PREF * M.mu * M.ca, true, add(O, NI, 12), { text: 'Fr' });
+    else if (down) setArrow(dyn.Fr, contact, U, PREF * M.mu * M.ca, true, add(O, NI, 12), { text: 'Fr' });
+    else if (stopped && !M.returns) setArrow(dyn.Fr, contact, U, PREF * M.sa, true, add(O, NI, 12), { text: 'Fr' });
+    else setArrow(dyn.Fr, contact, D, 0, false);
+    const comps = $('comps').checked;
+    setArrow(dyn.Px, C, D, PREF * M.sa, comps, add(O, N, 12), { dash: true });
+    setArrow(dyn.Py, C, NI, PREF * M.ca, comps, { x: -8, y: 0 }, { dash: true });
+    setArrow(dyn.V, add(C, N, BS / 2 + 16), up ? U : D, Math.min(95, 10 * Math.abs(s.v)), Math.abs(s.v) > 0.05, add(O, N, 8), { text: 'v' });
+    const showH = s.h > 1e-3 && Math.abs(s.s - M.d) > 1e-3;
+    dyn.hLine.style.display = dyn.hTxt.style.display = showH ? '' : 'none';
+    if (showH) {
+      const sp = S(s.s);
+      dyn.hLine.setAttribute('x1', sp.x); dyn.hLine.setAttribute('y1', sp.y); dyn.hLine.setAttribute('x2', sp.x); dyn.hLine.setAttribute('y2', G.SA.y);
+      dyn.hTxt.setAttribute('x', sp.x + 6); dyn.hTxt.setAttribute('y', Math.max(sp.y + 14, (sp.y + G.SA.y) / 2 + 4)); dyn.hTxt.textContent = `h = ${fmt(s.h)} m`;
+    }
+    let phase;
+    if (s.t === 0) phase = 'Sale de A hacia arriba';
+    else if (up) phase = 'Sube: Fr apunta hacia abajo del plano';
+    else if (down) phase = 'Baja: Fr apunta hacia arriba del plano';
+    else if (!M.returns) phase = 'Se queda parado en B';
+    else phase = 'En B: v = 0';
+    if (M.returns && s.t >= M.Tend - 1e-9) phase = 'De vuelta en A';
+    dyn.annot.textContent = phase;
+    const sign = s.v > 0.005 ? '+' : s.v < -0.005 ? '−' : '';
+    $('readouts').innerHTML = `<span class="phase">${up ? 'Tramo A → B' : down ? 'Tramo B → A' : s.t === 0 ? 'En A' : 'Parado'}</span><span>t <b>${fmt(s.t)} s</b></span><span>d <b>${fmt(s.s)} m</b></span><span>h <b>${fmt(s.h)} m</b></span><span>v <b>${sign}${fmt(Math.abs(s.v))} m/s</b></span>`;
+    $('segEc').style.width = (100 * s.Ec / M.E0) + '%'; $('segEp').style.width = (100 * s.Ep / M.E0) + '%'; $('segQ').style.width = (100 * s.Q / M.E0) + '%';
+    $('legend').innerHTML = `<span><i style="background:var(--c-v)"></i>Ec <b>${fmt(s.Ec)} J</b></span><span><i style="background:var(--c-p)"></i>Ep <b>${fmt(s.Ep)} J</b></span><span><i style="background:var(--c-fr)"></i>Calor <b>${fmt(s.Q)} J</b></span><span>Total <b>${fmt(s.Ec + s.Ep + s.Q)} J</b></span>`;
+    const cx = dyn.X(s.t); dyn.cursor.setAttribute('x1', cx); dyn.cursor.setAttribute('x2', cx);
+    [s.Ec, s.Ep, s.Q].forEach((e, i) => { dyn.dots[i].setAttribute('cx', cx); dyn.dots[i].setAttribute('cy', dyn.Y(e)); });
+    range.value = Math.round(1000 * t / M.Tend);
+  }
+
+  // ---------- Reproducción ----------
+  const playBtn = $('play');
+  function syncPlay() {
+    playBtn.setAttribute('aria-pressed', playing); playBtn.setAttribute('aria-label', playing ? 'Pausa' : 'Reproducir');
+    $('playLabel').textContent = playing ? 'Pausa' : 'Reproducir';
+    $('playIcon').innerHTML = playing ? '<path d="M3.5 2.5h3.2v11H3.5zM9.3 2.5h3.2v11H9.3z"/>' : '<path d="M4 2.5v11l9-5.5z"/>';
+  }
+  function frame(now) {
+    if (!playing) return;
+    const dt = Math.min(0.05, (now - last) / 1000); last = now;
+    t = Math.min(M.Tend, t + dt * speed); render();
+    if (t >= M.Tend) { playing = false; syncPlay(); return; }
+    requestAnimationFrame(frame);
+  }
+  function play() { if (t >= M.Tend - 1e-9) t = 0; playing = true; last = performance.now(); syncPlay(); requestAnimationFrame(frame); }
+  function pause() { playing = false; syncPlay(); }
+  playBtn.addEventListener('click', () => playing ? pause() : play());
+  $('reset').addEventListener('click', () => { pause(); t = 0; render(); });
+  range.addEventListener('input', () => { pause(); t = range.value / 1000 * M.Tend; render(); });
+  document.querySelectorAll('.speed button').forEach(b => b.addEventListener('click', () => {
+    speed = Number(b.dataset.speed);
+    document.querySelectorAll('.speed button').forEach(x => x.setAttribute('aria-pressed', x === b));
+  }));
+  $('comps').addEventListener('change', render);
+
+  // ---------- Parámetros ----------
+  const S = { m: $('m'), alpha: $('alpha'), mu: $('mu'), v0: $('v0') };
+  function showValues() {
+    $('mOut').textContent = `${fmt(P.m, 1)} kg`; $('alphaOut').textContent = `${P.alpha}°`;
+    $('muOut').textContent = fmt(P.mu); $('v0Out').textContent = `${fmt(P.v0, 1)} m/s`;
+  }
+  function apply(autoplay) {
+    for (const k in S) S[k].value = P[k];
+    showValues();
+    M = compute(P); buildScene(); buildChart(); renderResults();
+    pause(); t = 0; render();
+    if (autoplay && !reduce) play();
+  }
+  for (const k in S) {
+    S[k].addEventListener('input', () => { P[k] = Number(S[k].value); apply(false); });
+    S[k].addEventListener('change', () => apply(true));
+  }
+  const tries = {
+    masa: () => { P.m = Math.min(10, Math.round(P.m * 4 * 10) / 10); },
+    liso: () => { P.mu = 0; },
+    queda: () => { P.alpha = 15; P.mu = 0.35; },
+    rapido: () => { P.v0 = Math.min(10, Math.round(P.v0 * 2 * 10) / 10); },
+    ej4: () => { Object.assign(P, DEF); }
+  };
+  document.querySelectorAll('[data-try]').forEach(b => b.addEventListener('click', () => {
+    tries[b.dataset.try](); apply(true);
+    if (matchMedia('(max-width: 959px)').matches) window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  }));
+
+  apply(false);
+})();
+</script>
+</body>
+</html>

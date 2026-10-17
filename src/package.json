@@ -1,0 +1,14 @@
+{
+  "name": "fisica-interactiva-src",
+  "private": true,
+  "description": "Herramientas para generar las páginas de Física interactiva",
+  "dependencies": {
+    "mathjax-full": "3.2.2"
+  },
+  "devDependencies": {
+    "@fontsource/atkinson-hyperlegible": "5.1.0",
+    "@fontsource/bricolage-grotesque": "5.1.0",
+    "@fontsource/caveat": "5.1.0",
+    "@fontsource/jetbrains-mono": "5.1.0"
+  }
+}
