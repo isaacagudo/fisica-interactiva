@@ -19,6 +19,8 @@
   margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
 .fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
 .fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
+.doc .widget{margin:16px 0 8px}
+.doc .widget:empty{display:none}
 header.top{display:grid;gap:8px;margin:6px 0 18px}
 .cats{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 22px}
 .cats a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
@@ -77,6 +79,7 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 </blockquote>
 <p>La fuerza del muelle es conservativa: si no hay rozamiento, la energía mecánica (ahora con tres términos) se conserva:</p>
 <p class="eq"><strong>Ec + Ep gravitatoria + Ep elástica = constante</strong></p>
+<p>Para ver cómo pasa la energía de una forma a otra, abre el <a href="../../../simuladores/muelle/">simulador de muelles</a>: tiene los tres montajes de esta categoría (bloque contra un muelle, caída sobre un resorte y rampa con muelle). Cada ejercicio de esta página lleva además su simulación ya preparada con los datos del enunciado.</p>
 <p class="sub"><strong>Las claves de estos ejercicios</strong></p>
 <ol>
 <li><strong>Compresión máxima ⟺ v = 0.</strong> El muelle deja de comprimirse cuando el cuerpo se para un instante: toda la energía está en el muelle (y, si cae en vertical, algo en la altura).</li>
@@ -116,6 +119,8 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 <p><strong>¿Por qué la misma velocidad que al llegar?</strong> Sin rozamiento la energía mecánica se conserva: en la misma posición (misma Ep, resorte sin deformar) la bola tiene la misma Ec. Sale hacia arriba con 6,26 m/s y volvería a subir 2 m.</p>
 </blockquote>
 <p><strong>Comprobación.</strong> De C a B: ½·k·x² = ½·m·v² + m·g·x ⟹ 2,009 = 0,05·v² + 0,049 ⟹ v² = 39,2 ⟹ v = 6,26 m/s. Coincide.</p>
+<p>Pruébalo en el simulador: la bola cae, comprime el resorte 5 cm y vuelve a salir a 6,26 m/s. Cambia la altura o la constante k y mira cómo cambian la compresión y la fuerza máxima.</p>
+<div class="widget" data-widget="muelle" data-config='{"titulo":"Simúlalo · Teoría 12","escenario":"vertical","m":0.1,"h":2,"k":1607,"v0":0}'></div>
 <h2 id="5-2-cuestiones-8-bloque-de-4-kg-a-6-m-s-contra-un-muelle-de-">5.2 · Cuestiones 8 · Bloque de 4 kg a 6 m/s contra un muelle de K = 900 N/m</h2>
 <p class="res"><strong>Resultado:</strong> a) x máx = 0,40 m · b) v = 5,81 m/s cuando el muelle está comprimido 10 cm.</p>
 <p>Datos: m = 4 kg · v₀ = 6 m/s · K = 900 N/m · superficie horizontal sin rozamiento.</p>
@@ -134,6 +139,8 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 <p><strong>¿Por qué ahora hay dos términos a la derecha?</strong> A mitad de la compresión el bloque todavía se mueve (tiene Ec) y el muelle ya guarda algo de energía (Ep elástica). Entre los dos suman los 72 J del principio.</p>
 </blockquote>
 <p><strong>Sentido físico.</strong> Con 10 cm de compresión el muelle solo guarda 4,5 J de 72 J (un 6 %), porque la energía va con x²: la velocidad apenas ha bajado de 6 a 5,81 m/s. Al llegar a 40 cm (cuatro veces más) guarda 16 veces más: los 72 J.</p>
+<p>En el simulador, mueve la barra de tiempo hasta que el muelle lleve unos 10 cm comprimido y lee la velocidad: unos 5,8 m/s. Sube el rozamiento μ para ver qué parte de la energía se convierte en calor antes de llegar.</p>
+<div class="widget" data-widget="muelle" data-config='{"titulo":"Simúlalo · Cuestiones 8","escenario":"horizontal","m":4,"v0":6,"k":900,"mu":0,"L":1}'></div>
 <h2 id="5-3-cuestiones-9-cuerpo-de-200-g-que-cae-4-m-sobre-un-resort">5.3 · Cuestiones 9 · Cuerpo de 200 g que cae 4 m sobre un resorte de 1200 N/m</h2>
 <p class="res"><strong>Resultado:</strong> x = 0,116 m (11,6 cm).</p>
 <p>Datos: m = 200 g = 0,2 kg · h = 4 m hasta lo alto del resorte · k = 1200 N/m · parte del reposo · sin rozamiento · g = 9,8 m/s².</p>
@@ -151,6 +158,8 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 </blockquote>
 <p><strong>Comprobación.</strong> Energía que pierde el cuerpo: 0,2 · 9,8 · 4,116 = 8,07 J. Energía del resorte: ½ · 1200 · 0,116² = 8,07 J. Coinciden.</p>
 <p><strong>Aproximación.</strong> Si se desprecia x frente a 4 m: x ≈ √(2·m·g·h / k) = √(15,68 / 1200) = 0,114 m. Difiere en un 1,4 %: aquí la aproximación es buena porque 11 cm es poco comparado con 4 m (en Repaso 4 no lo será).</p>
+<p>En el simulador, compara la compresión máxima (11,6 cm) con lo que bajaría el resorte con el cuerpo colgado en reposo: x₀ = m·g/k ≈ 1,6 mm.</p>
+<div class="widget" data-widget="muelle" data-config='{"titulo":"Simúlalo · Cuestiones 9","escenario":"vertical","m":0.2,"h":4,"k":1200,"v0":0}'></div>
 <h2 id="5-4-repaso-4-muelle-que-se-alarga-2-cm-con-una-pesa-de-500-g">5.4 · Repaso 4 · Muelle que se alarga 2 cm con una pesa de 500 g</h2>
 <p class="res"><strong>Resultado:</strong> a) k = 245 N/m · b) x máx = 0,221 m (22,1 cm).</p>
 <p>Datos: m = 500 g = 0,5 kg · alargamiento en equilibrio x₀ = 2 cm = 0,02 m · caída desde h = 1 m sobre lo alto del resorte · g = 9,8 m/s².</p>
@@ -171,6 +180,8 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 </blockquote>
 <p><strong>Comprobación.</strong> Energía perdida por la pesa: 0,5 · 9,8 · 1,221 = 5,98 J. Energía del resorte: ½ · 245 · 0,221² = 5,98 J. Coinciden.</p>
 <p><strong>Sentido físico.</strong> Colgada en reposo, la pesa solo comprime (o estira) 2 cm; caída desde 1 m, lo comprime 22 cm, once veces más. Por eso un golpe deforma mucho más que un peso en reposo.</p>
+<p>En el simulador se ven las dos líneas de referencia: en reposo la pesa comprime el resorte 2 cm y, caída desde 1 m, 22,1 cm.</p>
+<div class="widget" data-widget="muelle" data-config='{"titulo":"Simúlalo · Repaso 4","escenario":"vertical","m":0.5,"h":1,"k":245,"v0":0}'></div>
 <h2 id="5-5-ejercicios-7-rampa-de-30-y-muelle-de-20-n-m">5.5 · Ejercicios 7 · Rampa de 30° y muelle de 20 N/m</h2>
 <p class="res"><strong>Resultado:</strong> a) sin rozamiento, x = 0,99 m · b) con μ = 0,2 en la rampa, x = 0,80 m.</p>
 <p>Datos: m = 1 kg · A a h = 1 m · α = 30° · k = 20 N/m · tramo horizontal sin rozamiento · en b), μ = 0,2 en AB · sale del reposo en A · g = 9,8 m/s².</p>
@@ -195,6 +206,8 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 <p><strong>¿Por qué se suma W roz?</strong> Es la forma Ec₀ + Ep₀ + W nc = Ec + Ep + Ep el con W nc = W roz, que ya es negativo. Sumar un número negativo es restar los 3,39 J que se convierten en calor.</p>
 </blockquote>
 <p><strong>Comprobación.</strong> Velocidad en B: sin rozamiento, √(2·9,8·1) = 4,43 m/s; con rozamiento, √(2 · 6,41 / 1) = 3,58 m/s. Con menos velocidad llega menos energía al muelle y se comprime menos (0,80 m &lt; 0,99 m). Tiene sentido.</p>
+<p>El simulador arranca con el apartado b (μ = 0,2 en la rampa). Pulsa «a) sin rozamiento» y compara: 0,99 m frente a 0,80 m.</p>
+<div class="widget" data-widget="muelle" data-config='{"titulo":"Simúlalo · Ejercicios 7","escenario":"rampa","m":1,"h":1,"alpha":30,"muRampa":0.2,"mu":0,"L":1,"k":20,"ejemplos":[{"nombre":"a) sin rozamiento","valores":{"muRampa":0}},{"nombre":"b) μ = 0,2 en la rampa","valores":{"muRampa":0.2}}]}'></div>
 <h2 id="5-6-cuestiones-10-bola-a-8-m-s-2-m-con-rozamiento-y-muelle-d">5.6 · Cuestiones 10 · Bola a 8 m/s, 2 m con rozamiento y muelle de 900 N/m</h2>
 <p class="res"><strong>Resultado:</strong> el enunciado no da la masa, y la compresión depende de ella. La bola llega al muelle a 7,49 m/s (eso no depende de m) y, por ejemplo, con m = 1 kg el muelle se comprime x = 0,248 m.</p>
 <p>Datos: v₀ = 8 m/s · 2 m hasta el muelle · μ = 0,2 (también mientras comprime el muelle) · K = 900 N/m · g = 9,8 m/s² · <strong>m no se da</strong>.</p>
@@ -240,6 +253,8 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 <p><strong>Cómo leer la tabla.</strong> Todas las bolas llegan al muelle a la misma velocidad, pero una bola más pesada lleva más energía (½·m·v²) y comprime más el muelle. Si en clase dan la masa, basta con sustituirla en la ecuación.</p>
 </blockquote>
 <p><strong>Comprobación (m = 1 kg).</strong> Energía inicial 32 J; rozamiento en 2,248 m: 0,2 · 9,8 · 2,248 = 4,41 J; muelle: ½ · 900 · 0,248² = 27,6 J. 4,41 + 27,6 = 32 J. Cuadra. Si se desprecia el rozamiento mientras se comprime el muelle, x = v₁·√(m/K) = 0,250 m: casi lo mismo.</p>
+<p>Como el enunciado no da la masa, el simulador deja cambiarla. La velocidad al llegar al muelle no varía (7,49 m/s), pero la compresión sí: pulsa cada masa y comprueba la tabla.</p>
+<div class="widget" data-widget="muelle" data-config='{"titulo":"Simúlalo · Cuestiones 10","escenario":"horizontal","m":1,"v0":8,"L":2,"mu":0.2,"k":900,"rozMuelle":true,"ejemplos":[{"nombre":"m = 0,5 kg","valores":{"m":0.5}},{"nombre":"m = 1 kg","valores":{"m":1}},{"nombre":"m = 2 kg","valores":{"m":2}},{"nombre":"m = 5 kg","valores":{"m":5}}]}'></div>
 
     <nav class="pager" aria-label="Anterior y siguiente"><a href="../conservacion/"><small>Anterior</small>Conservación de la energía mecánica</a><a href="../planos-inclinados/" style="text-align:right"><small>Siguiente</small>Planos inclinados con rozamiento</a></nav>
     </main>
@@ -247,5 +262,6 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
   </div>
   <footer>Material de estudio. Si el enunciado no da g, se usa 9,8 m/s². Para imprimir, usa la opción de imprimir del navegador.</footer>
 </div>
+<script src="../../../assets/widgets/muelle.js" defer></script>
 </body>
 </html>

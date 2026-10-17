@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Simulador de muelles</title>
+<meta name="description" content="Simulador interactivo de muelles: un bloque que choca contra un muelle, una bola que cae sobre un resorte o un bloque que baja por una rampa. Cambia la masa, la constante elástica, la velocidad, la altura y el rozamiento.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../../assets/base.css">
+<style>
+header.top{display:grid;gap:6px;margin-bottom:10px}
+.exp{display:grid;gap:10px;margin-top:22px}
+.cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}
+.xcard{display:grid;gap:8px;align-content:start}
+.xcard h3{font-size:1rem}
+.xcard p{margin:0;font-size:14.5px}
+.xcard .btn{justify-self:start}
+.ideas{margin-top:22px}
+.ideas p{max-width:72ch}
+footer{margin-top:30px;color:var(--ink-2);font-size:13px}
+</style>
+</head>
+<body>
+<div class="page">
+  <nav class="crumbs" aria-label="Ruta"><a href="../../">Física interactiva</a><span aria-hidden="true">›</span><a href="../../temas/energia/">Trabajo, potencia y energía</a><span aria-hidden="true">›</span><a href="../../temas/energia/muelles/">Muelles</a></nav>
+  <header class="top">
+    <div class="eyebrow">Simulador · Trabajo, potencia y energía</div>
+    <h1>Muelles: energía potencial elástica</h1>
+    <p class="lead">Elige una situación, cambia los datos y mira cómo la energía cinética y la potencial se guardan en el muelle (½·k·x²) y vuelven a salir. Los botones de ejemplo cargan los ejercicios de los apuntes; todos están resueltos paso a paso en la <a href="../../temas/energia/muelles/">categoría de muelles</a>.</p>
+  </header>
+
+  <div id="sim" data-widget="muelle" data-config='{
+    "modo": "completo", "selector": true, "titulo": "Simulador del muelle",
+    "escenario": "vertical", "m": 0.1, "h": 2, "k": 1607,
+    "ejemplos": [
+      {"nombre": "Teoría 12", "valores": {"escenario": "vertical", "m": 0.1, "h": 2, "k": 1607, "v0": 0}},
+      {"nombre": "Cuestiones 8", "valores": {"escenario": "horizontal", "m": 4, "v0": 6, "k": 900, "mu": 0, "L": 1}},
+      {"nombre": "Cuestiones 9", "valores": {"escenario": "vertical", "m": 0.2, "h": 4, "k": 1200, "v0": 0}},
+      {"nombre": "Repaso 4", "valores": {"escenario": "vertical", "m": 0.5, "h": 1, "k": 245, "v0": 0}},
+      {"nombre": "Ejercicios 7 a", "valores": {"escenario": "rampa", "m": 1, "h": 1, "alpha": 30, "muRampa": 0, "mu": 0, "L": 1, "k": 20}},
+      {"nombre": "Ejercicios 7 b", "valores": {"escenario": "rampa", "m": 1, "h": 1, "alpha": 30, "muRampa": 0.2, "mu": 0, "L": 1, "k": 20}},
+      {"nombre": "Cuestiones 10", "valores": {"escenario": "horizontal", "m": 1, "v0": 8, "L": 2, "mu": 0.2, "k": 900, "rozMuelle": true}}
+    ]}'></div>
+
+  <section class="exp" aria-labelledby="h-exp">
+    <h2 id="h-exp">Experimenta</h2>
+    <div class="cards">
+      <div class="xcard card"><h3>El doble de velocidad</h3><p>Sin rozamiento, ½·m·v² = ½·k·x² y la compresión es proporcional a v: al duplicar la velocidad, el muelle se comprime el doble.</p><button class="btn" type="button" data-try="rapido">Bloque de Cuestiones 8 a 12 m/s</button></div>
+      <div class="xcard card"><h3>Un muelle cuatro veces más duro</h3><p>x = v·√(m/k): con k cuatro veces mayor, la compresión se reduce a la mitad, pero la fuerza máxima se duplica.</p><button class="btn" type="button" data-try="duro">k × 4</button></div>
+      <div class="xcard card"><h3>El golpe frente al peso</h3><p>Una pesa colgada estira el muelle x₀ = m·g/k. Soltada desde arriba, lo comprime mucho más: compara las dos líneas de la escena.</p><button class="btn" type="button" data-try="golpe">Pesa de 500 g desde 1 m</button></div>
+      <div class="xcard card"><h3>¿Influye la masa?</h3><p>Con rozamiento, la velocidad al llegar al muelle no depende de la masa, pero la compresión sí. Cambia la masa y compara.</p><button class="btn" type="button" data-try="masa">Cuestiones 10 con 5 kg</button></div>
+    </div>
+  </section>
+
+  <section class="ideas">
+    <h2>Qué mirar</h2>
+    <p>La barra de colores bajo la escena siempre mide lo mismo: la energía total no cambia, solo pasa de cinética (ámbar) y potencial (azul) a elástica (rosa) y, si hay rozamiento, a calor (rojo). En la gráfica de fuerza, el área coloreada bajo la recta F = k·x es justo la energía guardada en el muelle.</p>
+  </section>
+
+  <footer>Material de estudio. Simulación numérica con g = 9,8 m/s²; los resultados se calculan también con las fórmulas de energía y coinciden.</footer>
+</div>
+<script src="../../assets/widgets/muelle.js"></script>
+<script>
+(() => {
+  const w = document.getElementById('sim').__wm;
+  const tries = {
+    rapido: () => { w.set({ escenario: 'horizontal', m: 4, v0: 12, k: 900, mu: 0, L: 1 }); },
+    duro: () => { const p = w.params; w.set({ k: Math.min(3000, p.k * 4) }); },
+    golpe: () => { w.set({ escenario: 'vertical', m: 0.5, h: 1, k: 245, v0: 0 }); },
+    masa: () => { w.set({ escenario: 'horizontal', m: 5, v0: 8, L: 2, mu: 0.2, k: 900, rozMuelle: true }); },
+  };
+  document.querySelectorAll('[data-try]').forEach(b => b.addEventListener('click', () => {
+    tries[b.dataset.try]();
+    document.getElementById('sim').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+  }));
+})();
+</script>
+</body>
+</html>

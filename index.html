@@ -30,6 +30,10 @@ a.item p{margin:4px 0 0;font-size:14.5px;color:var(--ink-2)}
 .thumb line{stroke-width:2.4;stroke-linecap:round}
 .thumb .slider{stroke:var(--ink-2);stroke-width:2}
 .thumb .knob{fill:var(--c-p)}
+.thumb .spr{fill:none;stroke:#b4407e;stroke-width:2;stroke-linejoin:round}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .thumb .spr{stroke:#f08cc0}}
+:root[data-theme="dark"] .thumb .spr{stroke:#f08cc0}
+.thumb .wl{fill:var(--plane);stroke:var(--plane-edge);stroke-width:1.5}
 .thumb.num{display:grid;place-items:center;aspect-ratio:4/3}
 .thumb.num span{font:700 2rem var(--f-display);color:var(--ink)}
 .badge.tema{border-color:var(--ink);color:var(--ink)}
@@ -99,6 +103,10 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
       <a class="item card" href="simuladores/plano-inclinado/">
         <div class="thumb grid-paper" aria-hidden="true"><svg viewBox="0 0 96 72"><polygon class="pl" points="8,18 8,50 90,50"/><rect class="bk" x="-6" y="-6" width="12" height="12" rx="2" transform="translate(52 28) rotate(21)"/><line class="slider" x1="12" y1="62" x2="84" y2="62"/><circle class="knob" cx="40" cy="62" r="4.5"/></svg></div>
         <div><span class="badge sim">Simulador</span><h3>Plano inclinado con rozamiento</h3><p>Cambia masa, ángulo, rozamiento y velocidad, y mira el efecto en la altura, la vuelta y la energía.</p></div>
+      </a>
+      <a class="item card" href="simuladores/muelle/">
+        <div class="thumb grid-paper" aria-hidden="true"><svg viewBox="0 0 96 72"><line class="slider" x1="6" y1="48" x2="90" y2="48"/><rect class="wl" x="82" y="18" width="7" height="30"/><path class="spr" d="M82 38 L78 38 L75 32 L71 44 L67 32 L63 44 L59 32 L55 44 L52 38 L48 38"/><rect class="bk" x="30" y="28" width="18" height="20" rx="2"/><line class="av" x1="14" y1="34" x2="25" y2="34"/><line class="slider" x1="12" y1="62" x2="84" y2="62"/><circle class="knob" cx="58" cy="62" r="4.5"/></svg></div>
+        <div><span class="badge sim">Simulador</span><h3>Muelles: energía elástica</h3><p>Un bloque contra un muelle, una bola que cae sobre un resorte o una rampa: cambia m, k, la altura y el rozamiento y mira adónde va la energía.</p></div>
       </a>
     </div>
   </section>

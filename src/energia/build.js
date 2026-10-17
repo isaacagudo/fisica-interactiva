@@ -33,9 +33,16 @@ function diagram(name) {
 
 // ---- Markdown -> HTML con clases para fórmulas, resultados y diagramas ----
 const slugify = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
+// [[widget:muelle|{json}]] -> <div data-widget="muelle" data-config='…'>; el script del widget se añade a la página
+const unesc = s => s.replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
 function render(md, catsHtml) {
-  const heads = [];
+  const heads = [], widgets = new Set();
   let html = marked.parse(md, { gfm: true });
+  html = html.replace(/<p>\[\[widget:([a-z]+)\|([\s\S]*?)\]\]<\/p>/g, (_, name, json) => {
+    const cfg = JSON.parse(unesc(json));
+    widgets.add(name);
+    return `<div class="widget" data-widget="${name}" data-config='${JSON.stringify(cfg).replace(/&/g, '&amp;').replace(/'/g, '&#39;')}'></div>`;
+  });
   html = html.replace(/<p>\[\[diagrama:([a-z0-9_]+)\|([^\]]+)\]\]<\/p>/g, (_, n, cap) =>
     `<figure class="fig">${diagram(n)}<figcaption>${cap}</figcaption></figure>`);
   html = html.replace(/<p>\[\[categorias\]\]<\/p>/, catsHtml || '');
@@ -57,7 +64,7 @@ function render(md, catsHtml) {
   html = html.replace(/<p><strong>Resultado:<\/strong>/g, '<p class="res"><strong>Resultado:</strong>');
   html = html.replace(/<blockquote>/g, '<blockquote class="why">');
   html = html.replace(/<table>/g, '<div class="table-wrap"><table>').replace(/<\/table>/g, '</table></div>');
-  return { html, heads };
+  return { html, heads, widgets: [...widgets] };
 }
 
 const CSS = `
@@ -70,6 +77,8 @@ const CSS = `
   margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
 .fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
 .fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
+.doc .widget{margin:16px 0 8px}
+.doc .widget:empty{display:none}
 header.top{display:grid;gap:8px;margin:6px 0 18px}
 .cats{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 22px}
 .cats a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
@@ -113,7 +122,7 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 @media print{.cats,.toc,.pager,.crumbs{display:none}.layout{display:block}.fig,.table-wrap,p.eq{break-inside:avoid}}
 `;
 
-function page({ title, eyebrow, desc, body, heads, depth, current }) {
+function page({ title, eyebrow, desc, body, heads, depth, current, widgets = [] }) {
   const up = '../'.repeat(depth);
   const topic = depth === 2 ? './' : '../';
   const cats = data.cats.map((c, i) =>
@@ -152,7 +161,7 @@ ${body}
   </div>
   <footer>Material de estudio. Si el enunciado no da g, se usa 9,8 m/s². Para imprimir, usa la opción de imprimir del navegador.</footer>
 </div>
-</body>
+${widgets.map(w => `<script src="${up}assets/widgets/${w}.js" defer></script>\n`).join('')}</body>
 </html>
 `;
 }
@@ -161,13 +170,13 @@ const catsHtml = `<div class="grid-cats">${data.cats.map((c, i) =>
   `<a class="card" href="${c.slug}/"><span class="n grid-paper">${i + 1}</span><span><h3>${c.name}</h3><p>${c.desc}</p></span></a>`).join('')}</div>`;
 
 for (const p of data.pages) {
-  const { html, heads } = render(p.md, p.slug ? '' : catsHtml);
+  const { html, heads, widgets } = render(p.md, p.slug ? '' : catsHtml);
   const dir = p.slug ? path.join(OUT, p.slug) : OUT;
   fs.mkdirSync(dir, { recursive: true });
   const out = page({
     title: p.title, eyebrow: p.eyebrow,
     desc: p.desc || 'Todos los ejercicios del tema ordenados por categorías, con el resultado de cada uno, el formulario y los errores frecuentes.',
-    body: html, heads, depth: p.slug ? 3 : 2, current: p.slug,
+    body: html, heads, widgets, depth: p.slug ? 3 : 2, current: p.slug,
   });
   fs.writeFileSync(path.join(dir, 'index.html'), out);
   console.log(path.relative(process.cwd(), path.join(dir, 'index.html')), Math.round(out.length / 1024) + ' KB');
