@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Potencia, rendimiento y consumo · Física interactiva</title>
+<meta name="description" content="Vatios, caballos, kWh, euros y rendimiento.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../../../assets/base.css">
+<style>
+:root{--c-a:#7b4fd6;--c-k:#b4407e;--axis:#8793a6}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--c-a:#b39bff;--c-k:#f08cc0;--axis:#8e9ab0}}
+:root[data-theme="dark"]{--c-a:#b39bff;--c-k:#f08cc0;--axis:#8e9ab0}
+.fig{--cds-text-primary:var(--ink);--cds-text-secondary:var(--ink-2);--cds-chart-axis:var(--axis);--cds-chart-grid:var(--rule);
+  --cds-chart-reference-tint:var(--plane);--cds-chart-categorical-1:var(--c-p);--cds-chart-categorical-2:var(--c-n);
+  --cds-chart-categorical-3:var(--c-fr);--cds-chart-categorical-4:var(--c-a);--cds-chart-categorical-5:var(--c-k);
+  margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
+.fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
+.fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
+header.top{display:grid;gap:8px;margin:6px 0 18px}
+.cats{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 22px}
+.cats a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.cats a:hover{border-color:var(--ink-2);color:var(--ink)}
+.cats a[aria-current="page"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+@media (min-width:1000px){.layout{grid-template-columns:minmax(0,760px) 1fr}}
+.toc{display:none}
+@media (min-width:1000px){.toc{display:block;position:sticky;top:16px;align-self:start;font-size:13.5px;max-height:calc(100vh - 32px);overflow:auto}
+  .toc h2{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:0 0 8px}
+  .toc ol{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+  .toc a{color:var(--ink-2);text-decoration:none;line-height:1.3;display:block}
+  .toc a:hover{color:var(--ink)}}
+.doc{min-width:0}
+.doc>h2:first-child{border-top:0;margin-top:0;padding-top:0}
+.doc h2{font-size:1.28rem;margin:38px 0 10px;padding-top:16px;border-top:1px solid var(--rule);scroll-margin-top:12px}
+.doc h3{font-size:1.06rem;margin:26px 0 8px}
+.doc p{margin:10px 0}
+.doc p.eq{background:var(--sheet);border:1px solid var(--rule);border-left:3px solid var(--c-p);border-radius:8px;padding:9px 12px;overflow-x:auto}
+.doc p.sub{margin:22px 0 4px}
+.doc p.res{background:var(--hl);border-radius:8px;padding:8px 12px}
+.doc blockquote.why{margin:10px 0 14px;padding:8px 14px;border-left:3px solid var(--rule);background:color-mix(in srgb,var(--sheet) 70%,transparent);border-radius:0 8px 8px 0;color:var(--ink)}
+.doc blockquote.why p{margin:4px 0}
+.doc ul,.doc ol{padding-left:1.3em}
+.doc li{margin:4px 0}
+.table-wrap{overflow-x:auto;margin:12px 0;border:1px solid var(--rule);border-radius:10px;background:var(--sheet)}
+.doc table{border-collapse:collapse;width:100%;font-size:14.5px}
+.doc th,.doc td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid var(--rule)}
+.doc th{font-weight:700;background:var(--paper)}
+.doc tr:last-child td{border-bottom:0}
+.grid-cats{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));margin:18px 0 8px}
+.grid-cats a{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:start;text-decoration:none;color:inherit}
+.grid-cats a:hover{border-color:var(--ink-2)}
+.grid-cats .n{font:700 1.5rem/44px var(--f-display);text-align:center;border-radius:10px;border:1px solid var(--rule)}
+.grid-cats h3{font-size:1rem;line-height:1.25}
+.grid-cats p{margin:4px 0 0;font-size:13.5px;color:var(--ink-2)}
+.pager{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:40px;border-top:1px solid var(--rule);padding-top:16px}
+.pager a{text-decoration:none;max-width:48%}
+.pager small{display:block;color:var(--ink-2);font-size:12px}
+footer{margin-top:36px;color:var(--ink-2);font-size:13px}
+@media print{.cats,.toc,.pager,.crumbs{display:none}.layout{display:block}.fig,.table-wrap,p.eq{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="page">
+  <nav class="crumbs" aria-label="Ruta"><a href="../../../">Física interactiva</a><span aria-hidden="true">›</span><a href="../">Trabajo, potencia y energía</a><span aria-hidden="true">›</span><span>Potencia, rendimiento y consumo</span></nav>
+  <header class="top"><div class="eyebrow">Categoría 7</div><h1>Potencia, rendimiento y consumo</h1><p class="lead">Vatios, caballos, kWh, euros y rendimiento.</p></header>
+  <nav class="cats" aria-label="Categorías del tema"><a href="../">Mapa del tema</a><a href="../trabajo-de-una-fuerza/">1 · Trabajo</a><a href="../trabajo-con-rozamiento/">2 · Rozamiento</a><a href="../energia-cinetica/">3 · Energía cinética</a><a href="../conservacion/">4 · Conservación</a><a href="../muelles/">5 · Muelles</a><a href="../planos-inclinados/">6 · Planos inclinados</a><a href="../potencia-y-rendimiento/" aria-current="page">7 · Potencia</a><a href="../cuestiones/">8 · Cuestiones</a></nav>
+  <div class="layout">
+    <main class="doc">
+<h2 id="idea-clave-potencia-es-trabajo-por-segundo-rendimiento-la-pa">Idea clave: potencia es trabajo por segundo; rendimiento, la parte que se aprovecha</h2>
+<p><strong>Potencia: P = W / Δt</strong> (vatios: 1 W = 1 J/s)</p>
+<blockquote class="why">
+<p><strong>¿Por qué?</strong> Dos máquinas pueden hacer el mismo trabajo, pero la más potente lo hace en menos tiempo. La potencia mide la rapidez con que se transfiere la energía.</p>
+</blockquote>
+<p class="eq"><strong>Con velocidad constante: P = F·v</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué?</strong> P = F·Δs / Δt, y Δs / Δt es la velocidad. Sirve para comprobar (Teoría 19).</p>
+</blockquote>
+<p class="sub"><strong>Unidades que salen en los ejercicios</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Unidad</th>
+<th>Qué mide</th>
+<th>Equivalencia</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>kW (kilovatio)</td>
+<td>Potencia</td>
+<td>1 kW = 1000 W</td>
+</tr>
+<tr>
+<td>CV (caballo de vapor)</td>
+<td>Potencia</td>
+<td>1 CV = 736 W</td>
+</tr>
+<tr>
+<td>kWh (kilovatio hora)</td>
+<td><strong>Energía</strong>, no potencia</td>
+<td>1 kWh = 1000 W · 3600 s = 3,6·10⁶ J</td>
+</tr>
+<tr>
+<td>MJ (megajulio)</td>
+<td>Energía</td>
+<td>1 MJ = 10⁶ J</td>
+</tr>
+</tbody></table></div>
+<p><strong>Rendimiento: η = P útil / P total = E útil / E total</strong> (entre 0 y 1; en % se multiplica por 100)</p>
+<blockquote class="why">
+<p><strong>¿Por qué nunca llega al 100 %?</strong> Parte de la energía que consume una máquina se pierde (calor por rozamiento, ruido, calentamiento de los cables). La útil es la que hace lo que queremos: subir la carga, calentar el agua.</p>
+</blockquote>
+<figure class="fig"><svg viewBox="0 0 760 300" role="img" aria-label="El motor del montacargas aprovecha el 60 %: de 2 940 W, 1 764 W suben la carga" font-size="13"><defs></defs><text x="24" y="30" font-size="15" font-weight="600" style="fill:var(--cds-text-primary)">El motor del montacargas aprovecha el 60 %: de 2 940 W, 1 764 W suben la carga</text><text x="24" y="50" font-size="11.5" style="fill:var(--cds-text-secondary)">Teoría 19 · rendimiento η = P útil / P total = 1 764 / 2 940 = 0,6</text><g><rect x="24" y="120" width="220" height="100" rx="8" fill="none" stroke-width="1.25" style="stroke:var(--cds-chart-axis)"></rect><text x="134" y="156" text-anchor="middle" font-weight="600" style="fill:var(--cds-text-primary)">Consume de la red</text><text x="134" y="180" text-anchor="middle" style="fill:var(--cds-text-primary)">P total = 2 940 W</text><text x="134" y="200" text-anchor="middle" font-size="11.5" style="fill:var(--cds-text-secondary)">100 %</text></g><g><rect x="420" y="80" width="316" height="78" rx="8" fill-opacity="0.12" stroke-width="2" style="fill:var(--cds-chart-categorical-1);stroke:var(--cds-chart-categorical-1)"></rect><text x="436" y="108" font-weight="600" style="fill:var(--cds-text-primary)">Útil: sube la carga (m·g·h)</text><text x="436" y="130" style="fill:var(--cds-text-primary)">P útil = 1 764 W</text><text x="436" y="148" font-size="11.5" style="fill:var(--cds-text-secondary)">60 %</text></g><g><rect x="420" y="186" width="316" height="78" rx="8" fill="none" stroke-width="1.25" style="stroke:var(--cds-chart-categorical-3)"></rect><text x="436" y="214" font-weight="600" style="fill:var(--cds-text-primary)">Pérdidas: calor y rozamientos</text><text x="436" y="236" style="fill:var(--cds-text-primary)">1 176 W</text><text x="436" y="254" font-size="11.5" style="fill:var(--cds-text-secondary)">40 %</text></g><g><path d="M244 150C330 150 330 119 418 119" fill="none" stroke-width="1.25" style="stroke:var(--cds-chart-axis)"></path><path d="M244 190C330 190 330 225 418 225" fill="none" stroke-width="1.25" style="stroke:var(--cds-chart-axis)"></path></g><g><text x="330" y="176" text-anchor="middle" font-size="11.5" style="fill:var(--cds-text-secondary)">motor</text></g></svg><figcaption>Teoría 19 · dónde va la energía del motor</figcaption></figure>
+<p>Lo que consume el motor se reparte entre la parte útil y las pérdidas; el rendimiento es la fracción útil.</p>
+<p><strong>Calentar agua</strong> (Cuestiones 11 y 12): la energía útil es el calor que absorbe el agua, <strong>Q = m·c·ΔT</strong>, con c = 4180 J/(kg·K) y ΔT la subida de temperatura (en °C o en K da lo mismo, porque es una diferencia).</p>
+<p class="sub"><strong>Método</strong></p>
+<ol>
+<li>Identificar qué es lo útil (subir algo: m·g·h; calentar: m·c·ΔT) y qué es lo total (lo que consume el aparato: P·t).</li>
+<li>Tiempos en segundos para julios y vatios; en horas para kWh.</li>
+<li>Rendimiento: útil = η · total. Si te sale η &gt; 1, has dividido al revés.</li>
+<li>Coste: energía consumida en kWh × precio del kWh.</li>
+</ol>
+<h2 id="7-1-teoria-16-cargar-15-sacos-de-80-kg-en-media-hora">7.1 · Teoría 16 · Cargar 15 sacos de 80 kg en media hora</h2>
+<p class="res"><strong>Resultado:</strong> P = 6,53 W (6,67 W con g = 10 m/s²).</p>
+<p>Datos: 15 sacos · 80 kg cada uno · h = 1 m · Δt = 30 min = 1 800 s · g = 9,8 m/s².</p>
+<p><strong>Qué herramienta usar.</strong> Potencia = trabajo / tiempo. El trabajo para subir cada saco a velocidad constante es m·g·h (ejercicio 1.4).</p>
+<p class="sub"><strong>Paso 1. Trabajo total</strong></p>
+<p class="eq"><strong>W = 15 · m·g·h = 15 · 80 · 9,8 · 1 = 11 760 J</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué m·g·h?</strong> Para subir un saco sin acelerarlo, el hombre hace una fuerza igual a su peso a lo largo de 1 m. Ese trabajo queda guardado como energía potencial de los sacos.</p>
+</blockquote>
+<p class="sub"><strong>Paso 2. Potencia</strong></p>
+<p class="eq"><strong>P = W / Δt = 11 760 / 1 800 = 6,53 W</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué 1 800 s?</strong> El vatio es julio por segundo: media hora son 30 · 60 = 1 800 s.</p>
+</blockquote>
+<p><strong>Sentido físico.</strong> Parece muy poco (una bombilla LED gasta unos 10 W), pero es la potencia media en media hora, contando las pausas entre saco y saco. Mientras levanta cada saco, el hombre desarrolla mucha más potencia durante uno o dos segundos. Además el cuerpo humano tiene un rendimiento bajo: consume bastante más energía de la que convierte en trabajo.</p>
+<h2 id="7-2-teoria-17-estufa-de-2000-w-durante-8-horas">7.2 · Teoría 17 · Estufa de 2000 W durante 8 horas</h2>
+<p class="res"><strong>Resultado:</strong> 16 kWh = 57,6 MJ · coste 1,44 €.</p>
+<p>Datos: P = 2000 W = 2 kW · t = 8 h · precio 0,09 €/kWh.</p>
+<p><strong>Qué herramienta usar.</strong> Energía = potencia × tiempo (despejando de P = E / t). Si la potencia va en kW y el tiempo en h, la energía sale directamente en kWh, que es como se paga la luz.</p>
+<p class="sub"><strong>Paso 1. Energía en kWh</strong></p>
+<p class="eq"><strong>E = P·t = 2 kW · 8 h = 16 kWh</strong></p>
+<p class="sub"><strong>Paso 2. En megajulios</strong></p>
+<p class="eq"><strong>E = 16 kWh · 3,6 MJ/kWh = 57,6 MJ</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué 3,6?</strong> 1 kWh = 1000 W · 3600 s = 3 600 000 J = 3,6 MJ.</p>
+</blockquote>
+<p><strong>Comprobación en el SI.</strong> E = 2000 W · (8 · 3600 s) = 2000 · 28 800 = 57 600 000 J = 57,6 MJ. Coincide.</p>
+<p class="sub"><strong>Paso 3. Coste</strong></p>
+<p class="eq"><strong>Coste = 16 kWh · 0,09 €/kWh = 1,44 €</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué en kWh?</strong> El precio de la electricidad se da por kWh. Multiplicar julios por €/kWh daría un disparate.</p>
+</blockquote>
+<h2 id="7-3-teoria-18-litros-de-agua-que-sube-un-motor-de-2-cv-con-r">7.3 · Teoría 18 · Litros de agua que sube un motor de 2 CV con rendimiento del 78 %</h2>
+<p class="res"><strong>Resultado:</strong> unos 1,17·10⁴ L (11 716 L).</p>
+<p>Datos: P total = 2 CV · h = 12 m · t = 20 min = 1 200 s · η = 78 % = 0,78 · g = 9,8 m/s² · 1 L de agua = 1 kg.</p>
+<p><strong>Qué herramienta usar.</strong> Rendimiento para pasar de la potencia del motor a la útil; después, la energía útil se convierte en energía potencial del agua (m·g·h).</p>
+<p class="sub"><strong>Paso 1. Potencia total y útil</strong></p>
+<p class="eq"><strong>P total = 2 · 736 = 1 472 W  P útil = η · P total = 0,78 · 1 472 = 1 148 W</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué?</strong> De cada 100 J que consume el motor, solo 78 J suben agua; el resto se pierde.</p>
+</blockquote>
+<p class="sub"><strong>Paso 2. Energía útil en 20 minutos</strong></p>
+<p class="eq"><strong>E útil = P útil · t = 1 148,16 · 1 200 = 1,378·10⁶ J</strong></p>
+<p class="sub"><strong>Paso 3. Masa de agua</strong></p>
+<p class="eq"><strong>E útil = m·g·h ⟹ m = E útil / (g·h) = 1 377 792 / (9,8 · 12) = 11 716 kg ⟹ 11 716 L</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué m·g·h?</strong> Subir agua a velocidad constante es darle energía potencial. Como 1 L de agua tiene 1 kg de masa, los kilos son litros.</p>
+</blockquote>
+<p><strong>Comprobación.</strong> Al revés: subir 11 716 kg a 12 m son 1,378·10⁶ J; en 1 200 s, 1 148 W útiles; dividido por 0,78, 1 472 W = 2 CV. Cuadra.</p>
+<h2 id="7-4-teoria-19-motor-de-un-montacargas-con-rendimiento-del-60">7.4 · Teoría 19 · Motor de un montacargas con rendimiento del 60 %</h2>
+<p class="res"><strong>Resultado:</strong> P motor = 2 940 W ≈ 4,0 CV.</p>
+<p>Datos: m = 450 kg · h = 12 m · t = 30 s · η = 60 % = 0,6 · g = 9,8 m/s².</p>
+<p><strong>Qué herramienta usar.</strong> La potencia útil es la que sube el montacargas (m·g·h en 30 s); la del motor es mayor, porque solo aprovecha el 60 %.</p>
+<p class="sub"><strong>Paso 1. Potencia útil</strong></p>
+<p class="eq"><strong>P útil = m·g·h / t = 450 · 9,8 · 12 / 30 = 52 920 / 30 = 1 764 W</strong></p>
+<p class="sub"><strong>Paso 2. Potencia del motor</strong></p>
+<p class="eq"><strong>P total = P útil / η = 1 764 / 0,6 = 2 940 W = 2 940 / 736 CV ≈ 4,0 CV</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué se divide?</strong> P útil = η · P total, así que P total = P útil / η. La potencia del motor tiene que salir mayor que la útil; si sale menor, se ha multiplicado por error.</p>
+</blockquote>
+<p><strong>Comprobación con P = F·v.</strong> Si sube a velocidad constante, v = 12 / 30 = 0,4 m/s y la fuerza del cable es su peso, 450 · 9,8 = 4 410 N. P útil = F·v = 4 410 · 0,4 = 1 764 W. Coincide.</p>
+<p><strong>Dónde va la energía.</strong> De los 2 940 W, 1 764 W suben la carga y 1 176 W se pierden (calor en el motor, rozamientos de poleas y guías). Es el ejemplo del diagrama de la idea clave.</p>
+<h2 id="7-5-cuestiones-11-hornillo-que-calienta-2-5-kg-de-agua-en-15">7.5 · Cuestiones 11 · Hornillo que calienta 2,5 kg de agua en 15 minutos</h2>
+<p class="res"><strong>Resultado:</strong> P = 929 W · coste ≈ 0,019 € (unos 2 céntimos).</p>
+<p>Datos: m = 2,5 kg de agua · de 12 °C a 80 °C (ΔT = 68 °C) · t = 15 min = 900 s · se aprovecha el 85 % (η = 0,85) · c = 4180 J/(kg·K) · 0,08 €/kWh. El «(1,5)» del enunciado es la puntuación.</p>
+<p><strong>Qué herramienta usar.</strong> La energía útil es el calor que absorbe el agua (Q = m·c·ΔT). Con el rendimiento se pasa a la energía que consume el hornillo, y con el tiempo, a su potencia.</p>
+<p class="sub"><strong>Paso 1. Energía útil (calor que absorbe el agua)</strong></p>
+<p class="eq"><strong>Q = m·c·ΔT = 2,5 · 4180 · 68 = 710 600 J</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué ΔT = 68 y no 80?</strong> Importa cuánto sube la temperatura: 80 − 12 = 68 °C. Una subida de 68 °C es también una subida de 68 K.</p>
+</blockquote>
+<p class="sub"><strong>Paso 2. Energía consumida</strong></p>
+<p class="eq"><strong>E total = Q / η = 710 600 / 0,85 = 836 000 J</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué se divide?</strong> Solo el 85 % de lo consumido llega al agua, así que el hornillo consume más de lo que recibe el agua.</p>
+</blockquote>
+<p class="sub"><strong>Paso 3. Potencia del hornillo</strong></p>
+<p class="eq"><strong>P = E total / t = 836 000 / 900 = 929 W</strong></p>
+<p class="sub"><strong>Paso 4. Coste</strong></p>
+<p class="eq"><strong>E = 836 000 / 3,6·10⁶ = 0,232 kWh ⟹ coste = 0,232 · 0,08 = 0,019 €</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué se paga la energía consumida y no la útil?</strong> El contador mide lo que gasta el aparato, incluida la parte que se pierde.</p>
+</blockquote>
+<h2 id="7-6-cuestiones-12-rendimiento-de-un-calentador-de-1500-w">7.6 · Cuestiones 12 · Rendimiento de un calentador de 1500 W</h2>
+<p class="res"><strong>Resultado:</strong> η = 77,4 % · coste 0,36 €.</p>
+<p>Datos: P = 1500 W · t = 3 h = 10 800 s · m = 50 kg de agua · de 20 °C a 80 °C (ΔT = 60 °C) · c = 4180 J/(kg·K) · 0,08 €/kWh.</p>
+<p><strong>Qué herramienta usar.</strong> Es el ejercicio 7.5 al revés: ahora se conocen la energía consumida (P·t) y la útil (m·c·ΔT), y se pide el cociente.</p>
+<p class="sub"><strong>Paso 1. Energía útil</strong></p>
+<p class="eq"><strong>Q = m·c·ΔT = 50 · 4180 · 60 = 12 540 000 J = 12,54 MJ</strong></p>
+<p class="sub"><strong>Paso 2. Energía consumida</strong></p>
+<p class="eq"><strong>E total = P·t = 1500 · 10 800 = 16 200 000 J = 16,2 MJ</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué 10 800 s?</strong> Para que vatios por segundos dé julios: 3 h = 3 · 3600 s.</p>
+</blockquote>
+<p class="sub"><strong>Paso 3. Rendimiento</strong></p>
+<p class="eq"><strong>η = E útil / E total = 12,54 / 16,2 = 0,774 = 77,4 %</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué tiene sentido?</strong> Es menor que 1: el calentador consume más energía de la que recibe el agua. El 22,6 % restante se pierde calentando el depósito, las tuberías y el aire.</p>
+</blockquote>
+<p class="sub"><strong>Paso 4. Coste</strong></p>
+<p class="eq"><strong>E = 1,5 kW · 3 h = 4,5 kWh ⟹ coste = 4,5 · 0,08 = 0,36 €</strong></p>
+<p><strong>Comprobación.</strong> 16,2 MJ / 3,6 MJ/kWh = 4,5 kWh. Coincide con el cálculo directo en kW·h.</p>
+
+    <nav class="pager" aria-label="Anterior y siguiente"><a href="../planos-inclinados/"><small>Anterior</small>Planos inclinados con rozamiento</a><a href="../cuestiones/" style="text-align:right"><small>Siguiente</small>Cuestiones de teoría</a></nav>
+    </main>
+    <aside class="toc" aria-label="En esta página"><h2>En esta página</h2><ol><li><a href="#idea-clave-potencia-es-trabajo-por-segundo-rendimiento-la-pa">Idea clave: potencia es trabajo por segundo; rendimiento, la parte que se aprovecha</a></li><li><a href="#7-1-teoria-16-cargar-15-sacos-de-80-kg-en-media-hora">7.1 · Teoría 16 · Cargar 15 sacos de 80 kg en media hora</a></li><li><a href="#7-2-teoria-17-estufa-de-2000-w-durante-8-horas">7.2 · Teoría 17 · Estufa de 2000 W durante 8 horas</a></li><li><a href="#7-3-teoria-18-litros-de-agua-que-sube-un-motor-de-2-cv-con-r">7.3 · Teoría 18 · Litros de agua que sube un motor de 2 CV con rendimiento del 78 %</a></li><li><a href="#7-4-teoria-19-motor-de-un-montacargas-con-rendimiento-del-60">7.4 · Teoría 19 · Motor de un montacargas con rendimiento del 60 %</a></li><li><a href="#7-5-cuestiones-11-hornillo-que-calienta-2-5-kg-de-agua-en-15">7.5 · Cuestiones 11 · Hornillo que calienta 2,5 kg de agua en 15 minutos</a></li><li><a href="#7-6-cuestiones-12-rendimiento-de-un-calentador-de-1500-w">7.6 · Cuestiones 12 · Rendimiento de un calentador de 1500 W</a></li></ol></aside>
+  </div>
+  <footer>Material de estudio. Si el enunciado no da g, se usa 9,8 m/s². Para imprimir, usa la opción de imprimir del navegador.</footer>
+</div>
+</body>
+</html>

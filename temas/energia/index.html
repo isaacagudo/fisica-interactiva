@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trabajo, potencia y energía · Física interactiva</title>
+<meta name="description" content="Todos los ejercicios del tema ordenados por categorías, con el resultado de cada uno, el formulario y los errores frecuentes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../../assets/base.css">
+<style>
+:root{--c-a:#7b4fd6;--c-k:#b4407e;--axis:#8793a6}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--c-a:#b39bff;--c-k:#f08cc0;--axis:#8e9ab0}}
+:root[data-theme="dark"]{--c-a:#b39bff;--c-k:#f08cc0;--axis:#8e9ab0}
+.fig{--cds-text-primary:var(--ink);--cds-text-secondary:var(--ink-2);--cds-chart-axis:var(--axis);--cds-chart-grid:var(--rule);
+  --cds-chart-reference-tint:var(--plane);--cds-chart-categorical-1:var(--c-p);--cds-chart-categorical-2:var(--c-n);
+  --cds-chart-categorical-3:var(--c-fr);--cds-chart-categorical-4:var(--c-a);--cds-chart-categorical-5:var(--c-k);
+  margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
+.fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
+.fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
+header.top{display:grid;gap:8px;margin:6px 0 18px}
+.cats{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 22px}
+.cats a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.cats a:hover{border-color:var(--ink-2);color:var(--ink)}
+.cats a[aria-current="page"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+@media (min-width:1000px){.layout{grid-template-columns:minmax(0,760px) 1fr}}
+.toc{display:none}
+@media (min-width:1000px){.toc{display:block;position:sticky;top:16px;align-self:start;font-size:13.5px;max-height:calc(100vh - 32px);overflow:auto}
+  .toc h2{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:0 0 8px}
+  .toc ol{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+  .toc a{color:var(--ink-2);text-decoration:none;line-height:1.3;display:block}
+  .toc a:hover{color:var(--ink)}}
+.doc{min-width:0}
+.doc>h2:first-child{border-top:0;margin-top:0;padding-top:0}
+.doc h2{font-size:1.28rem;margin:38px 0 10px;padding-top:16px;border-top:1px solid var(--rule);scroll-margin-top:12px}
+.doc h3{font-size:1.06rem;margin:26px 0 8px}
+.doc p{margin:10px 0}
+.doc p.eq{background:var(--sheet);border:1px solid var(--rule);border-left:3px solid var(--c-p);border-radius:8px;padding:9px 12px;overflow-x:auto}
+.doc p.sub{margin:22px 0 4px}
+.doc p.res{background:var(--hl);border-radius:8px;padding:8px 12px}
+.doc blockquote.why{margin:10px 0 14px;padding:8px 14px;border-left:3px solid var(--rule);background:color-mix(in srgb,var(--sheet) 70%,transparent);border-radius:0 8px 8px 0;color:var(--ink)}
+.doc blockquote.why p{margin:4px 0}
+.doc ul,.doc ol{padding-left:1.3em}
+.doc li{margin:4px 0}
+.table-wrap{overflow-x:auto;margin:12px 0;border:1px solid var(--rule);border-radius:10px;background:var(--sheet)}
+.doc table{border-collapse:collapse;width:100%;font-size:14.5px}
+.doc th,.doc td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid var(--rule)}
+.doc th{font-weight:700;background:var(--paper)}
+.doc tr:last-child td{border-bottom:0}
+.grid-cats{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));margin:18px 0 8px}
+.grid-cats a{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:start;text-decoration:none;color:inherit}
+.grid-cats a:hover{border-color:var(--ink-2)}
+.grid-cats .n{font:700 1.5rem/44px var(--f-display);text-align:center;border-radius:10px;border:1px solid var(--rule)}
+.grid-cats h3{font-size:1rem;line-height:1.25}
+.grid-cats p{margin:4px 0 0;font-size:13.5px;color:var(--ink-2)}
+.pager{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:40px;border-top:1px solid var(--rule);padding-top:16px}
+.pager a{text-decoration:none;max-width:48%}
+.pager small{display:block;color:var(--ink-2);font-size:12px}
+footer{margin-top:36px;color:var(--ink-2);font-size:13px}
+@media print{.cats,.toc,.pager,.crumbs{display:none}.layout{display:block}.fig,.table-wrap,p.eq{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="page">
+  <nav class="crumbs" aria-label="Ruta"><a href="../../">Física interactiva</a><span aria-hidden="true">›</span><a href="./">Trabajo, potencia y energía</a></nav>
+  <header class="top"><div class="eyebrow">Mapa del tema</div><h1>Trabajo, potencia y energía</h1><p class="lead">Todos los ejercicios del tema ordenados por categorías, con el resultado de cada uno, el formulario y los errores frecuentes.</p></header>
+  <nav class="cats" aria-label="Categorías del tema"><a href="./" aria-current="page">Mapa del tema</a><a href="./trabajo-de-una-fuerza/">1 · Trabajo</a><a href="./trabajo-con-rozamiento/">2 · Rozamiento</a><a href="./energia-cinetica/">3 · Energía cinética</a><a href="./conservacion/">4 · Conservación</a><a href="./muelles/">5 · Muelles</a><a href="./planos-inclinados/">6 · Planos inclinados</a><a href="./potencia-y-rendimiento/">7 · Potencia</a><a href="./cuestiones/">8 · Cuestiones</a></nav>
+  <div class="layout">
+    <main class="doc">
+<p>Todos los ejercicios de los apuntes del tema, ordenados en 8 categorías y resueltos paso a paso. Cada categoría empieza con su idea clave (qué herramienta se usa y por qué) y después resuelve sus ejercicios con el mismo esquema: resultado, datos, diagrama, herramienta, cálculo con el porqué de cada fórmula y comprobación.</p>
+<p>Cómo se citan los ejercicios: <strong>Teoría</strong> = los que aparecen dentro de la teoría (1 a 19), <strong>Ejercicios</strong> = la lista de las páginas 10 y 11 (1 a 10), <strong>Cuestiones</strong> = «Cuestiones y ejercicios» de las páginas 11 y 12 (1 a 12) y <strong>Repaso</strong> = «Ejercicios de repaso» de la página 13 (1 a 5). Si el enunciado no da g, se usa <strong>g = 9,8 m/s²</strong>.</p>
+<p>En esta página: cómo decidir qué herramienta usar, el índice con el resultado de cada ejercicio (para comprobar los tuyos), el formulario y los errores frecuentes.</p>
+<div class="grid-cats"><a class="card" href="trabajo-de-una-fuerza/"><span class="n grid-paper">1</span><span><h3>Trabajo de una fuerza</h3><p>Con módulos y ángulo o con vectores: el producto escalar y el signo del trabajo.</p></span></a><a class="card" href="trabajo-con-rozamiento/"><span class="n grid-paper">2</span><span><h3>Trabajo con rozamiento en un plano horizontal</h3><p>Fuerza oblicua: primero la normal, después el rozamiento y el trabajo.</p></span></a><a class="card" href="energia-cinetica/"><span class="n grid-paper">3</span><span><h3>Energía cinética: teorema de las fuerzas vivas</h3><p>Frenadas, balas y fuerzas medias: W total = ΔEc.</p></span></a><a class="card" href="conservacion/"><span class="n grid-paper">4</span><span><h3>Conservación de la energía mecánica</h3><p>Solo trabaja el peso: tiros, caídas y planos sin rozamiento.</p></span></a><a class="card" href="muelles/"><span class="n grid-paper">5</span><span><h3>Muelles: energía potencial elástica</h3><p>Ley de Hooke, ½·k·x² y compresión máxima.</p></span></a><a class="card" href="planos-inclinados/"><span class="n grid-paper">6</span><span><h3>Planos inclinados con rozamiento</h3><p>Subir, bajar y volver: la ecuación de trabajo y energía.</p></span></a><a class="card" href="potencia-y-rendimiento/"><span class="n grid-paper">7</span><span><h3>Potencia, rendimiento y consumo</h3><p>Vatios, caballos, kWh, euros y rendimiento.</p></span></a><a class="card" href="cuestiones/"><span class="n grid-paper">8</span><span><h3>Cuestiones de teoría</h3><p>Respuestas razonadas, cada una con su fórmula y un ejemplo.</p></span></a></div>
+<h2 id="que-herramienta-uso">¿Qué herramienta uso?</h2>
+<figure class="fig"><svg viewBox="0 0 760 490" role="img" aria-label="¿Qué herramienta uso? Cuatro preguntas en orden" font-size="13"><defs><marker id="m1-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-axis)"></path></marker></defs><text x="24" y="30" font-size="15" font-weight="600" style="fill:var(--cds-text-primary)">¿Qué herramienta uso? Cuatro preguntas en orden</text><text x="24" y="50" font-size="11.5" style="fill:var(--cds-text-secondary)">Si la respuesta es sí, ve a la derecha; si es no, baja a la siguiente pregunta</text><g><line x1="354" y1="100" x2="402" y2="100" stroke="var(--cds-chart-axis)" stroke-width="1.25" marker-end="url(#m1-a)"></line><line x1="189" y1="128" x2="189" y2="154" stroke="var(--cds-chart-axis)" stroke-width="1.25" marker-end="url(#m1-a)"></line><line x1="354" y1="184" x2="402" y2="184" stroke="var(--cds-chart-axis)" stroke-width="1.25" marker-end="url(#m1-a)"></line><line x1="189" y1="212" x2="189" y2="238" stroke="var(--cds-chart-axis)" stroke-width="1.25" marker-end="url(#m1-a)"></line><line x1="354" y1="268" x2="402" y2="268" stroke="var(--cds-chart-axis)" stroke-width="1.25" marker-end="url(#m1-a)"></line><line x1="189" y1="296" x2="189" y2="322" stroke="var(--cds-chart-axis)" stroke-width="1.25" marker-end="url(#m1-a)"></line><line x1="354" y1="352" x2="402" y2="352" stroke="var(--cds-chart-axis)" stroke-width="1.25" marker-end="url(#m1-a)"></line><line x1="189" y1="380" x2="189" y2="406" stroke="var(--cds-chart-axis)" stroke-width="1.25" marker-end="url(#m1-a)"></line></g><g><rect x="24" y="72" width="330" height="56" rx="8" fill="none" stroke-width="1.25" style="stroke:var(--cds-chart-axis)"></rect><text x="189" y="104.5" text-anchor="middle" style="fill:var(--cds-text-primary)">¿Piden el trabajo de una fuerza concreta?</text></g><g><rect x="404" y="72" width="332" height="56" rx="8" fill="none" stroke-width="1.25" style="stroke:var(--cds-chart-axis)"></rect><text x="418" y="96" font-weight="600" style="fill:var(--cds-text-primary)">W = F·Δs·cos φ   o   W = Fx·Δx + Fy·Δy</text><text x="418" y="115" font-size="11.5" style="fill:var(--cds-text-secondary)">Pestañas 1 y 2</text></g><text x="379" y="92" text-anchor="middle" font-size="11.5" style="fill:var(--cds-text-secondary)">sí</text><text x="199" y="146" font-size="11.5" style="fill:var(--cds-text-secondary)">no</text><g><rect x="24" y="156" width="330" height="56" rx="8" fill="none" stroke-width="1.25" style="stroke:var(--cds-chart-axis)"></rect><text x="189" y="188.5" text-anchor="middle" style="fill:var(--cds-text-primary)">¿Piden potencia, rendimiento o coste?</text></g><g><rect x="404" y="156" width="332" height="56" rx="8" fill="none" stroke-width="1.25" style="stroke:var(--cds-chart-axis)"></rect><text x="418" y="180" font-weight="600" style="fill:var(--cds-text-primary)">P = W / Δt  ·  η = P útil / P total</text><text x="418" y="199" font-size="11.5" style="fill:var(--cds-text-secondary)">Pestaña 7 (calentar agua: Q = m·c·ΔT)</text></g><text x="379" y="176" text-anchor="middle" font-size="11.5" style="fill:var(--cds-text-secondary)">sí</text><text x="199" y="230" font-size="11.5" style="fill:var(--cds-text-secondary)">no</text><g><rect x="24" y="240" width="330" height="56" rx="8" fill="none" stroke-width="1.25" style="stroke:var(--cds-chart-axis)"></rect><text x="189" y="272.5" text-anchor="middle" style="fill:var(--cds-text-primary)">¿Sale un tiempo o «velocidad constante»?</text></g><g><rect x="404" y="240" width="332" height="56" rx="8" fill="none" stroke-width="1.25" style="stroke:var(--cds-chart-axis)"></rect><text x="418" y="264" font-weight="600" style="fill:var(--cds-text-primary)">Dinámica: ΣF = m·a y ecuaciones del MRUA</text><text x="418" y="283" font-size="11.5" style="fill:var(--cds-text-secondary)">Pestaña 2 y ejercicio 6.7</text></g><text x="379" y="260" text-anchor="middle" font-size="11.5" style="fill:var(--cds-text-secondary)">sí</text><text x="199" y="314" font-size="11.5" style="fill:var(--cds-text-secondary)">no</text><g><rect x="24" y="324" width="330" height="56" rx="8" fill="none" stroke-width="1.25" style="stroke:var(--cds-chart-axis)"></rect><text x="189" y="356.5" text-anchor="middle" style="fill:var(--cds-text-primary)">¿Hay rozamiento o alguien aporta energía?</text></g><g><rect x="404" y="324" width="332" height="56" rx="8" fill="none" stroke-width="1.25" style="stroke:var(--cds-chart-axis)"></rect><text x="418" y="348" font-weight="600" style="fill:var(--cds-text-primary)">Ec₀ + Ep₀ + W nc = Ec + Ep</text><text x="418" y="367" font-size="11.5" style="fill:var(--cds-text-secondary)">Pestañas 5 y 6 · sin alturas: W total = ΔEc (pestaña 3)</text></g><text x="379" y="344" text-anchor="middle" font-size="11.5" style="fill:var(--cds-text-secondary)">sí</text><text x="199" y="398" font-size="11.5" style="fill:var(--cds-text-secondary)">no</text><g><rect x="24" y="408" width="712" height="56" rx="8" fill-opacity="0.12" stroke-width="2" style="fill:var(--cds-chart-categorical-1);stroke:var(--cds-chart-categorical-1)"></rect><text x="40" y="432" font-weight="600" style="fill:var(--cds-text-primary)">Conservación: Ec₀ + Ep₀ = Ec + Ep (con ½·k·x² si hay un muelle)</text><text x="40" y="451" font-size="11.5" style="fill:var(--cds-text-secondary)">Solo trabajan el peso y los muelles · pestañas 4 y 5</text></g></svg><figcaption>qué herramienta usar · 4 preguntas y la conservación</figcaption></figure>
+<p>Se lee de arriba abajo: la primera pregunta que tenga respuesta «sí» da la herramienta. Si las cuatro son «no», solo trabajan el peso y los muelles y se conserva la energía mecánica.</p>
+<h2 id="indice-de-ejercicios-con-su-resultado">Índice de ejercicios con su resultado</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Ejercicio</th>
+<th>Categoría</th>
+<th>Qué se pide</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Teoría 1</td>
+<td><a href="trabajo-de-una-fuerza/">1 · Trabajo</a></td>
+<td>W de F = 3i − 5j de A(−2, 1) a B(4, 3)</td>
+<td>W = 8 J</td>
+</tr>
+<tr>
+<td>Ejercicios 3</td>
+<td><a href="trabajo-de-una-fuerza/">1 · Trabajo</a></td>
+<td>W de F = 30i − 20j de A(−6, 2) a B(4, 10)</td>
+<td>W = 140 J</td>
+</tr>
+<tr>
+<td>Repaso 2</td>
+<td><a href="trabajo-de-una-fuerza/">1 · Trabajo</a></td>
+<td>W de F = −5i + 9j de A(−5, 3) a B(−3, −8)</td>
+<td>W = −109 J</td>
+</tr>
+<tr>
+<td>Teoría 3</td>
+<td><a href="trabajo-de-una-fuerza/">1 · Trabajo</a></td>
+<td>Subir 50 kg a 18 m con una polea</td>
+<td>W hombre = 8 820 J; W peso = −8 820 J</td>
+</tr>
+<tr>
+<td>Teoría 2</td>
+<td><a href="trabajo-con-rozamiento/">2 · Rozamiento</a></td>
+<td>Trabajo del peso, de F y del rozamiento en 8 m</td>
+<td>0 J; 320 J; −200 J</td>
+</tr>
+<tr>
+<td>Ejercicios 1</td>
+<td><a href="trabajo-con-rozamiento/">2 · Rozamiento</a></td>
+<td>30 N a 30°, μ = 0,2: v a los 10 s y W del rozamiento</td>
+<td>v = 38,4 m/s; W roz = −1,30·10³ J</td>
+</tr>
+<tr>
+<td>Repaso 5</td>
+<td><a href="trabajo-con-rozamiento/">2 · Rozamiento</a></td>
+<td>30 N a 30°, μ = 0,4: a, desplazamiento y W del rozamiento</td>
+<td>a = 2,48 m/s²; 124 m; W roz = −1,68·10³ J</td>
+</tr>
+<tr>
+<td>Teoría 9</td>
+<td><a href="energia-cinetica/">3 · Energía cinética</a></td>
+<td>Coche que frena de 108 a 18 km/h en 50 m</td>
+<td>W = −4,38·10⁵ J; F = 8 750 N</td>
+</tr>
+<tr>
+<td>Teoría 10</td>
+<td><a href="energia-cinetica/">3 · Energía cinética</a></td>
+<td>Bala que se incrusta 6 cm</td>
+<td>F = 3,0·10⁴ N</td>
+</tr>
+<tr>
+<td>Ejercicios 6</td>
+<td><a href="energia-cinetica/">3 · Energía cinética</a></td>
+<td>Proyectil que atraviesa 40 cm de madera</td>
+<td>F = 1,72·10⁴ N</td>
+</tr>
+<tr>
+<td>Teoría 13</td>
+<td><a href="energia-cinetica/">3 · Energía cinética</a></td>
+<td>Bloque a 15 m/s con μ = 0,4</td>
+<td>d = 28,7 m</td>
+</tr>
+<tr>
+<td>Teoría 11</td>
+<td><a href="conservacion/">4 · Conservación</a></td>
+<td>Plano de 30° sin rozamiento a 3 m/s</td>
+<td>h = 0,46 m; d = 0,92 m</td>
+</tr>
+<tr>
+<td>Ejercicios 4</td>
+<td><a href="conservacion/">4 · Conservación</a></td>
+<td>Tiro oblicuo a 25 m/s, punto más alto a 2,5 m</td>
+<td>v = 24 m/s</td>
+</tr>
+<tr>
+<td>Ejercicios 5</td>
+<td><a href="conservacion/">4 · Conservación</a></td>
+<td>Desde 5 m, llegar al suelo a 18 m/s</td>
+<td>v₀ = 15,0 m/s en los tres casos</td>
+</tr>
+<tr>
+<td>Ejercicios 8</td>
+<td><a href="conservacion/">4 · Conservación</a></td>
+<td>40 kg de 30 m y 15 m/s a 90 m y 12 m/s</td>
+<td>W = 2,19·10⁴ J</td>
+</tr>
+<tr>
+<td>Teoría 12</td>
+<td><a href="muelles/">5 · Muelles</a></td>
+<td>Bola de 100 g desde 2 m, comprime 5 cm</td>
+<td>k = 1,61·10³ N/m; v = 6,26 m/s</td>
+</tr>
+<tr>
+<td>Cuestiones 8</td>
+<td><a href="muelles/">5 · Muelles</a></td>
+<td>4 kg a 6 m/s contra K = 900 N/m</td>
+<td>x = 0,40 m; v = 5,81 m/s</td>
+</tr>
+<tr>
+<td>Cuestiones 9</td>
+<td><a href="muelles/">5 · Muelles</a></td>
+<td>200 g desde 4 m sobre K = 1200 N/m</td>
+<td>x = 0,116 m</td>
+</tr>
+<tr>
+<td>Repaso 4</td>
+<td><a href="muelles/">5 · Muelles</a></td>
+<td>Muelle que se alarga 2 cm con 500 g</td>
+<td>k = 245 N/m; x = 0,221 m</td>
+</tr>
+<tr>
+<td>Ejercicios 7</td>
+<td><a href="muelles/">5 · Muelles</a></td>
+<td>Rampa de 1 m y muelle de 20 N/m</td>
+<td>a) 0,99 m; b) 0,80 m</td>
+</tr>
+<tr>
+<td>Cuestiones 10</td>
+<td><a href="muelles/">5 · Muelles</a></td>
+<td>Bola a 8 m/s, 2 m con μ = 0,2, K = 900 N/m</td>
+<td>Falta la masa: 0,248 m si m = 1 kg</td>
+</tr>
+<tr>
+<td>Teoría 14</td>
+<td><a href="planos-inclinados/">6 · Planos</a></td>
+<td>Rampa de 6 m × 10 m, μ = 0,25</td>
+<td>v = 8,85 m/s</td>
+</tr>
+<tr>
+<td>Teoría 15</td>
+<td><a href="planos-inclinados/">6 · Planos</a></td>
+<td>3 m/s por 30°, μ = 0,3</td>
+<td>h = 0,302 m (d = 0,604 m)</td>
+</tr>
+<tr>
+<td>Repaso 3</td>
+<td><a href="planos-inclinados/">6 · Planos</a></td>
+<td>5 m/s por un plano 9 m × 15 m, μ = 0,4</td>
+<td>d = 1,39 m; W roz = −8,70 J</td>
+</tr>
+<tr>
+<td>Ejercicios 9</td>
+<td><a href="planos-inclinados/">6 · Planos</a></td>
+<td>Rampa de 5 m y 37°, μ = 0,4</td>
+<td>v = 6,78 m/s</td>
+</tr>
+<tr>
+<td>Cuestiones 6</td>
+<td><a href="planos-inclinados/">6 · Planos</a></td>
+<td>12 m/s por 40°, μ = 0,2, y vuelta</td>
+<td>d = 9,23 m; v = 9,41 m/s</td>
+</tr>
+<tr>
+<td>Cuestiones 7</td>
+<td><a href="planos-inclinados/">6 · Planos</a></td>
+<td>2 m horizontales y rampa de 40°</td>
+<td>v = 6,10 m/s; d = 2,18 m</td>
+</tr>
+<tr>
+<td>Ejercicios 2</td>
+<td><a href="planos-inclinados/">6 · Planos</a></td>
+<td>Subir 120 kg a velocidad constante</td>
+<td>F = 894 N; W = 8,94·10³ J</td>
+</tr>
+<tr>
+<td>Ejercicios 10</td>
+<td><a href="planos-inclinados/">6 · Planos</a></td>
+<td>Misma distancia en el plano y en horizontal</td>
+<td>μ = 0,268</td>
+</tr>
+<tr>
+<td>Selectividad 4</td>
+<td><a href="planos-inclinados/">6 · Planos</a></td>
+<td>Lanzado hacia arriba por un plano, en 10 pasos animados</td>
+<td><a href="plano-inclinado-ejercicio-4/">Ver la animación</a></td>
+</tr>
+<tr>
+<td>Teoría 16</td>
+<td><a href="potencia-y-rendimiento/">7 · Potencia</a></td>
+<td>15 sacos de 80 kg a 1 m en media hora</td>
+<td>P = 6,53 W</td>
+</tr>
+<tr>
+<td>Teoría 17</td>
+<td><a href="potencia-y-rendimiento/">7 · Potencia</a></td>
+<td>Estufa de 2000 W durante 8 h</td>
+<td>16 kWh = 57,6 MJ; 1,44 €</td>
+</tr>
+<tr>
+<td>Teoría 18</td>
+<td><a href="potencia-y-rendimiento/">7 · Potencia</a></td>
+<td>Motor de 2 CV, 12 m, 20 min, η = 78 %</td>
+<td>1,17·10⁴ L</td>
+</tr>
+<tr>
+<td>Teoría 19</td>
+<td><a href="potencia-y-rendimiento/">7 · Potencia</a></td>
+<td>Montacargas de 450 kg, 12 m en 30 s, η = 60 %</td>
+<td>P = 2 940 W ≈ 4,0 CV</td>
+</tr>
+<tr>
+<td>Cuestiones 11</td>
+<td><a href="potencia-y-rendimiento/">7 · Potencia</a></td>
+<td>Hornillo: 2,5 kg de agua de 12 a 80 °C en 15 min</td>
+<td>P = 929 W; 0,02 €</td>
+</tr>
+<tr>
+<td>Cuestiones 12</td>
+<td><a href="potencia-y-rendimiento/">7 · Potencia</a></td>
+<td>Calentador de 1500 W, 50 kg de 20 a 80 °C en 3 h</td>
+<td>η = 77,4 %; 0,36 €</td>
+</tr>
+<tr>
+<td>Teoría 4, Cuestiones 1 a 5, Repaso 1</td>
+<td><a href="cuestiones/">8 · Teoría</a></td>
+<td>Preguntas razonadas</td>
+<td><a href="cuestiones/">Respuestas razonadas</a></td>
+</tr>
+</tbody></table></div>
+<h2 id="formulario-del-tema">Formulario del tema</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Fórmula</th>
+<th>Cuándo se usa</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>W = F · Δs · cos φ</td>
+<td>Fuerza constante; φ es el ángulo entre la fuerza y el desplazamiento</td>
+<td>Teoría 2 (categoría 2)</td>
+</tr>
+<tr>
+<td>W = F⃗ · Δr⃗ = Fx·Δx + Fy·Δy</td>
+<td>Fuerza y posiciones dadas con vectores i, j</td>
+<td>Teoría 1 (categoría 1)</td>
+</tr>
+<tr>
+<td>W total = ΔEc = ½·m·v² − ½·m·v₀²</td>
+<td>Teorema de las fuerzas vivas: suma de los trabajos de TODAS las fuerzas</td>
+<td>Teoría 9 (categoría 3)</td>
+</tr>
+<tr>
+<td>Ec = ½·m·v²</td>
+<td>Energía de un cuerpo que se mueve; nunca es negativa</td>
+<td>Categorías 3 a 6</td>
+</tr>
+<tr>
+<td>Ep = m·g·h</td>
+<td>Energía potencial gravitatoria; h se mide desde el nivel que tú elijas como h = 0</td>
+<td>Categoría 4</td>
+</tr>
+<tr>
+<td>Ep elástica = ½·k·x²</td>
+<td>Muelle comprimido o estirado una distancia x desde su longitud natural</td>
+<td>Categoría 5</td>
+</tr>
+<tr>
+<td>F = k·x</td>
+<td>Ley de Hooke: fuerza del muelle (o la que lo deforma)</td>
+<td>Repaso 4 (categoría 5)</td>
+</tr>
+<tr>
+<td>W conservativa = −ΔEp</td>
+<td>El trabajo del peso o del muelle es la disminución de su energía potencial</td>
+<td>Categorías 1 y 4</td>
+</tr>
+<tr>
+<td>Ec₀ + Ep₀ = Ec + Ep</td>
+<td>Conservación: solo trabajan fuerzas conservativas (peso, muelles)</td>
+<td>Ejercicios 4 (categoría 4)</td>
+</tr>
+<tr>
+<td>Ec₀ + Ep₀ + W nc = Ec + Ep</td>
+<td>Ecuación de trabajo y energía: hay rozamiento o fuerzas aplicadas (W nc con su signo)</td>
+<td>Categorías 5 y 6</td>
+</tr>
+<tr>
+<td>W roz = −Fr·d = −μ·N·d</td>
+<td>Trabajo del rozamiento: siempre negativo; N se calcula con el diagrama</td>
+<td>Categorías 2 y 6</td>
+</tr>
+<tr>
+<td>N = m·g·cos α</td>
+<td>Normal en un plano inclinado sin otras fuerzas perpendiculares</td>
+<td>Categoría 6</td>
+</tr>
+<tr>
+<td>P = W / Δt = F·v</td>
+<td>Potencia: trabajo por segundo; F·v cuando la velocidad es constante</td>
+<td>Categoría 7</td>
+</tr>
+<tr>
+<td>η = P útil / P total = E útil / E total</td>
+<td>Rendimiento de una máquina o aparato (entre 0 y 1)</td>
+<td>Teoría 18 (categoría 7)</td>
+</tr>
+<tr>
+<td>Q = m·c·ΔT</td>
+<td>Energía para calentar agua (c = 4180 J/(kg·K))</td>
+<td>Cuestiones 11 (categoría 7)</td>
+</tr>
+</tbody></table></div>
+<p>Equivalencias: <strong>1 kWh = 1000 W · 3600 s = 3,6·10⁶ J</strong> · <strong>1 CV = 736 W</strong> · <strong>1 km/h = 1/3,6 m/s</strong> · <strong>1 L de agua = 1 kg</strong>.</p>
+<h2 id="errores-frecuentes-con-los-signos-y-las-unidades">Errores frecuentes con los signos y las unidades</h2>
+<ul>
+<li><strong>El producto escalar da un número, no un vector.</strong> (3i − 5j) · (6i + 2j) = 3·6 + (−5)·2 = 8 J. Escribir «18i − 10j» está mal: se multiplican las componentes y se <strong>suman</strong>, y el resultado no lleva i ni j.</li>
+<li><strong>Δr = posición final − posición inicial, componente a componente.</strong> De A(−2, 1) a B(4, 3): Δx = 4 − (−2) = 6 y Δy = 3 − 1 = 2. Cuidado con el doble signo menos.</li>
+<li><strong>El rozamiento siempre hace trabajo negativo</strong> (va contra el movimiento, φ = 180°). Si ya lo escribes como −μ·N·d en la ecuación, no lo vuelvas a restar.</li>
+<li><strong>N no siempre vale m·g.</strong> En un plano inclinado N = m·g·cos α; si tiras con una cuerda inclinada hacia arriba, N = m·g − F·sen φ. Dibuja siempre el diagrama antes.</li>
+<li><strong>El peso se cuenta una sola vez:</strong> o como energía potencial (m·g·h) o como trabajo del peso, nunca las dos a la vez.</li>
+<li><strong>En W roz va la distancia recorrida d, no la altura h.</strong> En un plano, h = d·sen α.</li>
+<li><strong>Unidades del SI antes de sustituir:</strong> km/h → m/s (÷ 3,6), g → kg, cm → m, minutos y horas → segundos. En los muelles, x en metros: 5 cm = 0,05 m y x² = 0,0025 m².</li>
+<li><strong>kWh es energía, no potencia.</strong> kW × h = kWh. Para pasar a julios, × 3,6·10⁶.</li>
+<li><strong>El rendimiento nunca es mayor que 1:</strong> P útil = η · P total. Si te sale η &gt; 1, has dividido al revés.</li>
+<li><strong>Calculadora en grados (DEG),</strong> no en radianes: sen 30° = 0,5.</li>
+<li><strong>La energía cinética nunca es negativa;</strong> la potencial sí puede serlo si el cuerpo está por debajo del nivel h = 0 elegido.</li>
+</ul>
+<h2 id="vocabulario-bi-en-ingles">Vocabulario BI en inglés</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Español</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Trabajo realizado por una fuerza</td>
+<td>Work done by a force (W)</td>
+</tr>
+<tr>
+<td>Producto escalar</td>
+<td>Scalar (dot) product</td>
+</tr>
+<tr>
+<td>Energía cinética</td>
+<td>Kinetic energy (E_k)</td>
+</tr>
+<tr>
+<td>Energía potencial gravitatoria</td>
+<td>Gravitational potential energy (E_p)</td>
+</tr>
+<tr>
+<td>Energía potencial elástica</td>
+<td>Elastic potential energy</td>
+</tr>
+<tr>
+<td>Energía mecánica</td>
+<td>Mechanical energy</td>
+</tr>
+<tr>
+<td>Teorema de las fuerzas vivas</td>
+<td>Work–kinetic energy theorem</td>
+</tr>
+<tr>
+<td>Conservación de la energía</td>
+<td>Conservation of energy</td>
+</tr>
+<tr>
+<td>Fuerza conservativa / no conservativa</td>
+<td>Conservative / non-conservative force</td>
+</tr>
+<tr>
+<td>Energía disipada (calor)</td>
+<td>Energy dissipated (thermal energy)</td>
+</tr>
+<tr>
+<td>Constante elástica, ley de Hooke</td>
+<td>Spring constant, Hooke&#39;s law</td>
+</tr>
+<tr>
+<td>Potencia</td>
+<td>Power (P)</td>
+</tr>
+<tr>
+<td>Rendimiento</td>
+<td>Efficiency (η)</td>
+</tr>
+<tr>
+<td>Potencia útil / suministrada</td>
+<td>Useful power output / power input</td>
+</tr>
+<tr>
+<td>Calor específico</td>
+<td>Specific heat capacity (c)</td>
+</tr>
+</tbody></table></div>
+
+    <nav class="pager" aria-label="Anterior y siguiente"><span></span><a href="./trabajo-de-una-fuerza/" style="text-align:right"><small>Siguiente</small>Trabajo de una fuerza</a></nav>
+    </main>
+    <aside class="toc" aria-label="En esta página"><h2>En esta página</h2><ol><li><a href="#que-herramienta-uso">¿Qué herramienta uso?</a></li><li><a href="#indice-de-ejercicios-con-su-resultado">Índice de ejercicios con su resultado</a></li><li><a href="#formulario-del-tema">Formulario del tema</a></li><li><a href="#errores-frecuentes-con-los-signos-y-las-unidades">Errores frecuentes con los signos y las unidades</a></li><li><a href="#vocabulario-bi-en-ingles">Vocabulario BI en inglés</a></li></ol></aside>
+  </div>
+  <footer>Material de estudio. Si el enunciado no da g, se usa 9,8 m/s². Para imprimir, usa la opción de imprimir del navegador.</footer>
+</div>
+</body>
+</html>

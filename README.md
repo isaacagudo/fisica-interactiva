@@ -13,6 +13,10 @@ temas/<tema>/<pagina>/index.html   Ejercicios resueltos (generados desde src/)
 simuladores/<nombre>/index.html    Simuladores interactivos (HTML escrito a mano)
 src/                               Fuentes y scripts para generar las páginas
   package.json                     Dependencias: mathjax-full (fórmulas) y fuentes para el vídeo
+  energia/
+    contenido.json                 Tema «Trabajo, potencia y energía»: Markdown del mapa y de las 8 categorías
+    diagramas/*.jsx                Diagramas de fuerzas (SVG en JSX), uno por fichero
+    build.js                       Genera temas/energia/index.html y temas/energia/<categoría>/index.html
   ejercicio-4/
     content.js                     Texto de los 10 pasos, con fórmulas en TeX ($…$ y $$…$$)
     template.html                  Escenario animado, estilos y lógica de pasos
@@ -28,6 +32,15 @@ src/                               Fuentes y scripts para generar las páginas
 | Rojo | Rozamiento y calor |
 | Ámbar | Velocidad y energía cinética |
 | Verde | Normal |
+
+## Regenerar el tema de energía
+
+```sh
+cd src && npm install
+node energia/build.js            # escribe el mapa del tema y las 8 páginas de categorías
+```
+
+En `contenido.json` cada página es Markdown; `[[diagrama:<fichero>|<pie>]]` inserta un diagrama de `diagramas/` y `[[categorias]]` las tarjetas de categorías. Las fórmulas van en Unicode (sin TeX), así que las páginas no cargan ninguna librería y se ven también en la vista rápida del iPad.
 
 ## Regenerar el ejercicio 4
 
