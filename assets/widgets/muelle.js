@@ -148,7 +148,7 @@
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .wm{--c-k:#f08cc0}}
 :root[data-theme="dark"] .wm{--c-k:#f08cc0}
 .wm *{box-sizing:border-box}
-.wm-box{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:12px;display:grid;gap:12px}
+.wm-box{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:12px;display:grid;gap:12px;grid-template-columns:minmax(0,1fr)}
 .wm-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 12px}
 .wm .wm-title{font:700 1rem var(--f-display);margin:0}
 .wm-tag{font:600 11px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--c-p);color:var(--c-p);border-radius:999px;padding:2px 7px}
@@ -204,6 +204,7 @@
 .wm-speed button{appearance:none;border:0;background:var(--sheet);color:var(--ink-2);font:600 12.5px var(--f-mono);padding:0 8px;min-height:36px;cursor:pointer}
 .wm-speed button[aria-pressed="true"]{background:var(--ink);color:var(--sheet)}
 @container (max-width: 480px){.wm-playlbl{display:none}.wm-read{font-size:11.5px;gap:0 10px}.wm-speed button{padding:0 6px}}
+@container (max-width: 340px){.wm-ctrl{flex-wrap:wrap}.wm-ctrl input[type=range]{order:5;flex-basis:100%}.wm-speed{margin-left:auto}}
 .wm-params{display:grid;gap:10px 18px;grid-template-columns:minmax(0,1fr)}
 .wm-param{display:grid;gap:2px}
 .wm-param label{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-weight:700;font-size:14.5px}
@@ -212,11 +213,12 @@
 .wm-toggle{display:flex;gap:8px;align-items:center;font-size:14px;color:var(--ink-2)}
 .wm-toggle input{accent-color:var(--c-p);width:18px;height:18px}
 .wm-res{margin:0;display:grid}
-.wm-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding:8px 0;border-top:1px solid var(--rule)}
+.wm-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 12px;padding:8px 0;border-top:1px solid var(--rule)}
+.wm-row dt{flex:1 1 auto;min-width:0}
 .wm-row:first-child{border-top:0}
 .wm-row dt{font-weight:700;font-size:14.5px}
-.wm-row dd{margin:0;font-family:var(--f-mono);font-weight:600;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
-.wm-row .f{grid-column:1 / -1;color:var(--ink-2);font-size:13px}
+.wm-row dd{margin:0 0 0 auto;font-family:var(--f-mono);font-weight:600;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.wm-row .f{flex-basis:100%;color:var(--ink-2);font-size:13px}
 .wm .wm-verdict{margin:0;padding:9px 12px;border-radius:9px;background:var(--paper);font-size:14px}
 .wm-chart svg{display:block;width:100%;height:auto}
 .wm-chart text{font-size:11px;fill:var(--ink-2)}
@@ -659,6 +661,7 @@
 
   function auto() {
     document.querySelectorAll('[data-widget="muelle"]').forEach(el => {
+      if (el.__wm) return;
       let cfg = {};
       try { cfg = JSON.parse(el.getAttribute('data-config') || '{}'); } catch (e) { console.error('muelle: data-config no es JSON válido', e); }
       mount(el, cfg);

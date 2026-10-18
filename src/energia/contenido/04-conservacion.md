@@ -3,9 +3,10 @@ slug: conservacion
 titulo: Conservación de la energía mecánica
 nombre: Conservación de la energía mecánica
 corto: Conservación
-eyebrow: Categoría 4
+eyebrow: Apartado 4
 desc: Solo trabaja el peso: tiros, caídas y planos sin rozamiento.
 resueltos: 4.1, 4.3
+icono: conservacion
 ---
 ## Idea clave: si solo trabajan el peso y los muelles, la energía mecánica no cambia
 
@@ -32,6 +33,12 @@ resueltos: 4.1, 4.3
 3. Escribir Ec₀ + Ep₀ = Ec + Ep con cada término (y decir cuáles valen 0).
 4. Despejar con letras: normalmente la masa se simplifica.
 5. Sustituir y comprobar con cinemática si se puede.
+
+## Simulador
+
+La barra de energías cambia de ámbar (Ec) a azul (Ep) al subir y vuelve al bajar, pero la suma no cambia. Prueba «Comparar direcciones»: con la misma rapidez de salida, todos los lanzamientos llegan al suelo con la misma rapidez.
+
+[[simulador:tiro|{"modo": "completo", "selector": true, "titulo": "Simulador: lanzamientos sin rozamiento", "escenario": "tiro", "m": 1, "h0": 0, "v0": 25, "angulo": 16.26, "ejemplos": [{"nombre": "Ejercicios 4", "valores": {"escenario": "tiro", "m": 1, "h0": 0, "v0": 25, "angulo": 16.26}}, {"nombre": "Ejercicios 5", "valores": {"escenario": "comparar", "m": 1, "h0": 5, "v0": 15.03, "angulos": [90, -90, 0]}}, {"nombre": "Tiro vertical", "valores": {"escenario": "tiro", "m": 1, "h0": 1.5, "v0": 12, "angulo": 90}}, {"nombre": "Caída desde 10 m", "valores": {"escenario": "tiro", "m": 1, "h0": 10, "v0": 0, "angulo": 0}}]}]]
 
 === 4.1 | Teoría 11 | Cuerpo lanzado a 3 m/s por un plano de 30° sin rozamiento
 pide: Plano de 30° sin rozamiento a 3 m/s

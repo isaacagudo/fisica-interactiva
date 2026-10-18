@@ -5,7 +5,7 @@
 :root{
   --paper:#f4f6f9; --sheet:#ffffff; --grid:#e1e6ee; --ink:#17202c; --ink-2:#556175; --rule:#d5dbe4;
   --plane:#e5e9f0; --plane-edge:#94a2b6;
-  --c-p:#1f4fd1; --c-n:#0d8a66; --c-fr:#c93427; --c-v:#a9680b;
+  --c-p:#1f4fd1; --c-n:#0d8a66; --c-fr:#c93427; --c-v:#a9680b; --c-a:#7b4fd6; --c-k:#b4407e;
   --hl:rgba(255,212,0,.45);
   --f-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
   --f-body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
@@ -16,14 +16,14 @@
   :root:not([data-theme="light"]){
     --paper:#0e1218; --sheet:#151b24; --grid:#1f2733; --ink:#e7ebf1; --ink-2:#a3aec0; --rule:#2b3544;
     --plane:#1c2431; --plane-edge:#62718b;
-    --c-p:#86a6ff; --c-n:#45d2a3; --c-fr:#ff7f6f; --c-v:#f2b74b; --hl:rgba(255,212,0,.2);
+    --c-p:#86a6ff; --c-n:#45d2a3; --c-fr:#ff7f6f; --c-v:#f2b74b; --c-a:#b39bff; --c-k:#f08cc0; --hl:rgba(255,212,0,.2);
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
   --paper:#0e1218; --sheet:#151b24; --grid:#1f2733; --ink:#e7ebf1; --ink-2:#a3aec0; --rule:#2b3544;
   --plane:#1c2431; --plane-edge:#62718b;
-  --c-p:#86a6ff; --c-n:#45d2a3; --c-fr:#ff7f6f; --c-v:#f2b74b; --hl:rgba(255,212,0,.2);
+  --c-p:#86a6ff; --c-n:#45d2a3; --c-fr:#ff7f6f; --c-v:#f2b74b; --c-a:#b39bff; --c-k:#f08cc0; --hl:rgba(255,212,0,.2);
   color-scheme:dark;
 }
 *,*::before,*::after{box-sizing:border-box}
@@ -49,3 +49,11 @@ h3{font-family:var(--f-display);font-weight:700;font-size:1.05rem;margin:0}
 .note{font-family:var(--f-hand);font-weight:600;font-size:1.4rem;line-height:1.15;color:var(--c-fr)}
 .k-p{color:var(--c-p)} .k-n{color:var(--c-n)} .k-fr{color:var(--c-fr)} .k-v{color:var(--c-v)}
 .grid-paper{background-color:var(--sheet);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:18px 18px;background-position:-1px -1px}
+
+/* iconos (src/iconos.js): mapa, ejercicios, examen y uno por apartado */
+.ico{display:block;width:100%;height:auto}
+.ico .pl{fill:var(--plane);stroke:var(--plane-edge);stroke-width:1.5}
+.ico .bk{fill:var(--sheet);stroke:var(--ink);stroke-width:1.8}
+.ico .ln{fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.ico .p{stroke:var(--c-p)} .ico .n{stroke:var(--c-n)} .ico .fr{stroke:var(--c-fr)} .ico .v{stroke:var(--c-v)} .ico .a{stroke:var(--c-a)} .ico .k{stroke:var(--c-k)} .ico .i{stroke:var(--ink)} .ico .q{stroke:var(--ink-2)}
+.ico .fp{fill:var(--c-p)} .ico .fn{fill:var(--c-n)} .ico .ffr{fill:var(--c-fr)} .ico .fv{fill:var(--c-v)} .ico .fa{fill:var(--c-a)} .ico .fk{fill:var(--c-k)} .ico .fi{fill:var(--ink)} .ico .fq{fill:var(--ink-2)}

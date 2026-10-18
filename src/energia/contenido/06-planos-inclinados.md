@@ -3,13 +3,14 @@ slug: planos-inclinados
 titulo: Planos inclinados con rozamiento
 nombre: Planos inclinados con rozamiento
 corto: Planos inclinados
-eyebrow: Categoría 6
+eyebrow: Apartado 6
 desc: Subir, bajar y volver: la ecuación de trabajo y energía.
 resueltos: 6.1, 6.2
+icono: plano
 ---
 ## Idea clave: las cuatro fórmulas del plano inclinado
 
-El [ejercicio 4 de Selectividad](../plano-inclinado-ejercicio-4/) está resuelto paso a paso con animación, y en el [simulador del plano inclinado](../../../simuladores/plano-inclinado/) se pueden cambiar la masa, el ángulo, μ y la velocidad para ver qué pasa. Abajo están los ejercicios de los apuntes del tema y, para practicar más, los cuatro de Selectividad de la hoja de planos inclinados (el 4, también con la animación paso a paso).
+El [ejercicio 4 de Selectividad](../plano-inclinado-ejercicio-4/) está resuelto paso a paso con animación, y en el [simulador de abajo](#simulador) se pueden cambiar la masa, el ángulo, μ y la velocidad para ver qué pasa. Los ejercicios de los apuntes y los cuatro de Selectividad de la hoja de planos inclinados están en la sección de ejercicios.
 
 | Fórmula | De dónde sale |
 | --- | --- |
@@ -28,6 +29,12 @@ El [ejercicio 4 de Selectividad](../plano-inclinado-ejercicio-4/) está resuelto
 - **A velocidad constante** no se usa la energía para hallar la fuerza: ΣF = 0 a lo largo del plano (Ejercicios 2).
 
 **Errores típicos:** poner h en lugar de d en el rozamiento; tomar N = m·g en el plano; restar el rozamiento dos veces; olvidar que el peso ya está en Ep y contarlo otra vez como trabajo.
+
+## Simulador
+
+Lanza el bloque hacia arriba, suéltalo desde arriba o súbelo con velocidad constante. Fíjate en la flecha del rozamiento: cambia de sentido cuando cambia la velocidad, pero en la barra el calor siempre crece.
+
+[[simulador:plano|{"modo": "completo", "selector": true, "titulo": "Simulador del plano inclinado", "escenario": "sube", "m": 2, "alpha": 30, "mu": 0.3, "v0": 3, "ejemplos": [{"nombre": "Teoría 15", "valores": {"escenario": "sube", "m": 2, "alpha": 30, "mu": 0.3, "v0": 3}}, {"nombre": "Teoría 14", "valores": {"escenario": "baja", "m": 4, "alpha": 36.87, "h": 6, "mu": 0.25, "v0": 0}}, {"nombre": "Cuestiones 6", "valores": {"escenario": "sube", "m": 10, "alpha": 40, "mu": 0.2, "v0": 12}}, {"nombre": "Cuestiones 7", "valores": {"escenario": "sube", "m": 1, "alpha": 40, "mu": 0.3, "v0": 7, "L0": 2}}, {"nombre": "Ejercicios 2", "valores": {"escenario": "empuje", "m": 120, "alpha": 30, "mu": 0.3, "d": 10, "v": 1, "sentido": "sube"}}, {"nombre": "Ejercicios 10", "valores": {"escenario": "baja", "m": 1, "alpha": 30, "h": 1, "mu": 0.2679, "suelo": true, "v0": 0}}]}]]
 
 === 6.1 | Teoría 14 | Rampa de 6 m de alto y 10 m de largo, μ = 0,25
 figura: e_t14

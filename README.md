@@ -7,13 +7,17 @@ Web: https://isaacagudo.github.io/fisica-interactiva/
 ## Estructura
 
 ```
-index.html                         Portada: un bloque por tema con sus páginas
-assets/base.css                    Estilos comunes (colores, tipografía, tarjetas)
+index.html                         Portada: un bloque por tema (mapa, ejercicios, examen y apartados; generado)
+assets/base.css                    Estilos comunes (colores, tipografía, tarjetas, iconos)
 assets/widgets/<nombre>.js         Simuladores reutilizables que se insertan en cualquier página (ver abajo)
+assets/examen/                     Generador de exámenes: núcleo, patrones de cada tema y la lógica de la página
 temas/<tema>/<pagina>/index.html   Páginas de cada tema (generadas desde src/)
-simuladores/<nombre>/index.html    Simuladores interactivos (HTML escrito a mano)
+examen/index.html                  Generador de exámenes (generado desde src/examen/build.js)
+simuladores/<nombre>/index.html    Redirecciones a los simuladores, que ahora están dentro de la teoría
 src/                               Fuentes y scripts para generar las páginas
-  package.json                     Dependencias: mathjax-full (fórmulas) y fuentes para el vídeo
+  package.json                     Dependencias: marked, esbuild, react (diagramas), mathjax-full y fuentes para el vídeo
+  iconos.js                        Iconos SVG: mapa, ejercicios y examen (comunes a todos los temas) y uno por apartado
+  examen/build.js                  Genera la página del generador de exámenes con los temas registrados
   energia/
     contenido/00-mapa.md           Mapa del tema (herramientas, índice, formulario, errores)
     contenido/NN-<categoría>.md    Idea clave y ejercicios de cada categoría (enunciado, resultado, solución, simulación)
@@ -40,10 +44,11 @@ src/                               Fuentes y scripts para generar las páginas
 
 ```sh
 cd src && npm install
-node energia/build.js            # mapa, 8 apartados, sección de ejercicios y sus soluciones
+node energia/build.js            # mapa, 8 apartados, sección de ejercicios, soluciones, bloque de la portada y cuestiones del examen
+node examen/build.js             # página del generador de exámenes
 ```
 
-Cada categoría es un fichero de `src/energia/contenido/`. Arriba, la cabecera (`slug`, `titulo`, `nombre`, `corto`, `eyebrow`, `desc` y `resueltos`, la lista de ejemplos que se resuelven en la propia página del apartado) entre dos líneas `---`; después, el Markdown de la idea clave, y después un bloque por ejercicio:
+Cada categoría es un fichero de `src/energia/contenido/`. Arriba, la cabecera (`slug`, `titulo`, `nombre`, `corto`, `eyebrow`, `desc`, `icono`, el nombre de su icono en `src/iconos.js`, y `resueltos`, la lista de ejemplos que se resuelven en la propia página del apartado) entre dos líneas `---`; después, el Markdown de la idea clave, que acaba con su simulador completo (`[[simulador:<nombre>|{json}]]` en una línea propia, con las opciones del widget), y después un bloque por ejercicio:
 
 ```
 === 5.1 | Teoría 12 | Bola de 100 g que cae 2 m sobre un resorte
@@ -62,6 +67,23 @@ widget: muelle {"escenario": "vertical", "m": 0.1, "h": 2, "k": 1607}
 ```
 
 La segunda columna es el origen: `Teoría n`, `Ejercicios n`, `Cuestiones n`, `Repaso n`, `Selectividad n` o `Nuevo` (ejercicios para practicar más). La página de cada apartado lleva la idea clave, los ejemplos de `resueltos` con su solución y su simulación, y un enlace a sus ejercicios. Todos los demás van a la sección común `temas/energia/ejercicios/`, agrupados por temática: enunciado, «Ver solo el resultado» y enlace a su solución (`temas/energia/ejercicios/5-3/`), con el enunciado, la resolución y la simulación. «ejercicio 2.1» en cualquier texto se enlaza solo con esa solución. Las fórmulas van en Unicode (sin TeX), así que las páginas se ven también en la vista rápida del iPad.
+
+Cada tema tiene la misma estructura, con un icono para cada página: **mapa** del tema, **ejercicios** (todos los propuestos), **examen** (el generador) y los **apartados** de teoría, cada uno con su simulador. Los iconos son SVG de 96×72 con las variables de color de `base.css` (`src/iconos.js`); para un tema nuevo se añaden los de sus apartados.
+
+## Generador de exámenes (`examen/`, `assets/examen/`)
+
+`examen/?temas=energia` abre el generador con los apartados de ese tema. Se eligen los apartados y el número de ejercicios; cada examen sale de patrones de ejercicio con datos aleatorios, se reparte entre los apartados elegidos (sin repetir un tipo hasta haber salido todos los de su apartado), lleva la puntuación sobre 10 en cuartos de punto y, para cada ejercicio, el resultado, la solución paso a paso y la simulación con esos mismos datos. Se imprime solo el examen o el examen y, en otra página, las soluciones. La dirección guarda el examen (`?sel=energia:1,4,6&n=6&s=48213`: apartados, número de ejercicios y número de examen), así que el enlace lo vuelve a abrir igual.
+
+| Fichero | Qué hace |
+| --- | --- |
+| `generador.js` | Números aleatorios con semilla, formato de números en español, reparto y puntuación (`generar(sel, n, semilla)`) |
+| `energia.js` | Patrones del tema de energía: 34 tipos de ejercicio en 7 apartados |
+| `energia-cuestiones.js` | Cuestiones de teoría, generadas por `src/energia/build.js` desde `08-cuestiones.md` (no editar) |
+| `pagina.js` | La página: formulario, dirección, soluciones, simulaciones e impresión |
+
+Un patrón es `{ id, titulo, peso, datos(r), enunciado(d, f), solucion(d, f), sim(d) }`: `datos` sortea los datos con `r.int`, `r.step`, `r.pick` o `r.chance` y devuelve `null` si no tienen sentido físico (por ejemplo, un bloque que debe volver a bajar necesita tg α > μ), y se vuelve a sortear; `solucion` devuelve `{ resultado, pasos, val }` (HTML de los pasos con «Qué herramienta usar», fórmulas y «¿Por qué?», y los números para comprobar); `sim` da el simulador y sus opciones. Para otro tema, se crea `assets/examen/<tema>.js` con `FisicaExamen.registrar({ tema, nombre, ruta, apartados: [{ slug, nombre, icono, patrones }] })` y se añade a la lista `TEMAS` de `src/examen/build.js`.
+
+Cada patrón se comprueba en Node generando cientos de casos al azar: datos válidos, textos sin `NaN` y resultados iguales a los que calculan los simuladores (`analizar` y `simular`) con esos datos.
 
 ## Simulaciones (`assets/widgets/`)
 
@@ -106,7 +128,7 @@ Otras opciones: `titulo`; `modo` (`"compacto"` por defecto, `"completo"` añade 
 
 Desde JavaScript: `elemento.__wm.set({k: 900})` cambia valores y vuelve a simular, y `FisicaWidgets.muelle.mount(elemento, opciones)` lo monta a mano. En Node, `require('./assets/widgets/muelle.js')` da `analizar(p)` (resultados con las fórmulas de energía) y `simular(p)` (integración numérica), útiles para comprobar ejercicios.
 
-La página completa está en `simuladores/muelle/` y cada ejercicio de `temas/energia/muelles/` lleva el suyo.
+El simulador completo está en la página del apartado `temas/energia/muelles/` y cada ejercicio de muelles lleva el suyo.
 
 ## Regenerar el ejercicio 4
 
@@ -125,7 +147,7 @@ node build.js --artifact && python3 make_video.py   # crea ejercicio4.mp4 en est
 
 1. Copia `src/ejercicio-4` a `src/<nuevo>` y cambia en `template.html` la física (`state(t)`), las escenas (`scenes`) y el dibujo; en `content.js`, los pasos.
 2. Ajusta la ruta de salida en `build.js` (`temas/<tema>/<pagina>/index.html`) y ejecútalo.
-3. Añade una tarjeta en la portada (`index.html`) dentro del bloque del tema, o un bloque nuevo.
+3. Añade una tarjeta en la portada (`index.html`) dentro del bloque del tema, o un bloque nuevo (el de energía lo escribe `src/energia/build.js` entre las marcas `<!-- tema:energia -->`).
 4. Para un simulador nuevo, copia uno de `assets/widgets/` que use `nucleo.js` (por ejemplo `tiro.js`): la física va en `analizar` y `simular`, el dibujo en `escena` y `pintar`, y los resultados en `resultados`.
 
 Cada página explica cada fórmula con un «¿Por qué?» y comprueba los resultados por un segundo método.

@@ -3,9 +3,10 @@ slug: potencia-y-rendimiento
 titulo: Potencia, rendimiento y consumo
 nombre: Potencia, rendimiento y consumo
 corto: Potencia
-eyebrow: Categoría 7
+eyebrow: Apartado 7
 desc: Vatios, caballos, kWh, euros y rendimiento.
 resueltos: 7.2, 7.4
+icono: potencia
 ---
 ## Idea clave: potencia es trabajo por segundo; rendimiento, la parte que se aprovecha
 
@@ -42,6 +43,16 @@ Lo que consume el motor se reparte entre la parte útil y las pérdidas; el rend
 2. Tiempos en segundos para julios y vatios; en horas para kWh.
 3. Rendimiento: útil = η · total. Si te sale η > 1, has dividido al revés.
 4. Coste: energía consumida en kWh × precio del kWh.
+
+## Simuladores
+
+La potencia es la rapidez con que se hace el trabajo: sube la misma carga en menos tiempo y mira cómo crece. Con rendimiento menor que 100 %, el motor consume más energía de la que gana la carga.
+
+[[simulador:potencia|{"modo": "completo", "titulo": "Simulador: subir cargas con un motor", "m": 450, "n": 1, "h": 12, "t": 30, "eta": 0.6, "cuerpo": "carga", "controles": ["m", "h", "t", "eta"], "ejemplos": [{"nombre": "Teoría 19", "valores": {"m": 450, "n": 1, "h": 12, "t": 30, "eta": 0.6, "cuerpo": "carga", "incognita": "P"}}, {"nombre": "Teoría 16", "valores": {"m": 80, "n": 15, "h": 1, "t": 1800, "eta": 1, "cuerpo": "sacos", "incognita": "P"}}, {"nombre": "Teoría 18", "valores": {"h": 12, "t": 1200, "eta": 0.78, "cuerpo": "agua", "incognita": "m", "Pcv": 2}}]}]]
+
+El contador marca los kWh consumidos y lo que cuestan. Al calentar agua, solo una parte de la energía llega al agua: el rendimiento.
+
+[[simulador:calentador|{"modo": "completo", "selector": true, "titulo": "Simulador: consumo eléctrico y rendimiento", "escenario": "agua", "P": 1500, "m": 50, "T0": 20, "Tf": 80, "t": 10800, "eta": 0.8, "precio": 0.08, "incognita": "eta", "controles": ["P", "m", "Tf", "t", "precio"], "ejemplos": [{"nombre": "Teoría 17", "valores": {"escenario": "estufa", "P": 2000, "horas": 8, "precio": 0.09}}, {"nombre": "Cuestiones 11", "valores": {"escenario": "agua", "m": 2.5, "T0": 12, "Tf": 80, "t": 900, "eta": 0.85, "precio": 0.08, "incognita": "P", "controles": ["m", "Tf", "t", "eta"]}}, {"nombre": "Cuestiones 12", "valores": {"escenario": "agua", "P": 1500, "m": 50, "T0": 20, "Tf": 80, "t": 10800, "precio": 0.08, "incognita": "eta", "controles": ["P", "m", "Tf", "t"]}}]}]]
 
 === 7.1 | Teoría 16 | Cargar 15 sacos de 80 kg en media hora
 pide: 15 sacos de 80 kg a 1 m en media hora

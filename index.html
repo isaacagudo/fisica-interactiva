@@ -37,6 +37,7 @@ a.item p{margin:4px 0 0;font-size:14.5px;color:var(--ink-2)}
 .thumb.num{display:grid;place-items:center;aspect-ratio:4/3}
 .thumb.num span{font:700 2rem var(--f-display);color:var(--ink)}
 .badge.tema{border-color:var(--ink);color:var(--ink)}
+.thumb .ico{display:block;width:100%;height:auto}
 .colors{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13.5px;color:var(--ink-2);margin-top:6px}
 .colors span{display:inline-flex;gap:6px;align-items:center}
 .colors i{width:12px;height:12px;border-radius:3px;display:inline-block}
@@ -48,7 +49,7 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
   <header class="top">
     <div class="eyebrow">1.º de Bachillerato · Bachillerato Internacional</div>
     <h1>Física interactiva</h1>
-    <p class="lead">Ejercicios resueltos paso a paso, con el porqué de cada fórmula, y simuladores para cambiar las condiciones de un problema y ver qué pasa.</p>
+    <p class="lead">Cada tema tiene su mapa, sus ejercicios para practicar, un generador de exámenes y la teoría por apartados, con ejemplos resueltos paso a paso y simuladores para cambiar las condiciones de un problema y ver qué pasa.</p>
     <div class="colors" aria-label="Código de colores">
       <span><i style="background:var(--c-p)"></i>Peso y energía potencial</span>
       <span><i style="background:var(--c-fr)"></i>Rozamiento y calor</span>
@@ -57,63 +58,60 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
     </div>
   </header>
 
+<!-- tema:energia -->
   <section class="topic" aria-labelledby="t-energia">
-    <div class="topic-head"><h2 id="t-energia">Trabajo, potencia y energía</h2><p>Teoría por apartados con ejemplos resueltos y una sección de ejercicios para practicar, con su solución paso a paso y su simulación</p></div>
+    <div class="topic-head"><h2 id="t-energia">Trabajo, potencia y energía</h2><p>Mapa del tema, ejercicios para practicar, generador de exámenes y teoría por apartados con ejemplos resueltos y simuladores</p></div>
     <div class="items">
       <a class="item card" href="temas/energia/">
-        <div class="thumb grid-paper num" aria-hidden="true"><span>0</span></div>
-        <div><span class="badge tema">Tema completo</span><h3>Mapa del tema</h3><p>Qué herramienta usar en cada caso, índice de los 67 ejercicios con su resultado (oculto), formulario y errores frecuentes.</p></div>
+        <div class="thumb grid-paper" aria-hidden="true"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><polygon class="pl" points="14,16 34,10 56,16 80,10 80,58 56,64 34,58 14,64"/><line class="ln q" x1="34" y1="10" x2="34" y2="58" style="stroke-width:1.2"/><line class="ln q" x1="56" y1="16" x2="56" y2="64" style="stroke-width:1.2"/>
+<path class="ln p" d="M22 52 C30 40, 40 50, 46 38 S62 26, 66 24" style="stroke-dasharray:4 4"/><path class="ffr" d="M66 12 C60 12 57 16 57 20 C57 26 66 34 66 34 C66 34 75 26 75 20 C75 16 72 12 66 12 Z"/><circle cx="66" cy="20" r="3.2" style="fill:var(--sheet)"/></svg></div>
+        <div><span class="badge tema">Mapa del tema</span><h3>Mapa del tema</h3><p>Qué herramienta usar en cada caso, índice de todos los ejercicios con su resultado (oculto), formulario y errores frecuentes.</p></div>
       </a>
       <a class="item card" href="temas/energia/ejercicios/">
-        <div class="thumb grid-paper num" aria-hidden="true"><span>✎</span></div>
-        <div><span class="badge tema">Para practicar</span><h3>Ejercicios del tema</h3><p>Los 51 ejercicios y cuestiones para practicar, por temática y sin teoría en medio, con su resultado y su solución paso a paso.</p></div>
+        <div class="thumb grid-paper" aria-hidden="true"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><rect class="bk" x="20" y="8" width="44" height="58" rx="3"/><line class="ln q" x1="28" y1="22" x2="56" y2="22" style="stroke-width:1.6"/><line class="ln q" x1="28" y1="32" x2="56" y2="32" style="stroke-width:1.6"/><line class="ln q" x1="28" y1="42" x2="48" y2="42" style="stroke-width:1.6"/><line class="ln q" x1="28" y1="52" x2="44" y2="52" style="stroke-width:1.6"/>
+<g transform="rotate(38 66 40)"><rect x="61" y="14" width="10" height="40" rx="1.5" class="fv"/><rect x="61" y="14" width="10" height="6" style="fill:var(--c-fr)"/><polygon points="61,54 71,54 66,64" style="fill:var(--sheet);stroke:var(--ink);stroke-width:1.4"/><polygon points="64.4,60.8 67.6,60.8 66,64" style="fill:var(--ink)"/></g></svg></div>
+        <div><span class="badge tema">Para practicar</span><h3>Ejercicios</h3><p>Los 51 ejercicios y cuestiones para practicar, por temática y sin teoría en medio, con su resultado y su solución paso a paso.</p></div>
+      </a>
+      <a class="item card" href="examen/?temas=energia">
+        <div class="thumb grid-paper" aria-hidden="true"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><rect class="bk" x="12" y="8" width="44" height="58" rx="3"/><path class="ln n" d="M19 22 l4 4 l7 -8"/><line class="ln q" x1="34" y1="22" x2="49" y2="22" style="stroke-width:1.6"/><path class="ln n" d="M19 37 l4 4 l7 -8"/><line class="ln q" x1="34" y1="37" x2="49" y2="37" style="stroke-width:1.6"/><path class="ln fr" d="M20 49 l8 8 M28 49 l-8 8"/><line class="ln q" x1="34" y1="53" x2="45" y2="53" style="stroke-width:1.6"/>
+<g transform="rotate(-12 72 46)"><rect x="56" y="30" width="32" height="32" rx="6" style="fill:var(--sheet);stroke:var(--c-p);stroke-width:2.2"/><circle cx="64" cy="38" r="2.8" class="fp"/><circle cx="72" cy="46" r="2.8" class="fp"/><circle cx="80" cy="54" r="2.8" class="fp"/><circle cx="80" cy="38" r="2.8" class="fp"/><circle cx="64" cy="54" r="2.8" class="fp"/></g></svg></div>
+        <div><span class="badge tema">Generador</span><h3>Generar un examen</h3><p>Elige los apartados y cuántos ejercicios: datos nuevos cada vez, con la puntuación y las soluciones paso a paso.</p></div>
       </a>
       <a class="item card" href="temas/energia/trabajo-de-una-fuerza/">
-        <div class="thumb grid-paper num" aria-hidden="true"><span>1</span></div>
-        <div><span class="badge">Categoría 1</span><h3>Trabajo de una fuerza</h3><p>Con módulos y ángulo o con vectores: el producto escalar y el signo del trabajo.</p></div>
+        <div class="thumb grid-paper" aria-hidden="true"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><rect class="pl" x="6" y="52" width="84" height="8" style="stroke:none"/><line class="ln q" x1="6" y1="52" x2="90" y2="52" style="stroke-width:1.5"/><rect class="bk" x="20" y="30" width="22" height="22" rx="2"/><line class="ln a" x1="42" y1="41" x2="64.2" y2="25.9" style="stroke-width:2.6"/><polygon class="fa" points="70,22 66.7,29.7 61.7,22.2"/><path class="ln q" d="M58 41 A16 16 0 0 0 55.3 32" style="stroke-width:1.3"/><line class="ln q" x1="42" y1="41" x2="66" y2="41" style="stroke-width:1.2;stroke-dasharray:3 3"/><line class="ln i" x1="20" y1="64" x2="73.0" y2="64.0" style="stroke-width:2"/><polygon class="fi" points="80,64 73.0,68.5 73.0,59.5"/></svg></div>
+        <div><span class="badge">Apartado 1</span><h3>Trabajo de una fuerza</h3><p>Con módulos y ángulo o con vectores: el producto escalar y el signo del trabajo.</p></div>
       </a>
       <a class="item card" href="temas/energia/trabajo-con-rozamiento/">
-        <div class="thumb grid-paper num" aria-hidden="true"><span>2</span></div>
-        <div><span class="badge">Categoría 2</span><h3>Trabajo con rozamiento en un plano horizontal</h3><p>Fuerza oblicua: primero la normal, después el rozamiento y el trabajo.</p></div>
+        <div class="thumb grid-paper" aria-hidden="true"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><rect class="pl" x="6" y="50" width="84" height="8" style="stroke:none"/><line class="ln q" x1="6" y1="50" x2="90" y2="50" style="stroke-width:1.5"/><path class="ln q" d="M10 58 l5 -5 M20 58 l5 -5 M30 58 l5 -5 M40 58 l5 -5 M50 58 l5 -5 M60 58 l5 -5 M70 58 l5 -5 M80 58 l5 -5" style="stroke-width:1.2"/><rect class="bk" x="36" y="26" width="24" height="24" rx="2"/><line class="ln a" x1="60" y1="38" x2="79.0" y2="38.0" style="stroke-width:2.6"/><polygon class="fa" points="86,38 79.0,42.5 79.0,33.5"/><line class="ln fr" x1="44" y1="47" x2="23.0" y2="47.0" style="stroke-width:2.6"/><polygon class="ffr" points="16,47 23.0,42.5 23.0,51.5"/></svg></div>
+        <div><span class="badge">Apartado 2</span><h3>Trabajo con rozamiento en un plano horizontal</h3><p>Fuerza oblicua: primero la normal, después el rozamiento y el trabajo.</p></div>
       </a>
       <a class="item card" href="temas/energia/energia-cinetica/">
-        <div class="thumb grid-paper num" aria-hidden="true"><span>3</span></div>
-        <div><span class="badge">Categoría 3</span><h3>Energía cinética: teorema de las fuerzas vivas</h3><p>Frenadas, balas y fuerzas medias: W total = ΔEc.</p></div>
+        <div class="thumb grid-paper" aria-hidden="true"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><rect class="pl" x="6" y="54" width="84" height="8" style="stroke:none"/><line class="ln q" x1="6" y1="54" x2="90" y2="54" style="stroke-width:1.5"/><rect class="bk" x="44" y="30" width="24" height="24" rx="2"/><line class="ln v" x1="12" y1="34" x2="34" y2="34" style="stroke-width:2;opacity:.5"/><line class="ln v" x1="18" y1="42" x2="38" y2="42" style="stroke-width:2;opacity:.75"/><line class="ln v" x1="10" y1="50" x2="36" y2="50" style="stroke-width:2;opacity:.5"/><line class="ln v" x1="52" y1="20" x2="79.0" y2="20.0" style="stroke-width:2.6"/><polygon class="fv" points="86,20 79.0,24.5 79.0,15.5"/></svg></div>
+        <div><span class="badge">Apartado 3</span><h3>Energía cinética: teorema de las fuerzas vivas</h3><p>Frenadas, balas y fuerzas medias: W total = ΔEc.</p></div>
       </a>
       <a class="item card" href="temas/energia/conservacion/">
-        <div class="thumb grid-paper num" aria-hidden="true"><span>4</span></div>
-        <div><span class="badge">Categoría 4</span><h3>Conservación de la energía mecánica</h3><p>Solo trabaja el peso: tiros, caídas y planos sin rozamiento.</p></div>
+        <div class="thumb grid-paper" aria-hidden="true"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><rect class="pl" x="6" y="60" width="84" height="8" style="stroke:none"/><line class="ln q" x1="6" y1="60" x2="90" y2="60" style="stroke-width:1.5"/><path class="ln q" d="M10 60 Q48 -14 86 60" style="stroke-width:1.6;stroke-dasharray:3 4"/><circle cx="48" cy="23" r="6.5" class="bk"/><line class="ln v" x1="56" y1="23" x2="73.0" y2="23.0" style="stroke-width:2.6"/><polygon class="fv" points="80,23 73.0,27.5 73.0,18.5"/><rect x="10" y="10" width="6" height="22" style="fill:var(--c-v)"/><rect x="18" y="18" width="6" height="14" style="fill:var(--c-p)"/></svg></div>
+        <div><span class="badge">Apartado 4</span><h3>Conservación de la energía mecánica</h3><p>Solo trabaja el peso: tiros, caídas y planos sin rozamiento.</p></div>
       </a>
       <a class="item card" href="temas/energia/muelles/">
-        <div class="thumb grid-paper num" aria-hidden="true"><span>5</span></div>
-        <div><span class="badge">Categoría 5</span><h3>Muelles: energía potencial elástica</h3><p>Ley de Hooke, ½·k·x² y compresión máxima.</p></div>
+        <div class="thumb grid-paper" aria-hidden="true"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><rect class="pl" x="6" y="56" width="84" height="8" style="stroke:none"/><line class="ln q" x1="6" y1="56" x2="90" y2="56" style="stroke-width:1.5"/><rect class="pl" x="80" y="22" width="8" height="34"/><path class="ln k" d="M46 44 L48.833333333333336 44 L50.3 38 L53.1 50 L55.9 38 L58.8 50 L61.6 38 L64.4 50 L67.3 38 L70.1 50 L72.9 38 L75.8 50 L77.16666666666667 44 L80 44" style="stroke-width:2.2"/><line class="ln k" x1="46" y1="35" x2="46" y2="53" style="stroke-width:3.5"/><rect class="bk" x="20" y="32" width="24" height="24" rx="2"/><line class="ln v" x1="8" y1="26" x2="19.0" y2="26.0" style="stroke-width:2.6"/><polygon class="fv" points="26,26 19.0,30.5 19.0,21.5"/></svg></div>
+        <div><span class="badge">Apartado 5</span><h3>Muelles: energía potencial elástica</h3><p>Ley de Hooke, ½·k·x² y compresión máxima.</p></div>
       </a>
       <a class="item card" href="temas/energia/planos-inclinados/">
-        <div class="thumb grid-paper num" aria-hidden="true"><span>6</span></div>
-        <div><span class="badge">Categoría 6</span><h3>Planos inclinados con rozamiento</h3><p>Subir, bajar y volver: la ecuación de trabajo y energía.</p></div>
+        <div class="thumb grid-paper" aria-hidden="true"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><polygon class="pl" points="8,14 8,62 90,62"/><rect class="bk" x="-8" y="-8" width="16" height="16" rx="2" transform="translate(42 30) rotate(30)"/><line class="ln p" x1="42" y1="32" x2="42.0" y2="47.0" style="stroke-width:2.6"/><polygon class="fp" points="42,54 37.5,47.0 46.5,47.0"/><line class="ln n" x1="42" y1="32" x2="47.6" y2="22.1" style="stroke-width:2.6"/><polygon class="fn" points="51,16 51.5,24.3 43.6,19.9"/><line class="ln fr" x1="34" y1="32" x2="24.1" y2="26.4" style="stroke-width:2.6"/><polygon class="ffr" points="18,23 26.3,22.5 21.9,30.4"/><path class="ln q" d="M76 62 A14 14 0 0 0 77.8 55" style="stroke-width:1.3"/></svg></div>
+        <div><span class="badge">Apartado 6</span><h3>Planos inclinados con rozamiento</h3><p>Subir, bajar y volver: la ecuación de trabajo y energía.</p></div>
       </a>
       <a class="item card" href="temas/energia/potencia-y-rendimiento/">
-        <div class="thumb grid-paper num" aria-hidden="true"><span>7</span></div>
-        <div><span class="badge">Categoría 7</span><h3>Potencia, rendimiento y consumo</h3><p>Vatios, caballos, kWh, euros y rendimiento.</p></div>
+        <div class="thumb grid-paper" aria-hidden="true"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><rect class="pl" x="6" y="64" width="84" height="8" style="stroke:none"/><line class="ln q" x1="6" y1="64" x2="90" y2="64" style="stroke-width:1.5"/><rect class="pl" x="64" y="10" width="7" height="54"/><rect class="pl" x="18" y="8" width="56" height="6"/><circle cx="30" cy="18" r="5" class="bk"/><line class="ln i" x1="25" y1="18" x2="25" y2="38" style="stroke-width:1.5"/><rect class="bk" x="16" y="38" width="18" height="16" rx="2"/><line class="ln v" x1="42" y1="52" x2="42.0" y2="37.0" style="stroke-width:2.2"/><polygon class="fv" points="42,30 46.5,37.0 37.5,37.0"/><polygon points="56,18 46,40 54,40 48,60 64,34 56,34 62,18" style="fill:var(--c-v);stroke:var(--ink);stroke-width:1.2;stroke-linejoin:round"/></svg></div>
+        <div><span class="badge">Apartado 7</span><h3>Potencia, rendimiento y consumo</h3><p>Vatios, caballos, kWh, euros y rendimiento.</p></div>
       </a>
       <a class="item card" href="temas/energia/cuestiones/">
-        <div class="thumb grid-paper num" aria-hidden="true"><span>8</span></div>
-        <div><span class="badge">Categoría 8</span><h3>Cuestiones de teoría</h3><p>Respuestas razonadas, cada una con su fórmula y un ejemplo.</p></div>
-      </a>
-      <a class="item card" href="temas/energia/plano-inclinado-ejercicio-4/">
-        <div class="thumb grid-paper" aria-hidden="true"><svg viewBox="0 0 96 72"><polygon class="pl" points="8,12 8,62 90,62"/><rect class="bk" x="-7" y="-7" width="14" height="14" rx="2" transform="translate(46 30) rotate(31)"/><line class="ap" x1="46" y1="30" x2="46" y2="50"/><line class="an" x1="46" y1="30" x2="54" y2="17"/><line class="av" x1="60" y1="22" x2="72" y2="29"/></svg></div>
-        <div><span class="badge">Ejercicio resuelto</span><h3>Cuerpo lanzado hacia arriba por un plano inclinado</h3><p>Ejercicio 4 (Selectividad 2020): altura máxima y velocidad al volver, en 10 pasos animados.</p></div>
-      </a>
-      <a class="item card" href="simuladores/plano-inclinado/">
-        <div class="thumb grid-paper" aria-hidden="true"><svg viewBox="0 0 96 72"><polygon class="pl" points="8,18 8,50 90,50"/><rect class="bk" x="-6" y="-6" width="12" height="12" rx="2" transform="translate(52 28) rotate(21)"/><line class="slider" x1="12" y1="62" x2="84" y2="62"/><circle class="knob" cx="40" cy="62" r="4.5"/></svg></div>
-        <div><span class="badge sim">Simulador</span><h3>Plano inclinado con rozamiento</h3><p>Cambia masa, ángulo, rozamiento y velocidad, y mira el efecto en la altura, la vuelta y la energía.</p></div>
-      </a>
-      <a class="item card" href="simuladores/muelle/">
-        <div class="thumb grid-paper" aria-hidden="true"><svg viewBox="0 0 96 72"><line class="slider" x1="6" y1="48" x2="90" y2="48"/><rect class="wl" x="82" y="18" width="7" height="30"/><path class="spr" d="M82 38 L78 38 L75 32 L71 44 L67 32 L63 44 L59 32 L55 44 L52 38 L48 38"/><rect class="bk" x="30" y="28" width="18" height="20" rx="2"/><line class="av" x1="14" y1="34" x2="25" y2="34"/><line class="slider" x1="12" y1="62" x2="84" y2="62"/><circle class="knob" cx="58" cy="62" r="4.5"/></svg></div>
-        <div><span class="badge sim">Simulador</span><h3>Muelles: energía elástica</h3><p>Un bloque contra un muelle, una bola que cae sobre un resorte o una rampa: cambia m, k, la altura y el rozamiento y mira adónde va la energía.</p></div>
+        <div class="thumb grid-paper" aria-hidden="true"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><path d="M14 12 h62 a6 6 0 0 1 6 6 v30 a6 6 0 0 1 -6 6 h-38 l-14 12 v-12 h-10 a6 6 0 0 1 -6 -6 v-30 a6 6 0 0 1 6 -6 z" class="bk"/><path class="ln p" d="M38 26 a9 9 0 1 1 13 8 c-3 2 -4 3 -4 6" style="stroke-width:4"/><circle cx="47" cy="47" r="2.8" class="fp"/></svg></div>
+        <div><span class="badge">Apartado 8</span><h3>Cuestiones de teoría</h3><p>Respuestas razonadas, cada una con su fórmula y un ejemplo.</p></div>
       </a>
     </div>
   </section>
+  <!-- /tema:energia -->
 
   <footer>Material de estudio. Cada página funciona en el navegador del ordenador, la tableta o el móvil.</footer>
 </div>

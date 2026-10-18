@@ -103,7 +103,7 @@
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .fw{--c-k:#f08cc0;--c-a:#b39bff}}
 :root[data-theme="dark"] .fw{--c-k:#f08cc0;--c-a:#b39bff}
 .fw *{box-sizing:border-box}
-.fw .fw-box{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:12px;display:grid;gap:12px}
+.fw .fw-box{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:12px;display:grid;gap:12px;grid-template-columns:minmax(0,1fr)}
 .fw .fw-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 12px}
 .fw .fw-title{font:700 1rem var(--f-display);margin:0}
 .fw .fw-tag{font:600 11px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--c-p);color:var(--c-p);border-radius:999px;padding:2px 7px}
@@ -162,6 +162,7 @@
 .fw .fw-speed button[aria-pressed="true"]{background:var(--ink);color:var(--sheet)}
 .fw .fw-slow{font-size:12px;color:var(--ink-2);margin:-6px 0 0}
 @container (max-width: 480px){.fw .fw-playlbl{display:none}.fw .fw-read{font-size:11.5px;gap:0 10px}.fw .fw-speed button{padding:0 6px}}
+@container (max-width: 340px){.fw .fw-ctrl{flex-wrap:wrap}.fw .fw-ctrl input[type=range]{order:5;flex-basis:100%}.fw .fw-speed{margin-left:auto}}
 .fw .fw-params{display:grid;gap:10px 18px;grid-template-columns:minmax(0,1fr)}
 .fw .fw-param{display:grid;gap:2px}
 .fw .fw-param label{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-weight:700;font-size:14.5px}
@@ -170,11 +171,12 @@
 .fw .fw-toggle{display:flex;gap:8px;align-items:center;font-size:14px;color:var(--ink-2)}
 .fw .fw-toggle input{accent-color:var(--c-p);width:18px;height:18px}
 .fw .fw-res{margin:0;display:grid}
-.fw .fw-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding:8px 0;border-top:1px solid var(--rule)}
+.fw .fw-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 12px;padding:8px 0;border-top:1px solid var(--rule)}
+.fw .fw-row dt{flex:1 1 auto;min-width:0}
 .fw .fw-row:first-child{border-top:0}
 .fw .fw-row dt{font-weight:700;font-size:14.5px}
-.fw .fw-row dd{margin:0;font-family:var(--f-mono);font-weight:600;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
-.fw .fw-row .f{grid-column:1 / -1;color:var(--ink-2);font-size:13px}
+.fw .fw-row dd{margin:0 0 0 auto;font-family:var(--f-mono);font-weight:600;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.fw .fw-row .f{flex-basis:100%;color:var(--ink-2);font-size:13px}
 .fw .fw-row.off dd{color:var(--ink-2)}
 .fw .fw-verdict{margin:0;padding:9px 12px;border-radius:9px;background:var(--paper);font-size:14px}
 .fw .fw-verdict:empty{display:none}
@@ -213,14 +215,14 @@
     cfg = Object.assign({}, cfg || {});
     const id = 'fw' + (++uid);
     const full = cfg.modo === 'completo';
-    const escenarios = Object.keys(def.DEF);
+    const escenarios = (cfg.escenarios || Object.keys(def.DEF)).filter(e => def.DEF[e]);
     let P = {};
     function setEsc(esc, vals) {
       if (!def.DEF[esc]) esc = escenarios[0];
       P = Object.assign({ escenario: esc }, def.DEF[esc], vals || {});
       if (!vals || !vals.controles) P.controles = (cfg.escenario === esc && cfg.controles) ? cfg.controles : def.DEF[esc].controles;
     }
-    const base = Object.assign({}, cfg); ['ejemplos', 'titulo', 'modo', 'selector', 'velocidad'].forEach(k => delete base[k]);
+    const base = Object.assign({}, cfg); ['ejemplos', 'titulo', 'modo', 'selector', 'velocidad', 'escenarios'].forEach(k => delete base[k]);
     setEsc(cfg.escenario || escenarios[0], base);
 
     el.classList.add('fw', full ? 'fw-full' : 'fw-compact');
@@ -437,19 +439,22 @@
 
   // Registro: cada simulador llama a registrar(nombre, def) y se monta en los <div data-widget="nombre">
   const defs = {};
-  function montarTodos() {
+  // monta los <div data-widget="nombre"> que aún no estén montados
+  function montar(nombre) {
     if (typeof document === 'undefined') return;
-    for (const nombre in defs) document.querySelectorAll(`[data-widget="${nombre}"]`).forEach(el => {
+    document.querySelectorAll(`[data-widget="${nombre}"]`).forEach(el => {
+      if (el.dataset.montado) return;
       let cfg = {};
       try { cfg = JSON.parse(el.getAttribute('data-config') || '{}'); } catch (e) { console.error(nombre + ': data-config no es JSON válido', e); }
+      el.dataset.montado = '1';
       crear(el, defs[nombre], cfg);
     });
   }
   function registrar(nombre, def) {
     defs[nombre] = def;
     if (typeof document !== 'undefined') {
-      montarTodos();
-      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', montarTodos);
+      montar(nombre);
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => montar(nombre));
     }
     return { mount: (el, cfg) => crear(el, def, cfg), analizar: def.analizar, simular: def.simular };
   }

@@ -3,9 +3,10 @@ slug: energia-cinetica
 titulo: Energía cinética: teorema de las fuerzas vivas
 nombre: Energía cinética: teorema de las fuerzas vivas
 corto: Energía cinética
-eyebrow: Categoría 3
+eyebrow: Apartado 3
 desc: Frenadas, balas y fuerzas medias: W total = ΔEc.
 resueltos: 3.1, 3.2
+icono: cinetica
 ---
 ## Idea clave: el trabajo total cambia la energía cinética
 
@@ -32,6 +33,12 @@ Cómo leer el signo:
 3. W total = Ec final − Ec inicial (sale negativo si frena).
 4. Si solo trabaja una fuerza que frena: W = −F·d ⟹ F = |W| / d.
 5. Comprobación: a = (v² − v₀²) / (2·d) y F = m·|a| deben dar lo mismo.
+
+## Simulador
+
+Cuatro situaciones en las que una fuerza frena (o acelera) un cuerpo: un coche, una bala que se incrusta, un proyectil que atraviesa una pared y un bloque que frena el rozamiento. En todas, el trabajo de esa fuerza es la variación de energía cinética.
+
+[[simulador:bloque|{"modo": "completo", "selector": true, "escenarios": ["frenada", "bala", "pared", "deslizar"], "titulo": "Simulador: el trabajo cambia la energía cinética", "escenario": "frenada", "m": 1000, "v0kmh": 108, "v1kmh": 18, "d": 50, "ejemplos": [{"nombre": "Teoría 9", "valores": {"escenario": "frenada", "m": 1000, "v0kmh": 108, "v1kmh": 18, "d": 50}}, {"nombre": "Teoría 10", "valores": {"escenario": "bala", "m": 0.04, "v0": 300, "p": 0.06}}, {"nombre": "Ejercicios 6", "valores": {"escenario": "pared", "m": 0.1, "v0": 400, "v1": 150, "e": 0.4}}, {"nombre": "Teoría 13", "valores": {"escenario": "deslizar", "m": 2, "v0": 15, "mu": 0.4}}]}]]
 
 === 3.1 | Teoría 9 | Coche de 1000 kg que frena de 108 a 18 km/h
 pide: Coche que frena de 108 a 18 km/h en 50 m

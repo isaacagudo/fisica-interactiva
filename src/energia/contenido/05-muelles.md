@@ -3,9 +3,10 @@ slug: muelles
 titulo: Muelles: energía potencial elástica
 nombre: Muelles: energía potencial elástica
 corto: Muelles
-eyebrow: Categoría 5
+eyebrow: Apartado 5
 desc: Ley de Hooke, ½·k·x² y compresión máxima.
 resueltos: 5.1, 5.2
+icono: muelle
 ---
 ## Idea clave: un muelle guarda energía al deformarse
 
@@ -19,7 +20,7 @@ La fuerza del muelle es conservativa: si no hay rozamiento, la energía mecánic
 
 **Ec + Ep gravitatoria + Ep elástica = constante**
 
-Para ver cómo pasa la energía de una forma a otra, abre el [simulador de muelles](../../../simuladores/muelle/): tiene los tres montajes de esta categoría (bloque contra un muelle, caída sobre un resorte y rampa con muelle). La solución de cada ejercicio lleva además su simulación, ya preparada con los datos del enunciado.
+Para ver cómo pasa la energía de una forma a otra, usa el [simulador de abajo](#simulador): tiene los tres montajes de este apartado (bloque contra un muelle, caída sobre un resorte y rampa con muelle). Los ejemplos resueltos y los ejercicios llevan además su propia simulación, ya preparada con los datos del enunciado.
 
 **Las claves de estos ejercicios**
 
@@ -36,6 +37,12 @@ Para ver cómo pasa la energía de una forma a otra, abre el [simulador de muell
 3. Ecuación de energía con todos los términos; decir cuáles valen 0.
 4. Unidades: x en metros (5 cm = 0,05 m).
 5. Resolver y comprobar el sentido físico (¿es razonable la compresión?).
+
+## Simulador
+
+Tres montajes: un bloque contra un muelle, una bola que cae sobre un resorte y una rampa que acaba en un muelle. En la gráfica de fuerza, el área coloreada bajo la recta F = k·x es la energía guardada en el muelle.
+
+[[simulador:muelle|{"modo": "completo", "selector": true, "titulo": "Simulador del muelle", "escenario": "vertical", "m": 0.1, "h": 2, "k": 1607, "ejemplos": [{"nombre": "Teoría 12", "valores": {"escenario": "vertical", "m": 0.1, "h": 2, "k": 1607, "v0": 0}}, {"nombre": "Cuestiones 8", "valores": {"escenario": "horizontal", "m": 4, "v0": 6, "k": 900, "mu": 0, "L": 1}}, {"nombre": "Cuestiones 9", "valores": {"escenario": "vertical", "m": 0.2, "h": 4, "k": 1200, "v0": 0}}, {"nombre": "Repaso 4", "valores": {"escenario": "vertical", "m": 0.5, "h": 1, "k": 245, "v0": 0}}, {"nombre": "Ejercicios 7 b", "valores": {"escenario": "rampa", "m": 1, "h": 1, "alpha": 30, "muRampa": 0.2, "mu": 0, "L": 1, "k": 20}}, {"nombre": "Cuestiones 10", "valores": {"escenario": "horizontal", "m": 1, "v0": 8, "L": 2, "mu": 0.2, "k": 900, "rozMuelle": true}}]}]]
 
 === 5.1 | Teoría 12 | Bola de 100 g que cae 2 m sobre un resorte
 figura: e_t12

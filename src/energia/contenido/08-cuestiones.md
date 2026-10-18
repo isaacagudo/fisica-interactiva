@@ -3,9 +3,10 @@ slug: cuestiones
 titulo: Cuestiones de teoría
 nombre: Cuestiones de teoría
 corto: Cuestiones
-eyebrow: Categoría 8
+eyebrow: Apartado 8
 desc: Respuestas razonadas, cada una con su fórmula y un ejemplo.
 resueltos: 8.2, 8.4
+icono: cuestiones
 ---
 ## Cómo responder una cuestión de teoría
 

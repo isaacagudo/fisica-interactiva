@@ -71,7 +71,7 @@
   }
   function resultados(P, A) {
     const f = [];
-    f.push(['Desplazamiento', 'Δr = r_B − r_A = (Bx − Ax)·i + (By − Ay)·j', `${sg(A.dx)}·i ${A.dy < 0 ? '−' : '+'} ${num(Math.abs(A.dy), 3)}·j m`]);
+    f.push(['Desplazamiento', 'Δr = r_B − r_A = (Bx − Ax)·i + (By − Ay)·j', `${sg(A.dx)}·i ${A.dy < 0 ? '−' : '+'} ${sg(Math.abs(A.dy))}·j m`]);
     f.push(['Trabajo', `W = Fx·Δx + Fy·Δy = ${par(P.Fx)}·${par(A.dx)} + ${par(P.Fy)}·${par(A.dy)}`, `${sg(A.W)} J`]);
     f.push(['Módulos', '|F| = √(Fx² + Fy²) ; |Δr| = √(Δx² + Δy²)', `${num(A.F)} N ; ${num(A.D)} m`]);
     f.push(['Ángulo entre F y Δr', 'cos φ = W / (|F|·|Δr|)', isFinite(A.phi) ? `${fmt(A.phi, 1)}°` : '—']);

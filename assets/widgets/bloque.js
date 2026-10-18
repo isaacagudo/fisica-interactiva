@@ -31,7 +31,7 @@
     t: { label: 'Tiempo que actúa la fuerza, t', unit: 's', min: 1, max: 30, step: 0.5, fmt: v => fmt(v, 1) },
     d: { label: 'Distancia, d', unit: 'm', min: 1, max: 200, step: 1, fmt: v => fmt(v, 0) },
     v0: { label: 'Velocidad inicial, v₀', unit: 'm/s', min: 0, max: 30, step: 0.5, fmt: v => fmt(v, 1), maxFn: P => P.escenario === 'bala' || P.escenario === 'pared' ? 800 : 30 },
-    v0kmh: { label: 'Velocidad inicial, v₀', unit: 'km/h', min: 10, max: 180, step: 1, fmt: v => fmt(v, 0) },
+    v0kmh: { label: 'Velocidad inicial, v₀', unit: 'km/h', min: 0, max: 180, step: 1, fmt: v => fmt(v, 0) },
     v1kmh: { label: 'Velocidad final, v', unit: 'km/h', min: 0, max: 170, step: 1, fmt: v => fmt(v, 0) },
     p: { label: 'Profundidad que penetra, p', unit: 'cm', min: 0.01, max: 0.3, step: 0.005, fmt: v => fmt(v * 100, 1) },
     v1: { label: 'Velocidad al salir, v', unit: 'm/s', min: 0, max: 790, step: 5, fmt: v => fmt(v, 0) },
@@ -85,7 +85,7 @@
       o = { s0: 0, v0, acel: (s, sv) => -sv * Froz / m, arranque: () => 0, tMax: P.mu > 0 ? Infinity : 4 };
     } else if (esc === 'frenada') {
       Ffr = A.Ff; v0 = A.v0;
-      o = { s0: 0, v0, acel: (s, sv) => -sv * Ffr / m, arranque: () => 0, dMax: P.d };
+      o = { s0: 0, v0, acel: (s, sv) => -sv * Ffr / m, arranque: () => A.acelera ? -Ffr / m : 0, dMax: P.d };
     } else if (esc === 'bala') {
       Ffr = A.Ff; s0 = -0.6 * P.p; zona = [0, Infinity];
       o = { s0, v0, bordes: [0], acel: (s, sv) => s > 0 ? -sv * Ffr / m : 0, arranque: () => 0, tMax: 1 };
@@ -178,8 +178,8 @@
     if (esc === 'arrastre') {
       const g = A.g, mg = P.m * g, ref = Math.max(mg, P.F, 1e-9), L = f => clamp(56 * f / ref, 0, 56);
       const a = rad(P.alpha), on = e.empuja, Nn = on ? A.N : A.N2, Frn = on ? A.Fr : A.Fr2;
-      if (P.alpha >= 0) c.setArrow(dyn.F, front, cy, Math.cos(a), -Math.sin(a), Math.max(L(P.F), P.F > 0 ? 18 : 0), P.F > 0 && on, 4, -4);
-      else { const Lf = Math.max(L(P.F), 18), ux = Math.cos(a), uy = -Math.sin(a); c.setArrow(dyn.F, front - BW - 2 - ux * Lf, yG - BW + 4 - uy * Lf, ux, uy, Lf, P.F > 0 && on, -10, -6); }
+      if (P.alpha >= 0) c.setArrow(dyn.F, front, cy, Math.cos(a), -Math.sin(a), Math.max(L(P.F), P.F > 0 ? 26 : 0), P.F > 0 && on, 4, -4);
+      else { const Lf = Math.max(L(P.F), 34), ux = Math.cos(a), uy = -Math.sin(a); c.setArrow(dyn.F, front - BW - 2 - ux * Lf, yG - BW + 4 - uy * Lf, ux, uy, Lf, P.F > 0 && on, -ux * (Lf + 26) - 4, -uy * (Lf + 26)); }
       c.setArrow(dyn.Fr, cx - 4, yG - 3, -1, 0, Math.max(L(Frn), Frn > 0 ? 16 : 0), Frn > 0 && (moving || e.t === 0 && A.mueve), 0, 12);
       c.setArrow(dyn.P, cx, cy, 0, 1, L(mg), true, 12, 0);
       c.setArrow(dyn.N, cx, cy, 0, -1, L(Nn), Nn > 0, 12, 0);
@@ -218,7 +218,7 @@
     const esc = P.escenario, f = [], m = P.m;
     let ver = '';
     if (esc === 'arrastre') {
-      f.push(['Normal', P.alpha > 0 ? 'N = m·g − F·sen α' : 'N = m·g', `${num(A.N)} N`]);
+      f.push(['Normal', P.alpha > 0 ? 'N = m·g − F·sen α' : P.alpha < 0 ? 'N = m·g + F·sen |α| (F empuja hacia abajo)' : 'N = m·g', `${num(A.N)} N`]);
       f.push(['Rozamiento', 'Fr = μ·N', `${num(A.Fr)} N`]);
       f.push(['Aceleración', 'a = (F·cos α − Fr) / m', A.mueve ? `${num(A.a)} m/s²` : '0', !A.mueve]);
       const tt = S.T;

@@ -3,9 +3,10 @@ slug: trabajo-de-una-fuerza
 titulo: Trabajo de una fuerza
 nombre: Trabajo de una fuerza
 corto: Trabajo
-eyebrow: Categoría 1
+eyebrow: Apartado 1
 desc: Con módulos y ángulo o con vectores: el producto escalar y el signo del trabajo.
 resueltos: 1.1, 1.4
+icono: trabajo
 ---
 ## Idea clave: el trabajo de una fuerza constante
 
@@ -37,6 +38,12 @@ También se puede ver en una gráfica: **el trabajo es el área bajo la curva fu
 2. Producto escalar: un número, en julios, sin i ni j.
 3. Signo: positivo si la fuerza ayuda al movimiento; negativo si se opone.
 4. Comprobación: cos φ = W / (|F|·|Δr|) da el ángulo; debe cuadrar con el signo.
+
+## Simulador
+
+Cambia las componentes de la fuerza y los puntos A y B. El trabajo acumulado se va sumando mientras el cuerpo avanza; con «camino curvo» se ve que, para una fuerza constante, el trabajo solo depende de A y B.
+
+[[simulador:vectores|{"modo": "completo", "titulo": "Simulador: trabajo de una fuerza con vectores", "Fx": 3, "Fy": -5, "Ax": -2, "Ay": 1, "Bx": 4, "By": 3, "controles": ["Fx", "Fy", "Ax", "Ay", "Bx", "By"], "ejemplos": [{"nombre": "Teoría 1", "valores": {"Fx": 3, "Fy": -5, "Ax": -2, "Ay": 1, "Bx": 4, "By": 3}}, {"nombre": "Ejercicios 3", "valores": {"Fx": 30, "Fy": -20, "Ax": -6, "Ay": 2, "Bx": 4, "By": 10}}, {"nombre": "Repaso 2", "valores": {"Fx": -5, "Fy": 9, "Ax": -5, "Ay": 3, "Bx": -3, "By": -8}}, {"nombre": "Trabajo nulo", "valores": {"Fx": 6, "Fy": 2, "Ax": 2, "Ay": 1, "Bx": 5, "By": -8}}]}]]
 
 === 1.1 | Teoría 1 | Trabajo de F = 3i − 5j de A(−2, 1) a B(4, 3)
 pide: W de F = 3i − 5j de A(−2, 1) a B(4, 3)

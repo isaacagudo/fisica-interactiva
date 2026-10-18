@@ -3,9 +3,10 @@ slug: trabajo-con-rozamiento
 titulo: Trabajo con rozamiento en un plano horizontal
 nombre: Trabajo con rozamiento en un plano horizontal
 corto: Rozamiento
-eyebrow: Categoría 2
+eyebrow: Apartado 2
 desc: Fuerza oblicua: primero la normal, después el rozamiento y el trabajo.
 resueltos: 2.1, 2.2
+icono: rozamiento
 ---
 ## Idea clave: primero el diagrama, después la normal, después el rozamiento
 
@@ -29,6 +30,12 @@ En estos ejercicios un cuerpo se arrastra por un suelo horizontal y actúan cuat
 4. ΣFx = m·a ⟹ a; si dan el tiempo: v = v₀ + a·t y Δx = v₀·t + ½·a·t².
 5. Trabajo de cada fuerza con W = F·Δs·cos φ.
 6. Comprobación: la suma de todos los trabajos debe ser igual a ΔEc.
+
+## Simulador
+
+Cambia el ángulo de la fuerza y mira la normal: al tirar hacia arriba disminuye (y con ella el rozamiento); al empujar hacia abajo (ángulo negativo) aumenta. La barra de energías reparte el trabajo de F entre la energía cinética y el calor.
+
+[[simulador:bloque|{"modo": "completo", "titulo": "Simulador: tirar de un bloque con rozamiento", "escenario": "arrastre", "m": 5, "F": 30, "alpha": 30, "mu": 0.2, "v0": 0, "hasta": "t", "t": 10, "controles": ["m", "F", "alpha", "mu", "t"], "ejemplos": [{"nombre": "Teoría 2 (g = 10)", "valores": {"escenario": "arrastre", "m": 5, "F": 40, "alpha": 0, "mu": 0.5, "g": 10, "v0": 0, "hasta": "d", "d": 8, "controles": ["m", "F", "alpha", "mu", "d"]}}, {"nombre": "Ejercicios 1", "valores": {"escenario": "arrastre", "m": 5, "F": 30, "alpha": 30, "mu": 0.2, "v0": 0, "hasta": "t", "t": 10}}, {"nombre": "Repaso 5", "valores": {"escenario": "arrastre", "m": 5, "F": 30, "alpha": 30, "mu": 0.4, "v0": 0, "hasta": "t", "t": 10}}, {"nombre": "Empujar hacia abajo", "valores": {"escenario": "arrastre", "m": 10, "F": 60, "alpha": -30, "mu": 0.25, "v0": 0, "hasta": "d", "d": 5, "controles": ["m", "F", "alpha", "mu", "d"]}}]}]]
 
 === 2.1 | Teoría 2 | Bloque de 5 kg arrastrado con una fuerza de 40 N
 pide: Trabajo del peso, de F y del rozamiento en 8 m
