@@ -19,8 +19,6 @@
   margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
 .fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
 .fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
-.doc .widget{margin:16px 0 8px}
-.doc .widget:empty{display:none}
 header.top{display:grid;gap:8px;margin:6px 0 18px}
 .cats{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 22px}
 .cats a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
@@ -33,7 +31,8 @@ header.top{display:grid;gap:8px;margin:6px 0 18px}
   .toc h2{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:0 0 8px}
   .toc ol{list-style:none;margin:0;padding:0;display:grid;gap:6px}
   .toc a{color:var(--ink-2);text-decoration:none;line-height:1.3;display:block}
-  .toc a:hover{color:var(--ink)}}
+  .toc a:hover{color:var(--ink)}
+  .toc .sep{margin-top:8px;font-weight:700;color:var(--ink)}}
 .doc{min-width:0}
 .doc>h2:first-child{border-top:0;margin-top:0;padding-top:0}
 .doc h2{font-size:1.28rem;margin:38px 0 10px;padding-top:16px;border-top:1px solid var(--rule);scroll-margin-top:12px}
@@ -57,16 +56,62 @@ header.top{display:grid;gap:8px;margin:6px 0 18px}
 .grid-cats .n{font:700 1.5rem/44px var(--f-display);text-align:center;border-radius:10px;border:1px solid var(--rule)}
 .grid-cats h3{font-size:1rem;line-height:1.25}
 .grid-cats p{margin:4px 0 0;font-size:13.5px;color:var(--ink-2)}
+/* ejercicios propuestos */
+.metodo{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 14px;font-size:14.5px}
+.metodo ol{margin:6px 0 2px}
+.props{display:grid;gap:14px;margin:14px 0}
+.prop{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:14px 16px;scroll-margin-top:12px}
+.prop .cab{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-bottom:6px}
+.prop .num{font:700 1.05rem var(--f-display)}
+.prop .src{font:600 12px var(--f-mono);color:var(--ink-2);letter-spacing:.02em}
+.tag{font:600 11px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;border:1px solid currentColor;border-radius:999px;padding:1px 7px}
+.tag.nuevo{color:var(--c-n)}
+.tag.sel{color:var(--c-a)}
+.tag.sim{color:var(--c-p)}
+.prop h3{font-size:1rem;margin:0 0 6px;line-height:1.3}
+.prop .enun p{margin:6px 0}
+.prop .fig{margin:10px 0 4px}
+.prop .acc{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;margin-top:10px}
+.prop details{flex:1 1 260px;min-width:0}
+.prop summary{cursor:pointer;font:600 13.5px var(--f-body);color:var(--ink-2);min-height:38px;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rule);border-radius:9px;padding:0 12px;list-style:none}
+.prop summary::-webkit-details-marker{display:none}
+.prop summary::before{content:"▸";font-size:12px}
+.prop details[open] summary::before{content:"▾"}
+.prop details[open] summary{color:var(--ink)}
+.prop details p{background:var(--hl);border-radius:8px;padding:8px 12px;margin:8px 0 0}
+.prop .btn{margin-left:auto}
+@media (max-width:520px){.prop .btn{margin-left:0;width:100%}}
+/* página de solución */
+.enun-box{background:var(--sheet);border:1px solid var(--rule);border-left:4px solid var(--ink);border-radius:12px;padding:12px 16px}
+.enun-box .lbl{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.enun-box p{margin:6px 0}
+.res-box{background:var(--hl);border-radius:12px;padding:10px 16px;margin:14px 0}
+.res-box .lbl{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase}
+.res-box p{margin:4px 0}
+.saltos{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.saltos a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.doc .widget{margin:16px 0 8px}
+.doc .widget:empty{display:none}
+/* índice con resultados ocultos */
+.ver-res{display:inline-flex;align-items:center;gap:8px;font:600 14px var(--f-body);cursor:pointer;margin:4px 0}
+.ver-res input{width:18px;height:18px;accent-color:var(--c-p)}
+.indice td.r{transition:filter .2s}
+.indice td:first-child{white-space:nowrap}
+.indice td small{display:block;color:var(--ink-2);font-size:12px}
+.indice tr.grupo th{background:var(--plane);font-size:14px}
+.indice tr.grupo a{color:inherit}
+.ver-res:has(input:not(:checked)) + .table-wrap td.r{filter:blur(5px);user-select:none}
 .pager{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:40px;border-top:1px solid var(--rule);padding-top:16px}
 .pager a{text-decoration:none;max-width:48%}
+.pager .mid{align-self:center}
 .pager small{display:block;color:var(--ink-2);font-size:12px}
 footer{margin-top:36px;color:var(--ink-2);font-size:13px}
-@media print{.cats,.toc,.pager,.crumbs{display:none}.layout{display:block}.fig,.table-wrap,p.eq{break-inside:avoid}}
+@media print{.cats,.toc,.pager,.crumbs,.widget,.saltos,.prop .btn,.prop summary{display:none}.layout{display:block}.fig,.table-wrap,p.eq,.prop{break-inside:avoid}}
 </style>
 </head>
 <body>
 <div class="page">
-  <nav class="crumbs" aria-label="Ruta"><a href="../../../">Física interactiva</a><span aria-hidden="true">›</span><a href="../">Trabajo, potencia y energía</a><span aria-hidden="true">›</span><span>Cuestiones de teoría</span></nav>
+  <nav class="crumbs" aria-label="Ruta"><a href="../../../">Física interactiva</a><span aria-hidden="true">›</span><a href="../">Trabajo, potencia y energía</a><span aria-hidden="true">›</span><span>Cuestiones</span></nav>
   <header class="top"><div class="eyebrow">Categoría 8</div><h1>Cuestiones de teoría</h1><p class="lead">Respuestas razonadas, cada una con su fórmula y un ejemplo.</p></header>
   <nav class="cats" aria-label="Categorías del tema"><a href="../">Mapa del tema</a><a href="../trabajo-de-una-fuerza/">1 · Trabajo</a><a href="../trabajo-con-rozamiento/">2 · Rozamiento</a><a href="../energia-cinetica/">3 · Energía cinética</a><a href="../conservacion/">4 · Conservación</a><a href="../muelles/">5 · Muelles</a><a href="../planos-inclinados/">6 · Planos inclinados</a><a href="../potencia-y-rendimiento/">7 · Potencia</a><a href="../cuestiones/" aria-current="page">8 · Cuestiones</a></nav>
   <div class="layout">
@@ -79,83 +124,45 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 <li><strong>Un ejemplo o un contraejemplo concreto:</strong> para «sí puede», un caso donde ocurre; para «es falso», un caso que lo contradice.</li>
 </ol>
 <p>Las respuestas de abajo siguen ese esquema y enlazan con los ejercicios de las otras categorías.</p>
-<h2 id="respuestas-razonadas">Respuestas razonadas</h2>
-<h3>Teoría 4 · Ejemplos de sistemas que tienen energía</h3>
-<p>Según los apuntes, en el fondo solo hay dos formas de energía: cinética (por moverse) y potencial (por la posición de las partes del sistema y las fuerzas entre ellas).</p>
-<div class="table-wrap"><table>
-<thead>
-<tr>
-<th>Sistema</th>
-<th>Por qué tiene energía</th>
-<th>Tipo</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Un coche en marcha, el viento, un río</td>
-<td>Se mueven</td>
-<td>Cinética</td>
-</tr>
-<tr>
-<td>El agua de un embalse y la Tierra</td>
-<td>El agua está alta y la Tierra la atrae</td>
-<td>Potencial gravitatoria</td>
-</tr>
-<tr>
-<td>Un muelle comprimido, un arco tensado</td>
-<td>Están deformados; las fuerzas elásticas los devuelven a su forma</td>
-<td>Potencial elástica</td>
-</tr>
-<tr>
-<td>Dos cargas del mismo signo cerca</td>
-<td>Se repelen y, al separarse, ganarían velocidad</td>
-<td>Potencial eléctrica</td>
-</tr>
-<tr>
-<td>La gasolina, los alimentos, una pila</td>
-<td>Las fuerzas eléctricas entre átomos y moléculas de sus enlaces</td>
-<td>Potencial (química)</td>
-</tr>
-<tr>
-<td>Un objeto caliente</td>
-<td>Sus partículas se mueven más deprisa</td>
-<td>Cinética de las partículas (térmica)</td>
-</tr>
-</tbody></table></div>
-<h3>Cuestiones 1 · ¿Pueden ser negativas Ec, Ep y E M?</h3>
-<ul>
-<li><strong>Energía cinética: nunca.</strong> Ec = ½·m·v², con m &gt; 0 y v² ≥ 0. Como mucho vale 0 (cuerpo en reposo).</li>
-<li><strong>Energía potencial: sí.</strong> Ep = m·g·h depende de dónde se ponga h = 0, que se elige libremente. Un cuerpo por debajo de ese nivel (una piedra en el fondo de un pozo, con h = 0 en el suelo) tiene h &lt; 0 y Ep &lt; 0. No pasa nada: en los ejercicios solo importan las diferencias de Ep.</li>
-<li><strong>Energía mecánica: sí.</strong> E M = Ec + Ep es negativa si la Ep es negativa y mayor en valor absoluto que la Ec (la piedra del pozo moviéndose despacio).</li>
-</ul>
-<h3>Cuestiones 2 · «¿Sólo las fuerzas conservativas realizan trabajo?»</h3>
-<p><strong>Falso.</strong> Las fuerzas no conservativas también trabajan: el rozamiento hace trabajo negativo (ejercicios 2.1 y 6.1) y una persona o un motor hacen trabajo positivo (ejercicios 1.4 y 6.7). Lo que distingue a las conservativas no es que trabajen, sino cómo: su trabajo no depende del camino, se puede recuperar y vale W = −ΔEp. El trabajo del rozamiento depende del camino y no se recupera: se pierde como calor.</p>
-<h3>Cuestiones 3 · Trabajo nulo y trabajo del rozamiento</h3>
-<p><strong>a) Sí, un cuerpo puede desplazarse y que una fuerza haga trabajo nulo.</strong> W = F·Δs·cos φ vale cero si φ = 90°: la fuerza es perpendicular al desplazamiento. Ejemplos: el peso y la normal cuando un cuerpo se mueve en horizontal (ejercicio 2.3, apartado d); la fuerza que haces para sostener una mochila mientras caminas en llano. También puede ser nulo el trabajo <strong>total</strong> con fuerzas que sí trabajan, si sus trabajos se compensan (velocidad constante, ejercicio 6.7).</p>
-<p><strong>b) El rozamiento siempre hace trabajo negativo</strong> porque el rozamiento de deslizamiento va siempre en sentido contrario al movimiento sobre la superficie: φ = 180°, cos 180° = −1, W = −Fr·d &lt; 0. Por eso siempre quita energía mecánica y la convierte en calor, tanto al subir como al bajar (ejercicio 6.5).</p>
-<blockquote class="why">
-<p>Para curiosos: el rozamiento estático sí puede hacer trabajo positivo. Es el que arrastra una caja colocada en la plataforma de un camión que acelera. En los ejercicios de este tema, el rozamiento es siempre de deslizamiento sobre un suelo quieto.</p>
-</blockquote>
-<h3>Cuestiones 4 · Una fuerza que no cambia la energía cinética</h3>
-<p>Si la fuerza es <strong>perpendicular a la velocidad en todo momento</strong>, su trabajo es cero y, por el teorema de las fuerzas vivas, la Ec no cambia: cambia la dirección de la velocidad, pero no su módulo. Es lo que pasa en un <strong>movimiento circular uniforme</strong>: la cuerda de una honda, la gravedad sobre un satélite en órbita circular o la fuerza magnética sobre una carga.</p>
-<figure class="fig"><svg viewBox="0 0 760 430" role="img" aria-label="Si la fuerza es siempre perpendicular a v, no trabaja y la rapidez no cambia" font-size="13"><defs><marker id="w8-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-axis)"></path></marker><marker id="w8-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-categorical-4)"></path></marker></defs><text x="24" y="30" font-size="15" font-weight="600" style="fill:var(--cds-text-primary)">Si la fuerza es siempre perpendicular a v, no trabaja y la rapidez no cambia</text><text x="24" y="50" font-size="11.5" style="fill:var(--cds-text-secondary)">Cuestiones 4 · movimiento circular uniforme: la fuerza apunta al centro, la velocidad es tangente</text><g><circle cx="300" cy="250" r="130" fill="none" stroke-width="1.25" stroke-dasharray="5 4" style="stroke:var(--cds-chart-axis)"></circle><circle cx="300" cy="250" r="3" stroke-width="1" style="fill:var(--cds-chart-axis);stroke:var(--cds-chart-axis)"></circle><text x="308" y="266" font-size="11.5" style="fill:var(--cds-text-secondary)">centro</text></g><g><circle cx="300" cy="120" r="9" stroke-width="1.5" style="fill:var(--cds-chart-reference-tint);stroke:var(--cds-text-primary)"></circle><line x1="300" y1="120" x2="370" y2="120" stroke="var(--cds-chart-axis)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w8-a)"></line><line x1="300" y1="120" x2="300" y2="182" stroke="var(--cds-chart-categorical-4)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w8-g)"></line><path d="M300 132L312 132L312 120" fill="none" stroke-width="1" style="stroke:var(--cds-text-primary)"></path></g><g><circle cx="422.2" cy="294.5" r="9" stroke-width="1.5" style="fill:var(--cds-chart-reference-tint);stroke:var(--cds-text-primary)"></circle><line x1="422.2" y1="294.5" x2="398.2" y2="360.2" stroke="var(--cds-chart-axis)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w8-a)"></line><line x1="422.2" y1="294.5" x2="363.9" y2="273.3" stroke="var(--cds-chart-categorical-4)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w8-g)"></line><path d="M410.9 290.4L406.8 301.6L418.1 305.7" fill="none" stroke-width="1" style="stroke:var(--cds-text-primary)"></path></g><g><circle cx="200.4" cy="333.6" r="9" stroke-width="1.5" style="fill:var(--cds-chart-reference-tint);stroke:var(--cds-text-primary)"></circle><line x1="200.4" y1="333.6" x2="155.4" y2="279.9" stroke="var(--cds-chart-axis)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w8-a)"></line><line x1="200.4" y1="333.6" x2="247.9" y2="293.7" stroke="var(--cds-chart-categorical-4)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w8-g)"></line><path d="M209.6 325.8L201.9 316.7L192.7 324.4" fill="none" stroke-width="1" style="stroke:var(--cds-text-primary)"></path></g><text x="376" y="124" style="fill:var(--cds-text-primary)">v</text><text x="308" y="180" style="fill:var(--cds-text-primary)">F</text><g><text x="490" y="150" font-weight="600" style="fill:var(--cds-text-primary)">φ = 90° en todo momento</text><text x="490" y="176" style="fill:var(--cds-text-primary)">W = F·Δs·cos 90° = 0</text><text x="490" y="202" style="fill:var(--cds-text-primary)">W total = ΔEc = 0</text><text x="490" y="236" font-size="11.5" style="fill:var(--cds-text-secondary)">Cambia la dirección de v,</text><text x="490" y="254" font-size="11.5" style="fill:var(--cds-text-secondary)">no su módulo.</text></g></svg><figcaption>Cuestiones 4 · fuerza perpendicular a la velocidad</figcaption></figure>
-<p>En cada punto la fuerza apunta al centro y la velocidad es tangente: forman 90°.</p>
-<p>Otra forma: que actúen otras fuerzas que compensen su trabajo, de modo que el trabajo total sea cero (empujar una caja a velocidad constante contra el rozamiento).</p>
-<h3>Cuestiones 5 · Principio de conservación de la energía mecánica</h3>
-<p class="eq"><strong>Enunciado:</strong> si sobre un sistema solo realizan trabajo fuerzas conservativas (peso, fuerzas elásticas, fuerzas eléctricas), su energía mecánica permanece constante: <strong>Ec₀ + Ep₀ = Ec + Ep</strong>.</p>
-<p><strong>Condiciones:</strong> que no haya rozamiento ni resistencia del aire, y que ninguna fuerza exterior (persona, motor, cuerda que tira) haga trabajo. Las fuerzas que no trabajan no estropean la conservación: la normal sobre un plano sin rozamiento (ejercicio 4.1) o la tensión de un péndulo.</p>
-<h3>Repaso 1 · Enunciado, demostración y relación con Ep</h3>
-<p><strong>a) Enunciado:</strong> el de la cuestión 5.</p>
-<p><strong>Demostración</strong> en tres pasos:</p>
-<ol>
-<li>Teorema de las fuerzas vivas: el trabajo de todas las fuerzas es <strong>W total = ΔEc</strong> (categoría 3).</li>
-<li>Si solo trabajan fuerzas conservativas, W total = W conservativas, y para ellas <strong>W cons = −ΔEp</strong>.</li>
-<li>Igualando: −ΔEp = ΔEc ⟹ ΔEc + ΔEp = 0 ⟹ Δ(Ec + Ep) = 0 ⟹ <strong>Ec₀ + Ep₀ = Ec + Ep</strong>. La energía mecánica no cambia.</li>
-</ol>
-<p><strong>b) Relación entre trabajo conservativo y energía potencial:</strong> <strong>W cons = −ΔEp = Ep inicial − Ep final</strong>. El trabajo de una fuerza conservativa es igual a la disminución de la energía potencial. Al caer un cuerpo, el peso hace trabajo positivo y la Ep disminuye; al subirlo, el peso hace trabajo negativo y la Ep aumenta (ejercicio 1.4).</p>
 
-    <nav class="pager" aria-label="Anterior y siguiente"><a href="../potencia-y-rendimiento/"><small>Anterior</small>Potencia, rendimiento y consumo</a></nav>
+<h2 id="propuestos">Cuestiones propuestas</h2>
+<div class="metodo"><strong>Cómo practicar</strong><ol><li>Lee el enunciado y resuélvelo en la libreta: respuesta corta, razón física con su fórmula y un ejemplo.</li><li>Compara con la respuesta razonada.</li><li>Si algo no cuadra, vuelve a la idea clave.</li></ol></div>
+<p>Cuestiones de los apuntes:</p>
+<div class="props"><article class="prop" id="e-8-1"><div class="cab"><span class="num">8.1</span><span class="src">Teoría 4</span></div>
+<h3>Ejemplos de sistemas que tienen energía</h3><div class="enun"><p>Poned distintos ejemplos de sistemas (objetos o conjuntos de objetos) que tengan energía y explicad a qué es debido que la tengan.</p>
+</div><div class="acc"><a class="btn primary" href="8-1/">Ver la respuesta razonada →</a></div></article>
+<article class="prop" id="e-8-2"><div class="cab"><span class="num">8.2</span><span class="src">Cuestiones 1</span></div>
+<h3>¿Pueden ser negativas Ec, Ep y E M?</h3><div class="enun"><p>¿Puede ser negativa la energía cinética de un cuerpo? ¿Por qué? ¿Y la energía potencial? ¿Por qué? ¿Y la energía mecánica? ¿Por qué?</p>
+</div><div class="acc"><a class="btn primary" href="8-2/">Ver la respuesta razonada →</a></div></article>
+<article class="prop" id="e-8-3"><div class="cab"><span class="num">8.3</span><span class="src">Cuestiones 2</span></div>
+<h3>«¿Sólo las fuerzas conservativas realizan trabajo?»</h3><div class="enun"><p>Decid si es cierta la siguiente afirmación y por qué: «sólo las fuerzas conservativas realizan trabajo».</p>
+</div><div class="acc"><a class="btn primary" href="8-3/">Ver la respuesta razonada →</a></div></article>
+<article class="prop" id="e-8-4"><div class="cab"><span class="num">8.4</span><span class="src">Cuestiones 3</span></div>
+<h3>Trabajo nulo y trabajo del rozamiento</h3><div class="enun"><p>a) ¿Puede un cuerpo desplazarse y realizar un trabajo nulo? ¿Por qué? b) Explica por qué el trabajo que hace la fuerza de rozamiento es siempre negativo.</p>
+</div><div class="acc"><a class="btn primary" href="8-4/">Ver la respuesta razonada →</a></div></article>
+<article class="prop" id="e-8-5"><div class="cab"><span class="num">8.5</span><span class="src">Cuestiones 4</span></div>
+<h3>Una fuerza que no cambia la energía cinética</h3><div class="enun"><p>¿De qué forma puede conseguirse que sobre un cuerpo en movimiento actúe una fuerza sin que se modifique su energía cinética?</p>
+</div><div class="acc"><a class="btn primary" href="8-5/">Ver la respuesta razonada →</a></div></article>
+<article class="prop" id="e-8-6"><div class="cab"><span class="num">8.6</span><span class="src">Cuestiones 5</span></div>
+<h3>Principio de conservación de la energía mecánica</h3><div class="enun"><p>Principio de conservación de la energía mecánica. Decid claramente en qué condiciones se cumple este principio.</p>
+</div><div class="acc"><a class="btn primary" href="8-6/">Ver la respuesta razonada →</a></div></article>
+<article class="prop" id="e-8-7"><div class="cab"><span class="num">8.7</span><span class="src">Repaso 1</span></div>
+<h3>Enunciado, demostración y relación con Ep</h3><div class="enun"><p>a) Enuncia y demuestra el principio de conservación de la energía mecánica. b) ¿Qué relación existe entre el trabajo realizado por una fuerza conservativa y la energía potencial?</p>
+</div><div class="acc"><a class="btn primary" href="8-7/">Ver la respuesta razonada →</a></div></article></div>
+<h2 id="practicar-mas">Para practicar más</h2>
+<p>Ejercicios nuevos del mismo tipo, con la solución completa.</p>
+<div class="props"><article class="prop" id="e-8-8"><div class="cab"><span class="num">8.8</span><span class="tag nuevo">Nuevo</span></div>
+<h3>¿Puede ser negativo el trabajo total?</h3><div class="enun"><p>¿Puede ser negativo el trabajo total realizado sobre un cuerpo? En ese caso, ¿qué le ocurre a su velocidad? Pon un ejemplo.</p>
+</div><div class="acc"><a class="btn primary" href="8-8/">Ver la respuesta razonada →</a></div></article>
+<article class="prop" id="e-8-9"><div class="cab"><span class="num">8.9</span><span class="tag nuevo">Nuevo</span><span class="tag sim">Con simulación</span></div>
+<h3>Dos bloques de masas m y 2m frenados por el rozamiento</h3><div class="enun"><p>Dos bloques de masas m y 2m se lanzan con la misma velocidad sobre el mismo suelo horizontal, con el mismo coeficiente de rozamiento. ¿Cuál recorre más distancia hasta pararse? ¿Cuál pierde más energía? Razónalo.</p>
+</div><div class="acc"><a class="btn primary" href="8-9/">Ver la respuesta razonada →</a></div></article>
+<article class="prop" id="e-8-10"><div class="cab"><span class="num">8.10</span><span class="tag nuevo">Nuevo</span><span class="tag sim">Con simulación</span></div>
+<h3>Subir una maleta por la escalera o en ascensor</h3><div class="enun"><p>Una persona sube una maleta de 15 kg por la escalera hasta un tercer piso, a 9 m de altura, y tarda 1 minuto. Otra persona sube una maleta igual en el ascensor y tarda 20 s. ¿Se hace el mismo trabajo contra el peso en los dos casos? ¿Se desarrolla la misma potencia? Razónalo con números.</p>
+</div><div class="acc"><a class="btn primary" href="8-10/">Ver la respuesta razonada →</a></div></article></div>
+    <nav class="pager" aria-label="Anterior y siguiente"><a href="../potencia-y-rendimiento/"><small>Anterior</small>Potencia, rendimiento y consumo</a><span></span></nav>
     </main>
-    <aside class="toc" aria-label="En esta página"><h2>En esta página</h2><ol><li><a href="#como-responder-una-cuestion-de-teoria">Cómo responder una cuestión de teoría</a></li><li><a href="#respuestas-razonadas">Respuestas razonadas</a></li></ol></aside>
+    <aside class="toc" aria-label="En esta página"><h2>En esta página</h2><ol><li><a href="#como-responder-una-cuestion-de-teoria">Cómo responder una cuestión de teoría</a></li><li class="sep"><a href="#propuestos">Cuestiones propuestas</a></li><li><a href="#e-8-1">8.1 · Teoría 4</a></li><li><a href="#e-8-2">8.2 · Cuestiones 1</a></li><li><a href="#e-8-3">8.3 · Cuestiones 2</a></li><li><a href="#e-8-4">8.4 · Cuestiones 3</a></li><li><a href="#e-8-5">8.5 · Cuestiones 4</a></li><li><a href="#e-8-6">8.6 · Cuestiones 5</a></li><li><a href="#e-8-7">8.7 · Repaso 1</a></li><li class="sep"><a href="#practicar-mas">Para practicar más</a></li><li><a href="#e-8-8">8.8 · Nuevo</a></li><li><a href="#e-8-9">8.9 · Nuevo</a></li><li><a href="#e-8-10">8.10 · Nuevo</a></li></ol></aside>
   </div>
   <footer>Material de estudio. Si el enunciado no da g, se usa 9,8 m/s². Para imprimir, usa la opción de imprimir del navegador.</footer>
 </div>

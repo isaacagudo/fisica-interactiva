@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>3.2 · Bala de 40 g que se incrusta 6 cm en una tabla · Física interactiva</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../../../../assets/base.css">
+<style>
+:root{--c-a:#7b4fd6;--c-k:#b4407e;--axis:#8793a6}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--c-a:#b39bff;--c-k:#f08cc0;--axis:#8e9ab0}}
+:root[data-theme="dark"]{--c-a:#b39bff;--c-k:#f08cc0;--axis:#8e9ab0}
+.fig{--cds-text-primary:var(--ink);--cds-text-secondary:var(--ink-2);--cds-chart-axis:var(--axis);--cds-chart-grid:var(--rule);
+  --cds-chart-reference-tint:var(--plane);--cds-chart-categorical-1:var(--c-p);--cds-chart-categorical-2:var(--c-n);
+  --cds-chart-categorical-3:var(--c-fr);--cds-chart-categorical-4:var(--c-a);--cds-chart-categorical-5:var(--c-k);
+  margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
+.fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
+.fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
+header.top{display:grid;gap:8px;margin:6px 0 18px}
+.cats{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 22px}
+.cats a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.cats a:hover{border-color:var(--ink-2);color:var(--ink)}
+.cats a[aria-current="page"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+@media (min-width:1000px){.layout{grid-template-columns:minmax(0,760px) 1fr}}
+.toc{display:none}
+@media (min-width:1000px){.toc{display:block;position:sticky;top:16px;align-self:start;font-size:13.5px;max-height:calc(100vh - 32px);overflow:auto}
+  .toc h2{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:0 0 8px}
+  .toc ol{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+  .toc a{color:var(--ink-2);text-decoration:none;line-height:1.3;display:block}
+  .toc a:hover{color:var(--ink)}
+  .toc .sep{margin-top:8px;font-weight:700;color:var(--ink)}}
+.doc{min-width:0}
+.doc>h2:first-child{border-top:0;margin-top:0;padding-top:0}
+.doc h2{font-size:1.28rem;margin:38px 0 10px;padding-top:16px;border-top:1px solid var(--rule);scroll-margin-top:12px}
+.doc h3{font-size:1.06rem;margin:26px 0 8px}
+.doc p{margin:10px 0}
+.doc p.eq{background:var(--sheet);border:1px solid var(--rule);border-left:3px solid var(--c-p);border-radius:8px;padding:9px 12px;overflow-x:auto}
+.doc p.sub{margin:22px 0 4px}
+.doc p.res{background:var(--hl);border-radius:8px;padding:8px 12px}
+.doc blockquote.why{margin:10px 0 14px;padding:8px 14px;border-left:3px solid var(--rule);background:color-mix(in srgb,var(--sheet) 70%,transparent);border-radius:0 8px 8px 0;color:var(--ink)}
+.doc blockquote.why p{margin:4px 0}
+.doc ul,.doc ol{padding-left:1.3em}
+.doc li{margin:4px 0}
+.table-wrap{overflow-x:auto;margin:12px 0;border:1px solid var(--rule);border-radius:10px;background:var(--sheet)}
+.doc table{border-collapse:collapse;width:100%;font-size:14.5px}
+.doc th,.doc td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid var(--rule)}
+.doc th{font-weight:700;background:var(--paper)}
+.doc tr:last-child td{border-bottom:0}
+.grid-cats{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));margin:18px 0 8px}
+.grid-cats a{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:start;text-decoration:none;color:inherit}
+.grid-cats a:hover{border-color:var(--ink-2)}
+.grid-cats .n{font:700 1.5rem/44px var(--f-display);text-align:center;border-radius:10px;border:1px solid var(--rule)}
+.grid-cats h3{font-size:1rem;line-height:1.25}
+.grid-cats p{margin:4px 0 0;font-size:13.5px;color:var(--ink-2)}
+/* ejercicios propuestos */
+.metodo{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 14px;font-size:14.5px}
+.metodo ol{margin:6px 0 2px}
+.props{display:grid;gap:14px;margin:14px 0}
+.prop{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:14px 16px;scroll-margin-top:12px}
+.prop .cab{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-bottom:6px}
+.prop .num{font:700 1.05rem var(--f-display)}
+.prop .src{font:600 12px var(--f-mono);color:var(--ink-2);letter-spacing:.02em}
+.tag{font:600 11px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;border:1px solid currentColor;border-radius:999px;padding:1px 7px}
+.tag.nuevo{color:var(--c-n)}
+.tag.sel{color:var(--c-a)}
+.tag.sim{color:var(--c-p)}
+.prop h3{font-size:1rem;margin:0 0 6px;line-height:1.3}
+.prop .enun p{margin:6px 0}
+.prop .fig{margin:10px 0 4px}
+.prop .acc{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;margin-top:10px}
+.prop details{flex:1 1 260px;min-width:0}
+.prop summary{cursor:pointer;font:600 13.5px var(--f-body);color:var(--ink-2);min-height:38px;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rule);border-radius:9px;padding:0 12px;list-style:none}
+.prop summary::-webkit-details-marker{display:none}
+.prop summary::before{content:"▸";font-size:12px}
+.prop details[open] summary::before{content:"▾"}
+.prop details[open] summary{color:var(--ink)}
+.prop details p{background:var(--hl);border-radius:8px;padding:8px 12px;margin:8px 0 0}
+.prop .btn{margin-left:auto}
+@media (max-width:520px){.prop .btn{margin-left:0;width:100%}}
+/* página de solución */
+.enun-box{background:var(--sheet);border:1px solid var(--rule);border-left:4px solid var(--ink);border-radius:12px;padding:12px 16px}
+.enun-box .lbl{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.enun-box p{margin:6px 0}
+.res-box{background:var(--hl);border-radius:12px;padding:10px 16px;margin:14px 0}
+.res-box .lbl{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase}
+.res-box p{margin:4px 0}
+.saltos{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.saltos a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.doc .widget{margin:16px 0 8px}
+.doc .widget:empty{display:none}
+/* índice con resultados ocultos */
+.ver-res{display:inline-flex;align-items:center;gap:8px;font:600 14px var(--f-body);cursor:pointer;margin:4px 0}
+.ver-res input{width:18px;height:18px;accent-color:var(--c-p)}
+.indice td.r{transition:filter .2s}
+.indice td:first-child{white-space:nowrap}
+.indice td small{display:block;color:var(--ink-2);font-size:12px}
+.indice tr.grupo th{background:var(--plane);font-size:14px}
+.indice tr.grupo a{color:inherit}
+.ver-res:has(input:not(:checked)) + .table-wrap td.r{filter:blur(5px);user-select:none}
+.pager{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:40px;border-top:1px solid var(--rule);padding-top:16px}
+.pager a{text-decoration:none;max-width:48%}
+.pager .mid{align-self:center}
+.pager small{display:block;color:var(--ink-2);font-size:12px}
+footer{margin-top:36px;color:var(--ink-2);font-size:13px}
+@media print{.cats,.toc,.pager,.crumbs,.widget,.saltos,.prop .btn,.prop summary{display:none}.layout{display:block}.fig,.table-wrap,p.eq,.prop{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="page">
+  <nav class="crumbs" aria-label="Ruta"><a href="../../../../">Física interactiva</a><span aria-hidden="true">›</span><a href="../../">Trabajo, potencia y energía</a><span aria-hidden="true">›</span><a href="../">Energía cinética</a><span aria-hidden="true">›</span><span>3.2</span></nav>
+  <header class="top"><div class="eyebrow">Solución · Teoría 10 · Categoría 3</div><h1>3.2 · Bala de 40 g que se incrusta 6 cm en una tabla</h1></header>
+  <nav class="cats" aria-label="Categorías del tema"><a href="../../">Mapa del tema</a><a href="../../trabajo-de-una-fuerza/">1 · Trabajo</a><a href="../../trabajo-con-rozamiento/">2 · Rozamiento</a><a href="../../energia-cinetica/" aria-current="page">3 · Energía cinética</a><a href="../../conservacion/">4 · Conservación</a><a href="../../muelles/">5 · Muelles</a><a href="../../planos-inclinados/">6 · Planos inclinados</a><a href="../../potencia-y-rendimiento/">7 · Potencia</a><a href="../../cuestiones/">8 · Cuestiones</a></nav>
+  <div class="layout">
+    <main class="doc">
+<nav class="saltos" aria-label="Saltar a"><a href="#simulacion">Ir a la simulación ↓</a><a href="../#e-3-2">Volver a la lista</a></nav><div class="enun-box" id="enunciado"><div class="lbl">Enunciado</div><p>Una bala de 40 g choca horizontalmente contra una tabla con una velocidad de 300 m/s y se incrusta en ella una profundidad de 6 cm. Calcula la fuerza, supuesta constante, que opone la madera a la penetración de la bala.</p>
+</div><div class="res-box" id="resultado"><div class="lbl">Resultado</div><p>F = 3,0·10⁴ N (30 000 N).</p></div>
+<h2 id="solucion">Solución paso a paso</h2>
+<p>Datos: m = 40 g = 0,040 kg · v₀ = 300 m/s · v = 0 (se queda incrustada) · d = 6 cm = 0,06 m.</p>
+<figure class="fig"><svg viewBox="0 0 760 378" role="img" aria-label="La madera frena la bala con 30 000 N a lo largo de 6 cm" font-size="13"><defs><marker id="w32-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-axis)"></path></marker><marker id="w32-f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-categorical-3)"></path></marker></defs><text x="24" y="30" font-size="15" font-weight="600" style="fill:var(--cds-text-primary)">La madera frena la bala con 30 000 N a lo largo de 6 cm</text><text x="24" y="50" font-size="11.5" style="fill:var(--cds-text-secondary)">Teoría 10 · bala de 40 g · esquema, no a escala</text><g><rect x="380" y="90" width="70" height="240" stroke-width="1.25" style="fill:var(--cds-chart-reference-tint);stroke:var(--cds-chart-axis)"></rect><text x="415" y="82" text-anchor="middle" font-size="11.5" style="fill:var(--cds-text-secondary)">tabla</text></g><g><rect x="310" y="142" width="56" height="16" rx="3" fill="none" stroke-width="1.5" style="stroke:var(--cds-text-primary)"></rect><polygon points="366,142 380,150 366,158" fill="none" stroke-width="1.5" style="stroke:var(--cds-text-primary)"></polygon><line x1="200" y1="150" x2="300" y2="150" stroke="var(--cds-chart-axis)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w32-a)"></line><text x="200" y="136" style="fill:var(--cds-text-primary)">v₀ = 300 m/s</text><text x="40" y="154" font-weight="600" style="fill:var(--cds-text-primary)">Al entrar</text></g><g><rect x="370" y="262" width="56" height="16" rx="3" fill="none" stroke-width="1.5" style="stroke:var(--cds-text-primary)"></rect><polygon points="426,262 440,270 426,278" fill="none" stroke-width="1.5" style="stroke:var(--cds-text-primary)"></polygon><line x1="400" y1="292" x2="300" y2="292" stroke="var(--cds-chart-categorical-3)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w32-f)"></line><text x="292" y="296" text-anchor="end" style="fill:var(--cds-text-primary)">F de la madera</text><text x="40" y="274" font-weight="600" style="fill:var(--cds-text-primary)">Se para</text><text x="40" y="292" font-size="11.5" style="fill:var(--cds-text-secondary)">v = 0</text><line x1="380" y1="344" x2="440" y2="344" stroke="var(--cds-chart-axis)" stroke-width="1" marker-start="url(#w32-a)" marker-end="url(#w32-a)"></line><text x="410" y="362" text-anchor="middle" font-size="11.5" style="fill:var(--cds-text-secondary)">d = 6 cm</text></g><g><text x="480" y="146" style="fill:var(--cds-text-primary)">Ec₀ = ½ · 0,040 · 300² = 1 800 J</text><text x="480" y="266" style="fill:var(--cds-text-primary)">Ec = 0 J</text><text x="480" y="292" font-weight="600" style="fill:var(--cds-text-primary)">W = −1 800 J = −F · 0,06</text></g></svg><figcaption>Teoría 10 · la bala al entrar y al pararse</figcaption></figure>
+<p>La madera empuja la bala hacia atrás durante los 6 cm que penetra, hasta quitarle los 1 800 J.</p>
+<p><strong>Qué herramienta usar.</strong> Velocidades y una distancia; piden una fuerza: teorema de las fuerzas vivas y después F = |W| / d.</p>
+<p class="sub"><strong>Paso 1. Trabajo de la madera</strong></p>
+<p class="eq"><strong>W = ½·m·v² − ½·m·v₀² = 0 − ½ · 0,040 · 300² = −1 800 J</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué Ec final = 0?</strong> «Se incrusta» quiere decir que se para dentro de la tabla. Toda su energía cinética la quita la fuerza de la madera, que es la única que trabaja durante esos 6 cm (el peso de la bala es despreciable frente a ella y además es perpendicular al movimiento).</p>
+</blockquote>
+<p class="sub"><strong>Paso 2. Fuerza (supuesta constante)</strong></p>
+<p class="eq"><strong>W = F · d · cos 180° ⟹ −1 800 = −F · 0,06 ⟹ F = 30 000 N</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué 0,06 y no 6?</strong> La distancia tiene que ir en metros para que N·m = J. Con 6 saldría una fuerza 100 veces menor.</p>
+</blockquote>
+<p><strong>Comprobación por cinemática.</strong> a = (0 − 300²) / (2 · 0,06) = −750 000 m/s² y F = 0,040 · 750 000 = 30 000 N. Coincide.</p>
+<p><strong>Sentido físico.</strong> El peso de la bala es 0,040 · 9,8 = 0,39 N: la madera hace una fuerza unas 77 000 veces mayor. Es grande porque tiene que quitar mucha energía en muy poca distancia.</p>
+
+<h2 id="simulacion">Simulación</h2>
+<p>La bala se frena en 0,4 milésimas de segundo: la simulación va a cámara lenta. Cambia la profundidad y mira cómo cambia la fuerza.</p>
+
+<div class="widget" data-widget="bloque" data-config='{"titulo":"Simulación · 3.2 · Teoría 10","escenario":"bala","m":0.04,"v0":300,"p":0.06}'></div>
+    <nav class="pager" aria-label="Anterior y siguiente"><a href="../3-1/"><small>Anterior</small>3.1 · Teoría 9</a><a class="mid" href="../#e-3-2">Todos los ejercicios</a><a href="../3-3/" style="text-align:right"><small>Siguiente</small>3.3 · Ejercicios 6</a></nav>
+    </main>
+    <aside class="toc" aria-label="En esta página"><h2>En esta página</h2><ol><li><a href="#enunciado">Enunciado</a></li><li><a href="#resultado">Resultado</a></li><li><a href="#solucion">Solución</a></li><li><a href="#simulacion">Simulación</a></li></ol></aside>
+  </div>
+  <footer>Material de estudio. Si el enunciado no da g, se usa 9,8 m/s². Para imprimir, usa la opción de imprimir del navegador.</footer>
+</div>
+<script src="../../../../assets/widgets/nucleo.js" defer></script>
+<script src="../../../../assets/widgets/bloque.js" defer></script>
+</body>
+</html>

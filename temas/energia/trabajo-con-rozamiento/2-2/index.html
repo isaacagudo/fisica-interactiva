@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>2.2 · Fuerza de 30 N a 30° con μ = 0,2: velocidad y trabajo del rozamiento · Física interactiva</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../../../../assets/base.css">
+<style>
+:root{--c-a:#7b4fd6;--c-k:#b4407e;--axis:#8793a6}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--c-a:#b39bff;--c-k:#f08cc0;--axis:#8e9ab0}}
+:root[data-theme="dark"]{--c-a:#b39bff;--c-k:#f08cc0;--axis:#8e9ab0}
+.fig{--cds-text-primary:var(--ink);--cds-text-secondary:var(--ink-2);--cds-chart-axis:var(--axis);--cds-chart-grid:var(--rule);
+  --cds-chart-reference-tint:var(--plane);--cds-chart-categorical-1:var(--c-p);--cds-chart-categorical-2:var(--c-n);
+  --cds-chart-categorical-3:var(--c-fr);--cds-chart-categorical-4:var(--c-a);--cds-chart-categorical-5:var(--c-k);
+  margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
+.fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
+.fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
+header.top{display:grid;gap:8px;margin:6px 0 18px}
+.cats{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 22px}
+.cats a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.cats a:hover{border-color:var(--ink-2);color:var(--ink)}
+.cats a[aria-current="page"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+@media (min-width:1000px){.layout{grid-template-columns:minmax(0,760px) 1fr}}
+.toc{display:none}
+@media (min-width:1000px){.toc{display:block;position:sticky;top:16px;align-self:start;font-size:13.5px;max-height:calc(100vh - 32px);overflow:auto}
+  .toc h2{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:0 0 8px}
+  .toc ol{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+  .toc a{color:var(--ink-2);text-decoration:none;line-height:1.3;display:block}
+  .toc a:hover{color:var(--ink)}
+  .toc .sep{margin-top:8px;font-weight:700;color:var(--ink)}}
+.doc{min-width:0}
+.doc>h2:first-child{border-top:0;margin-top:0;padding-top:0}
+.doc h2{font-size:1.28rem;margin:38px 0 10px;padding-top:16px;border-top:1px solid var(--rule);scroll-margin-top:12px}
+.doc h3{font-size:1.06rem;margin:26px 0 8px}
+.doc p{margin:10px 0}
+.doc p.eq{background:var(--sheet);border:1px solid var(--rule);border-left:3px solid var(--c-p);border-radius:8px;padding:9px 12px;overflow-x:auto}
+.doc p.sub{margin:22px 0 4px}
+.doc p.res{background:var(--hl);border-radius:8px;padding:8px 12px}
+.doc blockquote.why{margin:10px 0 14px;padding:8px 14px;border-left:3px solid var(--rule);background:color-mix(in srgb,var(--sheet) 70%,transparent);border-radius:0 8px 8px 0;color:var(--ink)}
+.doc blockquote.why p{margin:4px 0}
+.doc ul,.doc ol{padding-left:1.3em}
+.doc li{margin:4px 0}
+.table-wrap{overflow-x:auto;margin:12px 0;border:1px solid var(--rule);border-radius:10px;background:var(--sheet)}
+.doc table{border-collapse:collapse;width:100%;font-size:14.5px}
+.doc th,.doc td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid var(--rule)}
+.doc th{font-weight:700;background:var(--paper)}
+.doc tr:last-child td{border-bottom:0}
+.grid-cats{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));margin:18px 0 8px}
+.grid-cats a{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:start;text-decoration:none;color:inherit}
+.grid-cats a:hover{border-color:var(--ink-2)}
+.grid-cats .n{font:700 1.5rem/44px var(--f-display);text-align:center;border-radius:10px;border:1px solid var(--rule)}
+.grid-cats h3{font-size:1rem;line-height:1.25}
+.grid-cats p{margin:4px 0 0;font-size:13.5px;color:var(--ink-2)}
+/* ejercicios propuestos */
+.metodo{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 14px;font-size:14.5px}
+.metodo ol{margin:6px 0 2px}
+.props{display:grid;gap:14px;margin:14px 0}
+.prop{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:14px 16px;scroll-margin-top:12px}
+.prop .cab{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-bottom:6px}
+.prop .num{font:700 1.05rem var(--f-display)}
+.prop .src{font:600 12px var(--f-mono);color:var(--ink-2);letter-spacing:.02em}
+.tag{font:600 11px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;border:1px solid currentColor;border-radius:999px;padding:1px 7px}
+.tag.nuevo{color:var(--c-n)}
+.tag.sel{color:var(--c-a)}
+.tag.sim{color:var(--c-p)}
+.prop h3{font-size:1rem;margin:0 0 6px;line-height:1.3}
+.prop .enun p{margin:6px 0}
+.prop .fig{margin:10px 0 4px}
+.prop .acc{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;margin-top:10px}
+.prop details{flex:1 1 260px;min-width:0}
+.prop summary{cursor:pointer;font:600 13.5px var(--f-body);color:var(--ink-2);min-height:38px;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rule);border-radius:9px;padding:0 12px;list-style:none}
+.prop summary::-webkit-details-marker{display:none}
+.prop summary::before{content:"▸";font-size:12px}
+.prop details[open] summary::before{content:"▾"}
+.prop details[open] summary{color:var(--ink)}
+.prop details p{background:var(--hl);border-radius:8px;padding:8px 12px;margin:8px 0 0}
+.prop .btn{margin-left:auto}
+@media (max-width:520px){.prop .btn{margin-left:0;width:100%}}
+/* página de solución */
+.enun-box{background:var(--sheet);border:1px solid var(--rule);border-left:4px solid var(--ink);border-radius:12px;padding:12px 16px}
+.enun-box .lbl{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.enun-box p{margin:6px 0}
+.res-box{background:var(--hl);border-radius:12px;padding:10px 16px;margin:14px 0}
+.res-box .lbl{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase}
+.res-box p{margin:4px 0}
+.saltos{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.saltos a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.doc .widget{margin:16px 0 8px}
+.doc .widget:empty{display:none}
+/* índice con resultados ocultos */
+.ver-res{display:inline-flex;align-items:center;gap:8px;font:600 14px var(--f-body);cursor:pointer;margin:4px 0}
+.ver-res input{width:18px;height:18px;accent-color:var(--c-p)}
+.indice td.r{transition:filter .2s}
+.indice td:first-child{white-space:nowrap}
+.indice td small{display:block;color:var(--ink-2);font-size:12px}
+.indice tr.grupo th{background:var(--plane);font-size:14px}
+.indice tr.grupo a{color:inherit}
+.ver-res:has(input:not(:checked)) + .table-wrap td.r{filter:blur(5px);user-select:none}
+.pager{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:40px;border-top:1px solid var(--rule);padding-top:16px}
+.pager a{text-decoration:none;max-width:48%}
+.pager .mid{align-self:center}
+.pager small{display:block;color:var(--ink-2);font-size:12px}
+footer{margin-top:36px;color:var(--ink-2);font-size:13px}
+@media print{.cats,.toc,.pager,.crumbs,.widget,.saltos,.prop .btn,.prop summary{display:none}.layout{display:block}.fig,.table-wrap,p.eq,.prop{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="page">
+  <nav class="crumbs" aria-label="Ruta"><a href="../../../../">Física interactiva</a><span aria-hidden="true">›</span><a href="../../">Trabajo, potencia y energía</a><span aria-hidden="true">›</span><a href="../">Rozamiento</a><span aria-hidden="true">›</span><span>2.2</span></nav>
+  <header class="top"><div class="eyebrow">Solución · Ejercicios 1 · Categoría 2</div><h1>2.2 · Fuerza de 30 N a 30° con μ = 0,2: velocidad y trabajo del rozamiento</h1></header>
+  <nav class="cats" aria-label="Categorías del tema"><a href="../../">Mapa del tema</a><a href="../../trabajo-de-una-fuerza/">1 · Trabajo</a><a href="../../trabajo-con-rozamiento/" aria-current="page">2 · Rozamiento</a><a href="../../energia-cinetica/">3 · Energía cinética</a><a href="../../conservacion/">4 · Conservación</a><a href="../../muelles/">5 · Muelles</a><a href="../../planos-inclinados/">6 · Planos inclinados</a><a href="../../potencia-y-rendimiento/">7 · Potencia</a><a href="../../cuestiones/">8 · Cuestiones</a></nav>
+  <div class="layout">
+    <main class="doc">
+<nav class="saltos" aria-label="Saltar a"><a href="#simulacion">Ir a la simulación ↓</a><a href="../#e-2-2">Volver a la lista</a></nav><div class="enun-box" id="enunciado"><div class="lbl">Enunciado</div><p>Un cuerpo de 5 kg de masa se mueve sobre un plano horizontal por acción de una fuerza de 30 N, que se aplica al cuerpo formando un ángulo de 30° con la horizontal. El coeficiente de rozamiento es 0,2. Calcula la velocidad del cuerpo después de 10 s de haber sido aplicada la fuerza y el trabajo de la fuerza de fricción durante ese tiempo.</p>
+</div><div class="res-box" id="resultado"><div class="lbl">Resultado</div><p>v = 38,4 m/s a los 10 s · W roz = −1,30·10³ J (−1 304 J).</p></div>
+<h2 id="solucion">Solución paso a paso</h2>
+<p>Datos: m = 5 kg · F = 30 N a 30° sobre la horizontal · μ = 0,2 · t = 10 s · parte del reposo · g = 9,8 m/s². Se supone que la fuerza tira hacia arriba, como en el dibujo de la página 1 de los apuntes.</p>
+<figure class="fig"><svg viewBox="0 0 760 390" role="img" aria-label="La cuerda tira un poco hacia arriba: N = m·g − Fy, menor que el peso" font-size="13"><defs><marker id="w22-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-axis)"></path></marker><marker id="w22-f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-categorical-3)"></path></marker><marker id="w22-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-categorical-4)"></path></marker><marker id="w22-n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-categorical-2)"></path></marker><marker id="w22-p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-categorical-1)"></path></marker></defs><text x="24" y="30" font-size="15" font-weight="600" style="fill:var(--cds-text-primary)">La cuerda tira un poco hacia arriba: N = m·g − Fy, menor que el peso</text><text x="24" y="50" font-size="11.5" style="fill:var(--cds-text-secondary)">Ejercicios 1 y Repaso 5 · bloque de 5 kg, F = 30 N a 30° · esquema, no a escala</text><g><line x1="40" y1="290" x2="720" y2="290" stroke="var(--cds-chart-axis)" stroke-width="1.5"></line></g><g><rect x="290" y="210" width="110" height="80" rx="3" fill="none" stroke-width="1.5" style="stroke:var(--cds-text-primary)"></rect></g><g><line x1="345" y1="250" x2="457.6" y2="185" stroke="var(--cds-chart-categorical-4)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w22-g)"></line><line x1="345" y1="250" x2="457.6" y2="250" stroke="var(--cds-chart-categorical-4)" stroke-width="2.2" stroke-dasharray="5 4" marker-end="url(#w22-g)"></line><line x1="457.6" y1="250" x2="457.6" y2="185" stroke="var(--cds-chart-categorical-4)" stroke-width="2.2" stroke-dasharray="5 4" marker-end="url(#w22-g)"></line><path d="M383.1 228A44 44 0 0 1 389 250" fill="none" stroke-width="1.25" style="stroke:var(--cds-chart-categorical-4)"></path><text x="403" y="242" font-size="11.5" style="fill:var(--cds-text-primary)">30°</text><text x="467.6" y="181" style="fill:var(--cds-text-primary)">F = 30 N</text><text x="467.6" y="268" style="fill:var(--cds-text-primary)">Fx = F·cos 30° = 26,0 N</text><text x="467.6" y="221.5" style="fill:var(--cds-text-primary)">Fy = F·sen 30° = 15 N</text></g><g><line x1="345" y1="250" x2="345" y2="174" stroke="var(--cds-chart-categorical-2)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w22-n)"></line><text x="335" y="184" text-anchor="end" style="fill:var(--cds-text-primary)">N = 49 − 15 = 34 N</text></g><g><line x1="345" y1="250" x2="345" y2="346" stroke="var(--cds-chart-categorical-1)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w22-p)"></line><text x="355" y="344" style="fill:var(--cds-text-primary)">P = m·g = 49 N</text></g><g><line x1="290" y1="286" x2="220" y2="286" stroke="var(--cds-chart-categorical-3)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w22-f)"></line><text x="212" y="276" text-anchor="end" style="fill:var(--cds-text-primary)">Fr = μ·N</text><text x="212" y="310" text-anchor="end" font-size="11.5" style="fill:var(--cds-text-secondary)">6,8 N (μ = 0,2) o 13,6 N (μ = 0,4)</text></g><g><line x1="70" y1="170" x2="160" y2="170" stroke="var(--cds-chart-axis)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w22-a)"></line><text x="70" y="158" font-size="11.5" style="fill:var(--cds-text-secondary)">parte del reposo y acelera</text></g></svg><figcaption>Ejercicios 1 · fuerza a 30° descompuesta en Fx y Fy</figcaption></figure>
+<p>Fx arrastra el bloque; Fy lo levanta un poco, y por eso el suelo empuja menos: N = 34 N en vez de 49 N.</p>
+<p><strong>Qué herramienta usar.</strong> Piden la velocidad al cabo de un <strong>tiempo</strong>: eso es dinámica y cinemática (la energía no maneja tiempos). Después, el trabajo del rozamiento con W = Fr·Δs·cos 180°, que necesita la distancia recorrida.</p>
+<p class="sub"><strong>Paso 1. Componentes de F</strong></p>
+<p class="eq"><strong>Fx = F·cos 30° = 30 · 0,866 = 25,98 N  Fy = F·sen 30° = 30 · 0,5 = 15 N</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué?</strong> Fx es la parte que arrastra el bloque; Fy es la parte que tira hacia arriba y «aligera» el bloque contra el suelo.</p>
+</blockquote>
+<p class="sub"><strong>Paso 2. Normal y rozamiento</strong></p>
+<p class="eq"><strong>ΣFy = 0: N + Fy − m·g = 0 ⟹ N = 49 − 15 = 34 N</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué N no es m·g?</strong> La cuerda sostiene parte del peso (15 N), así que el suelo solo tiene que empujar 34 N hacia arriba.</p>
+</blockquote>
+<p class="eq"><strong>Fr = μ·N = 0,2 · 34 = 6,8 N</strong></p>
+<p class="sub"><strong>Paso 3. Aceleración</strong></p>
+<p class="eq"><strong>ΣFx = m·a: Fx − Fr = m·a ⟹ a = (25,98 − 6,8) / 5 = 3,84 m/s²</strong></p>
+<p class="sub"><strong>Paso 4. Velocidad y distancia a los 10 s (MRUA desde el reposo)</strong></p>
+<p class="eq"><strong>v = a·t = 3,836 · 10 = 38,4 m/s  Δx = ½·a·t² = ½ · 3,836 · 10² = 191,8 m</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué MRUA?</strong> Las fuerzas son constantes, así que la aceleración también lo es. Usa a sin redondear (3,836) para no arrastrar errores.</p>
+</blockquote>
+<p class="sub"><strong>Paso 5. Trabajo del rozamiento</strong></p>
+<p class="eq"><strong>W roz = Fr · Δx · cos 180° = 6,8 · 191,8 · (−1) = −1 304 J</strong></p>
+<p><strong>Comprobación por energía.</strong> Trabajo de F: Fx·Δx = 25,98 · 191,8 = 4 983 J. Trabajo total = 4 983 − 1 304 = 3 679 J. Energía cinética final: ½ · 5 · 38,36² = 3 679 J. Coinciden, como dice el teorema de las fuerzas vivas.</p>
+<blockquote class="why">
+<p><strong>Si la fuerza empujara hacia abajo</strong> (desde arriba, a 30°), Fy apretaría el bloque contra el suelo: N = 49 + 15 = 64 N, Fr = 12,8 N, a = 2,64 m/s² y v = 26,4 m/s. El mismo enunciado da otro resultado: por eso el diagrama va primero.</p>
+</blockquote>
+
+<h2 id="simulacion">Simulación</h2>
+<p>Cambia el ángulo en la simulación: al tirar más hacia arriba baja la normal (y el rozamiento), pero también la parte de F que tira hacia delante.</p>
+
+<div class="widget" data-widget="bloque" data-config='{"titulo":"Simulación · 2.2 · Ejercicios 1","escenario":"arrastre","m":5,"F":30,"alpha":30,"mu":0.2,"v0":0,"hasta":"t","t":10}'></div>
+    <nav class="pager" aria-label="Anterior y siguiente"><a href="../2-1/"><small>Anterior</small>2.1 · Teoría 2</a><a class="mid" href="../#e-2-2">Todos los ejercicios</a><a href="../2-3/" style="text-align:right"><small>Siguiente</small>2.3 · Repaso 5</a></nav>
+    </main>
+    <aside class="toc" aria-label="En esta página"><h2>En esta página</h2><ol><li><a href="#enunciado">Enunciado</a></li><li><a href="#resultado">Resultado</a></li><li><a href="#solucion">Solución</a></li><li><a href="#simulacion">Simulación</a></li></ol></aside>
+  </div>
+  <footer>Material de estudio. Si el enunciado no da g, se usa 9,8 m/s². Para imprimir, usa la opción de imprimir del navegador.</footer>
+</div>
+<script src="../../../../assets/widgets/nucleo.js" defer></script>
+<script src="../../../../assets/widgets/bloque.js" defer></script>
+</body>
+</html>

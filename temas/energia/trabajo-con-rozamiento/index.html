@@ -19,8 +19,6 @@
   margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
 .fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
 .fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
-.doc .widget{margin:16px 0 8px}
-.doc .widget:empty{display:none}
 header.top{display:grid;gap:8px;margin:6px 0 18px}
 .cats{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 22px}
 .cats a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
@@ -33,7 +31,8 @@ header.top{display:grid;gap:8px;margin:6px 0 18px}
   .toc h2{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:0 0 8px}
   .toc ol{list-style:none;margin:0;padding:0;display:grid;gap:6px}
   .toc a{color:var(--ink-2);text-decoration:none;line-height:1.3;display:block}
-  .toc a:hover{color:var(--ink)}}
+  .toc a:hover{color:var(--ink)}
+  .toc .sep{margin-top:8px;font-weight:700;color:var(--ink)}}
 .doc{min-width:0}
 .doc>h2:first-child{border-top:0;margin-top:0;padding-top:0}
 .doc h2{font-size:1.28rem;margin:38px 0 10px;padding-top:16px;border-top:1px solid var(--rule);scroll-margin-top:12px}
@@ -57,16 +56,62 @@ header.top{display:grid;gap:8px;margin:6px 0 18px}
 .grid-cats .n{font:700 1.5rem/44px var(--f-display);text-align:center;border-radius:10px;border:1px solid var(--rule)}
 .grid-cats h3{font-size:1rem;line-height:1.25}
 .grid-cats p{margin:4px 0 0;font-size:13.5px;color:var(--ink-2)}
+/* ejercicios propuestos */
+.metodo{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 14px;font-size:14.5px}
+.metodo ol{margin:6px 0 2px}
+.props{display:grid;gap:14px;margin:14px 0}
+.prop{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:14px 16px;scroll-margin-top:12px}
+.prop .cab{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-bottom:6px}
+.prop .num{font:700 1.05rem var(--f-display)}
+.prop .src{font:600 12px var(--f-mono);color:var(--ink-2);letter-spacing:.02em}
+.tag{font:600 11px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;border:1px solid currentColor;border-radius:999px;padding:1px 7px}
+.tag.nuevo{color:var(--c-n)}
+.tag.sel{color:var(--c-a)}
+.tag.sim{color:var(--c-p)}
+.prop h3{font-size:1rem;margin:0 0 6px;line-height:1.3}
+.prop .enun p{margin:6px 0}
+.prop .fig{margin:10px 0 4px}
+.prop .acc{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;margin-top:10px}
+.prop details{flex:1 1 260px;min-width:0}
+.prop summary{cursor:pointer;font:600 13.5px var(--f-body);color:var(--ink-2);min-height:38px;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rule);border-radius:9px;padding:0 12px;list-style:none}
+.prop summary::-webkit-details-marker{display:none}
+.prop summary::before{content:"▸";font-size:12px}
+.prop details[open] summary::before{content:"▾"}
+.prop details[open] summary{color:var(--ink)}
+.prop details p{background:var(--hl);border-radius:8px;padding:8px 12px;margin:8px 0 0}
+.prop .btn{margin-left:auto}
+@media (max-width:520px){.prop .btn{margin-left:0;width:100%}}
+/* página de solución */
+.enun-box{background:var(--sheet);border:1px solid var(--rule);border-left:4px solid var(--ink);border-radius:12px;padding:12px 16px}
+.enun-box .lbl{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.enun-box p{margin:6px 0}
+.res-box{background:var(--hl);border-radius:12px;padding:10px 16px;margin:14px 0}
+.res-box .lbl{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase}
+.res-box p{margin:4px 0}
+.saltos{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.saltos a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.doc .widget{margin:16px 0 8px}
+.doc .widget:empty{display:none}
+/* índice con resultados ocultos */
+.ver-res{display:inline-flex;align-items:center;gap:8px;font:600 14px var(--f-body);cursor:pointer;margin:4px 0}
+.ver-res input{width:18px;height:18px;accent-color:var(--c-p)}
+.indice td.r{transition:filter .2s}
+.indice td:first-child{white-space:nowrap}
+.indice td small{display:block;color:var(--ink-2);font-size:12px}
+.indice tr.grupo th{background:var(--plane);font-size:14px}
+.indice tr.grupo a{color:inherit}
+.ver-res:has(input:not(:checked)) + .table-wrap td.r{filter:blur(5px);user-select:none}
 .pager{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:40px;border-top:1px solid var(--rule);padding-top:16px}
 .pager a{text-decoration:none;max-width:48%}
+.pager .mid{align-self:center}
 .pager small{display:block;color:var(--ink-2);font-size:12px}
 footer{margin-top:36px;color:var(--ink-2);font-size:13px}
-@media print{.cats,.toc,.pager,.crumbs{display:none}.layout{display:block}.fig,.table-wrap,p.eq{break-inside:avoid}}
+@media print{.cats,.toc,.pager,.crumbs,.widget,.saltos,.prop .btn,.prop summary{display:none}.layout{display:block}.fig,.table-wrap,p.eq,.prop{break-inside:avoid}}
 </style>
 </head>
 <body>
 <div class="page">
-  <nav class="crumbs" aria-label="Ruta"><a href="../../../">Física interactiva</a><span aria-hidden="true">›</span><a href="../">Trabajo, potencia y energía</a><span aria-hidden="true">›</span><span>Trabajo con rozamiento en un plano horizontal</span></nav>
+  <nav class="crumbs" aria-label="Ruta"><a href="../../../">Física interactiva</a><span aria-hidden="true">›</span><a href="../">Trabajo, potencia y energía</a><span aria-hidden="true">›</span><span>Rozamiento</span></nav>
   <header class="top"><div class="eyebrow">Categoría 2</div><h1>Trabajo con rozamiento en un plano horizontal</h1><p class="lead">Fuerza oblicua: primero la normal, después el rozamiento y el trabajo.</p></header>
   <nav class="cats" aria-label="Categorías del tema"><a href="../">Mapa del tema</a><a href="../trabajo-de-una-fuerza/">1 · Trabajo</a><a href="../trabajo-con-rozamiento/" aria-current="page">2 · Rozamiento</a><a href="../energia-cinetica/">3 · Energía cinética</a><a href="../conservacion/">4 · Conservación</a><a href="../muelles/">5 · Muelles</a><a href="../planos-inclinados/">6 · Planos inclinados</a><a href="../potencia-y-rendimiento/">7 · Potencia</a><a href="../cuestiones/">8 · Cuestiones</a></nav>
   <div class="layout">
@@ -91,92 +136,33 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 <li>Trabajo de cada fuerza con W = F·Δs·cos φ.</li>
 <li>Comprobación: la suma de todos los trabajos debe ser igual a ΔEc.</li>
 </ol>
-<h2 id="2-1-teoria-2-bloque-de-5-kg-arrastrado-con-una-fuerza-de-40-">2.1 · Teoría 2 · Bloque de 5 kg arrastrado con una fuerza de 40 N</h2>
-<p class="res"><strong>Resultado:</strong> a) W peso = 0 J · b) W F = 320 J · c) W roz = −200 J.</p>
-<p>Datos: m = 5 kg · F = 40 N paralela al suelo · μ = 0,5 · Δs = 8 m · g = 10 m/s² (la da el enunciado).</p>
-<figure class="fig"><svg viewBox="0 0 760 380" role="img" aria-label="Solo trabajan las fuerzas horizontales: F suma 320 J y el rozamiento resta 200 J" font-size="13"><defs><marker id="w21-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-axis)"></path></marker><marker id="w21-f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-categorical-3)"></path></marker><marker id="w21-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-categorical-4)"></path></marker><marker id="w21-n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-categorical-2)"></path></marker><marker id="w21-p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-categorical-1)"></path></marker></defs><text x="24" y="30" font-size="15" font-weight="600" style="fill:var(--cds-text-primary)">Solo trabajan las fuerzas horizontales: F suma 320 J y el rozamiento resta 200 J</text><text x="24" y="50" font-size="11.5" style="fill:var(--cds-text-secondary)">Teoría 2 · bloque de 5 kg arrastrado 8 m · g = 10 m/s²</text><g><line x1="40" y1="250" x2="720" y2="250" stroke="var(--cds-chart-axis)" stroke-width="1.5"></line></g><g><rect x="300" y="170" width="100" height="80" rx="3" fill="none" stroke-width="1.5" style="stroke:var(--cds-text-primary)"></rect></g><g><line x1="350" y1="210" x2="350" y2="300" stroke="var(--cds-chart-categorical-1)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w21-p)"></line><text x="360" y="298" style="fill:var(--cds-text-primary)">P = 50 N · W = 0</text></g><g><line x1="350" y1="210" x2="350" y2="120" stroke="var(--cds-chart-categorical-2)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w21-n)"></line><text x="360" y="130" style="fill:var(--cds-text-primary)">N = 50 N · W = 0</text></g><g><line x1="400" y1="210" x2="510" y2="210" stroke="var(--cds-chart-categorical-4)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w21-g)"></line><text x="518" y="214" style="fill:var(--cds-text-primary)">F = 40 N · W = +320 J</text></g><g><line x1="300" y1="246" x2="220" y2="246" stroke="var(--cds-chart-categorical-3)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w21-f)"></line><text x="212" y="238" text-anchor="end" style="fill:var(--cds-text-primary)">Fr = μ·N = 25 N</text><text x="212" y="270" text-anchor="end" style="fill:var(--cds-text-primary)">W = −200 J</text></g><g><line x1="100" y1="160" x2="180" y2="160" stroke="var(--cds-chart-axis)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w21-a)"></line><text x="100" y="148" font-size="11.5" style="fill:var(--cds-text-secondary)">movimiento</text></g><g><line x1="300" y1="352" x2="630" y2="352" stroke="var(--cds-chart-axis)" stroke-width="1" marker-start="url(#w21-a)" marker-end="url(#w21-a)"></line><text x="465" y="370" text-anchor="middle" font-size="11.5" style="fill:var(--cds-text-secondary)">Δs = 8 m</text></g></svg><figcaption>Teoría 2 · fuerzas sobre el bloque arrastrado</figcaption></figure>
-<p>Las fuerzas verticales (P y N) no trabajan; F trabaja a favor y el rozamiento en contra.</p>
-<p><strong>Qué herramienta usar.</strong> Se piden trabajos de fuerzas constantes: W = F·Δs·cos φ para cada una. Para el rozamiento hace falta antes N, que sale del eje vertical.</p>
-<p class="sub"><strong>a) Trabajo del peso</strong></p>
-<p class="eq"><strong>W peso = m·g · Δs · cos 90° = 50 · 8 · 0 = 0 J</strong></p>
-<blockquote class="why">
-<p><strong>¿Por qué cos 90°?</strong> El peso es vertical y el bloque se mueve en horizontal: el peso ni ayuda ni frena el movimiento.</p>
-</blockquote>
-<p class="sub"><strong>b) Trabajo de F</strong></p>
-<p class="eq"><strong>W F = F · Δs · cos 0° = 40 · 8 · 1 = 320 J</strong></p>
-<blockquote class="why">
-<p><strong>¿Por qué cos 0°?</strong> F es paralela al suelo y tira en el sentido del movimiento.</p>
-</blockquote>
-<p class="sub"><strong>c) Trabajo del rozamiento</strong></p>
-<p>Eje vertical: <strong>N − m·g = 0 ⟹ N = m·g = 5 · 10 = 50 N</strong></p>
-<blockquote class="why">
-<p><strong>¿Por qué aquí N = m·g?</strong> Porque F es horizontal y no tiene componente vertical: en vertical solo están N y el peso.</p>
-</blockquote>
-<p class="eq"><strong>Fr = μ·N = 0,5 · 50 = 25 N</strong></p>
-<p class="eq"><strong>W roz = Fr · Δs · cos 180° = 25 · 8 · (−1) = −200 J</strong></p>
-<blockquote class="why">
-<p><strong>¿Por qué cos 180°?</strong> El rozamiento siempre va en sentido contrario al movimiento.</p>
-</blockquote>
-<p><strong>Comprobación.</strong> Trabajo total = 0 + 320 − 200 + 0 (la normal tampoco trabaja) = 120 J. Por el teorema de las fuerzas vivas esto es ΔEc: si el bloque salía del reposo, ½·5·v² = 120 ⟹ v = 6,93 m/s. Por dinámica: a = (40 − 25)/5 = 3 m/s² y v² = 2·3·8 = 48 ⟹ v = 6,93 m/s. Los dos métodos coinciden.</p>
-<h2 id="2-2-ejercicios-1-fuerza-de-30-n-a-30-con-0-2-velocidad-y-tra">2.2 · Ejercicios 1 · Fuerza de 30 N a 30° con μ = 0,2: velocidad y trabajo del rozamiento</h2>
-<p class="res"><strong>Resultado:</strong> v = 38,4 m/s a los 10 s · W roz = −1,30·10³ J (−1 304 J).</p>
-<p>Datos: m = 5 kg · F = 30 N a 30° sobre la horizontal · μ = 0,2 · t = 10 s · parte del reposo · g = 9,8 m/s². Se supone que la fuerza tira hacia arriba, como en el dibujo de la página 1 de los apuntes.</p>
-<figure class="fig"><svg viewBox="0 0 760 390" role="img" aria-label="La cuerda tira un poco hacia arriba: N = m·g − Fy, menor que el peso" font-size="13"><defs><marker id="w22-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-axis)"></path></marker><marker id="w22-f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-categorical-3)"></path></marker><marker id="w22-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-categorical-4)"></path></marker><marker id="w22-n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-categorical-2)"></path></marker><marker id="w22-p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-categorical-1)"></path></marker></defs><text x="24" y="30" font-size="15" font-weight="600" style="fill:var(--cds-text-primary)">La cuerda tira un poco hacia arriba: N = m·g − Fy, menor que el peso</text><text x="24" y="50" font-size="11.5" style="fill:var(--cds-text-secondary)">Ejercicios 1 y Repaso 5 · bloque de 5 kg, F = 30 N a 30° · esquema, no a escala</text><g><line x1="40" y1="290" x2="720" y2="290" stroke="var(--cds-chart-axis)" stroke-width="1.5"></line></g><g><rect x="290" y="210" width="110" height="80" rx="3" fill="none" stroke-width="1.5" style="stroke:var(--cds-text-primary)"></rect></g><g><line x1="345" y1="250" x2="457.6" y2="185" stroke="var(--cds-chart-categorical-4)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w22-g)"></line><line x1="345" y1="250" x2="457.6" y2="250" stroke="var(--cds-chart-categorical-4)" stroke-width="2.2" stroke-dasharray="5 4" marker-end="url(#w22-g)"></line><line x1="457.6" y1="250" x2="457.6" y2="185" stroke="var(--cds-chart-categorical-4)" stroke-width="2.2" stroke-dasharray="5 4" marker-end="url(#w22-g)"></line><path d="M383.1 228A44 44 0 0 1 389 250" fill="none" stroke-width="1.25" style="stroke:var(--cds-chart-categorical-4)"></path><text x="403" y="242" font-size="11.5" style="fill:var(--cds-text-primary)">30°</text><text x="467.6" y="181" style="fill:var(--cds-text-primary)">F = 30 N</text><text x="467.6" y="268" style="fill:var(--cds-text-primary)">Fx = F·cos 30° = 26,0 N</text><text x="467.6" y="221.5" style="fill:var(--cds-text-primary)">Fy = F·sen 30° = 15 N</text></g><g><line x1="345" y1="250" x2="345" y2="174" stroke="var(--cds-chart-categorical-2)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w22-n)"></line><text x="335" y="184" text-anchor="end" style="fill:var(--cds-text-primary)">N = 49 − 15 = 34 N</text></g><g><line x1="345" y1="250" x2="345" y2="346" stroke="var(--cds-chart-categorical-1)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w22-p)"></line><text x="355" y="344" style="fill:var(--cds-text-primary)">P = m·g = 49 N</text></g><g><line x1="290" y1="286" x2="220" y2="286" stroke="var(--cds-chart-categorical-3)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w22-f)"></line><text x="212" y="276" text-anchor="end" style="fill:var(--cds-text-primary)">Fr = μ·N</text><text x="212" y="310" text-anchor="end" font-size="11.5" style="fill:var(--cds-text-secondary)">6,8 N (μ = 0,2) o 13,6 N (μ = 0,4)</text></g><g><line x1="70" y1="170" x2="160" y2="170" stroke="var(--cds-chart-axis)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w22-a)"></line><text x="70" y="158" font-size="11.5" style="fill:var(--cds-text-secondary)">parte del reposo y acelera</text></g></svg><figcaption>Ejercicios 1 · fuerza a 30° descompuesta en Fx y Fy</figcaption></figure>
-<p>Fx arrastra el bloque; Fy lo levanta un poco, y por eso el suelo empuja menos: N = 34 N en vez de 49 N.</p>
-<p><strong>Qué herramienta usar.</strong> Piden la velocidad al cabo de un <strong>tiempo</strong>: eso es dinámica y cinemática (la energía no maneja tiempos). Después, el trabajo del rozamiento con W = Fr·Δs·cos 180°, que necesita la distancia recorrida.</p>
-<p class="sub"><strong>Paso 1. Componentes de F</strong></p>
-<p class="eq"><strong>Fx = F·cos 30° = 30 · 0,866 = 25,98 N  Fy = F·sen 30° = 30 · 0,5 = 15 N</strong></p>
-<blockquote class="why">
-<p><strong>¿Por qué?</strong> Fx es la parte que arrastra el bloque; Fy es la parte que tira hacia arriba y «aligera» el bloque contra el suelo.</p>
-</blockquote>
-<p class="sub"><strong>Paso 2. Normal y rozamiento</strong></p>
-<p class="eq"><strong>ΣFy = 0: N + Fy − m·g = 0 ⟹ N = 49 − 15 = 34 N</strong></p>
-<blockquote class="why">
-<p><strong>¿Por qué N no es m·g?</strong> La cuerda sostiene parte del peso (15 N), así que el suelo solo tiene que empujar 34 N hacia arriba.</p>
-</blockquote>
-<p class="eq"><strong>Fr = μ·N = 0,2 · 34 = 6,8 N</strong></p>
-<p class="sub"><strong>Paso 3. Aceleración</strong></p>
-<p class="eq"><strong>ΣFx = m·a: Fx − Fr = m·a ⟹ a = (25,98 − 6,8) / 5 = 3,84 m/s²</strong></p>
-<p class="sub"><strong>Paso 4. Velocidad y distancia a los 10 s (MRUA desde el reposo)</strong></p>
-<p class="eq"><strong>v = a·t = 3,836 · 10 = 38,4 m/s  Δx = ½·a·t² = ½ · 3,836 · 10² = 191,8 m</strong></p>
-<blockquote class="why">
-<p><strong>¿Por qué MRUA?</strong> Las fuerzas son constantes, así que la aceleración también lo es. Usa a sin redondear (3,836) para no arrastrar errores.</p>
-</blockquote>
-<p class="sub"><strong>Paso 5. Trabajo del rozamiento</strong></p>
-<p class="eq"><strong>W roz = Fr · Δx · cos 180° = 6,8 · 191,8 · (−1) = −1 304 J</strong></p>
-<p><strong>Comprobación por energía.</strong> Trabajo de F: Fx·Δx = 25,98 · 191,8 = 4 983 J. Trabajo total = 4 983 − 1 304 = 3 679 J. Energía cinética final: ½ · 5 · 38,36² = 3 679 J. Coinciden, como dice el teorema de las fuerzas vivas.</p>
-<blockquote class="why">
-<p><strong>Si la fuerza empujara hacia abajo</strong> (desde arriba, a 30°), Fy apretaría el bloque contra el suelo: N = 49 + 15 = 64 N, Fr = 12,8 N, a = 2,64 m/s² y v = 26,4 m/s. El mismo enunciado da otro resultado: por eso el diagrama va primero.</p>
-</blockquote>
-<h2 id="2-3-repaso-5-el-mismo-bloque-con-0-4">2.3 · Repaso 5 · El mismo bloque con μ = 0,4</h2>
-<p class="res"><strong>Resultado:</strong> a) a = 2,48 m/s² · b) Δx = 124 m · c) W roz = −1,68·10³ J (−1 684 J) · d) no trabajan el peso, la normal ni la componente vertical de F.</p>
-<p>Datos: m = 5 kg · F = 30 N a 30° hacia arriba · μ = 0,4 · t = 10 s desde el reposo · g = 9,8 m/s². El diagrama es el mismo que en 2.2.</p>
-<p><strong>Qué herramienta usar.</strong> Igual que 2.2: dinámica (ΣF = m·a), cinemática del MRUA y W = F·Δs·cos φ. Solo cambia μ.</p>
-<p class="sub"><strong>a) Aceleración</strong></p>
-<p>Las componentes y la normal no dependen de μ: <strong>Fx = 25,98 N, Fy = 15 N, N = 49 − 15 = 34 N</strong>.</p>
-<p class="eq"><strong>Fr = μ·N = 0,4 · 34 = 13,6 N</strong></p>
-<p class="eq"><strong>a = (Fx − Fr) / m = (25,98 − 13,6) / 5 = 2,48 m/s²</strong></p>
-<blockquote class="why">
-<p><strong>¿Por qué?</strong> Segunda ley de Newton en el eje del movimiento: la fuerza que queda después de restar el rozamiento es la que acelera.</p>
-</blockquote>
-<p class="sub"><strong>b) Desplazamiento a los 10 s</strong></p>
-<p class="eq"><strong>Δx = ½·a·t² = ½ · 2,476 · 10² = 123,8 m ≈ 124 m</strong></p>
-<blockquote class="why">
-<p><strong>¿Por qué sin v₀·t?</strong> «Comienza a moverse» significa que parte del reposo: v₀ = 0.</p>
-</blockquote>
-<p class="sub"><strong>c) Trabajo del rozamiento</strong></p>
-<p class="eq"><strong>W roz = Fr · Δx · cos 180° = 13,6 · 123,8 · (−1) = −1 684 J</strong></p>
-<p class="sub"><strong>d) Fuerzas que no realizan trabajo</strong></p>
-<p>El <strong>peso</strong> y la <strong>normal</strong> son perpendiculares al desplazamiento (φ = 90°, cos 90° = 0). De la fuerza F solo trabaja Fx; su componente vertical Fy tampoco trabaja.</p>
-<blockquote class="why">
-<p><strong>¿Por qué?</strong> Una fuerza perpendicular al movimiento no lo acelera ni lo frena: puede cambiar otras cosas (aquí, cuánto aprieta el bloque contra el suelo), pero no la energía cinética.</p>
-</blockquote>
-<p><strong>Comprobación por energía.</strong> W F = 25,98 · 123,8 = 3 217 J; trabajo total = 3 217 − 1 684 = 1 533 J. Con v = a·t = 24,76 m/s, Ec = ½ · 5 · 24,76² = 1 533 J. Coinciden.</p>
-<p><strong>Comparación con 2.2.</strong> Al duplicar μ, el rozamiento se duplica (de 6,8 a 13,6 N), la aceleración baja de 3,84 a 2,48 m/s² y el bloque recorre menos (124 m frente a 192 m), pero el trabajo del rozamiento es mayor en valor absoluto (1 684 J frente a 1 304 J).</p>
 
+<h2 id="propuestos">Ejercicios propuestos</h2>
+<div class="metodo"><strong>Cómo practicar</strong><ol><li>Lee el enunciado y resuélvelo en la libreta, con el diagrama de fuerzas y las unidades.</li><li>Comprueba el número con «Ver solo el resultado».</li><li>Abre la solución paso a paso para revisar el planteamiento, los signos y el porqué de cada fórmula. Si tiene simulación, cambia los datos y mira qué pasa.</li></ol></div>
+<p>Ejercicios de los apuntes de clase:</p>
+<div class="props"><article class="prop" id="e-2-1"><div class="cab"><span class="num">2.1</span><span class="src">Teoría 2</span><span class="tag sim">Con simulación</span></div>
+<h3>Bloque de 5 kg arrastrado con una fuerza de 40 N</h3><div class="enun"><p>Un bloque de masa m = 5 kg es arrastrado sobre una superficie plana y horizontal tirando de él por medio de una cuerda, que ejerce una fuerza F paralela a la superficie de 40 N. El coeficiente de rozamiento cinético entre el cuerpo y la superficie es 0,5. Calcula el trabajo que realizan las siguientes fuerzas cuando el cuerpo se desplaza 8 m: a) la fuerza peso; b) la fuerza F; c) la fuerza de rozamiento. (Tomar g = 10 m/s².)</p>
+</div><div class="acc"><details><summary>Ver solo el resultado</summary><p>a) W peso = 0 J · b) W F = 320 J · c) W roz = −200 J.</p></details><a class="btn primary" href="2-1/">Solución paso a paso →</a></div></article>
+<article class="prop" id="e-2-2"><div class="cab"><span class="num">2.2</span><span class="src">Ejercicios 1</span><span class="tag sim">Con simulación</span></div>
+<h3>Fuerza de 30 N a 30° con μ = 0,2: velocidad y trabajo del rozamiento</h3><div class="enun"><p>Un cuerpo de 5 kg de masa se mueve sobre un plano horizontal por acción de una fuerza de 30 N, que se aplica al cuerpo formando un ángulo de 30° con la horizontal. El coeficiente de rozamiento es 0,2. Calcula la velocidad del cuerpo después de 10 s de haber sido aplicada la fuerza y el trabajo de la fuerza de fricción durante ese tiempo.</p>
+</div><div class="acc"><details><summary>Ver solo el resultado</summary><p>v = 38,4 m/s a los 10 s · W roz = −1,30·10³ J (−1 304 J).</p></details><a class="btn primary" href="2-2/">Solución paso a paso →</a></div></article>
+<article class="prop" id="e-2-3"><div class="cab"><span class="num">2.3</span><span class="src">Repaso 5</span><span class="tag sim">Con simulación</span></div>
+<h3>El mismo bloque con μ = 0,4</h3><div class="enun"><p>Un cuerpo de 5 kg de masa comienza a moverse sobre un plano horizontal por acción de una fuerza de 30 N que se aplica al cuerpo formando un ángulo de 30° con la horizontal. El coeficiente de rozamiento entre el cuerpo y la superficie es de 0,4. Calcula: a) la aceleración; b) el desplazamiento realizado por el cuerpo a los 10 s de haber sido aplicada la fuerza; c) el trabajo realizado por la fuerza de rozamiento; d) ¿qué fuerza o fuerzas no realizan trabajo? ¿Por qué?</p>
+</div><div class="acc"><details><summary>Ver solo el resultado</summary><p>a) a = 2,48 m/s² · b) Δx = 124 m · c) W roz = −1,68·10³ J (−1 684 J) · d) no trabajan el peso, la normal ni la componente vertical de F.</p></details><a class="btn primary" href="2-3/">Solución paso a paso →</a></div></article></div>
+<h2 id="practicar-mas">Para practicar más</h2>
+<p>Ejercicios nuevos del mismo tipo, con la solución completa.</p>
+<div class="props"><article class="prop" id="e-2-4"><div class="cab"><span class="num">2.4</span><span class="tag nuevo">Nuevo</span><span class="tag sim">Con simulación</span></div>
+<h3>Empujar hacia abajo un bloque de 10 kg con 60 N a 30°</h3><div class="enun"><p>Un bloque de 10 kg en reposo sobre un suelo horizontal se empuja con una fuerza de 60 N dirigida hacia abajo, formando 30° con la horizontal (como cuando se empuja un carro desde arriba). El coeficiente de rozamiento es 0,25. Cuando el bloque ha recorrido 5 m, calcula: a) la fuerza normal y la de rozamiento; b) el trabajo de cada fuerza; c) la velocidad del bloque. d) ¿Qué cambiaría si la misma fuerza tirase hacia arriba con el mismo ángulo?</p>
+</div><div class="acc"><details><summary>Ver solo el resultado</summary><p>a) N = 128 N y Fr = 32 N · b) W F = 260 J, W roz = −160 J, W P = W N = 0 · c) v = 4,47 m/s · d) tirando hacia arriba N = 68 N, Fr = 17 N y el trabajo total sería 175 J en lugar de 100 J.</p></details><a class="btn primary" href="2-4/">Solución paso a paso →</a></div></article>
+<article class="prop" id="e-2-5"><div class="cab"><span class="num">2.5</span><span class="tag nuevo">Nuevo</span><span class="tag sim">Con simulación</span></div>
+<h3>Trineo de 30 kg arrastrado con velocidad constante</h3><div class="enun"><p>Un niño arrastra un trineo de 30 kg sobre un suelo horizontal tirando de una cuerda que forma 20° con la horizontal, con una fuerza de 100 N. El trineo avanza con velocidad constante. Calcula: a) el coeficiente de rozamiento; b) el trabajo que realiza cada fuerza en un recorrido de 15 m; c) el trabajo total. Interprétalo.</p>
+</div><div class="acc"><details><summary>Ver solo el resultado</summary><p>a) μ = 0,362 · b) W F = 1,41·10³ J, W roz = −1,41·10³ J, W P = W N = 0 · c) W total = 0: la energía cinética no cambia.</p></details><a class="btn primary" href="2-5/">Solución paso a paso →</a></div></article>
+<article class="prop" id="e-2-6"><div class="cab"><span class="num">2.6</span><span class="tag nuevo">Nuevo</span><span class="tag sim">Con simulación</span></div>
+<h3>Empujar 4 m y soltar: distancia hasta pararse</h3><div class="enun"><p>Un bloque de 4 kg, inicialmente en reposo sobre un suelo horizontal, se empuja con una fuerza horizontal de 30 N durante 4 m. Después se deja de empujar y el bloque sigue deslizando hasta pararse. El coeficiente de rozamiento es 0,3. Calcula: a) la velocidad del bloque cuando se deja de empujar; b) la distancia que recorre después hasta pararse; c) el trabajo total realizado por el rozamiento en todo el recorrido. ¿Por qué vale lo mismo que el trabajo de la fuerza, cambiado de signo?</p>
+</div><div class="acc"><details><summary>Ver solo el resultado</summary><p>a) v = 6,04 m/s · b) 6,20 m más (10,2 m en total) · c) W roz = −120 J, igual que el trabajo de F (120 J) con signo contrario, porque el bloque empieza y acaba parado.</p></details><a class="btn primary" href="2-6/">Solución paso a paso →</a></div></article></div>
     <nav class="pager" aria-label="Anterior y siguiente"><a href="../trabajo-de-una-fuerza/"><small>Anterior</small>Trabajo de una fuerza</a><a href="../energia-cinetica/" style="text-align:right"><small>Siguiente</small>Energía cinética: teorema de las fuerzas vivas</a></nav>
     </main>
-    <aside class="toc" aria-label="En esta página"><h2>En esta página</h2><ol><li><a href="#idea-clave-primero-el-diagrama-despues-la-normal-despues-el-">Idea clave: primero el diagrama, después la normal, después el rozamiento</a></li><li><a href="#2-1-teoria-2-bloque-de-5-kg-arrastrado-con-una-fuerza-de-40-">2.1 · Teoría 2 · Bloque de 5 kg arrastrado con una fuerza de 40 N</a></li><li><a href="#2-2-ejercicios-1-fuerza-de-30-n-a-30-con-0-2-velocidad-y-tra">2.2 · Ejercicios 1 · Fuerza de 30 N a 30° con μ = 0,2: velocidad y trabajo del rozamiento</a></li><li><a href="#2-3-repaso-5-el-mismo-bloque-con-0-4">2.3 · Repaso 5 · El mismo bloque con μ = 0,4</a></li></ol></aside>
+    <aside class="toc" aria-label="En esta página"><h2>En esta página</h2><ol><li><a href="#idea-clave-primero-el-diagrama-despues-la-normal-despues-el-">Idea clave: primero el diagrama, después la normal, después el rozamiento</a></li><li class="sep"><a href="#propuestos">Ejercicios propuestos</a></li><li><a href="#e-2-1">2.1 · Teoría 2</a></li><li><a href="#e-2-2">2.2 · Ejercicios 1</a></li><li><a href="#e-2-3">2.3 · Repaso 5</a></li><li class="sep"><a href="#practicar-mas">Para practicar más</a></li><li><a href="#e-2-4">2.4 · Nuevo</a></li><li><a href="#e-2-5">2.5 · Nuevo</a></li><li><a href="#e-2-6">2.6 · Nuevo</a></li></ol></aside>
   </div>
   <footer>Material de estudio. Si el enunciado no da g, se usa 9,8 m/s². Para imprimir, usa la opción de imprimir del navegador.</footer>
 </div>
