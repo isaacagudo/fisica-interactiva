@@ -18,7 +18,7 @@ src/                               Fuentes y scripts para generar las páginas
     contenido/00-mapa.md           Mapa del tema (herramientas, índice, formulario, errores)
     contenido/NN-<categoría>.md    Idea clave y ejercicios de cada categoría (enunciado, resultado, solución, simulación)
     diagramas/*.jsx                Diagramas de fuerzas y figuras de los enunciados (SVG en JSX), uno por fichero
-    build.js                       Genera el mapa, las 8 categorías y una página de solución por ejercicio
+    build.js                       Genera el mapa, las 8 categorías, la sección de ejercicios y una página de solución por ejercicio
   ejercicio-4/
     content.js                     Texto de los 10 pasos, con fórmulas en TeX ($…$ y $$…$$)
     template.html                  Escenario animado, estilos y lógica de pasos
@@ -40,10 +40,10 @@ src/                               Fuentes y scripts para generar las páginas
 
 ```sh
 cd src && npm install
-node energia/build.js            # mapa, 8 categorías y 67 páginas de solución
+node energia/build.js            # mapa, 8 apartados, sección de ejercicios y sus soluciones
 ```
 
-Cada categoría es un fichero de `src/energia/contenido/`. Arriba, la cabecera (`slug`, `titulo`, `nombre`, `corto`, `eyebrow`, `desc`) entre dos líneas `---`; después, el Markdown de la idea clave, y después un bloque por ejercicio:
+Cada categoría es un fichero de `src/energia/contenido/`. Arriba, la cabecera (`slug`, `titulo`, `nombre`, `corto`, `eyebrow`, `desc` y `resueltos`, la lista de ejemplos que se resuelven en la propia página del apartado) entre dos líneas `---`; después, el Markdown de la idea clave, y después un bloque por ejercicio:
 
 ```
 === 5.1 | Teoría 12 | Bola de 100 g que cae 2 m sobre un resorte
@@ -61,7 +61,7 @@ widget: muelle {"escenario": "vertical", "m": 0.1, "h": 2, "k": 1607}
 … (texto antes de la simulación)
 ```
 
-La segunda columna es el origen: `Teoría n`, `Ejercicios n`, `Cuestiones n`, `Repaso n`, `Selectividad n` o `Nuevo` (ejercicios para practicar más). En la página de la categoría cada ejercicio sale como propuesto: enunciado, «Ver solo el resultado» y un enlace a su solución (`temas/energia/<categoría>/5-1/`), que lleva el enunciado, la resolución y la simulación. «ejercicio 2.1» en cualquier texto se enlaza solo con esa solución. Las fórmulas van en Unicode (sin TeX), así que las páginas se ven también en la vista rápida del iPad.
+La segunda columna es el origen: `Teoría n`, `Ejercicios n`, `Cuestiones n`, `Repaso n`, `Selectividad n` o `Nuevo` (ejercicios para practicar más). La página de cada apartado lleva la idea clave, los ejemplos de `resueltos` con su solución y su simulación, y un enlace a sus ejercicios. Todos los demás van a la sección común `temas/energia/ejercicios/`, agrupados por temática: enunciado, «Ver solo el resultado» y enlace a su solución (`temas/energia/ejercicios/5-3/`), con el enunciado, la resolución y la simulación. «ejercicio 2.1» en cualquier texto se enlaza solo con esa solución. Las fórmulas van en Unicode (sin TeX), así que las páginas se ven también en la vista rápida del iPad.
 
 ## Simulaciones (`assets/widgets/`)
 

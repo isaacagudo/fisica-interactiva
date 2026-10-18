@@ -24,6 +24,8 @@ header.top{display:grid;gap:8px;margin:6px 0 18px}
 .cats a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
 .cats a:hover{border-color:var(--ink-2);color:var(--ink)}
 .cats a[aria-current="page"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+.cats a.ej{border-color:var(--c-p);color:var(--c-p)}
+.cats a.ej[aria-current="page"]{background:var(--c-p);color:var(--sheet)}
 .layout{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
 @media (min-width:1000px){.layout{grid-template-columns:minmax(0,760px) 1fr}}
 .toc{display:none}
@@ -81,6 +83,22 @@ header.top{display:grid;gap:8px;margin:6px 0 18px}
 .prop details p{background:var(--hl);border-radius:8px;padding:8px 12px;margin:8px 0 0}
 .prop .btn{margin-left:auto}
 @media (max-width:520px){.prop .btn{margin-left:0;width:100%}}
+/* ejemplos resueltos dentro de cada apartado */
+.ejemplo{margin:18px 0 0;padding-top:4px}
+.ejemplo>h3{font-size:1.12rem;margin:30px 0 10px;scroll-margin-top:12px}
+.ejemplo>h3 .src{font:600 12px var(--f-mono);color:var(--ink-2);margin-left:6px}
+.ejemplo h4{font:700 .82rem var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:22px 0 6px}
+.ejemplo+.ejemplo{border-top:1px dashed var(--rule);margin-top:30px}
+.ir-ej{display:grid;gap:8px;background:var(--sheet);border:1px solid var(--c-p);border-radius:12px;padding:14px 16px;margin:14px 0}
+.ir-ej p{margin:0}
+.ir-ej .lista{font-size:14px;color:var(--ink-2);margin:0;padding-left:0;list-style:none;display:grid;gap:3px}
+.ir-ej .lista .tag{font-size:10px;padding:0 6px}
+.ir-ej .btn{justify-self:start}
+.grupo-ej{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 12px}
+.grupo-ej a{font-size:14px}
+.filtro{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.filtro a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.filtro a:hover{border-color:var(--ink-2);color:var(--ink)}
 /* página de solución */
 .enun-box{background:var(--sheet);border:1px solid var(--rule);border-left:4px solid var(--ink);border-radius:12px;padding:12px 16px}
 .enun-box .lbl{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
@@ -113,7 +131,7 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 <div class="page">
   <nav class="crumbs" aria-label="Ruta"><a href="../../../">Física interactiva</a><span aria-hidden="true">›</span><a href="../">Trabajo, potencia y energía</a><span aria-hidden="true">›</span><span>Trabajo</span></nav>
   <header class="top"><div class="eyebrow">Categoría 1</div><h1>Trabajo de una fuerza</h1><p class="lead">Con módulos y ángulo o con vectores: el producto escalar y el signo del trabajo.</p></header>
-  <nav class="cats" aria-label="Categorías del tema"><a href="../">Mapa del tema</a><a href="../trabajo-de-una-fuerza/" aria-current="page">1 · Trabajo</a><a href="../trabajo-con-rozamiento/">2 · Rozamiento</a><a href="../energia-cinetica/">3 · Energía cinética</a><a href="../conservacion/">4 · Conservación</a><a href="../muelles/">5 · Muelles</a><a href="../planos-inclinados/">6 · Planos inclinados</a><a href="../potencia-y-rendimiento/">7 · Potencia</a><a href="../cuestiones/">8 · Cuestiones</a></nav>
+  <nav class="cats" aria-label="Categorías del tema"><a href="../">Mapa del tema</a><a class="ej" href="../ejercicios/">Ejercicios</a><a href="../trabajo-de-una-fuerza/" aria-current="page">1 · Trabajo</a><a href="../trabajo-con-rozamiento/">2 · Rozamiento</a><a href="../energia-cinetica/">3 · Energía cinética</a><a href="../conservacion/">4 · Conservación</a><a href="../muelles/">5 · Muelles</a><a href="../planos-inclinados/">6 · Planos inclinados</a><a href="../potencia-y-rendimiento/">7 · Potencia</a><a href="../cuestiones/">8 · Cuestiones</a></nav>
   <div class="layout">
     <main class="doc">
 <h2 id="idea-clave-el-trabajo-de-una-fuerza-constante">Idea clave: el trabajo de una fuerza constante</h2>
@@ -176,37 +194,78 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 <li>Comprobación: cos φ = W / (|F|·|Δr|) da el ángulo; debe cuadrar con el signo.</li>
 </ol>
 
-<h2 id="propuestos">Ejercicios propuestos</h2>
-<div class="metodo"><strong>Cómo practicar</strong><ol><li>Lee el enunciado y resuélvelo en la libreta, con el diagrama de fuerzas y las unidades.</li><li>Comprueba el número con «Ver solo el resultado».</li><li>Abre la solución paso a paso para revisar el planteamiento, los signos y el porqué de cada fórmula. Si tiene simulación, cambia los datos y mira qué pasa.</li></ol></div>
-<p>Ejercicios de los apuntes de clase:</p>
-<div class="props"><article class="prop" id="e-1-1"><div class="cab"><span class="num">1.1</span><span class="src">Teoría 1</span><span class="tag sim">Con simulación</span></div>
-<h3>Trabajo de F = 3i − 5j de A(−2, 1) a B(4, 3)</h3><div class="enun"><p>Un cuerpo se desplaza desde el punto A(−2, 1) m hasta el B(4, 3) m. Sobre él actúa una fuerza constante <strong>F = 3i − 5j N</strong>. ¿Qué trabajo realiza la fuerza F en el citado desplazamiento?</p>
-</div><div class="acc"><details><summary>Ver solo el resultado</summary><p>W = 8 J.</p></details><a class="btn primary" href="1-1/">Solución paso a paso →</a></div></article>
-<article class="prop" id="e-1-2"><div class="cab"><span class="num">1.2</span><span class="src">Ejercicios 3</span><span class="tag sim">Con simulación</span></div>
-<h3>Trabajo de F = 30i − 20j de A(−6, 2) a B(4, 10)</h3><div class="enun"><p>Calcula el trabajo realizado por la fuerza <strong>F = 30i − 20j (N)</strong> cuando su punto de aplicación se desplaza desde el punto A(−6, 2) al B(4, 10) m.</p>
-</div><div class="acc"><details><summary>Ver solo el resultado</summary><p>W = 140 J.</p></details><a class="btn primary" href="1-2/">Solución paso a paso →</a></div></article>
-<article class="prop" id="e-1-3"><div class="cab"><span class="num">1.3</span><span class="src">Repaso 2</span><span class="tag sim">Con simulación</span></div>
-<h3>Trabajo de F = −5i + 9j de A(−5, 3) a B(−3, −8)</h3><div class="enun"><p>Calcula el trabajo realizado por la fuerza <strong>F = −5i + 9j N</strong> cuando su punto de aplicación se desplaza desde el punto A(−5, 3) al B(−3, −8) m.</p>
-</div><div class="acc"><details><summary>Ver solo el resultado</summary><p>W = −109 J (la fuerza se opone al desplazamiento).</p></details><a class="btn primary" href="1-3/">Solución paso a paso →</a></div></article>
-<article class="prop" id="e-1-4"><div class="cab"><span class="num">1.4</span><span class="src">Teoría 3</span><span class="tag sim">Con simulación</span></div>
-<h3>Subir 50 kg a 18 m con una polea a velocidad constante</h3><div class="enun"><p>Calcula el trabajo realizado por un hombre que levanta mediante una polea y con velocidad constante una carga de 50 kg hasta una altura de 18 m. ¿Qué trabajo realiza la fuerza peso?</p>
-</div><div class="acc"><details><summary>Ver solo el resultado</summary><p>el hombre hace W = 8 820 J y el peso hace W = −8 820 J (con g = 10 m/s² saldrían 9 000 J y −9 000 J).</p></details><a class="btn primary" href="1-4/">Solución paso a paso →</a></div></article></div>
-<h2 id="practicar-mas">Para practicar más</h2>
-<p>Ejercicios nuevos del mismo tipo, con la solución completa.</p>
-<div class="props"><article class="prop" id="e-1-5"><div class="cab"><span class="num">1.5</span><span class="tag nuevo">Nuevo</span><span class="tag sim">Con simulación</span></div>
-<h3>Trabajo de F = 4i + 3j de A(1, −2) a B(−3, 5)</h3><div class="enun"><p>Una fuerza constante <strong>F = 4i + 3j N</strong> actúa sobre un cuerpo que se desplaza desde el punto A(1, −2) m hasta el punto B(−3, 5) m. Calcula: a) el trabajo que realiza la fuerza; b) el ángulo que forman la fuerza y el desplazamiento.</p>
-</div><div class="acc"><details><summary>Ver solo el resultado</summary><p>a) W = 5 J · b) φ = 82,9°.</p></details><a class="btn primary" href="1-5/">Solución paso a paso →</a></div></article>
-<article class="prop" id="e-1-6"><div class="cab"><span class="num">1.6</span><span class="tag nuevo">Nuevo</span><span class="tag sim">Con simulación</span></div>
-<h3>Subir una caja de 20 kg a 1,2 m por una rampa de 3 m</h3><div class="enun"><p>Para subir una caja de 20 kg a la plataforma de un camión, que está a 1,2 m del suelo, se empuja por una rampa de 3 m de largo, con velocidad constante y sin rozamiento. Calcula: a) la fuerza paralela a la rampa que hay que hacer y su trabajo; b) el trabajo del peso; c) la fuerza y el trabajo si la caja se subiera en vertical, también con velocidad constante. ¿Qué ventaja tiene la rampa?</p>
-</div><div class="acc"><details><summary>Ver solo el resultado</summary><p>a) F = 78,4 N y W F = 235 J · b) W peso = −235 J · c) en vertical F = 196 N y W = 235 J: el mismo trabajo con menos fuerza.</p></details><a class="btn primary" href="1-6/">Solución paso a paso →</a></div></article>
-<article class="prop" id="e-1-7"><div class="cab"><span class="num">1.7</span><span class="tag nuevo">Nuevo</span><span class="tag sim">Con simulación</span></div>
-<h3>Trabajo nulo y trabajo negativo con F = 6i + 2j</h3><div class="enun"><p>Sobre un cuerpo actúa una fuerza constante <strong>F = 6i + 2j N</strong>. Calcula el trabajo que realiza: a) cuando el cuerpo va del punto A(2, 1) m al B(5, −8) m; b) cuando va de A al punto C(−1, 3) m. c) Interpreta el signo de cada resultado y calcula el ángulo entre F y el desplazamiento en cada caso.</p>
-</div><div class="acc"><details><summary>Ver solo el resultado</summary><p>a) W = 0 J (F es perpendicular al desplazamiento, φ = 90°) · b) W = −14 J (φ = 128°: F se opone al movimiento).</p></details><a class="btn primary" href="1-7/">Solución paso a paso →</a></div></article></div>
+<h2 id="ejemplos">Ejemplos resueltos</h2>
+<p>Dos ejercicios de los apuntes resueltos paso a paso, con su simulación: léelos antes de pasar a los ejercicios.</p>
+<section class="ejemplo"><h3 id="ej-1-1">1.1 · Trabajo de F = 3i − 5j de A(−2, 1) a B(4, 3)<span class="src">Teoría 1</span></h3>
+<div class="enun-box"><div class="lbl">Enunciado</div><p>Un cuerpo se desplaza desde el punto A(−2, 1) m hasta el B(4, 3) m. Sobre él actúa una fuerza constante <strong>F = 3i − 5j N</strong>. ¿Qué trabajo realiza la fuerza F en el citado desplazamiento?</p>
+</div><div class="res-box"><div class="lbl">Resultado</div><p>W = 8 J.</p></div>
+<h4>Solución paso a paso</h4>
+<p>Datos: F⃗ = 3i − 5j N · A(−2, 1) m · B(4, 3) m.</p>
+<figure class="fig"><svg viewBox="0 0 760 466" role="img" aria-label="La fuerza forma 77,5° con el desplazamiento: trabajo positivo pero pequeño" font-size="13"><defs><marker id="w11-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-axis)"></path></marker><marker id="w11-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-categorical-4)"></path></marker><marker id="w11-i" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-text-primary)"></path></marker></defs><text x="24" y="30" font-size="15" font-weight="600" style="fill:var(--cds-text-primary)">La fuerza forma 77,5° con el desplazamiento: trabajo positivo pero pequeño</text><text x="24" y="50" font-size="11.5" style="fill:var(--cds-text-secondary)">Teoría 1 · posiciones en metros, fuerza en newtons (dibujada a otra escala)</text><g><line x1="36" y1="87.2" x2="36" y2="444.4" stroke="var(--cds-chart-grid)" stroke-width="1"></line><line x1="74" y1="87.2" x2="74" y2="444.4" stroke="var(--cds-chart-grid)" stroke-width="1"></line><line x1="112" y1="87.2" x2="112" y2="444.4" stroke="var(--cds-chart-grid)" stroke-width="1"></line><line x1="150" y1="87.2" x2="150" y2="444.4" stroke="var(--cds-chart-grid)" stroke-width="1"></line><line x1="188" y1="87.2" x2="188" y2="444.4" stroke="var(--cds-chart-grid)" stroke-width="1"></line><line x1="226" y1="87.2" x2="226" y2="444.4" stroke="var(--cds-chart-grid)" stroke-width="1"></line><line x1="264" y1="87.2" x2="264" y2="444.4" stroke="var(--cds-chart-grid)" stroke-width="1"></line><line x1="302" y1="87.2" x2="302" y2="444.4" stroke="var(--cds-chart-grid)" stroke-width="1"></line><line x1="340" y1="87.2" x2="340" y2="444.4" stroke="var(--cds-chart-grid)" stroke-width="1"></line><line x1="378" y1="87.2" x2="378" y2="444.4" stroke="var(--cds-chart-grid)" stroke-width="1"></line><line x1="20.8" y1="414" x2="400.8" y2="414" stroke="var(--cds-chart-grid)" stroke-width="1"></line><line x1="20.8" y1="376" x2="400.8" y2="376" stroke="var(--cds-chart-grid)" stroke-width="1"></line><line x1="20.8" y1="338" x2="400.8" y2="338" stroke="var(--cds-chart-grid)" stroke-width="1"></line><line x1="20.8" y1="300" x2="400.8" y2="300" stroke="var(--cds-chart-grid)" stroke-width="1"></line><line x1="20.8" y1="262" x2="400.8" y2="262" stroke="var(--cds-chart-grid)" stroke-width="1"></line><line x1="20.8" y1="224" x2="400.8" y2="224" stroke="var(--cds-chart-grid)" stroke-width="1"></line><line x1="20.8" y1="186" x2="400.8" y2="186" stroke="var(--cds-chart-grid)" stroke-width="1"></line><line x1="20.8" y1="148" x2="400.8" y2="148" stroke="var(--cds-chart-grid)" stroke-width="1"></line><line x1="20.8" y1="110" x2="400.8" y2="110" stroke="var(--cds-chart-grid)" stroke-width="1"></line><line x1="20.8" y1="262" x2="408.4" y2="262" stroke="var(--cds-chart-axis)" stroke-width="1.25" marker-end="url(#w11-a)"></line><line x1="150" y1="444.4" x2="150" y2="79.6" stroke="var(--cds-chart-axis)" stroke-width="1.25" marker-end="url(#w11-a)"></line><text x="408.4" y="280" text-anchor="end" font-size="11.5" style="fill:var(--cds-text-secondary)">x (m)</text><text x="158" y="89.6" font-size="11.5" style="fill:var(--cds-text-secondary)">y (m)</text></g><g><line x1="74" y1="224" x2="302" y2="148" stroke="var(--cds-text-primary)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w11-i)"></line><text x="178" y="164" text-anchor="middle" font-weight="600" style="fill:var(--cds-text-primary)">Δr = 6i + 2j</text></g><g><line x1="74" y1="224" x2="188" y2="414" stroke="var(--cds-chart-categorical-4)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w11-g)"></line><text x="198" y="418" font-weight="600" style="fill:var(--cds-text-primary)">F = 3i − 5j</text></g><g><circle cx="74" cy="224" r="4" stroke-width="1.5" style="fill:var(--cds-text-primary);stroke:var(--cds-text-primary)"></circle><circle cx="302" cy="148" r="4" stroke-width="1.5" style="fill:var(--cds-text-primary);stroke:var(--cds-text-primary)"></circle><text x="66" y="216" text-anchor="end" style="fill:var(--cds-text-primary)">A(−2, 1)</text><text x="310" y="140" style="fill:var(--cds-text-primary)">B(4, 3)</text></g><g><path d="M106.3 213.2A34 34 0 0 1 91.5 253.2" fill="none" stroke-width="1.25" style="stroke:var(--cds-text-primary)"></path><text x="125.3" y="243.3" font-size="11.5" style="fill:var(--cds-text-primary)">φ = 77,5°</text></g><g><text x="470" y="120" font-weight="600" style="fill:var(--cds-text-primary)">W = F · Δr</text><text x="470" y="146" style="fill:var(--cds-text-primary)">= 3 · 6 + (−5) · 2</text><text x="470" y="172" font-weight="600" style="fill:var(--cds-text-primary)">= 18 − 10 = 8 J</text><text x="470" y="214" font-size="11.5" style="fill:var(--cds-text-secondary)">φ menor que 90°  ⟹  W positivo</text><text x="470" y="234" font-size="11.5" style="fill:var(--cds-text-secondary)">La componente x de F ayuda (+18 J);</text><text x="470" y="252" font-size="11.5" style="fill:var(--cds-text-secondary)">la componente y se opone (−10 J).</text></g></svg><figcaption>Teoría 1 · F, Δr y el ángulo entre ellos</figcaption></figure>
+<p>La fuerza apunta hacia abajo a la derecha y el cuerpo sube a la derecha: forman 77,5°, así que el trabajo es positivo pero pequeño.</p>
+<p><strong>Qué herramienta usar.</strong> La fuerza y las posiciones vienen dadas con vectores, así que se usa el producto escalar. No hace falta conocer el ángulo.</p>
+<p class="sub"><strong>Paso 1. Desplazamiento</strong></p>
+<p class="eq"><strong>Δr⃗ = r⃗B − r⃗A = [4 − (−2)] i + (3 − 1) j = 6i + 2j m</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué?</strong> El desplazamiento va del punto inicial al final: se resta la posición inicial a la final, componente a componente. Cuidado con el doble signo: 4 − (−2) = 4 + 2 = 6.</p>
+</blockquote>
+<p class="sub"><strong>Paso 2. Producto escalar</strong></p>
+<p class="eq"><strong>W = F⃗ · Δr⃗ = 3 · 6 + (−5) · 2 = 18 − 10 = 8 J</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué?</strong> Se multiplica la componente x de la fuerza por la componente x del desplazamiento, lo mismo con y, y se suman. El resultado es un número (una energía), sin i ni j.</p>
+</blockquote>
+<p><strong>Comprobación con el ángulo.</strong> |F| = √(3² + 5²) = √34 = 5,83 N y |Δr| = √(6² + 2²) = √40 = 6,32 m.</p>
+<p class="eq"><strong>cos φ = W / (|F|·|Δr|) = 8 / (5,83 · 6,32) = 0,217 ⟹ φ = 77,5°</strong></p>
+<p>El ángulo es menor de 90°, así que el trabajo debe ser positivo, y lo es. Es pequeño porque la fuerza va casi perpendicular al desplazamiento.</p>
+<blockquote class="why">
+<p><strong>Ojo con un error frecuente.</strong> A veces se escribe (3i − 5j)·(6, 4) = 18i − 20j = −2j. Tiene dos fallos: Δy = 3 − 1 = 2, no 4; y el producto escalar no lleva i ni j, porque se suman los productos. Lo correcto es W = 8 J.</p>
+</blockquote>
+
+<h4>Simulación</h4>
+<p>En la simulación el cuerpo va de A a B y el trabajo se va sumando. Cambia las componentes de F o el punto B y comprueba el signo del resultado.</p>
+
+<div class="widget" data-widget="vectores" data-config='{"titulo":"Simulación · 1.1 · Teoría 1","Fx":3,"Fy":-5,"Ax":-2,"Ay":1,"Bx":4,"By":3}'></div></section>
+<section class="ejemplo"><h3 id="ej-1-4">1.4 · Subir 50 kg a 18 m con una polea a velocidad constante<span class="src">Teoría 3</span></h3>
+<div class="enun-box"><div class="lbl">Enunciado</div><p>Calcula el trabajo realizado por un hombre que levanta mediante una polea y con velocidad constante una carga de 50 kg hasta una altura de 18 m. ¿Qué trabajo realiza la fuerza peso?</p>
+</div><div class="res-box"><div class="lbl">Resultado</div><p>el hombre hace W = 8 820 J y el peso hace W = −8 820 J (con g = 10 m/s² saldrían 9 000 J y −9 000 J).</p></div>
+<h4>Solución paso a paso</h4>
+<p>Datos: m = 50 kg · h = 18 m · velocidad constante · g = 9,8 m/s² (el enunciado no la da).</p>
+<figure class="fig"><svg viewBox="0 0 760 470" role="img" aria-label="A velocidad constante la tensión iguala al peso y sus trabajos se anulan" font-size="13"><defs><marker id="w14-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-axis)"></path></marker><marker id="w14-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-categorical-4)"></path></marker><marker id="w14-p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-categorical-1)"></path></marker></defs><text x="24" y="30" font-size="15" font-weight="600" style="fill:var(--cds-text-primary)">A velocidad constante la tensión iguala al peso y sus trabajos se anulan</text><text x="24" y="50" font-size="11.5" style="fill:var(--cds-text-secondary)">Teoría 3 · carga de 50 kg subida 18 m con una polea fija · esquema, no a escala</text><g><line x1="160" y1="74" x2="300" y2="74" stroke="var(--cds-chart-axis)" stroke-width="2"></line><line x1="230" y1="74" x2="230" y2="110" stroke="var(--cds-chart-axis)" stroke-width="1.25"></line><circle cx="230" cy="110" r="24" stroke-width="1.5" style="fill:var(--cds-chart-reference-tint);stroke:var(--cds-chart-axis)"></circle><circle cx="230" cy="110" r="3" stroke-width="1" style="fill:var(--cds-chart-axis);stroke:var(--cds-chart-axis)"></circle><line x1="206" y1="110" x2="206" y2="330" stroke="var(--cds-text-primary)" stroke-width="1.25"></line><line x1="254" y1="110" x2="254" y2="300" stroke="var(--cds-text-primary)" stroke-width="1.25"></line></g><g><rect x="174" y="330" width="64" height="52" rx="3" fill="none" stroke-width="1.5" style="stroke:var(--cds-text-primary)"></rect><rect x="174" y="160" width="64" height="52" rx="3" fill="none" stroke-width="1.25" stroke-dasharray="4 4" style="stroke:var(--cds-chart-axis)"></rect><text x="166" y="190" text-anchor="end" font-size="11.5" style="fill:var(--cds-text-secondary)">posición final</text></g><g><line x1="206" y1="356" x2="206" y2="266" stroke="var(--cds-chart-categorical-4)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w14-g)"></line><text x="196" y="280" text-anchor="end" style="fill:var(--cds-text-primary)">T = 490 N</text><line x1="206" y1="356" x2="206" y2="446" stroke="var(--cds-chart-categorical-1)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w14-p)"></line><text x="216" y="440" style="fill:var(--cds-text-primary)">P = m·g = 490 N</text></g><g><line x1="96" y1="380" x2="96" y2="214" stroke="var(--cds-chart-axis)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w14-a)"></line><text x="88" y="300" text-anchor="end" font-size="11.5" style="fill:var(--cds-text-secondary)">Δs = 18 m</text></g><g><circle cx="254" cy="306" r="7" fill="none" stroke-width="1.5" style="stroke:var(--cds-text-primary)"></circle><line x1="268" y1="250" x2="268" y2="320" stroke="var(--cds-chart-categorical-4)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w14-g)"></line><text x="278" y="272" font-size="11.5" style="fill:var(--cds-text-secondary)">el hombre tira</text><text x="278" y="288" font-size="11.5" style="fill:var(--cds-text-secondary)">con 490 N</text></g><g><text x="420" y="150" font-weight="600" style="fill:var(--cds-text-primary)">ΣF = 0  ⟹  T = m·g = 490 N</text><text x="420" y="192" style="fill:var(--cds-text-primary)">W hombre = 490 · 18 · cos 0° = +8 820 J</text><text x="420" y="220" style="fill:var(--cds-text-primary)">W peso = 490 · 18 · cos 180° = −8 820 J</text><text x="420" y="262" font-weight="600" style="fill:var(--cds-text-primary)">W total = 0 J  ⟹  Ec no cambia</text><text x="420" y="290" font-size="11.5" style="fill:var(--cds-text-secondary)">La carga gana Ep = m·g·h = 8 820 J</text></g></svg><figcaption>Teoría 3 · fuerzas sobre la carga de la polea</figcaption></figure>
+<p>Sobre la carga, la tensión (hacia arriba) y el peso (hacia abajo) son iguales porque sube a velocidad constante.</p>
+<p><strong>Qué herramienta usar.</strong> «Velocidad constante» es la pista: la aceleración es cero, así que por la segunda ley de Newton las fuerzas se compensan. Primero dinámica para saber cuánto vale la fuerza del hombre; después W = F·Δs·cos φ para cada fuerza.</p>
+<p class="sub"><strong>Paso 1. Fuerza que hace el hombre</strong></p>
+<p class="eq"><strong>ΣF = m·a = 0 ⟹ T − m·g = 0 ⟹ T = m·g = 50 · 9,8 = 490 N</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué?</strong> Sobre la carga actúan la tensión de la cuerda T (hacia arriba) y el peso m·g (hacia abajo). Si no acelera, son iguales. Una polea fija solo cambia la dirección de la cuerda: el hombre tira con 490 N y su mano recorre los mismos 18 m.</p>
+</blockquote>
+<p class="sub"><strong>Paso 2. Trabajo del hombre</strong></p>
+<p class="eq"><strong>W hombre = T · h · cos 0° = 490 · 18 · 1 = 8 820 J</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué cos 0°?</strong> La tensión apunta hacia arriba y la carga sube: fuerza y desplazamiento en el mismo sentido.</p>
+</blockquote>
+<p class="sub"><strong>Paso 3. Trabajo del peso</strong></p>
+<p class="eq"><strong>W peso = m·g · h · cos 180° = 490 · 18 · (−1) = −8 820 J</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué cos 180°?</strong> El peso apunta hacia abajo y la carga sube: sentidos opuestos, trabajo negativo.</p>
+</blockquote>
+<p><strong>Comprobación.</strong> El trabajo total es 8 820 − 8 820 = 0 J, y debe serlo: la velocidad no cambia, así que ΔEc = 0 (teorema de las fuerzas vivas, categoría 3). Además, la energía potencial de la carga aumenta ΔEp = m·g·h = +8 820 J, justo lo contrario del trabajo del peso: <strong>W peso = −ΔEp</strong>. La energía que pone el hombre queda guardada como energía potencial.</p>
+
+<h4>Simulación</h4>
+<p>El enunciado no da el tiempo: en la simulación son 20 s. Cámbialo y verás que el trabajo no cambia; solo la potencia.</p>
+
+<div class="widget" data-widget="potencia" data-config='{"titulo":"Simulación · 1.4 · Teoría 3","m":50,"n":1,"h":18,"t":20,"eta":1,"cuerpo":"carga","controles":["m","h","t"]}'></div></section>
+<h2 id="practicar">Ejercicios para practicar</h2>
+<div class="ir-ej"><p>Este apartado tiene <strong>5 ejercicios más</strong> (2 de los apuntes, 3 nuevos) en la sección de ejercicios: enunciado, resultado para comprobar y solución paso a paso.</p>
+<ul class="lista"><li><a href="../ejercicios/#e-1-2">1.2</a> Trabajo de F = 30i − 20j de A(−6, 2) a B(4, 10)</li><li><a href="../ejercicios/#e-1-3">1.3</a> Trabajo de F = −5i + 9j de A(−5, 3) a B(−3, −8)</li><li><a href="../ejercicios/#e-1-5">1.5</a> Trabajo de F = 4i + 3j de A(1, −2) a B(−3, 5) <span class="tag nuevo">Nuevo</span></li><li><a href="../ejercicios/#e-1-6">1.6</a> Subir una caja de 20 kg a 1,2 m por una rampa de 3 m <span class="tag nuevo">Nuevo</span></li><li><a href="../ejercicios/#e-1-7">1.7</a> Trabajo nulo y trabajo negativo con F = 6i + 2j <span class="tag nuevo">Nuevo</span></li></ul>
+<a class="btn primary" href="../ejercicios/#trabajo-de-una-fuerza">Ejercicios de este apartado →</a></div>
     <nav class="pager" aria-label="Anterior y siguiente"><a href="../"><small>Anterior</small>Mapa del tema</a><a href="../trabajo-con-rozamiento/" style="text-align:right"><small>Siguiente</small>Trabajo con rozamiento en un plano horizontal</a></nav>
     </main>
-    <aside class="toc" aria-label="En esta página"><h2>En esta página</h2><ol><li><a href="#idea-clave-el-trabajo-de-una-fuerza-constante">Idea clave: el trabajo de una fuerza constante</a></li><li class="sep"><a href="#propuestos">Ejercicios propuestos</a></li><li><a href="#e-1-1">1.1 · Teoría 1</a></li><li><a href="#e-1-2">1.2 · Ejercicios 3</a></li><li><a href="#e-1-3">1.3 · Repaso 2</a></li><li><a href="#e-1-4">1.4 · Teoría 3</a></li><li class="sep"><a href="#practicar-mas">Para practicar más</a></li><li><a href="#e-1-5">1.5 · Nuevo</a></li><li><a href="#e-1-6">1.6 · Nuevo</a></li><li><a href="#e-1-7">1.7 · Nuevo</a></li></ol></aside>
+    <aside class="toc" aria-label="En esta página"><h2>En esta página</h2><ol><li><a href="#idea-clave-el-trabajo-de-una-fuerza-constante">Idea clave: el trabajo de una fuerza constante</a></li><li class="sep"><a href="#ejemplos">Ejemplos resueltos</a></li><li><a href="#ej-1-1">1.1 · Teoría 1</a></li><li><a href="#ej-1-4">1.4 · Teoría 3</a></li><li class="sep"><a href="#practicar">Para practicar</a></li></ol></aside>
   </div>
   <footer>Material de estudio. Si el enunciado no da g, se usa 9,8 m/s². Para imprimir, usa la opción de imprimir del navegador.</footer>
 </div>
+<script src="../../../assets/widgets/nucleo.js" defer></script>
+<script src="../../../assets/widgets/vectores.js" defer></script>
+<script src="../../../assets/widgets/potencia.js" defer></script>
 </body>
 </html>

@@ -24,6 +24,8 @@ header.top{display:grid;gap:8px;margin:6px 0 18px}
 .cats a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
 .cats a:hover{border-color:var(--ink-2);color:var(--ink)}
 .cats a[aria-current="page"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+.cats a.ej{border-color:var(--c-p);color:var(--c-p)}
+.cats a.ej[aria-current="page"]{background:var(--c-p);color:var(--sheet)}
 .layout{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
 @media (min-width:1000px){.layout{grid-template-columns:minmax(0,760px) 1fr}}
 .toc{display:none}
@@ -81,6 +83,22 @@ header.top{display:grid;gap:8px;margin:6px 0 18px}
 .prop details p{background:var(--hl);border-radius:8px;padding:8px 12px;margin:8px 0 0}
 .prop .btn{margin-left:auto}
 @media (max-width:520px){.prop .btn{margin-left:0;width:100%}}
+/* ejemplos resueltos dentro de cada apartado */
+.ejemplo{margin:18px 0 0;padding-top:4px}
+.ejemplo>h3{font-size:1.12rem;margin:30px 0 10px;scroll-margin-top:12px}
+.ejemplo>h3 .src{font:600 12px var(--f-mono);color:var(--ink-2);margin-left:6px}
+.ejemplo h4{font:700 .82rem var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:22px 0 6px}
+.ejemplo+.ejemplo{border-top:1px dashed var(--rule);margin-top:30px}
+.ir-ej{display:grid;gap:8px;background:var(--sheet);border:1px solid var(--c-p);border-radius:12px;padding:14px 16px;margin:14px 0}
+.ir-ej p{margin:0}
+.ir-ej .lista{font-size:14px;color:var(--ink-2);margin:0;padding-left:0;list-style:none;display:grid;gap:3px}
+.ir-ej .lista .tag{font-size:10px;padding:0 6px}
+.ir-ej .btn{justify-self:start}
+.grupo-ej{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 12px}
+.grupo-ej a{font-size:14px}
+.filtro{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.filtro a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.filtro a:hover{border-color:var(--ink-2);color:var(--ink)}
 /* página de solución */
 .enun-box{background:var(--sheet);border:1px solid var(--rule);border-left:4px solid var(--ink);border-radius:12px;padding:12px 16px}
 .enun-box .lbl{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
@@ -113,7 +131,7 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 <div class="page">
   <nav class="crumbs" aria-label="Ruta"><a href="../../../">Física interactiva</a><span aria-hidden="true">›</span><a href="../">Trabajo, potencia y energía</a><span aria-hidden="true">›</span><span>Potencia</span></nav>
   <header class="top"><div class="eyebrow">Categoría 7</div><h1>Potencia, rendimiento y consumo</h1><p class="lead">Vatios, caballos, kWh, euros y rendimiento.</p></header>
-  <nav class="cats" aria-label="Categorías del tema"><a href="../">Mapa del tema</a><a href="../trabajo-de-una-fuerza/">1 · Trabajo</a><a href="../trabajo-con-rozamiento/">2 · Rozamiento</a><a href="../energia-cinetica/">3 · Energía cinética</a><a href="../conservacion/">4 · Conservación</a><a href="../muelles/">5 · Muelles</a><a href="../planos-inclinados/">6 · Planos inclinados</a><a href="../potencia-y-rendimiento/" aria-current="page">7 · Potencia</a><a href="../cuestiones/">8 · Cuestiones</a></nav>
+  <nav class="cats" aria-label="Categorías del tema"><a href="../">Mapa del tema</a><a class="ej" href="../ejercicios/">Ejercicios</a><a href="../trabajo-de-una-fuerza/">1 · Trabajo</a><a href="../trabajo-con-rozamiento/">2 · Rozamiento</a><a href="../energia-cinetica/">3 · Energía cinética</a><a href="../conservacion/">4 · Conservación</a><a href="../muelles/">5 · Muelles</a><a href="../planos-inclinados/">6 · Planos inclinados</a><a href="../potencia-y-rendimiento/" aria-current="page">7 · Potencia</a><a href="../cuestiones/">8 · Cuestiones</a></nav>
   <div class="layout">
     <main class="doc">
 <h2 id="idea-clave-potencia-es-trabajo-por-segundo-rendimiento-la-pa">Idea clave: potencia es trabajo por segundo; rendimiento, la parte que se aprovecha</h2>
@@ -170,43 +188,64 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 <li>Coste: energía consumida en kWh × precio del kWh.</li>
 </ol>
 
-<h2 id="propuestos">Ejercicios propuestos</h2>
-<div class="metodo"><strong>Cómo practicar</strong><ol><li>Lee el enunciado y resuélvelo en la libreta, con el diagrama de fuerzas y las unidades.</li><li>Comprueba el número con «Ver solo el resultado».</li><li>Abre la solución paso a paso para revisar el planteamiento, los signos y el porqué de cada fórmula. Si tiene simulación, cambia los datos y mira qué pasa.</li></ol></div>
-<p>Ejercicios de los apuntes de clase:</p>
-<div class="props"><article class="prop" id="e-7-1"><div class="cab"><span class="num">7.1</span><span class="src">Teoría 16</span><span class="tag sim">Con simulación</span></div>
-<h3>Cargar 15 sacos de 80 kg en media hora</h3><div class="enun"><p>Un hombre tarda media hora en cargar un camión, elevando hasta una altura de un metro 15 sacos de 80 kg cada uno. Calcula la potencia desarrollada.</p>
-</div><div class="acc"><details><summary>Ver solo el resultado</summary><p>P = 6,53 W (6,67 W con g = 10 m/s²).</p></details><a class="btn primary" href="7-1/">Solución paso a paso →</a></div></article>
-<article class="prop" id="e-7-2"><div class="cab"><span class="num">7.2</span><span class="src">Teoría 17</span><span class="tag sim">Con simulación</span></div>
-<h3>Estufa de 2000 W durante 8 horas</h3><div class="enun"><p>Calcula los kWh que consume en 8 h una estufa cuya potencia es de 2000 W. Expresa el resultado en MJ. ¿Cuánto costará mantenerla las 8 h si el kWh está a 0,09 €?</p>
-</div><div class="acc"><details><summary>Ver solo el resultado</summary><p>16 kWh = 57,6 MJ · coste 1,44 €.</p></details><a class="btn primary" href="7-2/">Solución paso a paso →</a></div></article>
-<article class="prop" id="e-7-3"><div class="cab"><span class="num">7.3</span><span class="src">Teoría 18</span><span class="tag sim">Con simulación</span></div>
-<h3>Litros de agua que sube un motor de 2 CV con rendimiento del 78 %</h3><div class="enun"><p>¿Cuántos litros de agua podrá elevar un motor de 2 CV hasta una altura de 12 m en 20 minutos, si el proceso tiene un rendimiento del 78 %?</p>
-</div><div class="acc"><details><summary>Ver solo el resultado</summary><p>unos 1,17·10⁴ L (11 716 L).</p></details><a class="btn primary" href="7-3/">Solución paso a paso →</a></div></article>
-<article class="prop" id="e-7-4"><div class="cab"><span class="num">7.4</span><span class="src">Teoría 19</span><span class="tag sim">Con simulación</span></div>
-<h3>Motor de un montacargas con rendimiento del 60 %</h3><div class="enun"><p>Un montacargas de masa 450 kg tiene que subir hasta una altura de 12 m en 30 s. Calcula la potencia que debe tener el motor si se estima que el rendimiento de la instalación será del 60 %.</p>
-</div><div class="acc"><details><summary>Ver solo el resultado</summary><p>P motor = 2 940 W ≈ 4,0 CV.</p></details><a class="btn primary" href="7-4/">Solución paso a paso →</a></div></article>
-<article class="prop" id="e-7-5"><div class="cab"><span class="num">7.5</span><span class="src">Cuestiones 11</span><span class="tag sim">Con simulación</span></div>
-<h3>Hornillo que calienta 2,5 kg de agua en 15 minutos</h3><div class="enun"><p>Calcula la potencia de un hornillo eléctrico que tarda 15 minutos en calentar 2,5 kg de agua desde 12 °C hasta 80 °C, si sabemos que solo se aprovecha el 85 % de la energía producida. ¿Cuánto cuesta calentar el agua si está a 0,08 € el kWh? Calor específico del agua: 4180 J/(kg·K).</p>
-</div><div class="acc"><details><summary>Ver solo el resultado</summary><p>P = 929 W · coste ≈ 0,019 € (unos 2 céntimos).</p></details><a class="btn primary" href="7-5/">Solución paso a paso →</a></div></article>
-<article class="prop" id="e-7-6"><div class="cab"><span class="num">7.6</span><span class="src">Cuestiones 12</span><span class="tag sim">Con simulación</span></div>
-<h3>Rendimiento de un calentador de 1500 W</h3><div class="enun"><p>Calcula el rendimiento de un calentador eléctrico cuya potencia es 1500 W, si sabemos que tarda 3 h en calentar 50 kg de agua desde 20 °C hasta 80 °C (c agua = 4180 J/(kg·K)). ¿Cuánto costaría calentar los 50 kg si el kWh está a 0,08 €?</p>
-</div><div class="acc"><details><summary>Ver solo el resultado</summary><p>η = 77,4 % · coste 0,36 €.</p></details><a class="btn primary" href="7-6/">Solución paso a paso →</a></div></article></div>
-<h2 id="practicar-mas">Para practicar más</h2>
-<p>Ejercicios nuevos del mismo tipo, con la solución completa.</p>
-<div class="props"><article class="prop" id="e-7-7"><div class="cab"><span class="num">7.7</span><span class="tag nuevo">Nuevo</span><span class="tag sim">Con simulación</span></div>
-<h3>Grúa que sube 800 kg de ladrillos a 15 m</h3><div class="enun"><p>Una grúa sube un palé de ladrillos de 800 kg hasta una altura de 15 m en 40 s, con velocidad constante. El motor de la grúa consume una potencia de 4,5 kW. Calcula: a) el trabajo útil realizado; b) la potencia útil; c) el rendimiento de la grúa; d) la energía que se pierde durante la subida.</p>
-</div><div class="acc"><details><summary>Ver solo el resultado</summary><p>a) W útil = 1,18·10⁵ J · b) P útil = 2 940 W · c) η = 65,3 % · d) se pierden 6,24·10⁴ J.</p></details><a class="btn primary" href="7-7/">Solución paso a paso →</a></div></article>
-<article class="prop" id="e-7-8"><div class="cab"><span class="num">7.8</span><span class="tag nuevo">Nuevo</span><span class="tag sim">Con simulación</span></div>
-<h3>Ascensor con 880 kg a 1,5 m/s</h3><div class="enun"><p>Un ascensor de 600 kg sube a cuatro personas de 70 kg cada una con una velocidad constante de 1,5 m/s. El rendimiento del motor es del 75 %. Calcula: a) la potencia útil (usa P = F·v); b) la potencia que consume el motor, en W y en CV; c) la energía que consume en subir 30 m, en julios y en kWh.</p>
-</div><div class="acc"><details><summary>Ver solo el resultado</summary><p>a) P útil = 1,29·10⁴ W · b) P motor = 1,72·10⁴ W = 23,4 CV · c) E = 3,45·10⁵ J = 0,096 kWh.</p></details><a class="btn primary" href="7-8/">Solución paso a paso →</a></div></article>
-<article class="prop" id="e-7-9"><div class="cab"><span class="num">7.9</span><span class="tag nuevo">Nuevo</span><span class="tag sim">Con simulación</span></div>
-<h3>Hervidor de 2200 W que calienta 1,5 L de agua</h3><div class="enun"><p>Un hervidor eléctrico de 2200 W calienta 1,5 L de agua desde 15 °C hasta 100 °C en 4 minutos y 30 segundos. Calcula: a) la energía que absorbe el agua; b) la energía eléctrica consumida; c) el rendimiento del hervidor; d) el coste si el kWh está a 0,15 €. (c agua = 4180 J/(kg·K); 1 L de agua = 1 kg.)</p>
-</div><div class="acc"><details><summary>Ver solo el resultado</summary><p>a) Q = 5,33·10⁵ J · b) E = 5,94·10⁵ J = 0,165 kWh · c) η = 89,7 % · d) 0,025 €.</p></details><a class="btn primary" href="7-9/">Solución paso a paso →</a></div></article></div>
+<h2 id="ejemplos">Ejemplos resueltos</h2>
+<p>Dos ejercicios de los apuntes resueltos paso a paso, con su simulación: léelos antes de pasar a los ejercicios.</p>
+<section class="ejemplo"><h3 id="ej-7-2">7.2 · Estufa de 2000 W durante 8 horas<span class="src">Teoría 17</span></h3>
+<div class="enun-box"><div class="lbl">Enunciado</div><p>Calcula los kWh que consume en 8 h una estufa cuya potencia es de 2000 W. Expresa el resultado en MJ. ¿Cuánto costará mantenerla las 8 h si el kWh está a 0,09 €?</p>
+</div><div class="res-box"><div class="lbl">Resultado</div><p>16 kWh = 57,6 MJ · coste 1,44 €.</p></div>
+<h4>Solución paso a paso</h4>
+<p>Datos: P = 2000 W = 2 kW · t = 8 h · precio 0,09 €/kWh.</p>
+<p><strong>Qué herramienta usar.</strong> Energía = potencia × tiempo (despejando de P = E / t). Si la potencia va en kW y el tiempo en h, la energía sale directamente en kWh, que es como se paga la luz.</p>
+<p class="sub"><strong>Paso 1. Energía en kWh</strong></p>
+<p class="eq"><strong>E = P·t = 2 kW · 8 h = 16 kWh</strong></p>
+<p class="sub"><strong>Paso 2. En megajulios</strong></p>
+<p class="eq"><strong>E = 16 kWh · 3,6 MJ/kWh = 57,6 MJ</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué 3,6?</strong> 1 kWh = 1000 W · 3600 s = 3 600 000 J = 3,6 MJ.</p>
+</blockquote>
+<p><strong>Comprobación en el SI.</strong> E = 2000 W · (8 · 3600 s) = 2000 · 28 800 = 57 600 000 J = 57,6 MJ. Coincide.</p>
+<p class="sub"><strong>Paso 3. Coste</strong></p>
+<p class="eq"><strong>Coste = 16 kWh · 0,09 €/kWh = 1,44 €</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué en kWh?</strong> El precio de la electricidad se da por kWh. Multiplicar julios por €/kWh daría un disparate.</p>
+</blockquote>
+
+<h4>Simulación</h4>
+<p>En la simulación el contador marca los kWh y el coste a medida que pasan las 8 horas.</p>
+
+<div class="widget" data-widget="calentador" data-config='{"titulo":"Simulación · 7.2 · Teoría 17","escenario":"estufa","P":2000,"horas":8,"precio":0.09}'></div></section>
+<section class="ejemplo"><h3 id="ej-7-4">7.4 · Motor de un montacargas con rendimiento del 60 %<span class="src">Teoría 19</span></h3>
+<div class="enun-box"><div class="lbl">Enunciado</div><p>Un montacargas de masa 450 kg tiene que subir hasta una altura de 12 m en 30 s. Calcula la potencia que debe tener el motor si se estima que el rendimiento de la instalación será del 60 %.</p>
+</div><div class="res-box"><div class="lbl">Resultado</div><p>P motor = 2 940 W ≈ 4,0 CV.</p></div>
+<h4>Solución paso a paso</h4>
+<p>Datos: m = 450 kg · h = 12 m · t = 30 s · η = 60 % = 0,6 · g = 9,8 m/s².</p>
+<p><strong>Qué herramienta usar.</strong> La potencia útil es la que sube el montacargas (m·g·h en 30 s); la del motor es mayor, porque solo aprovecha el 60 %.</p>
+<p class="sub"><strong>Paso 1. Potencia útil</strong></p>
+<p class="eq"><strong>P útil = m·g·h / t = 450 · 9,8 · 12 / 30 = 52 920 / 30 = 1 764 W</strong></p>
+<p class="sub"><strong>Paso 2. Potencia del motor</strong></p>
+<p class="eq"><strong>P total = P útil / η = 1 764 / 0,6 = 2 940 W = 2 940 / 736 CV ≈ 4,0 CV</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué se divide?</strong> P útil = η · P total, así que P total = P útil / η. La potencia del motor tiene que salir mayor que la útil; si sale menor, se ha multiplicado por error.</p>
+</blockquote>
+<p><strong>Comprobación con P = F·v.</strong> Si sube a velocidad constante, v = 12 / 30 = 0,4 m/s y la fuerza del cable es su peso, 450 · 9,8 = 4 410 N. P útil = F·v = 4 410 · 0,4 = 1 764 W. Coincide.</p>
+<p><strong>Dónde va la energía.</strong> De los 2 940 W, 1 764 W suben la carga y 1 176 W se pierden (calor en el motor, rozamientos de poleas y guías). Es el ejemplo del diagrama de la idea clave.</p>
+
+<h4>Simulación</h4>
+<p>La barra de la simulación separa la energía útil (azul) de la que se pierde (roja): con η = 60 %, 4 de cada 10 julios se pierden.</p>
+
+<div class="widget" data-widget="potencia" data-config='{"titulo":"Simulación · 7.4 · Teoría 19","m":450,"n":1,"h":12,"t":30,"eta":0.6,"cuerpo":"carga","controles":["m","h","t","eta"]}'></div></section>
+<h2 id="practicar">Ejercicios para practicar</h2>
+<div class="ir-ej"><p>Este apartado tiene <strong>7 ejercicios más</strong> (4 de los apuntes, 3 nuevos) en la sección de ejercicios: enunciado, resultado para comprobar y solución paso a paso.</p>
+<ul class="lista"><li><a href="../ejercicios/#e-7-1">7.1</a> Cargar 15 sacos de 80 kg en media hora</li><li><a href="../ejercicios/#e-7-3">7.3</a> Litros de agua que sube un motor de 2 CV con rendimiento del 78 %</li><li><a href="../ejercicios/#e-7-5">7.5</a> Hornillo que calienta 2,5 kg de agua en 15 minutos</li><li><a href="../ejercicios/#e-7-6">7.6</a> Rendimiento de un calentador de 1500 W</li><li><a href="../ejercicios/#e-7-7">7.7</a> Grúa que sube 800 kg de ladrillos a 15 m <span class="tag nuevo">Nuevo</span></li><li><a href="../ejercicios/#e-7-8">7.8</a> Ascensor con 880 kg a 1,5 m/s <span class="tag nuevo">Nuevo</span></li><li><a href="../ejercicios/#e-7-9">7.9</a> Hervidor de 2200 W que calienta 1,5 L de agua <span class="tag nuevo">Nuevo</span></li></ul>
+<a class="btn primary" href="../ejercicios/#potencia-y-rendimiento">Ejercicios de este apartado →</a></div>
     <nav class="pager" aria-label="Anterior y siguiente"><a href="../planos-inclinados/"><small>Anterior</small>Planos inclinados con rozamiento</a><a href="../cuestiones/" style="text-align:right"><small>Siguiente</small>Cuestiones de teoría</a></nav>
     </main>
-    <aside class="toc" aria-label="En esta página"><h2>En esta página</h2><ol><li><a href="#idea-clave-potencia-es-trabajo-por-segundo-rendimiento-la-pa">Idea clave: potencia es trabajo por segundo; rendimiento, la parte que se aprovecha</a></li><li class="sep"><a href="#propuestos">Ejercicios propuestos</a></li><li><a href="#e-7-1">7.1 · Teoría 16</a></li><li><a href="#e-7-2">7.2 · Teoría 17</a></li><li><a href="#e-7-3">7.3 · Teoría 18</a></li><li><a href="#e-7-4">7.4 · Teoría 19</a></li><li><a href="#e-7-5">7.5 · Cuestiones 11</a></li><li><a href="#e-7-6">7.6 · Cuestiones 12</a></li><li class="sep"><a href="#practicar-mas">Para practicar más</a></li><li><a href="#e-7-7">7.7 · Nuevo</a></li><li><a href="#e-7-8">7.8 · Nuevo</a></li><li><a href="#e-7-9">7.9 · Nuevo</a></li></ol></aside>
+    <aside class="toc" aria-label="En esta página"><h2>En esta página</h2><ol><li><a href="#idea-clave-potencia-es-trabajo-por-segundo-rendimiento-la-pa">Idea clave: potencia es trabajo por segundo; rendimiento, la parte que se aprovecha</a></li><li class="sep"><a href="#ejemplos">Ejemplos resueltos</a></li><li><a href="#ej-7-2">7.2 · Teoría 17</a></li><li><a href="#ej-7-4">7.4 · Teoría 19</a></li><li class="sep"><a href="#practicar">Para practicar</a></li></ol></aside>
   </div>
   <footer>Material de estudio. Si el enunciado no da g, se usa 9,8 m/s². Para imprimir, usa la opción de imprimir del navegador.</footer>
 </div>
+<script src="../../../assets/widgets/nucleo.js" defer></script>
+<script src="../../../assets/widgets/calentador.js" defer></script>
+<script src="../../../assets/widgets/potencia.js" defer></script>
 </body>
 </html>

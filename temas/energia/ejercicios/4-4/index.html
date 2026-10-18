@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>4.4 · Energía que hay que suministrar a un cuerpo de 40 kg · Física interactiva</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../../../../assets/base.css">
+<style>
+:root{--c-a:#7b4fd6;--c-k:#b4407e;--axis:#8793a6}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--c-a:#b39bff;--c-k:#f08cc0;--axis:#8e9ab0}}
+:root[data-theme="dark"]{--c-a:#b39bff;--c-k:#f08cc0;--axis:#8e9ab0}
+.fig{--cds-text-primary:var(--ink);--cds-text-secondary:var(--ink-2);--cds-chart-axis:var(--axis);--cds-chart-grid:var(--rule);
+  --cds-chart-reference-tint:var(--plane);--cds-chart-categorical-1:var(--c-p);--cds-chart-categorical-2:var(--c-n);
+  --cds-chart-categorical-3:var(--c-fr);--cds-chart-categorical-4:var(--c-a);--cds-chart-categorical-5:var(--c-k);
+  margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
+.fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
+.fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
+header.top{display:grid;gap:8px;margin:6px 0 18px}
+.cats{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 22px}
+.cats a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.cats a:hover{border-color:var(--ink-2);color:var(--ink)}
+.cats a[aria-current="page"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+.cats a.ej{border-color:var(--c-p);color:var(--c-p)}
+.cats a.ej[aria-current="page"]{background:var(--c-p);color:var(--sheet)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+@media (min-width:1000px){.layout{grid-template-columns:minmax(0,760px) 1fr}}
+.toc{display:none}
+@media (min-width:1000px){.toc{display:block;position:sticky;top:16px;align-self:start;font-size:13.5px;max-height:calc(100vh - 32px);overflow:auto}
+  .toc h2{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:0 0 8px}
+  .toc ol{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+  .toc a{color:var(--ink-2);text-decoration:none;line-height:1.3;display:block}
+  .toc a:hover{color:var(--ink)}
+  .toc .sep{margin-top:8px;font-weight:700;color:var(--ink)}}
+.doc{min-width:0}
+.doc>h2:first-child{border-top:0;margin-top:0;padding-top:0}
+.doc h2{font-size:1.28rem;margin:38px 0 10px;padding-top:16px;border-top:1px solid var(--rule);scroll-margin-top:12px}
+.doc h3{font-size:1.06rem;margin:26px 0 8px}
+.doc p{margin:10px 0}
+.doc p.eq{background:var(--sheet);border:1px solid var(--rule);border-left:3px solid var(--c-p);border-radius:8px;padding:9px 12px;overflow-x:auto}
+.doc p.sub{margin:22px 0 4px}
+.doc p.res{background:var(--hl);border-radius:8px;padding:8px 12px}
+.doc blockquote.why{margin:10px 0 14px;padding:8px 14px;border-left:3px solid var(--rule);background:color-mix(in srgb,var(--sheet) 70%,transparent);border-radius:0 8px 8px 0;color:var(--ink)}
+.doc blockquote.why p{margin:4px 0}
+.doc ul,.doc ol{padding-left:1.3em}
+.doc li{margin:4px 0}
+.table-wrap{overflow-x:auto;margin:12px 0;border:1px solid var(--rule);border-radius:10px;background:var(--sheet)}
+.doc table{border-collapse:collapse;width:100%;font-size:14.5px}
+.doc th,.doc td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid var(--rule)}
+.doc th{font-weight:700;background:var(--paper)}
+.doc tr:last-child td{border-bottom:0}
+.grid-cats{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));margin:18px 0 8px}
+.grid-cats a{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:start;text-decoration:none;color:inherit}
+.grid-cats a:hover{border-color:var(--ink-2)}
+.grid-cats .n{font:700 1.5rem/44px var(--f-display);text-align:center;border-radius:10px;border:1px solid var(--rule)}
+.grid-cats h3{font-size:1rem;line-height:1.25}
+.grid-cats p{margin:4px 0 0;font-size:13.5px;color:var(--ink-2)}
+/* ejercicios propuestos */
+.metodo{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 14px;font-size:14.5px}
+.metodo ol{margin:6px 0 2px}
+.props{display:grid;gap:14px;margin:14px 0}
+.prop{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:14px 16px;scroll-margin-top:12px}
+.prop .cab{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-bottom:6px}
+.prop .num{font:700 1.05rem var(--f-display)}
+.prop .src{font:600 12px var(--f-mono);color:var(--ink-2);letter-spacing:.02em}
+.tag{font:600 11px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;border:1px solid currentColor;border-radius:999px;padding:1px 7px}
+.tag.nuevo{color:var(--c-n)}
+.tag.sel{color:var(--c-a)}
+.tag.sim{color:var(--c-p)}
+.prop h3{font-size:1rem;margin:0 0 6px;line-height:1.3}
+.prop .enun p{margin:6px 0}
+.prop .fig{margin:10px 0 4px}
+.prop .acc{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;margin-top:10px}
+.prop details{flex:1 1 260px;min-width:0}
+.prop summary{cursor:pointer;font:600 13.5px var(--f-body);color:var(--ink-2);min-height:38px;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rule);border-radius:9px;padding:0 12px;list-style:none}
+.prop summary::-webkit-details-marker{display:none}
+.prop summary::before{content:"▸";font-size:12px}
+.prop details[open] summary::before{content:"▾"}
+.prop details[open] summary{color:var(--ink)}
+.prop details p{background:var(--hl);border-radius:8px;padding:8px 12px;margin:8px 0 0}
+.prop .btn{margin-left:auto}
+@media (max-width:520px){.prop .btn{margin-left:0;width:100%}}
+/* ejemplos resueltos dentro de cada apartado */
+.ejemplo{margin:18px 0 0;padding-top:4px}
+.ejemplo>h3{font-size:1.12rem;margin:30px 0 10px;scroll-margin-top:12px}
+.ejemplo>h3 .src{font:600 12px var(--f-mono);color:var(--ink-2);margin-left:6px}
+.ejemplo h4{font:700 .82rem var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:22px 0 6px}
+.ejemplo+.ejemplo{border-top:1px dashed var(--rule);margin-top:30px}
+.ir-ej{display:grid;gap:8px;background:var(--sheet);border:1px solid var(--c-p);border-radius:12px;padding:14px 16px;margin:14px 0}
+.ir-ej p{margin:0}
+.ir-ej .lista{font-size:14px;color:var(--ink-2);margin:0;padding-left:0;list-style:none;display:grid;gap:3px}
+.ir-ej .lista .tag{font-size:10px;padding:0 6px}
+.ir-ej .btn{justify-self:start}
+.grupo-ej{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 12px}
+.grupo-ej a{font-size:14px}
+.filtro{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.filtro a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.filtro a:hover{border-color:var(--ink-2);color:var(--ink)}
+/* página de solución */
+.enun-box{background:var(--sheet);border:1px solid var(--rule);border-left:4px solid var(--ink);border-radius:12px;padding:12px 16px}
+.enun-box .lbl{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.enun-box p{margin:6px 0}
+.res-box{background:var(--hl);border-radius:12px;padding:10px 16px;margin:14px 0}
+.res-box .lbl{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase}
+.res-box p{margin:4px 0}
+.saltos{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.saltos a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.doc .widget{margin:16px 0 8px}
+.doc .widget:empty{display:none}
+/* índice con resultados ocultos */
+.ver-res{display:inline-flex;align-items:center;gap:8px;font:600 14px var(--f-body);cursor:pointer;margin:4px 0}
+.ver-res input{width:18px;height:18px;accent-color:var(--c-p)}
+.indice td.r{transition:filter .2s}
+.indice td:first-child{white-space:nowrap}
+.indice td small{display:block;color:var(--ink-2);font-size:12px}
+.indice tr.grupo th{background:var(--plane);font-size:14px}
+.indice tr.grupo a{color:inherit}
+.ver-res:has(input:not(:checked)) + .table-wrap td.r{filter:blur(5px);user-select:none}
+.pager{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:40px;border-top:1px solid var(--rule);padding-top:16px}
+.pager a{text-decoration:none;max-width:48%}
+.pager .mid{align-self:center}
+.pager small{display:block;color:var(--ink-2);font-size:12px}
+footer{margin-top:36px;color:var(--ink-2);font-size:13px}
+@media print{.cats,.toc,.pager,.crumbs,.widget,.saltos,.prop .btn,.prop summary{display:none}.layout{display:block}.fig,.table-wrap,p.eq,.prop{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="page">
+  <nav class="crumbs" aria-label="Ruta"><a href="../../../../">Física interactiva</a><span aria-hidden="true">›</span><a href="../../">Trabajo, potencia y energía</a><span aria-hidden="true">›</span><a href="../">Ejercicios</a><span aria-hidden="true">›</span><span>4.4</span></nav>
+  <header class="top"><div class="eyebrow">Solución · Ejercicios 8 · Conservación de la energía mecánica</div><h1>4.4 · Energía que hay que suministrar a un cuerpo de 40 kg</h1></header>
+  <nav class="cats" aria-label="Categorías del tema"><a href="../../">Mapa del tema</a><a class="ej" href="../../ejercicios/" aria-current="page">Ejercicios</a><a href="../../trabajo-de-una-fuerza/">1 · Trabajo</a><a href="../../trabajo-con-rozamiento/">2 · Rozamiento</a><a href="../../energia-cinetica/">3 · Energía cinética</a><a href="../../conservacion/">4 · Conservación</a><a href="../../muelles/">5 · Muelles</a><a href="../../planos-inclinados/">6 · Planos inclinados</a><a href="../../potencia-y-rendimiento/">7 · Potencia</a><a href="../../cuestiones/">8 · Cuestiones</a></nav>
+  <div class="layout">
+    <main class="doc">
+<nav class="saltos" aria-label="Saltar a"><a href="../#e-4-4">Volver a los ejercicios</a><a href="../../conservacion/">Teoría: Conservación</a></nav><div class="enun-box" id="enunciado"><div class="lbl">Enunciado</div><p>Un cuerpo de 40 kg que está a 30 m de altura lleva una velocidad de 15 m/s. ¿Qué energía hay que suministrarle si queremos que ascienda hasta una altura de 90 m y se mueva con una velocidad de 12 m/s?</p>
+</div><div class="res-box" id="resultado"><div class="lbl">Resultado</div><p>W = 21 900 J = 2,19·10⁴ J.</p></div>
+<h2 id="solucion">Solución paso a paso</h2>
+<p>Datos: m = 40 kg · estado inicial: h₀ = 30 m, v₀ = 15 m/s · estado final: h = 90 m, v = 12 m/s · g = 9,8 m/s².</p>
+<p><strong>Qué herramienta usar.</strong> Aquí la energía mecánica <strong>no</strong> se conserva: alguien (un motor, una grúa) tiene que aportar energía para subir el cuerpo. Se usa la versión general del apartado 2.1 de los apuntes: el trabajo exterior es la variación de energía mecánica.</p>
+<p class="eq"><strong>W exterior = E M final − E M inicial = (Ec + Ep) final − (Ec + Ep) inicial</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué?</strong> Es la ecuación de conservación con un término más: Ec₀ + Ep₀ + W ext = Ec + Ep. Si W ext es positivo, la energía mecánica aumenta en esa cantidad.</p>
+</blockquote>
+<p class="eq"><strong>Paso 1. Energías (h = 0 en el suelo)</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>Ec = ½·m·v²</th>
+<th>Ep = m·g·h</th>
+<th>E M</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Inicial (30 m, 15 m/s)</td>
+<td>½ · 40 · 15² = 4 500 J</td>
+<td>40 · 9,8 · 30 = 11 760 J</td>
+<td>16 260 J</td>
+</tr>
+<tr>
+<td>Final (90 m, 12 m/s)</td>
+<td>½ · 40 · 12² = 2 880 J</td>
+<td>40 · 9,8 · 90 = 35 280 J</td>
+<td>38 160 J</td>
+</tr>
+<tr>
+<td>Variación</td>
+<td>−1 620 J</td>
+<td>+23 520 J</td>
+<td>+21 900 J</td>
+</tr>
+</tbody></table></div>
+<p class="sub"><strong>Paso 2. Energía que hay que suministrar</strong></p>
+<p class="eq"><strong>W ext = 38 160 − 16 260 = 21 900 J</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué es menor que el aumento de Ep?</strong> El cuerpo llega más despacio (12 m/s en vez de 15 m/s): parte de la energía potencial que gana sale de su propia energía cinética (1 620 J). El resto, 21 900 J, lo pone el motor.</p>
+</blockquote>
+<p><strong>Comprobación.</strong> Con otro nivel de referencia (por ejemplo h = 0 a 30 m), las Ep cambian pero la variación no: ΔEp = 40 · 9,8 · 60 = 23 520 J. El resultado sigue siendo 21 900 J.</p>
+
+    <nav class="pager" aria-label="Anterior y siguiente"><a href="../4-2/"><small>Anterior</small>4.2 · Ejercicios 4</a><a class="mid" href="../#e-4-4">Todos los ejercicios</a><a href="../4-5/" style="text-align:right"><small>Siguiente</small>4.5 · Nuevo</a></nav>
+    </main>
+    <aside class="toc" aria-label="En esta página"><h2>En esta página</h2><ol><li><a href="#enunciado">Enunciado</a></li><li><a href="#resultado">Resultado</a></li><li><a href="#solucion">Solución</a></li></ol></aside>
+  </div>
+  <footer>Material de estudio. Si el enunciado no da g, se usa 9,8 m/s². Para imprimir, usa la opción de imprimir del navegador.</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>6.10 · Bajada desde el reposo y frenada en el plano horizontal · Física interactiva</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../../../../assets/base.css">
+<style>
+:root{--c-a:#7b4fd6;--c-k:#b4407e;--axis:#8793a6}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--c-a:#b39bff;--c-k:#f08cc0;--axis:#8e9ab0}}
+:root[data-theme="dark"]{--c-a:#b39bff;--c-k:#f08cc0;--axis:#8e9ab0}
+.fig{--cds-text-primary:var(--ink);--cds-text-secondary:var(--ink-2);--cds-chart-axis:var(--axis);--cds-chart-grid:var(--rule);
+  --cds-chart-reference-tint:var(--plane);--cds-chart-categorical-1:var(--c-p);--cds-chart-categorical-2:var(--c-n);
+  --cds-chart-categorical-3:var(--c-fr);--cds-chart-categorical-4:var(--c-a);--cds-chart-categorical-5:var(--c-k);
+  margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
+.fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
+.fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
+header.top{display:grid;gap:8px;margin:6px 0 18px}
+.cats{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 22px}
+.cats a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.cats a:hover{border-color:var(--ink-2);color:var(--ink)}
+.cats a[aria-current="page"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+.cats a.ej{border-color:var(--c-p);color:var(--c-p)}
+.cats a.ej[aria-current="page"]{background:var(--c-p);color:var(--sheet)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+@media (min-width:1000px){.layout{grid-template-columns:minmax(0,760px) 1fr}}
+.toc{display:none}
+@media (min-width:1000px){.toc{display:block;position:sticky;top:16px;align-self:start;font-size:13.5px;max-height:calc(100vh - 32px);overflow:auto}
+  .toc h2{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:0 0 8px}
+  .toc ol{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+  .toc a{color:var(--ink-2);text-decoration:none;line-height:1.3;display:block}
+  .toc a:hover{color:var(--ink)}
+  .toc .sep{margin-top:8px;font-weight:700;color:var(--ink)}}
+.doc{min-width:0}
+.doc>h2:first-child{border-top:0;margin-top:0;padding-top:0}
+.doc h2{font-size:1.28rem;margin:38px 0 10px;padding-top:16px;border-top:1px solid var(--rule);scroll-margin-top:12px}
+.doc h3{font-size:1.06rem;margin:26px 0 8px}
+.doc p{margin:10px 0}
+.doc p.eq{background:var(--sheet);border:1px solid var(--rule);border-left:3px solid var(--c-p);border-radius:8px;padding:9px 12px;overflow-x:auto}
+.doc p.sub{margin:22px 0 4px}
+.doc p.res{background:var(--hl);border-radius:8px;padding:8px 12px}
+.doc blockquote.why{margin:10px 0 14px;padding:8px 14px;border-left:3px solid var(--rule);background:color-mix(in srgb,var(--sheet) 70%,transparent);border-radius:0 8px 8px 0;color:var(--ink)}
+.doc blockquote.why p{margin:4px 0}
+.doc ul,.doc ol{padding-left:1.3em}
+.doc li{margin:4px 0}
+.table-wrap{overflow-x:auto;margin:12px 0;border:1px solid var(--rule);border-radius:10px;background:var(--sheet)}
+.doc table{border-collapse:collapse;width:100%;font-size:14.5px}
+.doc th,.doc td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid var(--rule)}
+.doc th{font-weight:700;background:var(--paper)}
+.doc tr:last-child td{border-bottom:0}
+.grid-cats{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));margin:18px 0 8px}
+.grid-cats a{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:start;text-decoration:none;color:inherit}
+.grid-cats a:hover{border-color:var(--ink-2)}
+.grid-cats .n{font:700 1.5rem/44px var(--f-display);text-align:center;border-radius:10px;border:1px solid var(--rule)}
+.grid-cats h3{font-size:1rem;line-height:1.25}
+.grid-cats p{margin:4px 0 0;font-size:13.5px;color:var(--ink-2)}
+/* ejercicios propuestos */
+.metodo{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 14px;font-size:14.5px}
+.metodo ol{margin:6px 0 2px}
+.props{display:grid;gap:14px;margin:14px 0}
+.prop{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:14px 16px;scroll-margin-top:12px}
+.prop .cab{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-bottom:6px}
+.prop .num{font:700 1.05rem var(--f-display)}
+.prop .src{font:600 12px var(--f-mono);color:var(--ink-2);letter-spacing:.02em}
+.tag{font:600 11px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;border:1px solid currentColor;border-radius:999px;padding:1px 7px}
+.tag.nuevo{color:var(--c-n)}
+.tag.sel{color:var(--c-a)}
+.tag.sim{color:var(--c-p)}
+.prop h3{font-size:1rem;margin:0 0 6px;line-height:1.3}
+.prop .enun p{margin:6px 0}
+.prop .fig{margin:10px 0 4px}
+.prop .acc{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;margin-top:10px}
+.prop details{flex:1 1 260px;min-width:0}
+.prop summary{cursor:pointer;font:600 13.5px var(--f-body);color:var(--ink-2);min-height:38px;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rule);border-radius:9px;padding:0 12px;list-style:none}
+.prop summary::-webkit-details-marker{display:none}
+.prop summary::before{content:"▸";font-size:12px}
+.prop details[open] summary::before{content:"▾"}
+.prop details[open] summary{color:var(--ink)}
+.prop details p{background:var(--hl);border-radius:8px;padding:8px 12px;margin:8px 0 0}
+.prop .btn{margin-left:auto}
+@media (max-width:520px){.prop .btn{margin-left:0;width:100%}}
+/* ejemplos resueltos dentro de cada apartado */
+.ejemplo{margin:18px 0 0;padding-top:4px}
+.ejemplo>h3{font-size:1.12rem;margin:30px 0 10px;scroll-margin-top:12px}
+.ejemplo>h3 .src{font:600 12px var(--f-mono);color:var(--ink-2);margin-left:6px}
+.ejemplo h4{font:700 .82rem var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:22px 0 6px}
+.ejemplo+.ejemplo{border-top:1px dashed var(--rule);margin-top:30px}
+.ir-ej{display:grid;gap:8px;background:var(--sheet);border:1px solid var(--c-p);border-radius:12px;padding:14px 16px;margin:14px 0}
+.ir-ej p{margin:0}
+.ir-ej .lista{font-size:14px;color:var(--ink-2);margin:0;padding-left:0;list-style:none;display:grid;gap:3px}
+.ir-ej .lista .tag{font-size:10px;padding:0 6px}
+.ir-ej .btn{justify-self:start}
+.grupo-ej{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 12px}
+.grupo-ej a{font-size:14px}
+.filtro{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.filtro a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.filtro a:hover{border-color:var(--ink-2);color:var(--ink)}
+/* página de solución */
+.enun-box{background:var(--sheet);border:1px solid var(--rule);border-left:4px solid var(--ink);border-radius:12px;padding:12px 16px}
+.enun-box .lbl{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.enun-box p{margin:6px 0}
+.res-box{background:var(--hl);border-radius:12px;padding:10px 16px;margin:14px 0}
+.res-box .lbl{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase}
+.res-box p{margin:4px 0}
+.saltos{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.saltos a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.doc .widget{margin:16px 0 8px}
+.doc .widget:empty{display:none}
+/* índice con resultados ocultos */
+.ver-res{display:inline-flex;align-items:center;gap:8px;font:600 14px var(--f-body);cursor:pointer;margin:4px 0}
+.ver-res input{width:18px;height:18px;accent-color:var(--c-p)}
+.indice td.r{transition:filter .2s}
+.indice td:first-child{white-space:nowrap}
+.indice td small{display:block;color:var(--ink-2);font-size:12px}
+.indice tr.grupo th{background:var(--plane);font-size:14px}
+.indice tr.grupo a{color:inherit}
+.ver-res:has(input:not(:checked)) + .table-wrap td.r{filter:blur(5px);user-select:none}
+.pager{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:40px;border-top:1px solid var(--rule);padding-top:16px}
+.pager a{text-decoration:none;max-width:48%}
+.pager .mid{align-self:center}
+.pager small{display:block;color:var(--ink-2);font-size:12px}
+footer{margin-top:36px;color:var(--ink-2);font-size:13px}
+@media print{.cats,.toc,.pager,.crumbs,.widget,.saltos,.prop .btn,.prop summary{display:none}.layout{display:block}.fig,.table-wrap,p.eq,.prop{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="page">
+  <nav class="crumbs" aria-label="Ruta"><a href="../../../../">Física interactiva</a><span aria-hidden="true">›</span><a href="../../">Trabajo, potencia y energía</a><span aria-hidden="true">›</span><a href="../">Ejercicios</a><span aria-hidden="true">›</span><span>6.10</span></nav>
+  <header class="top"><div class="eyebrow">Solución · Selectividad 2 · Planos inclinados con rozamiento</div><h1>6.10 · Bajada desde el reposo y frenada en el plano horizontal</h1></header>
+  <nav class="cats" aria-label="Categorías del tema"><a href="../../">Mapa del tema</a><a class="ej" href="../../ejercicios/" aria-current="page">Ejercicios</a><a href="../../trabajo-de-una-fuerza/">1 · Trabajo</a><a href="../../trabajo-con-rozamiento/">2 · Rozamiento</a><a href="../../energia-cinetica/">3 · Energía cinética</a><a href="../../conservacion/">4 · Conservación</a><a href="../../muelles/">5 · Muelles</a><a href="../../planos-inclinados/">6 · Planos inclinados</a><a href="../../potencia-y-rendimiento/">7 · Potencia</a><a href="../../cuestiones/">8 · Cuestiones</a></nav>
+  <div class="layout">
+    <main class="doc">
+<nav class="saltos" aria-label="Saltar a"><a href="#simulacion">Ir a la simulación ↓</a><a href="../#e-6-10">Volver a los ejercicios</a><a href="../../planos-inclinados/">Teoría: Planos inclinados</a></nav><div class="enun-box" id="enunciado"><div class="lbl">Enunciado</div><p>Se deja caer un cuerpo, partiendo del reposo, por un plano inclinado que forma un ángulo de 30° con la horizontal. Después de recorrer 2 m llega al final del plano inclinado con una velocidad de 4 m/s y continúa deslizándose por un plano horizontal hasta detenerse. La distancia recorrida en el plano horizontal es 4 m. a) Dibuje en un esquema las fuerzas que actúan sobre el bloque cuando se encuentra en el plano inclinado y determine el valor del coeficiente de rozamiento entre el cuerpo y el plano inclinado. b) Explique el balance energético durante el movimiento en el plano horizontal y calcule la fuerza de rozamiento entre el cuerpo y el plano. (g = 9,8 m/s²)</p>
+</div><div class="res-box" id="resultado"><div class="lbl">Resultado</div><p>μ ≈ 0,106 en el plano inclinado. En el horizontal, Fr = 2·m (en N, con m en kg): el enunciado no da la masa, así que la fuerza queda en función de m; el coeficiente allí es μ&#39; ≈ 0,204.</p></div>
+<h2 id="solucion">Solución paso a paso</h2>
+<p>Datos: vA = 0 · α = 30° · AB = 2 m sobre el plano · vB = 4 m/s · BC = 4 m en horizontal · vC = 0 · g = 9,8 m/s². Masa: no se da; la llamamos m.</p>
+<figure class="fig"><svg viewBox="0 0 760 316" role="img" aria-label="La Ep de A acaba como calor: 18 % en la rampa y 82 % en el horizontal" font-size="13"><defs><marker id="d2-p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-categorical-1)"></path></marker><marker id="d2-n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-categorical-2)"></path></marker><marker id="d2-f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-categorical-3)"></path></marker><marker id="d2-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-axis)"></path></marker></defs><text x="24" y="28" font-size="15" font-weight="600" style="fill:var(--cds-text-primary)">La Ep de A acaba como calor: 18 % en la rampa y 82 % en el horizontal</text><text x="24" y="48" font-size="11.5" style="fill:var(--cds-text-secondary)">Selectividad 2 · recorrido A → B → C con las distancias a escala; las fuerzas, no</text><g><rect x="120" y="250" width="608" height="14" style="fill:var(--cds-chart-reference-tint)"></rect><line x1="120" y1="250" x2="728" y2="250" stroke="var(--cds-chart-axis)" stroke-width="1.25"></line></g><g><polygon points="120,150 120,250 293.2,250" stroke-width="1.25" style="fill:var(--cds-chart-reference-tint);stroke:var(--cds-chart-axis)"></polygon><path d="M253.2 250A40 40 0 0 1 258.6 230" fill="none" stroke-width="1.25" style="stroke:var(--cds-chart-axis)"></path><text x="238" y="243" text-anchor="middle" font-size="11.5" style="fill:var(--cds-text-primary)">30°</text><text x="112" y="204" text-anchor="end" style="fill:var(--cds-text-primary)">h = 1 m</text><text x="162.6" y="156.1" text-anchor="middle" transform="rotate(30 162.6 156.1)" style="fill:var(--cds-text-primary)">AB = 2 m</text></g><g><polygon points="209.3,155.4 243.9,175.4 223.9,210 189.3,190" fill="none" stroke-width="1.5" style="stroke:var(--cds-text-primary)"></polygon><line x1="216.6" y1="182.7" x2="216.6" y2="242.7" stroke="var(--cds-chart-categorical-1)" stroke-width="2" marker-end="url(#d2-p)"></line><line x1="216.6" y1="182.7" x2="242.6" y2="137.7" stroke="var(--cds-chart-categorical-2)" stroke-width="2" marker-end="url(#d2-n)"></line><line x1="208.6" y1="196.5" x2="161" y2="169" stroke="var(--cds-chart-categorical-3)" stroke-width="2" marker-end="url(#d2-f)"></line><line x1="151.7" y1="115.2" x2="190.7" y2="137.7" stroke="var(--cds-chart-axis)" stroke-width="2" marker-end="url(#d2-a)"></line><text x="209" y="246" text-anchor="end" style="fill:var(--cds-text-primary)">P</text><text x="250" y="140" style="fill:var(--cds-text-primary)">N</text><text x="158" y="192" text-anchor="end" style="fill:var(--cds-text-primary)">Fr</text><text x="168" y="114" text-anchor="middle" style="fill:var(--cds-text-secondary)">v</text></g><g><rect x="560" y="210" width="40" height="40" fill="none" stroke-width="1.5" style="stroke:var(--cds-text-primary)"></rect><line x1="580" y1="230" x2="580" y2="186" stroke="var(--cds-chart-categorical-2)" stroke-width="2" marker-end="url(#d2-n)"></line><line x1="580" y1="230" x2="580" y2="274" stroke="var(--cds-chart-categorical-1)" stroke-width="2" marker-end="url(#d2-p)"></line><line x1="578" y1="246" x2="525" y2="246" stroke="var(--cds-chart-categorical-3)" stroke-width="2" marker-end="url(#d2-f)"></line><line x1="610" y1="224" x2="660" y2="224" stroke="var(--cds-chart-axis)" stroke-width="2" marker-end="url(#d2-a)"></line><text x="588" y="192" style="fill:var(--cds-text-primary)">N</text><text x="588" y="276" style="fill:var(--cds-text-primary)">P</text><text x="517" y="244" text-anchor="end" style="fill:var(--cds-text-primary)">Fr</text><text x="635" y="216" text-anchor="middle" style="fill:var(--cds-text-secondary)">v</text></g><g><circle cx="120" cy="150" r="3.5" style="fill:var(--cds-text-primary)"></circle><circle cx="293.2" cy="250" r="3.5" style="fill:var(--cds-text-primary)"></circle><circle cx="693.2" cy="250" r="3.5" style="fill:var(--cds-text-primary)"></circle><text x="112" y="154" text-anchor="end" style="fill:var(--cds-text-primary)">A · vA = 0</text><text x="293" y="292" text-anchor="middle" style="fill:var(--cds-text-primary)">B · vB = 4 m/s</text><text x="493" y="292" text-anchor="middle" style="fill:var(--cds-text-primary)">BC = 4 m</text><text x="693" y="292" text-anchor="middle" style="fill:var(--cds-text-primary)">C · vC = 0</text></g></svg><figcaption>Selectividad 2 · recorrido A → B → C y fuerzas en cada tramo</figcaption></figure>
+<p>En la rampa el rozamiento apunta hacia arriba del plano y en el horizontal hacia atrás: en los dos tramos se opone a v.</p>
+<p class="sub"><strong>a) Fuerzas en el plano inclinado y coeficiente de rozamiento</strong></p>
+<p>Mientras baja actúan el peso P (vertical, hacia abajo), la normal N = m·g·cos 30° (perpendicular al plano, hacia fuera) y el rozamiento Fr = μ·m·g·cos 30°, paralelo al plano y <strong>hacia arriba</strong>, porque el cuerpo baja.</p>
+<p><strong>Qué herramienta usar.</strong> Conocemos la velocidad en dos puntos (A y B) y la distancia entre ellos, pero no el tiempo. Ese es justo el caso de la ecuación de trabajo: relaciona velocidades y posiciones sin pasar por el tiempo.</p>
+<p class="eq"><strong>hA = dAB · sen 30° = 2 · 0,5 = 1 m</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué?</strong> Necesitamos la altura de A para su energía potencial. Tomamos h = 0 en el plano horizontal (el punto más bajo), así que Ep,B = 0.</p>
+</blockquote>
+<p>Ecuación de trabajo de A a B (el rozamiento es la única fuerza no conservativa que trabaja):</p>
+<p class="eq"><strong>0 + m·g·hA − μ·m·g·cos α·dAB = ½·m·vB² + 0</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué cada término?</strong> Ec,A = 0 porque parte del reposo; Ep,B = 0 porque B está en el nivel de referencia; el rozamiento va con signo menos porque su trabajo es negativo (φ = 180°). La única incógnita es μ.</p>
+</blockquote>
+<p class="eq"><strong>μ = (g·hA − ½·vB²) / (g·cos α·dAB) = 1,8 / 16,97 ≈ 0,106</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué?</strong> La masa aparece en todos los términos: dividimos toda la ecuación entre m y desaparece. Por eso no hace falta conocerla en este apartado. Después se despeja μ.</p>
+</blockquote>
+<p>Lectura física, por cada kilogramo: había 9,8 J de energía potencial; llegan 8 J como energía cinética y 1,8 J (el 18 %) se disipan como calor.</p>
+<p>Coherencia: μ = 0,106 &lt; tg 30° = 0,577, así que el cuerpo puede empezar a deslizar desde el reposo, como dice el enunciado.</p>
+<p class="sub"><strong>b) Balance energético en el plano horizontal y fuerza de rozamiento</strong></p>
+<ul>
+<li>La altura no cambia: ΔEp = 0.</li>
+<li>El peso y la normal son perpendiculares al desplazamiento: no trabajan.</li>
+<li>Solo trabaja el rozamiento, en contra del movimiento: toda la energía cinética que traía en B se transforma en energía térmica.</li>
+</ul>
+<p class="eq"><strong>½ · m · vB² − Fr · dBC = 0 ⟹ Fr = m · vB² / (2 · dBC) = m · 4² / (2 · 4) = 2 · m</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué?</strong> Es la ecuación de trabajo de B a C con ΔEp = 0, que se reduce al teorema de la energía cinética: toda la Ec que traía en B se la quita el rozamiento en 4 m.</p>
+</blockquote>
+<p>Como el enunciado no da la masa, la fuerza solo puede darse en función de m: 2 N por cada kilogramo (por ejemplo, 2 N si m = 1 kg). Sí salen como números la deceleración, a = Fr/m = 2 m/s², y el coeficiente en el plano horizontal:</p>
+<p class="eq"><strong>μ&#39; = Fr / N = Fr / (m · g) = 2 · m / (9,8 · m) ≈ 0,204</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué?</strong> En el plano horizontal no hay inclinación, así que N = m·g (y no m·g·cos α). La masa se simplifica y el coeficiente sale como número.</p>
+</blockquote>
+<p>Observación: μ&#39; ≈ 0,20 es casi el doble que en la rampa (0,106), así que las dos superficies son distintas. Con μ = 0,106 en el horizontal, el cuerpo habría recorrido v²/(2·μ·g) ≈ 7,7 m, no 4 m.</p>
+
+<h2 id="simulacion">Simulación</h2>
+<p>La simulación usa m = 1 kg (el enunciado no da la masa) y los dos coeficientes calculados: llega a la base a 4 m/s y se para a 4 m.</p>
+
+<div class="widget" data-widget="plano" data-config='{"titulo":"Simulación · 6.10 · Selectividad 2","escenario":"baja","m":1,"alpha":30,"h":1,"mu":0.106,"mu1":0.204,"suelo":true,"v0":0,"controles":["m","mu","mu1"]}'></div>
+    <nav class="pager" aria-label="Anterior y siguiente"><a href="../6-9/"><small>Anterior</small>6.9 · Selectividad 1</a><a class="mid" href="../#e-6-10">Todos los ejercicios</a><a href="../6-11/" style="text-align:right"><small>Siguiente</small>6.11 · Selectividad 3</a></nav>
+    </main>
+    <aside class="toc" aria-label="En esta página"><h2>En esta página</h2><ol><li><a href="#enunciado">Enunciado</a></li><li><a href="#resultado">Resultado</a></li><li><a href="#solucion">Solución</a></li><li><a href="#simulacion">Simulación</a></li></ol></aside>
+  </div>
+  <footer>Material de estudio. Si el enunciado no da g, se usa 9,8 m/s². Para imprimir, usa la opción de imprimir del navegador.</footer>
+</div>
+<script src="../../../../assets/widgets/nucleo.js" defer></script>
+<script src="../../../../assets/widgets/plano.js" defer></script>
+</body>
+</html>

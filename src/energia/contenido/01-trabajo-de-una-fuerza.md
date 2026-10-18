@@ -5,6 +5,7 @@ nombre: Trabajo de una fuerza
 corto: Trabajo
 eyebrow: Categoría 1
 desc: Con módulos y ángulo o con vectores: el producto escalar y el signo del trabajo.
+resueltos: 1.1, 1.4
 ---
 ## Idea clave: el trabajo de una fuerza constante
 

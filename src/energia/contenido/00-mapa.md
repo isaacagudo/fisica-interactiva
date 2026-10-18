@@ -4,7 +4,7 @@ titulo: Trabajo, potencia y energía
 eyebrow: Mapa del tema
 desc: Todos los ejercicios del tema por categorías: enunciados para practicar, resultados para comprobar y soluciones paso a paso con simulaciones.
 ---
-Todos los ejercicios de los apuntes del tema, ordenados en 8 categorías, y en cada categoría **ejercicios nuevos para practicar** (marcados como «Nuevo») y, en planos inclinados, los cuatro de Selectividad. Cada categoría empieza con su idea clave y después da la lista de **ejercicios propuestos**: primero se intentan en la libreta y después se comprueban con «Ver solo el resultado» o con la **solución paso a paso**, que lleva el diagrama, el porqué de cada fórmula, una comprobación y, cuando tiene sentido, una simulación con los datos del ejercicio.
+Todos los ejercicios de los apuntes del tema, ordenados en 8 categorías. Cada categoría tiene su **idea clave** (la teoría que hace falta) y **dos ejemplos resueltos** paso a paso con su simulación. El resto de los ejercicios está en la sección **[Ejercicios](ejercicios/)**, agrupados por temática y sin teoría en medio, junto con ejercicios nuevos para practicar más y los cuatro de Selectividad de planos inclinados: primero se intentan en la libreta y después se comprueban con «Ver solo el resultado» o con la solución paso a paso.
 
 Cómo se citan los ejercicios: **Teoría** = los que aparecen dentro de la teoría (1 a 19), **Ejercicios** = la lista de las páginas 10 y 11 (1 a 10), **Cuestiones** = «Cuestiones y ejercicios» de las páginas 11 y 12 (1 a 12) y **Repaso** = «Ejercicios de repaso» de la página 13 (1 a 5). Si el enunciado no da g, se usa **g = 9,8 m/s²**.
 

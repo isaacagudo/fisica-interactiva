@@ -5,6 +5,7 @@ nombre: Planos inclinados con rozamiento
 corto: Planos inclinados
 eyebrow: Categoría 6
 desc: Subir, bajar y volver: la ecuación de trabajo y energía.
+resueltos: 6.1, 6.2
 ---
 ## Idea clave: las cuatro fórmulas del plano inclinado
 

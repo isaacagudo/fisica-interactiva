@@ -5,6 +5,7 @@ nombre: Energía cinética: teorema de las fuerzas vivas
 corto: Energía cinética
 eyebrow: Categoría 3
 desc: Frenadas, balas y fuerzas medias: W total = ΔEc.
+resueltos: 3.1, 3.2
 ---
 ## Idea clave: el trabajo total cambia la energía cinética
 

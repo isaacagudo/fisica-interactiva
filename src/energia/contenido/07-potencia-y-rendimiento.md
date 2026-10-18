@@ -5,6 +5,7 @@ nombre: Potencia, rendimiento y consumo
 corto: Potencia
 eyebrow: Categoría 7
 desc: Vatios, caballos, kWh, euros y rendimiento.
+resueltos: 7.2, 7.4
 ---
 ## Idea clave: potencia es trabajo por segundo; rendimiento, la parte que se aprovecha
 

@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>5.4 · Muelle que se alarga 2 cm con una pesa de 500 g · Física interactiva</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../../../../assets/base.css">
+<style>
+:root{--c-a:#7b4fd6;--c-k:#b4407e;--axis:#8793a6}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--c-a:#b39bff;--c-k:#f08cc0;--axis:#8e9ab0}}
+:root[data-theme="dark"]{--c-a:#b39bff;--c-k:#f08cc0;--axis:#8e9ab0}
+.fig{--cds-text-primary:var(--ink);--cds-text-secondary:var(--ink-2);--cds-chart-axis:var(--axis);--cds-chart-grid:var(--rule);
+  --cds-chart-reference-tint:var(--plane);--cds-chart-categorical-1:var(--c-p);--cds-chart-categorical-2:var(--c-n);
+  --cds-chart-categorical-3:var(--c-fr);--cds-chart-categorical-4:var(--c-a);--cds-chart-categorical-5:var(--c-k);
+  margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
+.fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
+.fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
+header.top{display:grid;gap:8px;margin:6px 0 18px}
+.cats{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 22px}
+.cats a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.cats a:hover{border-color:var(--ink-2);color:var(--ink)}
+.cats a[aria-current="page"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+.cats a.ej{border-color:var(--c-p);color:var(--c-p)}
+.cats a.ej[aria-current="page"]{background:var(--c-p);color:var(--sheet)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+@media (min-width:1000px){.layout{grid-template-columns:minmax(0,760px) 1fr}}
+.toc{display:none}
+@media (min-width:1000px){.toc{display:block;position:sticky;top:16px;align-self:start;font-size:13.5px;max-height:calc(100vh - 32px);overflow:auto}
+  .toc h2{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:0 0 8px}
+  .toc ol{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+  .toc a{color:var(--ink-2);text-decoration:none;line-height:1.3;display:block}
+  .toc a:hover{color:var(--ink)}
+  .toc .sep{margin-top:8px;font-weight:700;color:var(--ink)}}
+.doc{min-width:0}
+.doc>h2:first-child{border-top:0;margin-top:0;padding-top:0}
+.doc h2{font-size:1.28rem;margin:38px 0 10px;padding-top:16px;border-top:1px solid var(--rule);scroll-margin-top:12px}
+.doc h3{font-size:1.06rem;margin:26px 0 8px}
+.doc p{margin:10px 0}
+.doc p.eq{background:var(--sheet);border:1px solid var(--rule);border-left:3px solid var(--c-p);border-radius:8px;padding:9px 12px;overflow-x:auto}
+.doc p.sub{margin:22px 0 4px}
+.doc p.res{background:var(--hl);border-radius:8px;padding:8px 12px}
+.doc blockquote.why{margin:10px 0 14px;padding:8px 14px;border-left:3px solid var(--rule);background:color-mix(in srgb,var(--sheet) 70%,transparent);border-radius:0 8px 8px 0;color:var(--ink)}
+.doc blockquote.why p{margin:4px 0}
+.doc ul,.doc ol{padding-left:1.3em}
+.doc li{margin:4px 0}
+.table-wrap{overflow-x:auto;margin:12px 0;border:1px solid var(--rule);border-radius:10px;background:var(--sheet)}
+.doc table{border-collapse:collapse;width:100%;font-size:14.5px}
+.doc th,.doc td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid var(--rule)}
+.doc th{font-weight:700;background:var(--paper)}
+.doc tr:last-child td{border-bottom:0}
+.grid-cats{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));margin:18px 0 8px}
+.grid-cats a{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:start;text-decoration:none;color:inherit}
+.grid-cats a:hover{border-color:var(--ink-2)}
+.grid-cats .n{font:700 1.5rem/44px var(--f-display);text-align:center;border-radius:10px;border:1px solid var(--rule)}
+.grid-cats h3{font-size:1rem;line-height:1.25}
+.grid-cats p{margin:4px 0 0;font-size:13.5px;color:var(--ink-2)}
+/* ejercicios propuestos */
+.metodo{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 14px;font-size:14.5px}
+.metodo ol{margin:6px 0 2px}
+.props{display:grid;gap:14px;margin:14px 0}
+.prop{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:14px 16px;scroll-margin-top:12px}
+.prop .cab{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-bottom:6px}
+.prop .num{font:700 1.05rem var(--f-display)}
+.prop .src{font:600 12px var(--f-mono);color:var(--ink-2);letter-spacing:.02em}
+.tag{font:600 11px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;border:1px solid currentColor;border-radius:999px;padding:1px 7px}
+.tag.nuevo{color:var(--c-n)}
+.tag.sel{color:var(--c-a)}
+.tag.sim{color:var(--c-p)}
+.prop h3{font-size:1rem;margin:0 0 6px;line-height:1.3}
+.prop .enun p{margin:6px 0}
+.prop .fig{margin:10px 0 4px}
+.prop .acc{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;margin-top:10px}
+.prop details{flex:1 1 260px;min-width:0}
+.prop summary{cursor:pointer;font:600 13.5px var(--f-body);color:var(--ink-2);min-height:38px;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rule);border-radius:9px;padding:0 12px;list-style:none}
+.prop summary::-webkit-details-marker{display:none}
+.prop summary::before{content:"▸";font-size:12px}
+.prop details[open] summary::before{content:"▾"}
+.prop details[open] summary{color:var(--ink)}
+.prop details p{background:var(--hl);border-radius:8px;padding:8px 12px;margin:8px 0 0}
+.prop .btn{margin-left:auto}
+@media (max-width:520px){.prop .btn{margin-left:0;width:100%}}
+/* ejemplos resueltos dentro de cada apartado */
+.ejemplo{margin:18px 0 0;padding-top:4px}
+.ejemplo>h3{font-size:1.12rem;margin:30px 0 10px;scroll-margin-top:12px}
+.ejemplo>h3 .src{font:600 12px var(--f-mono);color:var(--ink-2);margin-left:6px}
+.ejemplo h4{font:700 .82rem var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:22px 0 6px}
+.ejemplo+.ejemplo{border-top:1px dashed var(--rule);margin-top:30px}
+.ir-ej{display:grid;gap:8px;background:var(--sheet);border:1px solid var(--c-p);border-radius:12px;padding:14px 16px;margin:14px 0}
+.ir-ej p{margin:0}
+.ir-ej .lista{font-size:14px;color:var(--ink-2);margin:0;padding-left:0;list-style:none;display:grid;gap:3px}
+.ir-ej .lista .tag{font-size:10px;padding:0 6px}
+.ir-ej .btn{justify-self:start}
+.grupo-ej{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 12px}
+.grupo-ej a{font-size:14px}
+.filtro{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.filtro a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.filtro a:hover{border-color:var(--ink-2);color:var(--ink)}
+/* página de solución */
+.enun-box{background:var(--sheet);border:1px solid var(--rule);border-left:4px solid var(--ink);border-radius:12px;padding:12px 16px}
+.enun-box .lbl{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.enun-box p{margin:6px 0}
+.res-box{background:var(--hl);border-radius:12px;padding:10px 16px;margin:14px 0}
+.res-box .lbl{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase}
+.res-box p{margin:4px 0}
+.saltos{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.saltos a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.doc .widget{margin:16px 0 8px}
+.doc .widget:empty{display:none}
+/* índice con resultados ocultos */
+.ver-res{display:inline-flex;align-items:center;gap:8px;font:600 14px var(--f-body);cursor:pointer;margin:4px 0}
+.ver-res input{width:18px;height:18px;accent-color:var(--c-p)}
+.indice td.r{transition:filter .2s}
+.indice td:first-child{white-space:nowrap}
+.indice td small{display:block;color:var(--ink-2);font-size:12px}
+.indice tr.grupo th{background:var(--plane);font-size:14px}
+.indice tr.grupo a{color:inherit}
+.ver-res:has(input:not(:checked)) + .table-wrap td.r{filter:blur(5px);user-select:none}
+.pager{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:40px;border-top:1px solid var(--rule);padding-top:16px}
+.pager a{text-decoration:none;max-width:48%}
+.pager .mid{align-self:center}
+.pager small{display:block;color:var(--ink-2);font-size:12px}
+footer{margin-top:36px;color:var(--ink-2);font-size:13px}
+@media print{.cats,.toc,.pager,.crumbs,.widget,.saltos,.prop .btn,.prop summary{display:none}.layout{display:block}.fig,.table-wrap,p.eq,.prop{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="page">
+  <nav class="crumbs" aria-label="Ruta"><a href="../../../../">Física interactiva</a><span aria-hidden="true">›</span><a href="../../">Trabajo, potencia y energía</a><span aria-hidden="true">›</span><a href="../">Ejercicios</a><span aria-hidden="true">›</span><span>5.4</span></nav>
+  <header class="top"><div class="eyebrow">Solución · Repaso 4 · Muelles: energía potencial elástica</div><h1>5.4 · Muelle que se alarga 2 cm con una pesa de 500 g</h1></header>
+  <nav class="cats" aria-label="Categorías del tema"><a href="../../">Mapa del tema</a><a class="ej" href="../../ejercicios/" aria-current="page">Ejercicios</a><a href="../../trabajo-de-una-fuerza/">1 · Trabajo</a><a href="../../trabajo-con-rozamiento/">2 · Rozamiento</a><a href="../../energia-cinetica/">3 · Energía cinética</a><a href="../../conservacion/">4 · Conservación</a><a href="../../muelles/">5 · Muelles</a><a href="../../planos-inclinados/">6 · Planos inclinados</a><a href="../../potencia-y-rendimiento/">7 · Potencia</a><a href="../../cuestiones/">8 · Cuestiones</a></nav>
+  <div class="layout">
+    <main class="doc">
+<nav class="saltos" aria-label="Saltar a"><a href="#simulacion">Ir a la simulación ↓</a><a href="../#e-5-4">Volver a los ejercicios</a><a href="../../muelles/">Teoría: Muelles</a></nav><div class="enun-box" id="enunciado"><div class="lbl">Enunciado</div><p>Un muelle se alarga 2 cm al colgar de él una pesa de 500 g. Colocamos el resorte sobre el suelo y dejamos caer sobre él la pesa de 500 g desde una altura de 1 m, medida desde la parte más alta del resorte. Calcula: a) la constante elástica del resorte; b) la máxima deformación que experimenta el resorte.</p>
+</div><figure class="fig"><svg viewBox="0 0 760 300" role="img" aria-label="Repaso 4 · figura del enunciado" font-size="13"><defs><marker id="e_r4-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-axis)"></path></marker></defs><text x="24" y="30" font-size="15" font-weight="600" style="fill:var(--cds-text-primary)">Repaso 4 · figura del enunciado</text><line x1="250" y1="268" x2="470" y2="268" stroke="var(--cds-chart-axis)" stroke-width="1.5"></line><path d="M360 268L360 258L372 255.9L348 251.8L372 247.6L348 243.4L372 239.2L348 235.1L372 230.9L348 226.8L372 222.6L348 218.4L372 214.2L348 210.1L360 208L360 198" fill="none" stroke-width="2" style="stroke:var(--cds-chart-categorical-5)"></path><line x1="338" y1="198" x2="382" y2="198" stroke="var(--cds-chart-categorical-5)" stroke-width="3"></line><circle cx="360" cy="78" r="18" stroke-width="1.8" style="fill:var(--cds-chart-reference-tint);stroke:var(--cds-text-primary)"></circle><line x1="330" y1="98" x2="390" y2="98" stroke="var(--cds-chart-axis)" stroke-width="1" stroke-dasharray="4 4"></line><line x1="330" y1="198" x2="400" y2="198" stroke="var(--cds-chart-axis)" stroke-width="1" stroke-dasharray="4 4"></line><line x1="410" y1="98" x2="410" y2="198" stroke="var(--cds-chart-axis)" stroke-width="1" marker-start="url(#e_r4-a)" marker-end="url(#e_r4-a)"></line><text x="422" y="153" font-size="15" font-weight="600" style="fill:var(--cds-text-primary)">h = 1 m</text><text x="24" y="292" font-size="12" style="fill:var(--cds-text-secondary)">h se mide desde la parte de arriba del resorte, sin comprimir</text></svg><figcaption>Figura del enunciado</figcaption></figure><div class="res-box" id="resultado"><div class="lbl">Resultado</div><p>a) k = 245 N/m · b) x máx = 0,221 m (22,1 cm).</p></div>
+<h2 id="solucion">Solución paso a paso</h2>
+<p>Datos: m = 500 g = 0,5 kg · alargamiento en equilibrio x₀ = 2 cm = 0,02 m · caída desde h = 1 m sobre lo alto del resorte · g = 9,8 m/s².</p>
+<figure class="fig"><svg viewBox="0 0 760 470" role="img" aria-label="Colgada en reposo se estira 2 cm; soltada desde 1 m comprime 22 cm" font-size="13"><defs><marker id="w54-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-axis)"></path></marker><marker id="w54-k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-categorical-5)"></path></marker><marker id="w54-p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cds-chart-categorical-1)"></path></marker></defs><text x="24" y="30" font-size="15" font-weight="600" style="fill:var(--cds-text-primary)">Colgada en reposo se estira 2 cm; soltada desde 1 m comprime 22 cm</text><text x="24" y="50" font-size="11.5" style="fill:var(--cds-text-secondary)">Repaso 4 · pesa de 500 g · a) equilibrio: k·x₀ = m·g · b) caída: m·g·(h + x) = ½·k·x²</text><g><line x1="80" y1="96" x2="260" y2="96" stroke="var(--cds-chart-axis)" stroke-width="2"></line><path d="M170 96L170 106L161 109.6L179 116.7L161 123.9L179 131L161 138.1L179 145.3L161 152.4L179 159.6L161 166.7L179 173.9L161 181L179 188.1L161 195.3L179 202.4L170 206L170 216" fill="none" stroke-width="1.75" style="stroke:var(--cds-chart-categorical-5)"></path><line x1="130" y1="196" x2="210" y2="196" stroke="var(--cds-chart-axis)" stroke-width="1" stroke-dasharray="3 3"></line><rect x="146" y="216" width="48" height="40" rx="3" fill="none" stroke-width="1.5" style="stroke:var(--cds-text-primary)"></rect><line x1="150" y1="236" x2="150" y2="176" stroke="var(--cds-chart-categorical-5)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w54-k)"></line><text x="142" y="184" text-anchor="end" font-size="11.5" style="fill:var(--cds-text-primary)">k·x₀ = 4,9 N</text><line x1="170" y1="236" x2="170" y2="300" stroke="var(--cds-chart-categorical-1)" stroke-width="2.2" stroke-dasharray="none" marker-end="url(#w54-p)"></line><text x="180" y="298" font-size="11.5" style="fill:var(--cds-text-primary)">P = m·g = 4,9 N</text><line x1="232" y1="196" x2="232" y2="216" stroke="var(--cds-chart-axis)" stroke-width="1" marker-start="url(#w54-a)" marker-end="url(#w54-a)"></line><text x="240" y="210" font-size="11.5" style="fill:var(--cds-text-primary)">x₀ = 2 cm</text><text x="170" y="340" text-anchor="middle" font-weight="600" style="fill:var(--cds-text-primary)">a) En equilibrio</text><text x="170" y="360" text-anchor="middle" font-size="11.5" style="fill:var(--cds-text-primary)">k = m·g / x₀ = 245 N/m</text></g><g><line x1="380" y1="420" x2="720" y2="420" stroke="var(--cds-chart-axis)" stroke-width="1.5"></line><path d="M560 420L560 410L569 407.1L551 401.2L569 395.4L551 389.6L569 383.8L551 377.9L569 372.1L551 366.2L569 360.4L551 354.6L569 348.8L551 342.9L560 340L560 330" fill="none" stroke-width="1.75" style="stroke:var(--cds-chart-categorical-5)"></path><line x1="540" y1="330" x2="580" y2="330" stroke="var(--cds-chart-categorical-5)" stroke-width="2"></line><rect x="536" y="150" width="48" height="40" rx="3" fill="none" stroke-width="1.5" style="stroke:var(--cds-text-primary)"></rect><rect x="536" y="340" width="48" height="40" rx="3" fill="none" stroke-width="1.25" stroke-dasharray="4 4" style="stroke:var(--cds-chart-axis)"></rect><line x1="500" y1="190" x2="500" y2="330" stroke="var(--cds-chart-axis)" stroke-width="1" marker-start="url(#w54-a)" marker-end="url(#w54-a)"></line><text x="492" y="260" text-anchor="end" font-size="11.5" style="fill:var(--cds-text-primary)">h = 1 m</text><line x1="590" y1="330" x2="650" y2="330" stroke="var(--cds-chart-axis)" stroke-width="1" stroke-dasharray="3 3"></line><line x1="640" y1="330" x2="640" y2="380" stroke="var(--cds-chart-axis)" stroke-width="1" marker-start="url(#w54-a)" marker-end="url(#w54-a)"></line><text x="648" y="359" font-size="11.5" style="fill:var(--cds-text-primary)">x = 0,221 m</text><text x="560" y="96" text-anchor="middle" font-weight="600" style="fill:var(--cds-text-primary)">b) Soltada desde 1 m</text><text x="560" y="116" text-anchor="middle" font-size="11.5" style="fill:var(--cds-text-secondary)">baja h + x antes de pararse</text></g></svg><figcaption>Repaso 4 · equilibrio y caída sobre el resorte</figcaption></figure>
+<p>A la izquierda el muelle sostiene la pesa en reposo; a la derecha la pesa cae y lo comprime mucho más.</p>
+<p class="sub"><strong>a) Constante elástica</strong></p>
+<p><strong>Qué herramienta usar.</strong> La pesa cuelga quieta: es un problema de equilibrio (dinámica), no de energía.</p>
+<p class="eq"><strong>ΣF = 0: k·x₀ − m·g = 0 ⟹ k = m·g / x₀ = 0,5 · 9,8 / 0,02 = 245 N/m</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué no ½·k·x² = m·g·x?</strong> Porque la pesa no se ha soltado de golpe: se ha colgado con cuidado hasta que queda quieta. En equilibrio, la fuerza del muelle (ley de Hooke) compensa el peso. Usar energía aquí daría el doble de k, un error típico.</p>
+</blockquote>
+<p class="sub"><strong>b) Máxima deformación al dejarla caer desde 1 m</strong></p>
+<p><strong>Qué herramienta usar.</strong> Ahora sí hay movimiento: conservación de la energía con Ep gravitatoria y elástica, como en 5.1 (h = 0 en el punto de máxima compresión).</p>
+<p class="eq"><strong>m·g·(h + x) = ½·k·x² ⟹ 0,5 · 9,8 · (1 + x) = ½ · 245 · x² ⟹ 122,5·x² − 4,9·x − 4,9 = 0</strong></p>
+<p class="eq"><strong>x = [4,9 + √(4,9² + 4 · 122,5 · 4,9)] / (2 · 122,5) = (4,9 + 49,24) / 245 = 0,221 m</strong></p>
+<blockquote class="why">
+<p><strong>¿Por qué h + x?</strong> La pesa baja 1 m hasta tocar el resorte y luego x más mientras lo comprime. Aquí la x no es despreciable: si se aproxima h + x ≈ h, sale x = 0,20 m, un 10 % menos.</p>
+</blockquote>
+<p><strong>Comprobación.</strong> Energía perdida por la pesa: 0,5 · 9,8 · 1,221 = 5,98 J. Energía del resorte: ½ · 245 · 0,221² = 5,98 J. Coinciden.</p>
+<p><strong>Sentido físico.</strong> Colgada en reposo, la pesa solo comprime (o estira) 2 cm; caída desde 1 m, lo comprime 22 cm, once veces más. Por eso un golpe deforma mucho más que un peso en reposo.</p>
+
+<h2 id="simulacion">Simulación</h2>
+<p>En el simulador se ven las dos líneas de referencia: en reposo la pesa comprime el resorte 2 cm y, caída desde 1 m, 22,1 cm.</p>
+
+<div class="widget" data-widget="muelle" data-config='{"titulo":"Simulación · 5.4 · Repaso 4","escenario":"vertical","m":0.5,"h":1,"k":245,"v0":0}'></div>
+    <nav class="pager" aria-label="Anterior y siguiente"><a href="../5-3/"><small>Anterior</small>5.3 · Cuestiones 9</a><a class="mid" href="../#e-5-4">Todos los ejercicios</a><a href="../5-5/" style="text-align:right"><small>Siguiente</small>5.5 · Ejercicios 7</a></nav>
+    </main>
+    <aside class="toc" aria-label="En esta página"><h2>En esta página</h2><ol><li><a href="#enunciado">Enunciado</a></li><li><a href="#resultado">Resultado</a></li><li><a href="#solucion">Solución</a></li><li><a href="#simulacion">Simulación</a></li></ol></aside>
+  </div>
+  <footer>Material de estudio. Si el enunciado no da g, se usa 9,8 m/s². Para imprimir, usa la opción de imprimir del navegador.</footer>
+</div>
+<script src="../../../../assets/widgets/muelle.js" defer></script>
+</body>
+</html>

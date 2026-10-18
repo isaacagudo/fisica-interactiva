@@ -5,6 +5,7 @@ nombre: Muelles: energía potencial elástica
 corto: Muelles
 eyebrow: Categoría 5
 desc: Ley de Hooke, ½·k·x² y compresión máxima.
+resueltos: 5.1, 5.2
 ---
 ## Idea clave: un muelle guarda energía al deformarse
 

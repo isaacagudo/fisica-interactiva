@@ -1,7 +1,8 @@
 // Genera las páginas del tema «Trabajo, potencia y energía»:
 //   ../../temas/energia/index.html                    mapa del tema (herramientas, índice, formulario, errores)
-//   ../../temas/energia/<categoría>/index.html         idea clave + ejercicios propuestos (enunciado, resultado oculto, enlace a la solución)
-//   ../../temas/energia/<categoría>/<n-m>/index.html   solución paso a paso de cada ejercicio, con su simulación
+//   ../../temas/energia/<categoría>/index.html         idea clave + dos ejemplos resueltos con simulación + enlace a sus ejercicios
+//   ../../temas/energia/ejercicios/index.html          todos los ejercicios propuestos, por temática, sin teoría
+//   ../../temas/energia/ejercicios/<n-m>/index.html    solución paso a paso de cada ejercicio, con su simulación
 // Fuentes: contenido/*.md (una categoría por fichero; formato descrito en el README) y diagramas/*.jsx.
 // Uso: cd src && npm install && node energia/build.js
 const fs = require('fs'), path = require('path');
@@ -45,7 +46,15 @@ const ficheros = fs.readdirSync(path.join(HERE, 'contenido')).filter(f => f.ends
 const mapa = leer(path.join(HERE, 'contenido', ficheros[0]));
 const cats = ficheros.slice(1).map(f => leer(path.join(HERE, 'contenido', f)));
 const porId = {};
-cats.forEach((c, i) => c.ejercicios.forEach(e => { e.cat = c; e.catN = i + 1; porId[e.id] = e; }));
+cats.forEach((c, i) => {
+  const res = (c.resueltos || '').split(',').map(s => s.trim()).filter(Boolean);
+  c.ejercicios.forEach(e => { e.cat = c; e.catN = i + 1; e.resuelto = res.includes(e.id); porId[e.id] = e; });
+  c.ejemplos = c.ejercicios.filter(e => e.resuelto);
+  c.practica = c.ejercicios.filter(e => !e.resuelto);
+});
+// los ejemplos resueltos están en la página de su apartado; el resto, en la sección de ejercicios (base = ruta hasta temas/energia/)
+const url = (e, base) => e.resuelto ? `${base}${e.cat.slug}/#ej-${e.id.replace('.', '-')}` : `${base}ejercicios/${e.id.replace('.', '-')}/`;
+const practica = cats.flatMap(c => c.practica);
 
 // ---------------------------------------------------------------- diagramas: JSX -> SVG estático con colores en style (Safari)
 function diagram(name) {
@@ -70,7 +79,7 @@ const slugify = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').re
 // enlaza «ejercicio 2.1», «ejercicios 2.1 y 6.1» con la página de su solución; base = ruta hasta temas/energia/
 function enlazar(html, base) {
   return html.replace(/(ejercicios?\s+)(\d\.\d{1,2})((?:\s*(?:,|y)\s*\d\.\d{1,2})*)/gi, (m, pre, a, resto) => {
-    const L = id => porId[id] ? `<a href="${base}${porId[id].cat.slug}/${dash(id)}/">${id}</a>` : id;
+    const L = id => porId[id] ? `<a href="${url(porId[id], base)}">${id}</a>` : id;
     return pre + L(a) + resto.replace(/\d\.\d{1,2}/g, L);
   });
 }
@@ -118,6 +127,8 @@ header.top{display:grid;gap:8px;margin:6px 0 18px}
 .cats a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
 .cats a:hover{border-color:var(--ink-2);color:var(--ink)}
 .cats a[aria-current="page"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+.cats a.ej{border-color:var(--c-p);color:var(--c-p)}
+.cats a.ej[aria-current="page"]{background:var(--c-p);color:var(--sheet)}
 .layout{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
 @media (min-width:1000px){.layout{grid-template-columns:minmax(0,760px) 1fr}}
 .toc{display:none}
@@ -175,6 +186,22 @@ header.top{display:grid;gap:8px;margin:6px 0 18px}
 .prop details p{background:var(--hl);border-radius:8px;padding:8px 12px;margin:8px 0 0}
 .prop .btn{margin-left:auto}
 @media (max-width:520px){.prop .btn{margin-left:0;width:100%}}
+/* ejemplos resueltos dentro de cada apartado */
+.ejemplo{margin:18px 0 0;padding-top:4px}
+.ejemplo>h3{font-size:1.12rem;margin:30px 0 10px;scroll-margin-top:12px}
+.ejemplo>h3 .src{font:600 12px var(--f-mono);color:var(--ink-2);margin-left:6px}
+.ejemplo h4{font:700 .82rem var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:22px 0 6px}
+.ejemplo+.ejemplo{border-top:1px dashed var(--rule);margin-top:30px}
+.ir-ej{display:grid;gap:8px;background:var(--sheet);border:1px solid var(--c-p);border-radius:12px;padding:14px 16px;margin:14px 0}
+.ir-ej p{margin:0}
+.ir-ej .lista{font-size:14px;color:var(--ink-2);margin:0;padding-left:0;list-style:none;display:grid;gap:3px}
+.ir-ej .lista .tag{font-size:10px;padding:0 6px}
+.ir-ej .btn{justify-self:start}
+.grupo-ej{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 12px}
+.grupo-ej a{font-size:14px}
+.filtro{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.filtro a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.filtro a:hover{border-color:var(--ink-2);color:var(--ink)}
 /* página de solución */
 .enun-box{background:var(--sheet);border:1px solid var(--rule);border-left:4px solid var(--ink);border-radius:12px;padding:12px 16px}
 .enun-box .lbl{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
@@ -206,7 +233,7 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 // ---------------------------------------------------------------- plantilla de página
 function page({ title, eyebrow, desc, body, toc, depth, current, crumbs, widgets = [], pager }) {
   const up = '../'.repeat(depth), topic = '../'.repeat(depth - 2);
-  const chips = `<a href="${topic}"${current === '' ? ' aria-current="page"' : ''}>Mapa del tema</a>` +
+  const chips = `<a href="${topic}"${current === '' ? ' aria-current="page"' : ''}>Mapa del tema</a><a class="ej" href="${topic}ejercicios/"${current === 'ejercicios' ? ' aria-current="page"' : ''}>Ejercicios</a>` +
     cats.map((c, i) => `<a href="${topic}${c.slug}/"${current === c.slug ? ' aria-current="page"' : ''}>${i + 1} · ${c.corto}</a>`).join('');
   const tocHtml = toc && toc.length ? `<aside class="toc" aria-label="En esta página"><h2>En esta página</h2><ol>${toc.map(h => `<li${h.sep ? ' class="sep"' : ''}><a href="#${h.id}">${h.txt}</a></li>`).join('')}</ol></aside>` : '';
   const scripts = [];
@@ -253,8 +280,8 @@ const esCuestion = c => c.slug === 'cuestiones';
 const catsHtml = `<div class="grid-cats">${cats.map((c, i) =>
   `<a class="card" href="${c.slug}/"><span class="n grid-paper">${i + 1}</span><span><h3>${c.nombre}</h3><p>${c.desc}</p></span></a>`).join('')}</div>`;
 const filas = cats.map((c, i) => `<tr class="grupo"><th colspan="3"><a href="${c.slug}/">${i + 1} · ${esc(c.nombre)}</a></th></tr>` + c.ejercicios.map(e =>
-  `<tr><td><a href="${c.slug}/${dash(e.id)}/">${e.id}</a><small>${esc(e.fuente)}</small></td><td>${inline(e.pide || e.titulo)}</td><td class="r">${e.indice ? inline(e.indice) : esCuestion(c) ? 'Respuesta razonada' : inline(e.resultado || '')}</td></tr>`).join('')).join('');
-const indiceHtml = `<p>${cats.reduce((a, c) => a + c.ejercicios.length, 0)} ejercicios y cuestiones. El número lleva a la solución paso a paso. Los resultados están difuminados para que no los veas sin querer.</p>
+  `<tr><td><a href="${url(e, '')}">${e.id}</a><small>${esc(e.fuente)}${e.resuelto ? ' · resuelto' : ''}</small></td><td>${inline(e.pide || e.titulo)}</td><td class="r">${e.indice ? inline(e.indice) : esCuestion(c) ? 'Respuesta razonada' : inline(e.resultado || '')}</td></tr>`).join('')).join('');
+const indiceHtml = `<p>${cats.reduce((a, c) => a + c.ejercicios.length, 0)} ejercicios y cuestiones. El número lleva a la solución paso a paso (los marcados «resuelto» son los ejemplos de cada apartado). Los resultados están difuminados para que no los veas sin querer.</p>
 <label class="ver-res"><input type="checkbox"> Mostrar los resultados</label>
 <div class="table-wrap indice"><table><thead><tr><th>Ejercicio</th><th>Qué se pide</th><th>Resultado</th></tr></thead><tbody>${filas}</tbody></table></div>`;
 {
@@ -264,68 +291,85 @@ const indiceHtml = `<p>${cats.reduce((a, c) => a + c.ejercicios.length, 0)} ejer
   console.log(path.relative(process.cwd(), f));
 }
 
-// ---------------------------------------------------------------- categorías y soluciones
+// ---------------------------------------------------------------- tarjeta de ejercicio propuesto (sección de ejercicios)
+const tarjeta = (e, base) => {
+  const cuest = esCuestion(e.cat), fig = e.figura ? figura(e.figura, '') : '', h = url(e, base);
+  const acc = cuest
+    ? `<div class="acc"><a class="btn primary" href="${h}">Ver la respuesta razonada →</a></div>`
+    : `<div class="acc"><details><summary>Ver solo el resultado</summary><p>${inline(e.resultado)}</p></details><a class="btn primary" href="${h}">Solución paso a paso →</a></div>`;
+  return `<article class="prop" id="e-${dash(e.id)}"><div class="cab"><span class="num">${e.id}</span>${e.nuevo || /^Selectividad/.test(e.fuente) ? '' : `<span class="src">${esc(e.fuente)}</span>`}${tagHtml(e)}${e.widget ? '<span class="tag sim">Con simulación</span>' : ''}</div>
+<h3>${esc(e.titulo)}</h3><div class="enun">${enlazar(marked.parse(e.enunciado), base)}</div>${fig}${acc}</article>`;
+};
+// bloque con enunciado, resultado, solución y simulación (ejemplos en su apartado y páginas de solución)
+function solucionHtml(e, base, { h, ids }) {
+  const cuest = esCuestion(e.cat), s = render(e.solucion, { base });
+  const fig = e.figura ? figura(e.figura, 'Figura del enunciado') : '';
+  let b = `<div class="enun-box"${ids ? ' id="enunciado"' : ''}><div class="lbl">Enunciado</div>${enlazar(marked.parse(e.enunciado), base)}</div>${fig}`;
+  if (!cuest && e.resultado) b += `<div class="res-box"${ids ? ' id="resultado"' : ''}><div class="lbl">Resultado</div><p>${inline(e.resultado)}</p></div>`;
+  b += `\n<${h}${ids ? ' id="solucion"' : ''}>${cuest ? 'Respuesta razonada' : 'Solución paso a paso'}</${h}>\n${s.html}`;
+  if (e.widget) b += `\n<${h}${ids ? ' id="simulacion"' : ''}>Simulación</${h}>\n${e.simulacion ? marked.parse(e.simulacion) : ''}\n${widgetDiv(e)}`;
+  return b;
+}
+
+// ---------------------------------------------------------------- apartados: idea clave + ejemplos resueltos + enlace a sus ejercicios
 let total = 0;
 cats.forEach((c, ci) => {
   const cuest = esCuestion(c), base = '../';
   const r = render(c.intro, { base });
   const toc = r.heads.slice();
-  const tarjeta = e => {
-    const fig = e.figura ? figura(e.figura, '') : '';
-    const acc = cuest
-      ? `<div class="acc"><a class="btn primary" href="${dash(e.id)}/">Ver la respuesta razonada →</a></div>`
-      : `<div class="acc"><details><summary>Ver solo el resultado</summary><p>${inline(e.resultado)}</p></details><a class="btn primary" href="${dash(e.id)}/">Solución paso a paso →</a></div>`;
-    return `<article class="prop" id="e-${dash(e.id)}"><div class="cab"><span class="num">${e.id}</span>${e.nuevo || /^Selectividad/.test(e.fuente) ? '' : `<span class="src">${esc(e.fuente)}</span>`}${tagHtml(e)}${e.widget ? '<span class="tag sim">Con simulación</span>' : ''}</div>
-<h3>${esc(e.titulo)}</h3><div class="enun">${enlazar(marked.parse(e.enunciado), base)}</div>${fig}${acc}</article>`;
-  };
-  const delPdf = c.ejercicios.filter(e => !e.nuevo && !/^Selectividad/.test(e.fuente));
-  const mas = c.ejercicios.filter(e => e.nuevo || /^Selectividad/.test(e.fuente));
-  const hProp = cuest ? 'Cuestiones propuestas' : 'Ejercicios propuestos', idProp = 'propuestos';
-  let body = r.html + `
-<h2 id="${idProp}">${hProp}</h2>
-<div class="metodo"><strong>Cómo practicar</strong><ol><li>Lee el enunciado y resuélvelo en la libreta${cuest ? ': respuesta corta, razón física con su fórmula y un ejemplo' : ', con el diagrama de fuerzas y las unidades'}.</li><li>${cuest ? 'Compara con la respuesta razonada.' : 'Comprueba el número con «Ver solo el resultado».'}</li><li>${cuest ? 'Si algo no cuadra, vuelve a la idea clave.' : 'Abre la solución paso a paso para revisar el planteamiento, los signos y el porqué de cada fórmula. Si tiene simulación, cambia los datos y mira qué pasa.'}</li></ol></div>
-<p>${cuest ? 'Cuestiones de los apuntes:' : 'Ejercicios de los apuntes de clase:'}</p>
-<div class="props">${delPdf.map(tarjeta).join('\n')}</div>`;
-  toc.push({ id: idProp, txt: hProp, sep: true });
-  delPdf.forEach(e => toc.push({ id: `e-${dash(e.id)}`, txt: `${e.id} · ${e.fuente}` }));
-  if (mas.length) {
-    const sel = mas.some(e => /^Selectividad/.test(e.fuente));
-    body += `
-<h2 id="practicar-mas">Para practicar más</h2>
-<p>${sel ? 'Los cuatro ejercicios de Selectividad de la hoja de planos inclinados y ejercicios nuevos' : 'Ejercicios nuevos'} del mismo tipo, con la solución completa.</p>
-<div class="props">${mas.map(tarjeta).join('\n')}</div>`;
-    toc.push({ id: 'practicar-mas', txt: 'Para practicar más', sep: true });
-    mas.forEach(e => toc.push({ id: `e-${dash(e.id)}`, txt: `${e.id} · ${e.fuente}` }));
-  }
-  const prevC = ci === 0 ? { href: '../', txt: 'Mapa del tema' } : { href: `../${cats[ci - 1].slug}/`, txt: cats[ci - 1].nombre };
-  const nextC = cats[ci + 1] ? { href: `../${cats[ci + 1].slug}/`, txt: cats[ci + 1].nombre } : null;
-  escribir(c.slug, page({ title: esc(c.titulo), eyebrow: c.eyebrow, desc: c.desc, body, toc, depth: 3, current: c.slug,
-    crumbs: [[TEMA, '../'], [c.corto, null]], pager: pagerHtml(prevC, nextC) }));
-  total++;
-
-  // soluciones
-  c.ejercicios.forEach((e, k) => {
-    const sb = '../../';
-    const s = render(e.solucion, { base: sb });
-    const fig = e.figura ? figura(e.figura, 'Figura del enunciado') : '';
-    let body = `<div class="enun-box" id="enunciado"><div class="lbl">Enunciado</div>${enlazar(marked.parse(e.enunciado), sb)}</div>${fig}`;
-    if (!cuest && e.resultado) body += `<div class="res-box" id="resultado"><div class="lbl">Resultado</div><p>${inline(e.resultado)}</p></div>`;
-    const saltos = [];
-    body += `\n<h2 id="solucion">${cuest ? 'Respuesta razonada' : 'Solución paso a paso'}</h2>\n${s.html}`;
-    if (e.widget) {
-      body += `\n<h2 id="simulacion">Simulación</h2>\n${e.simulacion ? marked.parse(e.simulacion) : ''}\n${widgetDiv(e)}`;
-      saltos.push(['simulacion', 'Ir a la simulación']);
+  let body = r.html;
+  if (c.ejemplos.length) {
+    const hEj = cuest ? 'Cuestiones resueltas' : 'Ejemplos resueltos';
+    body += `\n<h2 id="ejemplos">${hEj}</h2>\n<p>${cuest ? 'Dos cuestiones de los apuntes respondidas con el esquema de arriba.' : 'Dos ejercicios de los apuntes resueltos paso a paso, con su simulación: léelos antes de pasar a los ejercicios.'}</p>`;
+    toc.push({ id: 'ejemplos', txt: hEj, sep: true });
+    for (const e of c.ejemplos) {
+      body += `\n<section class="ejemplo"><h3 id="ej-${dash(e.id)}">${e.id} · ${esc(e.titulo)}<span class="src">${esc(e.fuente)}</span></h3>\n${solucionHtml(e, base, { h: 'h4', ids: false })}</section>`;
+      toc.push({ id: `ej-${dash(e.id)}`, txt: `${e.id} · ${e.fuente}` });
     }
-    const top = saltos.length ? `<nav class="saltos" aria-label="Saltar a">${saltos.map(([id, t]) => `<a href="#${id}">${t} ↓</a>`).join('')}<a href="../#e-${dash(e.id)}">Volver a la lista</a></nav>` : `<nav class="saltos" aria-label="Saltar a"><a href="../#e-${dash(e.id)}">Volver a la lista</a></nav>`;
-    body = top + body;
-    const toc = [{ id: 'enunciado', txt: 'Enunciado' }].concat(!cuest && e.resultado ? [{ id: 'resultado', txt: 'Resultado' }] : [], [{ id: 'solucion', txt: cuest ? 'Respuesta' : 'Solución' }], e.widget ? [{ id: 'simulacion', txt: 'Simulación' }] : []);
-    const prev = c.ejercicios[k - 1], next = c.ejercicios[k + 1];
-    const pg = pagerHtml(prev ? { href: `../${dash(prev.id)}/`, txt: `${prev.id} · ${prev.fuente}` } : null, next ? { href: `../${dash(next.id)}/`, txt: `${next.id} · ${next.fuente}` } : null, { href: `../#e-${dash(e.id)}`, txt: 'Todos los ejercicios' });
-    escribir(path.join(c.slug, dash(e.id)), page({
-      title: `${e.id} · ${esc(e.titulo)}`, eyebrow: `${cuest ? 'Respuesta' : 'Solución'} · ${e.fuente} · Categoría ${ci + 1}`, desc: '', body, toc, depth: 4, current: c.slug,
-      crumbs: [[TEMA, '../../'], [c.corto, '../'], [e.id, null]], widgets: e.widget ? [e.widgetNombre] : [], pager: pg,
-    }));
-    total++;
-  });
+  }
+  const n = c.practica.length, nNuevos = c.practica.filter(e => e.nuevo).length, nSel = c.practica.filter(e => /^Selectividad/.test(e.fuente)).length;
+  const desglose = [n - nNuevos - nSel ? `${n - nNuevos - nSel} de los apuntes` : '', nSel ? `${nSel} de Selectividad` : '', nNuevos ? `${nNuevos} ${cuest ? 'nuevas' : 'nuevos'}` : ''].filter(Boolean).join(', ');
+  body += `\n<h2 id="practicar">${cuest ? 'Cuestiones para practicar' : 'Ejercicios para practicar'}</h2>
+<div class="ir-ej"><p>Este apartado tiene <strong>${n} ${cuest ? 'cuestiones' : 'ejercicios'} más</strong> (${desglose}) en la sección de ejercicios: enunciado, resultado para comprobar y solución paso a paso.</p>
+<ul class="lista">${c.practica.map(e => `<li><a href="../ejercicios/#e-${dash(e.id)}">${e.id}</a> ${esc(e.titulo)}${e.nuevo ? ' <span class="tag nuevo">Nuevo</span>' : /^Selectividad/.test(e.fuente) ? ` <span class="tag sel">${esc(e.fuente)}</span>` : ''}</li>`).join('')}</ul>
+<a class="btn primary" href="../ejercicios/#${c.slug}">${cuest ? 'Cuestiones' : 'Ejercicios'} de este apartado →</a></div>`;
+  toc.push({ id: 'practicar', txt: 'Para practicar', sep: true });
+  const prevC = ci === 0 ? { href: '../', txt: 'Mapa del tema' } : { href: `../${cats[ci - 1].slug}/`, txt: cats[ci - 1].nombre };
+  const nextC = cats[ci + 1] ? { href: `../${cats[ci + 1].slug}/`, txt: cats[ci + 1].nombre } : { href: '../ejercicios/', txt: 'Ejercicios del tema' };
+  escribir(c.slug, page({ title: esc(c.titulo), eyebrow: c.eyebrow, desc: c.desc, body, toc, depth: 3, current: c.slug,
+    crumbs: [[TEMA, '../'], [c.corto, null]], widgets: c.ejemplos.filter(e => e.widget).map(e => e.widgetNombre), pager: pagerHtml(prevC, nextC) }));
+  total++;
 });
-console.log(`${total} páginas de categorías y soluciones`);
+
+// ---------------------------------------------------------------- sección de ejercicios: todos los propuestos, por temática
+{
+  const base = '../';
+  let body = `<div class="metodo"><strong>Cómo practicar</strong><ol><li>Lee el enunciado y resuélvelo en la libreta, con el diagrama de fuerzas y las unidades.</li><li>Comprueba el número con «Ver solo el resultado».</li><li>Abre la solución paso a paso para revisar el planteamiento, los signos y el porqué de cada fórmula. Si tiene simulación, cambia los datos y mira qué pasa.</li></ol><p style="margin:6px 0 0">Si te atascas, repasa la teoría del apartado (el enlace está junto a cada título) y sus dos ejemplos resueltos.</p></div>
+<nav class="filtro" aria-label="Ir a una temática">${cats.map((c, i) => `<a href="#${c.slug}">${i + 1} · ${esc(c.corto)} (${c.practica.length})</a>`).join('')}</nav>`;
+  const toc = [];
+  cats.forEach((c, i) => {
+    body += `\n<h2 id="${c.slug}" class="grupo-ej"><span>${i + 1} · ${esc(c.nombre)}</span><a href="../${c.slug}/">Repasar la teoría →</a></h2>\n<div class="props">${c.practica.map(e => tarjeta(e, base)).join('\n')}</div>`;
+    toc.push({ id: c.slug, txt: `${i + 1} · ${c.corto} (${c.practica.length})` });
+  });
+  escribir('ejercicios', page({ title: 'Ejercicios', eyebrow: TEMA, desc: `${practica.length} ejercicios y cuestiones para practicar, clasificados por temática: de los apuntes de clase, de Selectividad y nuevos. Cada uno con su resultado y su solución paso a paso.`,
+    body, toc, depth: 3, current: 'ejercicios', crumbs: [[TEMA, '../'], ['Ejercicios', null]],
+    pager: pagerHtml({ href: '../', txt: 'Mapa del tema' }, { href: `../${cats[0].slug}/`, txt: cats[0].nombre }) }));
+  total++;
+}
+
+// ---------------------------------------------------------------- una página de solución por ejercicio de la sección
+practica.forEach((e, k) => {
+  const c = e.cat, cuest = esCuestion(c), sb = '../../';
+  let body = solucionHtml(e, sb, { h: 'h2', ids: true });
+  const saltos = (e.widget ? `<a href="#simulacion">Ir a la simulación ↓</a>` : '') + `<a href="../#e-${dash(e.id)}">Volver a los ejercicios</a><a href="../../${c.slug}/">Teoría: ${esc(c.corto)}</a>`;
+  body = `<nav class="saltos" aria-label="Saltar a">${saltos}</nav>` + body;
+  const toc = [{ id: 'enunciado', txt: 'Enunciado' }].concat(!cuest && e.resultado ? [{ id: 'resultado', txt: 'Resultado' }] : [], [{ id: 'solucion', txt: cuest ? 'Respuesta' : 'Solución' }], e.widget ? [{ id: 'simulacion', txt: 'Simulación' }] : []);
+  const prev = practica[k - 1], next = practica[k + 1];
+  const pg = pagerHtml(prev ? { href: `../${dash(prev.id)}/`, txt: `${prev.id} · ${prev.fuente}` } : null, next ? { href: `../${dash(next.id)}/`, txt: `${next.id} · ${next.fuente}` } : null, { href: `../#e-${dash(e.id)}`, txt: 'Todos los ejercicios' });
+  escribir(path.join('ejercicios', dash(e.id)), page({
+    title: `${e.id} · ${esc(e.titulo)}`, eyebrow: `${cuest ? 'Respuesta' : 'Solución'} · ${e.fuente} · ${c.nombre}`, desc: '', body, toc, depth: 4, current: 'ejercicios',
+    crumbs: [[TEMA, '../../'], ['Ejercicios', '../'], [e.id, null]], widgets: e.widget ? [e.widgetNombre] : [], pager: pg,
+  }));
+  total++;
+});
+console.log(`${total} páginas: 8 apartados, la sección de ejercicios y ${practica.length} soluciones`);

@@ -5,6 +5,7 @@ nombre: Conservación de la energía mecánica
 corto: Conservación
 eyebrow: Categoría 4
 desc: Solo trabaja el peso: tiros, caídas y planos sin rozamiento.
+resueltos: 4.1, 4.3
 ---
 ## Idea clave: si solo trabajan el peso y los muelles, la energía mecánica no cambia
 

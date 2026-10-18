@@ -5,6 +5,7 @@ nombre: Cuestiones de teoría
 corto: Cuestiones
 eyebrow: Categoría 8
 desc: Respuestas razonadas, cada una con su fórmula y un ejemplo.
+resueltos: 8.2, 8.4
 ---
 ## Cómo responder una cuestión de teoría
 

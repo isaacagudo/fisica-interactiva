@@ -5,6 +5,7 @@ nombre: Trabajo con rozamiento en un plano horizontal
 corto: Rozamiento
 eyebrow: Categoría 2
 desc: Fuerza oblicua: primero la normal, después el rozamiento y el trabajo.
+resueltos: 2.1, 2.2
 ---
 ## Idea clave: primero el diagrama, después la normal, después el rozamiento
 
