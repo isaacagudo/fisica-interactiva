@@ -342,6 +342,8 @@ Datos: m = 100 kg · α = 30° · μ = 0,2 · v constante (bajando) · g = 9,8 m
 
 **a) Fuerzas y valor de F**
 
+[[diagrama:s_sel1|Selectividad 1 · fuerzas sobre el bloque de 100 kg]]
+
 Fr y F apuntan las dos hacia arriba del plano: el rozamiento porque el bloque baja, y F porque lo frena.
 
 **Qué herramienta usar.** Este apartado pide una fuerza cuando la velocidad es constante. Es un problema de **dinámica** (leyes de Newton), no de energía: velocidad constante significa aceleración cero, y eso se traduce en una suma de fuerzas igual a cero.
@@ -415,6 +417,8 @@ Se deja caer un cuerpo, partiendo del reposo, por un plano inclinado que forma u
 --- solucion
 Datos: vA = 0 · α = 30° · AB = 2 m sobre el plano · vB = 4 m/s · BC = 4 m en horizontal · vC = 0 · g = 9,8 m/s². Masa: no se da; la llamamos m.
 
+[[diagrama:s_sel2|Selectividad 2 · recorrido A → B → C y fuerzas en cada tramo]]
+
 En la rampa el rozamiento apunta hacia arriba del plano y en el horizontal hacia atrás: en los dos tramos se opone a v.
 
 **a) Fuerzas en el plano inclinado y coeficiente de rozamiento**
@@ -471,6 +475,8 @@ Por un plano inclinado que forma un ángulo de 30° con la horizontal se lanza h
 altura máxima h ≈ 1,09 m (recorre d ≈ 2,17 m sobre el plano) y regresa al punto de partida con v ≈ 4,20 m/s.
 --- solucion
 Datos: m = 10 kg · α = 30° · vA = 5 m/s hacia arriba · μ = 0,1 · g = 9,8 m/s² (este enunciado no la da; usamos el mismo valor que en los demás).
+
+[[diagrama:s_sel3|Selectividad 3 · fuerzas al subir y al bajar]]
 
 P y N no cambian entre los dos tramos; el rozamiento invierte su sentido porque la velocidad lo invierte.
 
@@ -540,6 +546,8 @@ altura máxima h ≈ 0,95 m (d ≈ 1,89 m sobre el plano) y regresa al punto de 
 Datos: m = 0,5 kg · α = 30° · vA = 5 m/s hacia arriba · μ = 0,2 · g = 9,8 m/s².
 
 **i) Fuerzas cuando sube y cuando baja**
+
+[[diagrama:s_sel4|Selectividad 4 · fuerzas al subir y al bajar]]
 
 | Fuerza | Al subir | Al bajar | Módulo |
 | --- | --- | --- | --- |
