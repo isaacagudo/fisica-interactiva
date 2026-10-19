@@ -132,6 +132,10 @@ x = 0,116 m (11,6 cm).
 --- solucion
 Datos: m = 200 g = 0,2 kg · h = 4 m hasta lo alto del resorte · k = 1200 N/m · parte del reposo · sin rozamiento · g = 9,8 m/s².
 
+[[figura:muelleV|{"hTxt": "h = 4 m", "xTxt": "x"}]]
+
+Estado A: se suelta 4 m por encima del resorte. Estado B: compresión máxima. Entre los dos baja h + x.
+
 **Qué herramienta usar.** Igual que en 5.1, pero ahora la incógnita es x: conservación de la energía con Ep gravitatoria y elástica. El esquema es el mismo que el diagrama de 5.1.
 
 **Paso 1. Ecuación de energía** (h = 0 en el punto de máxima compresión)
@@ -294,6 +298,10 @@ a) k = 500 N/m · b) Ep el = 1,6 J · c) v = 2,53 m/s.
 --- solucion
 Datos: F = 40 N · x = 8 cm = 0,08 m · m = 0,5 kg · sin rozamiento.
 
+[[figura:muelleH|{"A": {"txt": "muelle comprimido 8 cm, bloque en reposo", "comp": true}, "B": {"txt": "el muelle recupera su longitud y lanza el bloque", "v": "izq", "vtxt": "v"}}]]
+
+Estado A: toda la energía está en el muelle. Estado B: toda es energía cinética del bloque.
+
 **Qué herramienta usar.** a) Ley de Hooke; b) energía potencial elástica; c) conservación de la energía (solo trabaja la fuerza del muelle, que es conservativa).
 
 **a) Constante elástica**
@@ -328,6 +336,10 @@ Un bloque de 2 kg se lanza con una velocidad de 4 m/s sobre una superficie horiz
 a) v = 2,94 m/s · b) x = 0,224 m · c) sí: la fuerza del muelle (67 N) supera al rozamiento máximo (4,9 N).
 --- solucion
 Datos: m = 2 kg · v₀ = 4 m/s · μ = 0,25 · L = 1,5 m · k = 300 N/m · g = 9,8 m/s².
+
+[[figura:muelleH|{"roz": true, "A": {"txt": "lanzado con v₀ = 4 m/s a L = 1,5 m del muelle", "v": "der", "vtxt": "v₀", "sep": true, "Ltxt": "L = 1,5 m"}, "B": {"txt": "compresión máxima x: se para", "comp": true}}]]
+
+El rozamiento frena el bloque en el tramo L y también mientras comprime el muelle.
 
 **Qué herramienta usar.** Ecuación de trabajo y energía con el rozamiento (W nc = W roz): Ec₀ + Ep₀ + W roz = Ec + Ep + Ep el.
 
@@ -367,6 +379,10 @@ Una caja de 5 kg se deja caer desde 0,5 m de altura sobre un muelle vertical de 
 a) x = 0,183 m · b) x₀ = 2,45 cm (la caída comprime 7,5 veces más) · c) h = 10,4 cm.
 --- solucion
 Datos: m = 5 kg · h = 0,5 m · k = 2000 N/m · g = 9,8 m/s². Nivel h = 0 en el punto de máxima compresión.
+
+[[figura:muelleV|{"hTxt": "h = 0,5 m", "xTxt": "x"}]]
+
+La caja se suelta 0,5 m por encima del muelle y lo comprime x: baja h + x en total. El nivel h = 0 va en el punto de máxima compresión.
 
 **Qué herramienta usar.** Conservación de la energía (solo trabajan el peso y el muelle). Para b), equilibrio de fuerzas.
 

@@ -18,6 +18,8 @@
   --cds-chart-categorical-3:var(--c-fr);--cds-chart-categorical-4:var(--c-a);--cds-chart-categorical-5:var(--c-k);
   margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
 .fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
+.fig.dg{max-width:640px}
+.doc p.lectura{font-size:15px;color:var(--ink-2);margin:4px 0 14px}
 .fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
 header.top{display:grid;gap:8px;margin:6px 0 18px}
 header.top .txt{display:grid;gap:8px;min-width:0}
@@ -153,6 +155,8 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 </div><div class="res-box" id="resultado"><div class="lbl">Resultado</div><p>a) W = 2,4·10⁵ J · b) F = 1,6·10³ N · c) con el doble de masa, 4,8·10⁵ J; de 0 a 90 km/h, 3,75·10⁵ J.</p></div>
 <h2 id="solucion">Solución paso a paso</h2>
 <p>Datos: m = 1200 kg · v₀ = 54 km/h = 15 m/s · v = 90 km/h = 25 m/s · d = 150 m.</p>
+<figure class="fig dg" data-diagrama="horizontal" data-config='{"P":1,"N":1,"empuja":"F neta","v":"v₀ = 54 km/h","cuerpo":"coche"}'><svg viewBox="0 0 600 340" role="img" aria-label="Diagrama de fuerzas sobre el cuerpo" style="font-family:var(--f-body)"><rect x="20" y="250" width="560" height="14" rx="0" style="fill:var(--plane);stroke:none;stroke-width:1.6"/><line x1="20" y1="250" x2="580" y2="250" style="stroke:var(--plane-edge);stroke-width:2"/><rect x="230" y="154" width="140" height="96" rx="4" style="fill:var(--sheet);stroke:var(--ink);stroke-width:1.6"/><text x="220" y="238" text-anchor="end" style="fill:var(--ink-2);font-size:14px;font-weight:600">coche</text><g class="dg-p" data-p="1"><line x1="300" y1="202" x2="300" y2="297" style="stroke:var(--c-p);stroke-width:2.6"/><polygon points="300,308 294.5,297 305.5,297" style="fill:var(--c-p)"/><text x="314" y="308" text-anchor="start" style="fill:var(--c-p);font-size:18px;font-weight:700">P</text></g><g class="dg-p" data-p="2"><line x1="300" y1="202" x2="300" y2="107" style="stroke:var(--c-n);stroke-width:2.6"/><polygon points="300,96 305.5,107 294.5,107" style="fill:var(--c-n)"/><text x="288" y="108" text-anchor="end" style="fill:var(--c-n);font-size:18px;font-weight:700">N</text></g><g class="dg-p" data-p="3"><line x1="40" y1="70" x2="125" y2="70" style="stroke:var(--c-v);stroke-width:2.6"/><polygon points="136,70 125,75.5 125,64.5" style="fill:var(--c-v)"/><text x="88" y="56" text-anchor="middle" style="fill:var(--c-v);font-size:16px;font-weight:700">v₀ = 54 km/h</text></g><g class="dg-p" data-p="4"><line x1="370" y1="188" x2="469" y2="188" style="stroke:var(--c-a);stroke-width:2.6"/><polygon points="480,188 469,193.5 469,182.5" style="fill:var(--c-a)"/><text x="480" y="176" text-anchor="end" style="fill:var(--c-a);font-size:16px;font-weight:700">F neta</text></g></svg></figure>
+<p>El peso y la normal se compensan; la fuerza neta va a favor del movimiento y aumenta la energía cinética.</p>
 <p><strong>Qué herramienta usar.</strong> Teorema de las fuerzas vivas: el trabajo de la fuerza neta (la suma de todas) es la variación de energía cinética.</p>
 <p class="sub"><strong>a) Trabajo de la fuerza neta</strong></p>
 <p class="eq"><strong>W neta = ½·m·v² − ½·m·v₀² = ½ · 1200 · (25² − 15²) = 600 · 400 = 2,4·10⁵ J</strong></p>
@@ -184,5 +188,6 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 </div>
 <script src="../../../../assets/widgets/nucleo.js" defer></script>
 <script src="../../../../assets/widgets/bloque.js" defer></script>
+<script src="../../../../assets/diagramas/diagramas.js" defer></script>
 </body>
 </html>

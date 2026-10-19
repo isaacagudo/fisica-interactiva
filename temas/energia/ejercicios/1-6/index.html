@@ -18,6 +18,8 @@
   --cds-chart-categorical-3:var(--c-fr);--cds-chart-categorical-4:var(--c-a);--cds-chart-categorical-5:var(--c-k);
   margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
 .fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
+.fig.dg{max-width:640px}
+.doc p.lectura{font-size:15px;color:var(--ink-2);margin:4px 0 14px}
 .fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
 header.top{display:grid;gap:8px;margin:6px 0 18px}
 header.top .txt{display:grid;gap:8px;min-width:0}
@@ -153,6 +155,8 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 </div><div class="res-box" id="resultado"><div class="lbl">Resultado</div><p>a) F = 78,4 N y W F = 235 J · b) W peso = −235 J · c) en vertical F = 196 N y W = 235 J: el mismo trabajo con menos fuerza.</p></div>
 <h2 id="solucion">Solución paso a paso</h2>
 <p>Datos: m = 20 kg · h = 1,2 m · d = 3 m sobre la rampa · sin rozamiento · v constante · g = 9,8 m/s².</p>
+<figure class="fig dg" data-diagrama="plano" data-config='{"alpha":23.58,"mov":"sube","roz":false,"F":"sube","v":"v constante"}'><svg viewBox="0 0 640 400" role="img" aria-label="Diagrama de fuerzas en el plano inclinado" style="font-family:var(--f-body)"><polygon points="40,127.6 40,372 600,372" style="fill:var(--plane);stroke:var(--plane-edge);stroke-width:2"/><polygon points="294.5,238.7 367.9,270.7 390.3,219.4 316.9,187.4" style="fill:var(--sheet);stroke:var(--ink);stroke-width:1.6"/><path d="M540 372 A60 60 0 0 1 545 348" style="fill:none;stroke:var(--ink);stroke-width:1.4"/><text x="517.8" y="360.8" text-anchor="middle" style="fill:var(--ink);font-size:15px;font-weight:600">23,6°</text><g class="dg-p" data-p="1"><line x1="342.4" y1="229" x2="342.4" y2="338" style="stroke:var(--c-p);stroke-width:2.6"/><polygon points="342.4,349 336.9,338 347.9,338" style="fill:var(--c-p)"/><text x="352.4" y="351" text-anchor="start" style="fill:var(--c-p);font-size:18px;font-weight:700">P</text></g><g class="dg-p" data-p="2"><line x1="342.4" y1="229" x2="376.3" y2="243.8" style="stroke:var(--c-p);stroke-width:2;stroke-dasharray:6 4"/><polygon points="386.4,248.2 374.1,248.9 378.5,238.8" style="fill:var(--c-p)"/><text x="396.4" y="240.2" text-anchor="start" style="fill:var(--c-p);font-size:16px;font-weight:700">Px</text><line x1="342.4" y1="229" x2="302.8" y2="319.7" style="stroke:var(--c-p);stroke-width:2;stroke-dasharray:6 4"/><polygon points="298.4,329.8 297.8,317.5 307.8,321.9" style="fill:var(--c-p)"/><text x="288.4" y="339.8" text-anchor="end" style="fill:var(--c-p);font-size:16px;font-weight:700">Py</text></g><g class="dg-p" data-p="3"><line x1="342.4" y1="229" x2="382" y2="138.3" style="stroke:var(--c-n);stroke-width:2.6"/><polygon points="386.4,128.2 387,140.5 377,136.1" style="fill:var(--c-n)"/><text x="396" y="121.4" text-anchor="start" style="fill:var(--c-n);font-size:18px;font-weight:700">N</text></g><g class="dg-p" data-p="4"><line x1="311.3" y1="200.2" x2="233.4" y2="166.2" style="stroke:var(--c-a);stroke-width:2.6"/><polygon points="223.4,161.8 235.6,161.1 231.2,171.2" style="fill:var(--c-a)"/><text x="219.4" y="147.8" text-anchor="end" style="fill:var(--c-a);font-size:17px;font-weight:700">F</text></g><g class="dg-p" data-p="5"><line x1="360.2" y1="123.3" x2="306.1" y2="99.7" style="stroke:var(--c-v);stroke-width:2.6"/><polygon points="296,95.3 308.3,94.7 303.9,104.7" style="fill:var(--c-v)"/><text x="334.5" y="98.6" text-anchor="start" style="fill:var(--c-v);font-size:16px;font-weight:700">v constante</text></g></svg></figure>
+<p>Sin rozamiento, a lo largo de la rampa solo compiten la fuerza que empuja y la componente del peso Px.</p>
 <p><strong>Qué herramienta usar.</strong> Velocidad constante significa aceleración cero: la fuerza sale de <strong>ΣF = 0</strong> (dinámica). El trabajo de cada fuerza, de W = F·d·cos φ.</p>
 <p class="sub"><strong>a) Fuerza y trabajo por la rampa</strong></p>
 <p class="eq"><strong>sen α = h / d = 1,2 / 3 = 0,4 ⟹ α = 23,6°</strong></p>
@@ -186,5 +190,6 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 </div>
 <script src="../../../../assets/widgets/nucleo.js" defer></script>
 <script src="../../../../assets/widgets/plano.js" defer></script>
+<script src="../../../../assets/diagramas/diagramas.js" defer></script>
 </body>
 </html>

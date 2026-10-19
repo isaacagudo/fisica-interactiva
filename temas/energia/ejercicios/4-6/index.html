@@ -18,6 +18,8 @@
   --cds-chart-categorical-3:var(--c-fr);--cds-chart-categorical-4:var(--c-a);--cds-chart-categorical-5:var(--c-k);
   margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
 .fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
+.fig.dg{max-width:640px}
+.doc p.lectura{font-size:15px;color:var(--ink-2);margin:4px 0 14px}
 .fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
 header.top{display:grid;gap:8px;margin:6px 0 18px}
 header.top .txt{display:grid;gap:8px;min-width:0}
@@ -153,6 +155,8 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 </div><div class="res-box" id="resultado"><div class="lbl">Resultado</div><p>a) v = 7,67 m/s · b) v = 5,42 m/s · c) la velocidad final es la misma (solo depende de la altura); el tiempo es menor con 60°.</p></div>
 <h2 id="solucion">Solución paso a paso</h2>
 <p>Datos: m = 2 kg · α = 30° · h = 3 m · sin rozamiento · v₀ = 0 · g = 9,8 m/s². Nivel h = 0 en la base.</p>
+<figure class="fig dg" data-diagrama="plano" data-config='{"alpha":30,"mov":"baja","roz":false,"v":"v"}'><svg viewBox="0 0 640 400" role="img" aria-label="Diagrama de fuerzas en el plano inclinado" style="font-family:var(--f-body)"><polygon points="40,72 40,372 559.6,372" style="fill:var(--plane);stroke:var(--plane-edge);stroke-width:2"/><polygon points="275.6,208 344.8,248 372.8,199.5 303.6,159.5" style="fill:var(--sheet);stroke:var(--ink);stroke-width:1.6"/><path d="M499.6 372 A60 60 0 0 1 507.7 342" style="fill:none;stroke:var(--ink);stroke-width:1.4"/><text x="478.5" y="356.3" text-anchor="middle" style="fill:var(--ink);font-size:15px;font-weight:600">30°</text><g class="dg-p" data-p="1"><line x1="324.2" y1="203.8" x2="324.2" y2="312.8" style="stroke:var(--c-p);stroke-width:2.6"/><polygon points="324.2,323.8 318.7,312.8 329.7,312.8" style="fill:var(--c-p)"/><text x="334.2" y="325.8" text-anchor="start" style="fill:var(--c-p);font-size:18px;font-weight:700">P</text></g><g class="dg-p" data-p="2"><line x1="324.2" y1="203.8" x2="366.6" y2="228.3" style="stroke:var(--c-p);stroke-width:2;stroke-dasharray:6 4"/><polygon points="376.2,233.8 363.9,233 369.4,223.5" style="fill:var(--c-p)"/><text x="386.2" y="225.8" text-anchor="start" style="fill:var(--c-p);font-size:16px;font-weight:700">Px</text><line x1="324.2" y1="203.8" x2="277.7" y2="284.2" style="stroke:var(--c-p);stroke-width:2;stroke-dasharray:6 4"/><polygon points="272.2,293.8 273,281.5 282.5,287" style="fill:var(--c-p)"/><text x="262.2" y="303.8" text-anchor="end" style="fill:var(--c-p);font-size:16px;font-weight:700">Py</text></g><g class="dg-p" data-p="3"><line x1="324.2" y1="203.8" x2="370.7" y2="123.3" style="stroke:var(--c-n);stroke-width:2.6"/><polygon points="376.2,113.8 375.4,126 365.9,120.5" style="fill:var(--c-n)"/><text x="387.2" y="107.6" text-anchor="start" style="fill:var(--c-n);font-size:18px;font-weight:700">N</text></g><g class="dg-p" data-p="4"><line x1="398.7" y1="126.7" x2="449.8" y2="156.2" style="stroke:var(--c-v);stroke-width:2.6"/><polygon points="459.3,161.7 447.1,160.9 452.6,151.4" style="fill:var(--c-v)"/><text x="437" y="134.3" text-anchor="start" style="fill:var(--c-v);font-size:16px;font-weight:700">v</text></g></svg></figure>
+<p>Sin rozamiento solo actúan el peso y la normal; la normal es perpendicular al movimiento y no trabaja.</p>
 <p><strong>Qué herramienta usar.</strong> Sobre el bloque actúan el peso y la normal. La normal es perpendicular al plano y no trabaja; solo trabaja el peso, así que <strong>se conserva la energía mecánica</strong>.</p>
 <p class="sub"><strong>a) Velocidad en la base</strong></p>
 <p class="eq"><strong>m·g·h = ½·m·v² ⟹ v = √(2·g·h) = √(2 · 9,8 · 3) = 7,67 m/s</strong></p>
@@ -179,5 +183,6 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 </div>
 <script src="../../../../assets/widgets/nucleo.js" defer></script>
 <script src="../../../../assets/widgets/plano.js" defer></script>
+<script src="../../../../assets/diagramas/diagramas.js" defer></script>
 </body>
 </html>

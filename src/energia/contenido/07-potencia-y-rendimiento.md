@@ -65,6 +65,10 @@ P = 6,53 W (6,67 W con g = 10 m/s²).
 --- solucion
 Datos: 15 sacos · 80 kg cada uno · h = 1 m · Δt = 30 min = 1 800 s · g = 9,8 m/s².
 
+[[figura:vertical|{"Ftxt": "F", "cuerpo": "saco", "v": "v constante"}]]
+
+Cada saco se sube con velocidad constante: la fuerza que se hace es igual a su peso y el trabajo queda como energía potencial.
+
 **Qué herramienta usar.** Potencia = trabajo / tiempo. El trabajo para subir cada saco a velocidad constante es m·g·h (ejercicio 1.4).
 
 **Paso 1. Trabajo total**
@@ -93,6 +97,10 @@ Calcula los kWh que consume en 8 h una estufa cuya potencia es de 2000 W. Expres
 16 kWh = 57,6 MJ · coste 1,44 €.
 --- solucion
 Datos: P = 2000 W = 2 kW · t = 8 h · precio 0,09 €/kWh.
+
+[[figura:cadena|{"cajas": ["E = P·t = 2 kW · 8 h = 16 kWh", "E = 16 · 3,6 MJ = 57,6 MJ", "coste = 16 kWh · 0,09 €/kWh = 1,44 €"], "ops": ["× 3,6 MJ/kWh", "× precio"], "textos": ["Potencia en kW por tiempo en horas: la energía sale directamente en kWh.", "Cada kWh son 3,6·10⁶ J = 3,6 MJ.", "El coste es la energía consumida, en kWh, por el precio del kWh."]}]]
+
+Toda la cuenta en cadena: energía en kWh, paso a julios y coste.
 
 **Qué herramienta usar.** Energía = potencia × tiempo (despejando de P = E / t). Si la potencia va en kW y el tiempo en h, la energía sale directamente en kWh, que es como se paga la luz.
 
@@ -127,6 +135,10 @@ unos 1,17·10⁴ L (11 716 L).
 --- solucion
 Datos: P total = 2 CV · h = 12 m · t = 20 min = 1 200 s · η = 78 % = 0,78 · g = 9,8 m/s² · 1 L de agua = 1 kg.
 
+[[figura:reparto|{"total": 100, "util": 78, "txtTotal": "Energía que consume el motor: P·t = 1 472 W · 1 200 s", "txtUtil": "útil (Ep del agua): 78 %", "txtPerd": "pérdidas: 22 %"}]]
+
+Solo la parte útil de la energía que consume el motor sube el agua.
+
 **Qué herramienta usar.** Rendimiento para pasar de la potencia del motor a la útil; después, la energía útil se convierte en energía potencial del agua (m·g·h).
 
 **Paso 1. Potencia total y útil**
@@ -160,6 +172,10 @@ P motor = 2 940 W ≈ 4,0 CV.
 --- solucion
 Datos: m = 450 kg · h = 12 m · t = 30 s · η = 60 % = 0,6 · g = 9,8 m/s².
 
+[[figura:vertical|{"Ftxt": "F motor", "cuerpo": "montacargas"}]]
+
+Con velocidad constante, la fuerza del cable es igual al peso; lo útil es la energía potencial que gana la carga.
+
 **Qué herramienta usar.** La potencia útil es la que sube el montacargas (m·g·h en 30 s); la del motor es mayor, porque solo aprovecha el 60 %.
 
 **Paso 1. Potencia útil**
@@ -188,6 +204,10 @@ Calcula la potencia de un hornillo eléctrico que tarda 15 minutos en calentar 2
 P = 929 W · coste ≈ 0,019 € (unos 2 céntimos).
 --- solucion
 Datos: m = 2,5 kg de agua · de 12 °C a 80 °C (ΔT = 68 °C) · t = 15 min = 900 s · se aprovecha el 85 % (η = 0,85) · c = 4180 J/(kg·K) · 0,08 €/kWh. El «(1,5)» del enunciado es la puntuación.
+
+[[figura:reparto|{"total": 100, "util": 85, "txtTotal": "Energía que consume el hornillo: P·t", "txtUtil": "útil, la que absorbe el agua: 85 %", "txtPerd": "pérdidas: 15 %"}]]
+
+El agua solo aprovecha el 85 % de la energía: el hornillo tiene que consumir más de lo que absorbe el agua.
 
 **Qué herramienta usar.** La energía útil es el calor que absorbe el agua (Q = m·c·ΔT). Con el rendimiento se pasa a la energía que consume el hornillo, y con el tiempo, a su potencia.
 
@@ -226,6 +246,10 @@ Calcula el rendimiento de un calentador eléctrico cuya potencia es 1500 W, si s
 --- solucion
 Datos: P = 1500 W · t = 3 h = 10 800 s · m = 50 kg de agua · de 20 °C a 80 °C (ΔT = 60 °C) · c = 4180 J/(kg·K) · 0,08 €/kWh.
 
+[[figura:reparto|{"total": 16.2, "util": 12.54, "txtTotal": "Energía consumida: P·t = 1,62·10⁷ J", "txtUtil": "útil, la que absorbe el agua: 1,25·10⁷ J", "txtPerd": "pérdidas"}]]
+
+El calentador consume P·t; el agua solo absorbe una parte. El rendimiento es esa fracción.
+
 **Qué herramienta usar.** Es el ejercicio 7.5 al revés: ahora se conocen la energía consumida (P·t) y la útil (m·c·ΔT), y se pide el cociente.
 
 **Paso 1. Energía útil**
@@ -262,6 +286,10 @@ Una grúa sube un palé de ladrillos de 800 kg hasta una altura de 15 m en 40 s,
 a) W útil = 1,18·10⁵ J · b) P útil = 2 940 W · c) η = 65,3 % · d) se pierden 6,24·10⁴ J.
 --- solucion
 Datos: m = 800 kg · h = 15 m · t = 40 s · P consumida = 4,5 kW = 4 500 W · g = 9,8 m/s².
+
+[[figura:reparto|{"total": 4500, "util": 2940, "txtTotal": "Potencia que consume la grúa: 4 500 W", "txtUtil": "útil (sube los ladrillos): 2 940 W", "txtPerd": "pérdidas"}]]
+
+De la potencia que consume la grúa, solo la parte útil sube los ladrillos; el resto se pierde.
 
 **Qué herramienta usar.** A velocidad constante la grúa tira con una fuerza igual al peso: su trabajo útil es la energía potencial que gana la carga. Después, P = W/t y η = P útil / P total.
 
@@ -300,6 +328,10 @@ a) P útil = 1,29·10⁴ W · b) P motor = 1,72·10⁴ W = 23,4 CV · c) E = 3,4
 --- solucion
 Datos: m = 600 + 4 · 70 = 880 kg · v = 1,5 m/s constante · η = 0,75 · h = 30 m · g = 9,8 m/s² · 1 CV = 736 W.
 
+[[figura:vertical|{"Ftxt": "F motor", "cuerpo": "ascensor", "v": "v = 1,5 m/s"}]]
+
+El ascensor sube con velocidad constante: la fuerza del cable es igual al peso y la potencia útil es P = F·v.
+
 **Qué herramienta usar.** Con velocidad constante, P = F·v con F igual al peso. El rendimiento relaciona la potencia útil con la consumida.
 
 **a) Potencia útil**
@@ -334,6 +366,10 @@ Un hervidor eléctrico de 2200 W calienta 1,5 L de agua desde 15 °C hasta 100 �
 a) Q = 5,33·10⁵ J · b) E = 5,94·10⁵ J = 0,165 kWh · c) η = 89,7 % · d) 0,025 €.
 --- solucion
 Datos: P = 2200 W · m = 1,5 kg · T₀ = 15 °C · T = 100 °C · t = 4 min 30 s = 270 s · c = 4180 J/(kg·K) · precio 0,15 €/kWh.
+
+[[figura:reparto|{"total": 594000, "util": 532950, "txtTotal": "Energía consumida: P·t = 5,94·10⁵ J", "txtUtil": "útil, la que absorbe el agua: 5,33·10⁵ J", "txtPerd": "pérdidas"}]]
+
+El hervidor consume P·t; el agua absorbe casi toda esa energía.
 
 **Qué herramienta usar.** La energía útil es el calor que gana el agua (Q = m·c·ΔT); la consumida, P·t. El rendimiento es su cociente.
 

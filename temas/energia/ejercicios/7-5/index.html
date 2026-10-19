@@ -18,6 +18,8 @@
   --cds-chart-categorical-3:var(--c-fr);--cds-chart-categorical-4:var(--c-a);--cds-chart-categorical-5:var(--c-k);
   margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
 .fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
+.fig.dg{max-width:640px}
+.doc p.lectura{font-size:15px;color:var(--ink-2);margin:4px 0 14px}
 .fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
 header.top{display:grid;gap:8px;margin:6px 0 18px}
 header.top .txt{display:grid;gap:8px;min-width:0}
@@ -153,6 +155,8 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 </div><div class="res-box" id="resultado"><div class="lbl">Resultado</div><p>P = 929 W · coste ≈ 0,019 € (unos 2 céntimos).</p></div>
 <h2 id="solucion">Solución paso a paso</h2>
 <p>Datos: m = 2,5 kg de agua · de 12 °C a 80 °C (ΔT = 68 °C) · t = 15 min = 900 s · se aprovecha el 85 % (η = 0,85) · c = 4180 J/(kg·K) · 0,08 €/kWh. El «(1,5)» del enunciado es la puntuación.</p>
+<figure class="fig dg" data-diagrama="reparto" data-config='{"total":100,"util":85,"txtTotal":"Energía que consume el hornillo: P·t","txtUtil":"útil, la que absorbe el agua: 85 %","txtPerd":"pérdidas: 15 %"}'><svg viewBox="0 0 600 160" role="img" aria-label="Reparto de la energía consumida" style="font-family:var(--f-body)"><g class="dg-p" data-p="1"><text x="20" y="30" text-anchor="start" style="fill:var(--ink);font-size:16px;font-weight:700">Energía que consume el hornillo: P·t</text><rect x="20" y="44" width="560" height="46" rx="0" style="fill:none;stroke:var(--ink);stroke-width:1.2"/></g><g class="dg-p" data-p="2"><rect x="20" y="44" width="476" height="46" rx="0" style="fill:var(--c-n);stroke:none;stroke-width:1.6;opacity:0.85"/><text x="24" y="116" text-anchor="start" style="fill:var(--c-n);font-size:15px;font-weight:700">útil, la que absorbe el agua: 85 %</text></g><g class="dg-p" data-p="3"><rect x="496" y="44" width="84" height="46" rx="0" style="fill:var(--c-fr);stroke:none;stroke-width:1.6;opacity:0.75"/><text x="580" y="142" text-anchor="end" style="fill:var(--c-fr);font-size:15px;font-weight:700">pérdidas: 15 %</text></g></svg></figure>
+<p>El agua solo aprovecha el 85 % de la energía: el hornillo tiene que consumir más de lo que absorbe el agua.</p>
 <p><strong>Qué herramienta usar.</strong> La energía útil es el calor que absorbe el agua (Q = m·c·ΔT). Con el rendimiento se pasa a la energía que consume el hornillo, y con el tiempo, a su potencia.</p>
 <p class="sub"><strong>Paso 1. Energía útil (calor que absorbe el agua)</strong></p>
 <p class="eq"><strong>Q = m·c·ΔT = 2,5 · 4180 · 68 = 710 600 J</strong></p>
@@ -184,5 +188,6 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 </div>
 <script src="../../../../assets/widgets/nucleo.js" defer></script>
 <script src="../../../../assets/widgets/calentador.js" defer></script>
+<script src="../../../../assets/diagramas/diagramas.js" defer></script>
 </body>
 </html>

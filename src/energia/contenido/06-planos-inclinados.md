@@ -121,7 +121,11 @@ Desde la base del plano inclinado de la figura se lanza hacia arriba, y paralela
 --- resultado
 a) d = 1,39 m · b) W roz = −8,70 J (energía disipada: 8,70 J).
 --- solucion
-Datos: m = 2 kg · v₀ = 5 m/s desde la base · plano de 15 m de largo y 9 m de alto · μ = 0,4 · g = 9,8 m/s². El esquema es el del diagrama de 6.2 (bloque que sube).
+Datos: m = 2 kg · v₀ = 5 m/s desde la base · plano de 15 m de largo y 9 m de alto · μ = 0,4 · g = 9,8 m/s².
+
+[[figura:plano|{"alpha": 36.87, "mov": "sube", "roz": true, "v": "v₀"}]]
+
+Al subir, Px y el rozamiento van los dos hacia abajo del plano: los dos frenan el bloque.
 
 **Qué herramienta usar.** El enunciado pide «consideraciones energéticas»: ecuación de trabajo y energía entre la base y el punto donde se para.
 
@@ -157,7 +161,11 @@ Desde lo alto de la rampa de la figura se deja caer un cuerpo de 3 kg. El coefic
 --- resultado
 v = 6,78 m/s al llegar al suelo (6,76 m/s si se usa sen 37° ≈ 0,6 y cos 37° ≈ 0,8).
 --- solucion
-Datos: m = 3 kg · h = 5 m · α = 37° · μ = 0,4 · parte del reposo arriba · g = 9,8 m/s². El esquema es el del diagrama de 6.1 (bloque que baja).
+Datos: m = 3 kg · h = 5 m · α = 37° · μ = 0,4 · parte del reposo arriba · g = 9,8 m/s².
+
+[[figura:plano|{"alpha": 37, "mov": "baja", "roz": true, "v": "v"}]]
+
+Al bajar, Px empuja el bloque plano abajo y el rozamiento, hacia arriba del plano, lo frena.
 
 **Qué herramienta usar.** Igual que en 6.1: ecuación de trabajo y energía entre arriba y abajo. Aquí dan la altura y el ángulo, y la longitud hay que calcularla.
 

@@ -163,6 +163,10 @@ W = 21 900 J = 2,19·10⁴ J.
 --- solucion
 Datos: m = 40 kg · estado inicial: h₀ = 30 m, v₀ = 15 m/s · estado final: h = 90 m, v = 12 m/s · g = 9,8 m/s².
 
+[[figura:niveles|{"puntos": [{"id": "1", "h": 30, "txt": "h = 30 m, v = 15 m/s"}, {"id": "2", "h": 90, "txt": "h = 90 m, v = 12 m/s"}], "nivel0": "h = 0 (suelo)"}]]
+
+Se fija h = 0 en el suelo y se comparan los dos estados: hay que aportar la diferencia de energía mecánica.
+
 **Qué herramienta usar.** Aquí la energía mecánica **no** se conserva: alguien (un motor, una grúa) tiene que aportar energía para subir el cuerpo. Se usa la versión general del apartado 2.1 de los apuntes: el trabajo exterior es la variación de energía mecánica.
 
 **W exterior = E M final − E M inicial = (Ec + Ep) final − (Ec + Ep) inicial**
@@ -195,6 +199,10 @@ Se lanza verticalmente hacia arriba una pelota de 200 g con una velocidad de 12 
 a) h máx = 8,85 m sobre el suelo · b) v = 9,75 m/s (al subir y al bajar) · c) v = 13,2 m/s.
 --- solucion
 Datos: m = 0,2 kg · v₀ = 12 m/s hacia arriba · h₀ = 1,5 m · g = 9,8 m/s². Nivel h = 0 en el suelo.
+
+[[figura:niveles|{"puntos": [{"id": "A", "h": 1.5, "txt": "lanzamiento: h = 1,5 m, v = 12 m/s", "v": "arriba"}, {"id": "B", "h": 8.85, "txt": "punto más alto: v = 0"}, {"id": "C", "h": 0, "txt": "suelo: h = 0", "v": "abajo"}], "nivel0": "h = 0 (suelo)"}]]
+
+Nivel h = 0 en el suelo y tres puntos: el de lanzamiento, el más alto y la llegada al suelo.
 
 **Qué herramienta usar.** Solo trabaja el peso: **conservación de la energía mecánica**, Ec₀ + Ep₀ = Ec + Ep.
 
@@ -233,6 +241,10 @@ a) v = 7,67 m/s · b) v = 5,42 m/s · c) la velocidad final es la misma (solo de
 --- solucion
 Datos: m = 2 kg · α = 30° · h = 3 m · sin rozamiento · v₀ = 0 · g = 9,8 m/s². Nivel h = 0 en la base.
 
+[[figura:plano|{"alpha": 30, "mov": "baja", "roz": false, "v": "v"}]]
+
+Sin rozamiento solo actúan el peso y la normal; la normal es perpendicular al movimiento y no trabaja.
+
 **Qué herramienta usar.** Sobre el bloque actúan el peso y la normal. La normal es perpendicular al plano y no trabaja; solo trabaja el peso, así que **se conserva la energía mecánica**.
 
 **a) Velocidad en la base**
@@ -263,6 +275,10 @@ Una canica de 20 g rueda por una mesa de 0,8 m de altura con una velocidad de 2 
 a) v = 4,44 m/s · b) la energía da el módulo, no la dirección: la velocidad forma 63,2° con la horizontal, hacia abajo.
 --- solucion
 Datos: m = 0,02 kg · v₀ = 2 m/s horizontal · h₀ = 0,8 m · g = 9,8 m/s². Nivel h = 0 en el suelo.
+
+[[figura:niveles|{"puntos": [{"id": "A", "h": 0.8, "txt": "borde de la mesa: h = 0,8 m, v = 2 m/s", "v": "horizontal"}, {"id": "B", "h": 0, "txt": "suelo: h = 0", "v": "abajo"}], "nivel0": "h = 0 (suelo)"}]]
+
+La canica sale en horizontal del borde de la mesa y llega al suelo describiendo una curva; a la energía no le importa la dirección.
 
 **Qué herramienta usar.** Solo trabaja el peso: conservación de la energía mecánica para el módulo de la velocidad.
 

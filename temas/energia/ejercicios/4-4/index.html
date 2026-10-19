@@ -18,6 +18,8 @@
   --cds-chart-categorical-3:var(--c-fr);--cds-chart-categorical-4:var(--c-a);--cds-chart-categorical-5:var(--c-k);
   margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
 .fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
+.fig.dg{max-width:640px}
+.doc p.lectura{font-size:15px;color:var(--ink-2);margin:4px 0 14px}
 .fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
 header.top{display:grid;gap:8px;margin:6px 0 18px}
 header.top .txt{display:grid;gap:8px;min-width:0}
@@ -153,6 +155,8 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 </div><div class="res-box" id="resultado"><div class="lbl">Resultado</div><p>W = 21 900 J = 2,19·10⁴ J.</p></div>
 <h2 id="solucion">Solución paso a paso</h2>
 <p>Datos: m = 40 kg · estado inicial: h₀ = 30 m, v₀ = 15 m/s · estado final: h = 90 m, v = 12 m/s · g = 9,8 m/s².</p>
+<figure class="fig dg" data-diagrama="niveles" data-config='{"puntos":[{"id":"1","h":30,"txt":"h = 30 m, v = 15 m/s"},{"id":"2","h":90,"txt":"h = 90 m, v = 12 m/s"}],"nivel0":"h = 0 (suelo)"}'><svg viewBox="0 0 600 340" role="img" aria-label="Alturas medidas desde el nivel h = 0" style="font-family:var(--f-body)"><rect x="20" y="300" width="560" height="14" rx="0" style="fill:var(--plane);stroke:none;stroke-width:1.6"/><line x1="150" y1="44" x2="150" y2="300" style="stroke:var(--ink-2);stroke-width:1.5;stroke-dasharray:4 5"/><g class="dg-p" data-p="1"><line x1="20" y1="300" x2="580" y2="300" style="stroke:var(--ink);stroke-width:2.4"/><text x="580" y="330" text-anchor="end" style="fill:var(--ink);font-size:15px;font-weight:700">h = 0 (suelo)</text></g><g class="dg-p" data-p="2"><circle cx="150" cy="214.7" r="10" style="fill:var(--sheet);stroke:var(--ink);stroke-width:1.8"/><text x="126" y="220.7" text-anchor="end" style="fill:var(--ink);font-size:18px;font-weight:700">1</text><text x="194" y="220.7" text-anchor="start" style="fill:var(--ink);font-size:16px;font-weight:600">h = 30 m, v = 15 m/s</text></g><g class="dg-p" data-p="3"><circle cx="150" cy="44" r="10" style="fill:var(--sheet);stroke:var(--ink);stroke-width:1.8"/><text x="126" y="50" text-anchor="end" style="fill:var(--ink);font-size:18px;font-weight:700">2</text><text x="194" y="50" text-anchor="start" style="fill:var(--ink);font-size:16px;font-weight:600">h = 90 m, v = 12 m/s</text></g></svg></figure>
+<p>Se fija h = 0 en el suelo y se comparan los dos estados: hay que aportar la diferencia de energía mecánica.</p>
 <p><strong>Qué herramienta usar.</strong> Aquí la energía mecánica <strong>no</strong> se conserva: alguien (un motor, una grúa) tiene que aportar energía para subir el cuerpo. Se usa la versión general del apartado 2.1 de los apuntes: el trabajo exterior es la variación de energía mecánica.</p>
 <p class="eq"><strong>W exterior = E M final − E M inicial = (Ec + Ep) final − (Ec + Ep) inicial</strong></p>
 <blockquote class="why">
@@ -200,5 +204,6 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
   </div>
   <footer>Material de estudio. Si el enunciado no da g, se usa 9,8 m/s². Para imprimir, usa la opción de imprimir del navegador.</footer>
 </div>
+<script src="../../../../assets/diagramas/diagramas.js" defer></script>
 </body>
 </html>

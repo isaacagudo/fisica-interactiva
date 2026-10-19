@@ -127,6 +127,10 @@ F = 1,72·10⁴ N (17 188 N).
 --- solucion
 Datos: m = 100 g = 0,1 kg · v₀ = 400 m/s al entrar · v = 150 m/s al salir · d = 40 cm = 0,40 m.
 
+[[figura:horizontal|{"P": 1, "N": 1, "sinPN": true, "frena": "F pared", "v": "v₀ = 400 m/s", "cuerpo": "proyectil"}]]
+
+Dentro de la pared, la única fuerza que trabaja es la de la madera, contra el movimiento.
+
 **Qué herramienta usar.** Como 3.2, pero ahora el proyectil **no se para**: sale con 150 m/s, así que la Ec final no es cero.
 
 **Paso 1. Trabajo de la madera**
@@ -199,6 +203,10 @@ a) W = −1,8·10⁵ J · b) F = 450 N · c) t = 40 s.
 --- solucion
 Datos: m = 900 kg · v₀ = 72 km/h = 20 m/s · v = 0 · d = 400 m.
 
+[[figura:horizontal|{"P": 1, "N": 1, "frena": "F rozamientos", "v": "v₀ = 72 km/h", "cuerpo": "coche"}]]
+
+En punto muerto nadie empuja: solo los rozamientos (con el aire y con el suelo) frenan el coche.
+
 **Qué herramienta usar.** Se conocen las velocidades y la distancia, y se pide un trabajo: **teorema de las fuerzas vivas**, W total = ΔEc. Peso y normal no trabajan (en horizontal), así que el trabajo total es el de la resistencia.
 
 **72 km/h = 72 / 3,6 = 20 m/s**
@@ -236,6 +244,10 @@ a) W = 2,4·10⁵ J · b) F = 1,6·10³ N · c) con el doble de masa, 4,8·10⁵
 --- solucion
 Datos: m = 1200 kg · v₀ = 54 km/h = 15 m/s · v = 90 km/h = 25 m/s · d = 150 m.
 
+[[figura:horizontal|{"P": 1, "N": 1, "empuja": "F neta", "v": "v₀ = 54 km/h", "cuerpo": "coche"}]]
+
+El peso y la normal se compensan; la fuerza neta va a favor del movimiento y aumenta la energía cinética.
+
 **Qué herramienta usar.** Teorema de las fuerzas vivas: el trabajo de la fuerza neta (la suma de todas) es la variación de energía cinética.
 
 **a) Trabajo de la fuerza neta**
@@ -271,6 +283,10 @@ Un esquiador de 70 kg llega a una zona horizontal con una velocidad de 12 m/s y,
 a) W roz = −5,04·10³ J · b) μ = 0,184 · c) sí: la distancia d = v²/(2·μ·g) no depende de la masa.
 --- solucion
 Datos: m = 70 kg · v₀ = 12 m/s · v = 0 · d = 40 m · g = 9,8 m/s².
+
+[[figura:horizontal|{"P": 686, "N": 686, "Fr": 126, "v": "v₀ = 12 m/s", "cuerpo": "esquiador"}]]
+
+Sin impulsarse, la única fuerza que trabaja es el rozamiento: va contra el movimiento hasta parar al esquiador.
 
 **Qué herramienta usar.** Teorema de las fuerzas vivas. En horizontal, el peso y la normal no trabajan y N = m·g.
 

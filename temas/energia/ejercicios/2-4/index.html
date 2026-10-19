@@ -18,6 +18,8 @@
   --cds-chart-categorical-3:var(--c-fr);--cds-chart-categorical-4:var(--c-a);--cds-chart-categorical-5:var(--c-k);
   margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
 .fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
+.fig.dg{max-width:640px}
+.doc p.lectura{font-size:15px;color:var(--ink-2);margin:4px 0 14px}
 .fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
 header.top{display:grid;gap:8px;margin:6px 0 18px}
 header.top .txt{display:grid;gap:8px;min-width:0}
@@ -153,6 +155,8 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 </div><div class="res-box" id="resultado"><div class="lbl">Resultado</div><p>a) N = 128 N y Fr = 32 N · b) W F = 260 J, W roz = −160 J, W P = W N = 0 · c) v = 4,47 m/s · d) tirando hacia arriba N = 68 N, Fr = 17 N y el trabajo total sería 175 J en lugar de 100 J.</p></div>
 <h2 id="solucion">Solución paso a paso</h2>
 <p>Datos: m = 10 kg · F = 60 N, 30° por debajo de la horizontal · μ = 0,25 · Δx = 5 m · v₀ = 0 · g = 9,8 m/s².</p>
+<figure class="fig dg" data-diagrama="horizontal" data-config='{"alpha":-30,"F":60,"P":98,"N":128,"Fr":32,"v":"v"}'><svg viewBox="0 0 600 340" role="img" aria-label="Diagrama de fuerzas sobre el cuerpo" style="font-family:var(--f-body)"><rect x="20" y="250" width="560" height="14" rx="0" style="fill:var(--plane);stroke:none;stroke-width:1.6"/><line x1="20" y1="250" x2="580" y2="250" style="stroke:var(--plane-edge);stroke-width:2"/><rect x="230" y="154" width="140" height="96" rx="4" style="fill:var(--sheet);stroke:var(--ink);stroke-width:1.6"/><g class="dg-p" data-p="1"><line x1="300" y1="202" x2="300" y2="297" style="stroke:var(--c-p);stroke-width:2.6"/><polygon points="300,308 294.5,297 305.5,297" style="fill:var(--c-p)"/><text x="314" y="308" text-anchor="start" style="fill:var(--c-p);font-size:18px;font-weight:700">P</text></g><g class="dg-p" data-p="2"><line x1="300" y1="202" x2="300" y2="74.6" style="stroke:var(--c-n);stroke-width:2.6"/><polygon points="300,63.6 305.5,74.6 294.5,74.6" style="fill:var(--c-n)"/><text x="288" y="75.6" text-anchor="end" style="fill:var(--c-n);font-size:18px;font-weight:700">N</text></g><g class="dg-p" data-p="3"><line x1="143.9" y1="106" x2="223" y2="106" style="stroke:var(--c-a);stroke-width:2;stroke-dasharray:6 4"/><polygon points="234,106 223,111.5 223,100.5" style="fill:var(--c-a)"/><line x1="234" y1="106" x2="234" y2="147" style="stroke:var(--c-a);stroke-width:2;stroke-dasharray:6 4"/><polygon points="234,158 228.5,147 239.5,147" style="fill:var(--c-a)"/><text x="189" y="96" text-anchor="middle" style="fill:var(--c-a);font-size:15px;font-weight:700">Fx</text><text x="242" y="138" text-anchor="start" style="fill:var(--c-a);font-size:15px;font-weight:700">Fy</text><path d="M177.9 106 A34 34 0 0 1 173.4 123" style="fill:none;stroke:var(--ink);stroke-width:1.4"/><text x="196.2" y="128.9" text-anchor="start" style="fill:var(--ink);font-size:13px;font-weight:600">30°</text><line x1="143.9" y1="106" x2="224.5" y2="152.5" style="stroke:var(--c-a);stroke-width:2.6"/><polygon points="234,158 221.7,157.3 227.2,147.7" style="fill:var(--c-a)"/><text x="135.9" y="98" text-anchor="end" style="fill:var(--c-a);font-size:18px;font-weight:700">F</text></g><g class="dg-p" data-p="4"><line x1="430" y1="70" x2="515" y2="70" style="stroke:var(--c-v);stroke-width:2.6"/><polygon points="526,70 515,75.5 515,64.5" style="fill:var(--c-v)"/><text x="478" y="56" text-anchor="middle" style="fill:var(--c-v);font-size:16px;font-weight:700">v</text></g><g class="dg-p" data-p="5"><line x1="300" y1="242" x2="211" y2="242" style="stroke:var(--c-fr);stroke-width:2.6"/><polygon points="200,242 211,236.5 211,247.5" style="fill:var(--c-fr)"/><text x="192" y="248" text-anchor="end" style="fill:var(--c-fr);font-size:18px;font-weight:700">Fr</text></g></svg></figure>
+<p>Al empujar desde arriba, Fy aprieta el bloque contra el suelo: la normal crece y, con ella, el rozamiento.</p>
 <p><strong>Qué herramienta usar.</strong> Primero el diagrama de fuerzas y el eje vertical (para N y Fr); después W = F·d·cos φ para cada fuerza y el teorema de las fuerzas vivas, W total = ΔEc, para la velocidad.</p>
 <p class="sub"><strong>a) Normal y rozamiento</strong></p>
 <p>Componentes de F: <strong>Fx = F·cos 30° = 60 · 0,866 = 52,0 N</strong> (hacia delante) y <strong>Fy = F·sen 30° = 60 · 0,5 = 30 N</strong> (hacia abajo).</p>
@@ -190,5 +194,6 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 </div>
 <script src="../../../../assets/widgets/nucleo.js" defer></script>
 <script src="../../../../assets/widgets/bloque.js" defer></script>
+<script src="../../../../assets/diagramas/diagramas.js" defer></script>
 </body>
 </html>

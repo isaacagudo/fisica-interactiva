@@ -101,8 +101,13 @@ main{max-width:860px}
 .table-wrap table{border-collapse:collapse;width:100%;font-size:14px}
 .table-wrap th,.table-wrap td{text-align:left;vertical-align:top;padding:6px 9px;border-bottom:1px solid var(--rule)}
 .table-wrap th{background:var(--paper)}
-.fig{margin:12px 0;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:8px}
+.fig{margin:12px 0 4px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:8px}
 .fig svg{display:block;width:100%;height:auto}
+.fig.dg{max-width:620px}
+.fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
+.paso p.datos{font-size:14.5px;color:var(--ink-2)}
+.paso p.lectura{font-size:14.5px;margin:4px 0 12px}
+.paso p.ojo{border-left:3px solid var(--c-fr);padding:4px 12px;background:var(--sheet);border-radius:0 8px 8px 0}
 .ex-sim{margin-top:10px}
 .ex-sim .widget{margin-top:10px}
 .solucionario{display:none}
@@ -158,6 +163,7 @@ const html = `<!doctype html>
   <footer>Material de estudio. Si el enunciado no da g, se usa 9,8 m/s². El enlace de cada examen lo vuelve a abrir igual, con los mismos datos.</footer>
 </div>
 ${WIDGETS.map(w => `<script src="../assets/widgets/${w}.js" defer></script>`).join('\n')}
+<script src="../assets/diagramas/diagramas.js" defer></script>
 <script src="../assets/examen/generador.js" defer></script>
 ${TEMAS.flat().map(f => `<script src="../assets/examen/${f}" defer></script>`).join('\n')}
 <script src="../assets/examen/pagina.js" defer></script>

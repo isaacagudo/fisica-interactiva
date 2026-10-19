@@ -18,6 +18,8 @@
   --cds-chart-categorical-3:var(--c-fr);--cds-chart-categorical-4:var(--c-a);--cds-chart-categorical-5:var(--c-k);
   margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
 .fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
+.fig.dg{max-width:640px}
+.doc p.lectura{font-size:15px;color:var(--ink-2);margin:4px 0 14px}
 .fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
 header.top{display:grid;gap:8px;margin:6px 0 18px}
 header.top .txt{display:grid;gap:8px;min-width:0}
@@ -215,6 +217,8 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 </div><div class="res-box"><div class="lbl">Resultado</div><p>16 kWh = 57,6 MJ · coste 1,44 €.</p></div>
 <h4>Solución paso a paso</h4>
 <p>Datos: P = 2000 W = 2 kW · t = 8 h · precio 0,09 €/kWh.</p>
+<figure class="fig dg" data-diagrama="cadena" data-config='{"cajas":["E = P·t = 2 kW · 8 h = 16 kWh","E = 16 · 3,6 MJ = 57,6 MJ","coste = 16 kWh · 0,09 €/kWh = 1,44 €"],"ops":["× 3,6 MJ/kWh","× precio"],"textos":["Potencia en kW por tiempo en horas: la energía sale directamente en kWh.","Cada kWh son 3,6·10⁶ J = 3,6 MJ.","El coste es la energía consumida, en kWh, por el precio del kWh."]}'><svg viewBox="0 0 600 258" role="img" aria-label="Cálculo paso a paso" style="font-family:var(--f-body)"><g class="dg-p" data-p="1"><rect x="40" y="24" width="520" height="46" rx="8" style="fill:var(--sheet);stroke:var(--ink);stroke-width:1.4"/><text x="300" y="53" text-anchor="middle" style="fill:var(--ink);font-size:17px;font-weight:700">E = P·t = 2 kW · 8 h = 16 kWh</text></g><g class="dg-p" data-p="2"><line x1="100" y1="72" x2="100" y2="97" style="stroke:var(--ink-2);stroke-width:2"/><polygon points="100,108 94.5,97 105.5,97" style="fill:var(--ink-2)"/><text x="116" y="96" text-anchor="start" style="fill:var(--ink-2);font-size:15px;font-weight:600">× 3,6 MJ/kWh</text><rect x="40" y="110" width="520" height="46" rx="8" style="fill:var(--sheet);stroke:var(--ink);stroke-width:1.4"/><text x="300" y="139" text-anchor="middle" style="fill:var(--ink);font-size:17px;font-weight:700">E = 16 · 3,6 MJ = 57,6 MJ</text></g><g class="dg-p" data-p="3"><line x1="100" y1="158" x2="100" y2="183" style="stroke:var(--ink-2);stroke-width:2"/><polygon points="100,194 94.5,183 105.5,183" style="fill:var(--ink-2)"/><text x="116" y="182" text-anchor="start" style="fill:var(--ink-2);font-size:15px;font-weight:600">× precio</text><rect x="40" y="196" width="520" height="46" rx="8" style="fill:var(--hl);stroke:var(--ink);stroke-width:1.4"/><text x="300" y="225" text-anchor="middle" style="fill:var(--ink);font-size:17px;font-weight:700">coste = 16 kWh · 0,09 €/kWh = 1,44 €</text></g></svg></figure>
+<p>Toda la cuenta en cadena: energía en kWh, paso a julios y coste.</p>
 <p><strong>Qué herramienta usar.</strong> Energía = potencia × tiempo (despejando de P = E / t). Si la potencia va en kW y el tiempo en h, la energía sale directamente en kWh, que es como se paga la luz.</p>
 <p class="sub"><strong>Paso 1. Energía en kWh</strong></p>
 <p class="eq"><strong>E = P·t = 2 kW · 8 h = 16 kWh</strong></p>
@@ -239,6 +243,8 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 </div><div class="res-box"><div class="lbl">Resultado</div><p>P motor = 2 940 W ≈ 4,0 CV.</p></div>
 <h4>Solución paso a paso</h4>
 <p>Datos: m = 450 kg · h = 12 m · t = 30 s · η = 60 % = 0,6 · g = 9,8 m/s².</p>
+<figure class="fig dg" data-diagrama="vertical" data-config='{"Ftxt":"F motor","cuerpo":"montacargas"}'><svg viewBox="0 0 600 320" role="img" aria-label="Fuerzas sobre la carga que sube" style="font-family:var(--f-body)"><circle cx="280" cy="34" r="18" style="fill:var(--sheet);stroke:var(--ink);stroke-width:1.8"/><line x1="280" y1="34" x2="280" y2="160" style="stroke:var(--ink-2);stroke-width:1.6"/><rect x="215" y="160" width="130" height="90" rx="4" style="fill:var(--sheet);stroke:var(--ink);stroke-width:1.6"/><text x="203" y="182" text-anchor="end" style="fill:var(--ink-2);font-size:14px;font-weight:600">montacargas</text><g class="dg-p" data-p="1"><line x1="280" y1="205" x2="280" y2="294" style="stroke:var(--c-p);stroke-width:2.6"/><polygon points="280,305 274.5,294 285.5,294" style="fill:var(--c-p)"/><text x="294" y="305" text-anchor="start" style="fill:var(--c-p);font-size:18px;font-weight:700">P</text></g><g class="dg-p" data-p="2"><line x1="288" y1="160" x2="288" y2="71" style="stroke:var(--c-a);stroke-width:2.6"/><polygon points="288,60 293.5,71 282.5,71" style="fill:var(--c-a)"/><text x="300" y="74" text-anchor="start" style="fill:var(--c-a);font-size:18px;font-weight:700">F motor</text></g><g class="dg-p" data-p="3"><line x1="430" y1="239" x2="430" y2="172" style="stroke:var(--c-v);stroke-width:2.6"/><polygon points="430,161 435.5,172 424.5,172" style="fill:var(--c-v)"/><text x="444" y="209" text-anchor="start" style="fill:var(--c-v);font-size:16px;font-weight:700">v constante</text></g></svg></figure>
+<p>Con velocidad constante, la fuerza del cable es igual al peso; lo útil es la energía potencial que gana la carga.</p>
 <p><strong>Qué herramienta usar.</strong> La potencia útil es la que sube el montacargas (m·g·h en 30 s); la del motor es mayor, porque solo aprovecha el 60 %.</p>
 <p class="sub"><strong>Paso 1. Potencia útil</strong></p>
 <p class="eq"><strong>P útil = m·g·h / t = 450 · 9,8 · 12 / 30 = 52 920 / 30 = 1 764 W</strong></p>
@@ -267,5 +273,6 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 <script src="../../../assets/widgets/nucleo.js" defer></script>
 <script src="../../../assets/widgets/potencia.js" defer></script>
 <script src="../../../assets/widgets/calentador.js" defer></script>
+<script src="../../../assets/diagramas/diagramas.js" defer></script>
 </body>
 </html>

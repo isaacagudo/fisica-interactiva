@@ -93,7 +93,11 @@ Calcula el trabajo realizado por la fuerza **F = 30i − 20j (N)** cuando su pun
 --- resultado
 W = 140 J.
 --- solucion
-Datos: F⃗ = 30i − 20j N · A(−6, 2) m · B(4, 10) m.
+Datos: F = 30i − 20j N · A(−6, 2) m · B(4, 10) m.
+
+[[figura:vectores|{"Ax": -6, "Ay": 2, "Bx": 4, "By": 10, "Fx": 30, "Fy": -20}]]
+
+El cuerpo va de A a B y la fuerza apunta hacia abajo a la derecha: el ángulo φ entre F y Δr decide el signo del trabajo.
 
 **Qué herramienta usar.** Igual que en 1.1: vectores, así que producto escalar.
 
@@ -196,6 +200,10 @@ a) W = 5 J · b) φ = 82,9°.
 --- solucion
 Datos: F = 4i + 3j N · A(1, −2) m · B(−3, 5) m.
 
+[[figura:vectores|{"Ax": 1, "Ay": -2, "Bx": -3, "By": 5, "Fx": 4, "Fy": 3}]]
+
+Δr va hacia arriba a la izquierda y F hacia arriba a la derecha: forman casi un ángulo recto, así que el trabajo será pequeño.
+
 **Qué herramienta usar.** La fuerza y las posiciones vienen dadas con vectores: el trabajo es el producto escalar W = F⃗ · Δr⃗. Después, el ángulo sale de la otra forma del producto escalar, W = |F|·|Δr|·cos φ.
 
 **a) Trabajo**
@@ -232,6 +240,10 @@ Para subir una caja de 20 kg a la plataforma de un camión, que está a 1,2 m de
 a) F = 78,4 N y W F = 235 J · b) W peso = −235 J · c) en vertical F = 196 N y W = 235 J: el mismo trabajo con menos fuerza.
 --- solucion
 Datos: m = 20 kg · h = 1,2 m · d = 3 m sobre la rampa · sin rozamiento · v constante · g = 9,8 m/s².
+
+[[figura:plano|{"alpha": 23.58, "mov": "sube", "roz": false, "F": "sube", "v": "v constante"}]]
+
+Sin rozamiento, a lo largo de la rampa solo compiten la fuerza que empuja y la componente del peso Px.
 
 **Qué herramienta usar.** Velocidad constante significa aceleración cero: la fuerza sale de **ΣF = 0** (dinámica). El trabajo de cada fuerza, de W = F·d·cos φ.
 
@@ -273,6 +285,10 @@ Sobre un cuerpo actúa una fuerza constante **F = 6i + 2j N**. Calcula el trabaj
 a) W = 0 J (F es perpendicular al desplazamiento, φ = 90°) · b) W = −14 J (φ = 128°: F se opone al movimiento).
 --- solucion
 Datos: F = 6i + 2j N · A(2, 1) · B(5, −8) · C(−1, 3), en metros.
+
+[[figura:vectores|{"Ax": 2, "Ay": 1, "Bx": 5, "By": -8, "Fx": 6, "Fy": 2}]]
+
+Primer caso, de A a B. Para el de A a C, Δr cambia y con él el ángulo φ.
 
 **Qué herramienta usar.** Producto escalar W = Fx·Δx + Fy·Δy para el trabajo, y cos φ = W / (|F|·|Δr|) para el ángulo.
 

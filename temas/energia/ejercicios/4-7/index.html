@@ -18,6 +18,8 @@
   --cds-chart-categorical-3:var(--c-fr);--cds-chart-categorical-4:var(--c-a);--cds-chart-categorical-5:var(--c-k);
   margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
 .fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
+.fig.dg{max-width:640px}
+.doc p.lectura{font-size:15px;color:var(--ink-2);margin:4px 0 14px}
 .fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
 header.top{display:grid;gap:8px;margin:6px 0 18px}
 header.top .txt{display:grid;gap:8px;min-width:0}
@@ -153,6 +155,8 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 </div><div class="res-box" id="resultado"><div class="lbl">Resultado</div><p>a) v = 4,44 m/s · b) la energía da el módulo, no la dirección: la velocidad forma 63,2° con la horizontal, hacia abajo.</p></div>
 <h2 id="solucion">Solución paso a paso</h2>
 <p>Datos: m = 0,02 kg · v₀ = 2 m/s horizontal · h₀ = 0,8 m · g = 9,8 m/s². Nivel h = 0 en el suelo.</p>
+<figure class="fig dg" data-diagrama="niveles" data-config='{"puntos":[{"id":"A","h":0.8,"txt":"borde de la mesa: h = 0,8 m, v = 2 m/s","v":"horizontal"},{"id":"B","h":0,"txt":"suelo: h = 0","v":"abajo"}],"nivel0":"h = 0 (suelo)"}'><svg viewBox="0 0 600 340" role="img" aria-label="Alturas medidas desde el nivel h = 0" style="font-family:var(--f-body)"><rect x="20" y="300" width="560" height="14" rx="0" style="fill:var(--plane);stroke:none;stroke-width:1.6"/><line x1="150" y1="44" x2="150" y2="300" style="stroke:var(--ink-2);stroke-width:1.5;stroke-dasharray:4 5"/><g class="dg-p" data-p="1"><line x1="20" y1="300" x2="580" y2="300" style="stroke:var(--ink);stroke-width:2.4"/><text x="580" y="330" text-anchor="end" style="fill:var(--ink);font-size:15px;font-weight:700">h = 0 (suelo)</text></g><g class="dg-p" data-p="2"><circle cx="150" cy="44" r="10" style="fill:var(--sheet);stroke:var(--ink);stroke-width:1.8"/><text x="126" y="50" text-anchor="end" style="fill:var(--ink);font-size:18px;font-weight:700">A</text><text x="194" y="50" text-anchor="start" style="fill:var(--ink);font-size:16px;font-weight:600">borde de la mesa: h = 0,8 m, v = 2 m/s</text><line x1="60" y1="22" x2="109" y2="22" style="stroke:var(--c-v);stroke-width:2.6"/><polygon points="120,22 109,27.5 109,16.5" style="fill:var(--c-v)"/></g><g class="dg-p" data-p="3"><circle cx="150" cy="300" r="10" style="fill:var(--sheet);stroke:var(--ink);stroke-width:1.8"/><text x="126" y="288" text-anchor="end" style="fill:var(--ink);font-size:18px;font-weight:700">B</text><line x1="163" y1="300" x2="190" y2="283" style="stroke:var(--ink-2);stroke-width:1"/><text x="194" y="288" text-anchor="start" style="fill:var(--ink);font-size:16px;font-weight:600">suelo: h = 0</text><line x1="80" y1="246" x2="80" y2="285" style="stroke:var(--c-v);stroke-width:2.6"/><polygon points="80,296 74.5,285 85.5,285" style="fill:var(--c-v)"/></g></svg></figure>
+<p>La canica sale en horizontal del borde de la mesa y llega al suelo describiendo una curva; a la energía no le importa la dirección.</p>
 <p><strong>Qué herramienta usar.</strong> Solo trabaja el peso: conservación de la energía mecánica para el módulo de la velocidad.</p>
 <p class="sub"><strong>a) Velocidad al llegar al suelo</strong></p>
 <p class="eq"><strong>½·m·v₀² + m·g·h₀ = ½·m·v² ⟹ v = √(v₀² + 2·g·h₀) = √(4 + 15,68) = 4,44 m/s</strong></p>
@@ -177,5 +181,6 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 </div>
 <script src="../../../../assets/widgets/nucleo.js" defer></script>
 <script src="../../../../assets/widgets/tiro.js" defer></script>
+<script src="../../../../assets/diagramas/diagramas.js" defer></script>
 </body>
 </html>

@@ -18,6 +18,8 @@
   --cds-chart-categorical-3:var(--c-fr);--cds-chart-categorical-4:var(--c-a);--cds-chart-categorical-5:var(--c-k);
   margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
 .fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
+.fig.dg{max-width:640px}
+.doc p.lectura{font-size:15px;color:var(--ink-2);margin:4px 0 14px}
 .fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
 header.top{display:grid;gap:8px;margin:6px 0 18px}
 header.top .txt{display:grid;gap:8px;min-width:0}
@@ -153,6 +155,8 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 </div><div class="res-box" id="resultado"><div class="lbl">Resultado</div><p>F = 1,72·10⁴ N (17 188 N).</p></div>
 <h2 id="solucion">Solución paso a paso</h2>
 <p>Datos: m = 100 g = 0,1 kg · v₀ = 400 m/s al entrar · v = 150 m/s al salir · d = 40 cm = 0,40 m.</p>
+<figure class="fig dg" data-diagrama="horizontal" data-config='{"P":1,"N":1,"sinPN":true,"frena":"F pared","v":"v₀ = 400 m/s","cuerpo":"proyectil"}'><svg viewBox="0 0 600 340" role="img" aria-label="Diagrama de fuerzas sobre el cuerpo" style="font-family:var(--f-body)"><rect x="20" y="250" width="560" height="14" rx="0" style="fill:var(--plane);stroke:none;stroke-width:1.6"/><line x1="20" y1="250" x2="580" y2="250" style="stroke:var(--plane-edge);stroke-width:2"/><rect x="230" y="154" width="140" height="96" rx="4" style="fill:var(--sheet);stroke:var(--ink);stroke-width:1.6"/><text x="220" y="238" text-anchor="end" style="fill:var(--ink-2);font-size:14px;font-weight:600">proyectil</text><g class="dg-p" data-p="1"><line x1="40" y1="70" x2="125" y2="70" style="stroke:var(--c-v);stroke-width:2.6"/><polygon points="136,70 125,75.5 125,64.5" style="fill:var(--c-v)"/><text x="88" y="56" text-anchor="middle" style="fill:var(--c-v);font-size:16px;font-weight:700">v₀ = 400 m/s</text></g><g class="dg-p" data-p="2"><line x1="230" y1="188" x2="131" y2="188" style="stroke:var(--c-fr);stroke-width:2.6"/><polygon points="120,188 131,182.5 131,193.5" style="fill:var(--c-fr)"/><text x="120" y="176" text-anchor="start" style="fill:var(--c-fr);font-size:16px;font-weight:700">F pared</text></g></svg></figure>
+<p>Dentro de la pared, la única fuerza que trabaja es la de la madera, contra el movimiento.</p>
 <p><strong>Qué herramienta usar.</strong> Como 3.2, pero ahora el proyectil <strong>no se para</strong>: sale con 150 m/s, así que la Ec final no es cero.</p>
 <p class="sub"><strong>Paso 1. Trabajo de la madera</strong></p>
 <p class="eq"><strong>W = ½·m·(v² − v₀²) = ½ · 0,1 · (150² − 400²) = 0,05 · (22 500 − 160 000) = −6 875 J</strong></p>
@@ -179,5 +183,6 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 </div>
 <script src="../../../../assets/widgets/nucleo.js" defer></script>
 <script src="../../../../assets/widgets/bloque.js" defer></script>
+<script src="../../../../assets/diagramas/diagramas.js" defer></script>
 </body>
 </html>

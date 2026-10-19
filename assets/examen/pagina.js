@@ -82,6 +82,7 @@
       box.innerHTML = `<h3>${e.patron.cuestion ? 'Respuesta razonada' : 'Solución paso a paso'}</h3>${solHtml(e)}` +
         (e.sim ? `<div class="ex-sim"><button type="button" class="btn" data-sim="${i}">Ver la simulación con estos datos</button><div class="widget"></div></div>` : '');
       box.dataset.lleno = '1';
+      if (window.FisicaDiagramas) window.FisicaDiagramas.montarEn(box);   // diagramas: botón para verlos paso a paso
     }
     box.hidden = !abrir; btn.setAttribute('aria-expanded', String(abrir));
     btn.textContent = abrir ? 'Ocultar la solución' : e.patron.cuestion ? 'Respuesta razonada' : 'Solución paso a paso';

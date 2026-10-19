@@ -142,7 +142,11 @@ Un cuerpo de 5 kg de masa comienza a moverse sobre un plano horizontal por acci�
 --- resultado
 a) a = 2,48 m/s² · b) Δx = 124 m · c) W roz = −1,68·10³ J (−1 684 J) · d) no trabajan el peso, la normal ni la componente vertical de F.
 --- solucion
-Datos: m = 5 kg · F = 30 N a 30° hacia arriba · μ = 0,4 · t = 10 s desde el reposo · g = 9,8 m/s². El diagrama es el mismo que en 2.2.
+Datos: m = 5 kg · F = 30 N a 30° hacia arriba · μ = 0,4 · t = 10 s desde el reposo · g = 9,8 m/s².
+
+[[figura:horizontal|{"alpha": 30, "F": 30, "P": 49, "N": 34, "Fr": 13.6, "v": "v"}]]
+
+El mismo esquema que en 2.2: solo cambia μ, así que la normal no cambia y el rozamiento se duplica.
 
 **Qué herramienta usar.** Igual que 2.2: dinámica (ΣF = m·a), cinemática del MRUA y W = F·Δs·cos φ. Solo cambia μ.
 
@@ -188,6 +192,10 @@ Un bloque de 10 kg en reposo sobre un suelo horizontal se empuja con una fuerza 
 a) N = 128 N y Fr = 32 N · b) W F = 260 J, W roz = −160 J, W P = W N = 0 · c) v = 4,47 m/s · d) tirando hacia arriba N = 68 N, Fr = 17 N y el trabajo total sería 175 J en lugar de 100 J.
 --- solucion
 Datos: m = 10 kg · F = 60 N, 30° por debajo de la horizontal · μ = 0,25 · Δx = 5 m · v₀ = 0 · g = 9,8 m/s².
+
+[[figura:horizontal|{"alpha": -30, "F": 60, "P": 98, "N": 128, "Fr": 32, "v": "v"}]]
+
+Al empujar desde arriba, Fy aprieta el bloque contra el suelo: la normal crece y, con ella, el rozamiento.
 
 **Qué herramienta usar.** Primero el diagrama de fuerzas y el eje vertical (para N y Fr); después W = F·d·cos φ para cada fuerza y el teorema de las fuerzas vivas, W total = ΔEc, para la velocidad.
 
@@ -238,6 +246,10 @@ a) μ = 0,362 · b) W F = 1,41·10³ J, W roz = −1,41·10³ J, W P = W N = 0 �
 --- solucion
 Datos: m = 30 kg · F = 100 N a 20° hacia arriba · v constante · Δx = 15 m · g = 9,8 m/s².
 
+[[figura:horizontal|{"alpha": 20, "F": 100, "P": 294, "N": 259.8, "Fr": 94, "v": "v constante"}]]
+
+Cuatro fuerzas: peso, normal, la cuerda (descompuesta en Fx y Fy) y el rozamiento, contra el movimiento.
+
 **Qué herramienta usar.** Velocidad constante ⟹ aceleración nula ⟹ **ΣF = 0 en los dos ejes** (dinámica). De ahí salen N y μ. Los trabajos, con W = F·d·cos φ.
 
 **a) Coeficiente de rozamiento**
@@ -280,6 +292,10 @@ Un bloque de 4 kg, inicialmente en reposo sobre un suelo horizontal, se empuja c
 a) v = 6,04 m/s · b) 6,20 m más (10,2 m en total) · c) W roz = −120 J, igual que el trabajo de F (120 J) con signo contrario, porque el bloque empieza y acaba parado.
 --- solucion
 Datos: m = 4 kg · F = 30 N horizontal durante d₁ = 4 m · μ = 0,3 · v₀ = 0 · g = 9,8 m/s².
+
+[[figura:horizontal|{"alpha": 0, "F": 30, "P": 39.2, "N": 39.2, "Fr": 11.76, "v": "v"}]]
+
+Mientras se empuja actúan F y el rozamiento; al soltar desaparece F y solo queda el rozamiento, que lo acaba parando.
 
 **Qué herramienta usar.** Dos tramos con fuerzas distintas: el teorema de las fuerzas vivas en cada tramo. En horizontal y con F horizontal, N = m·g en los dos.
 

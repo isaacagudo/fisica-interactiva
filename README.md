@@ -9,7 +9,8 @@ Web: https://isaacagudo.github.io/fisica-interactiva/
 ```
 index.html                         Portada: un bloque por tema (mapa, ejercicios, examen y apartados; generado)
 assets/base.css                    Estilos comunes (colores, tipografía, tarjetas, iconos)
-assets/widgets/<nombre>.js         Simuladores reutilizables que se insertan en cualquier página (ver abajo)
+assets/widgets/<nombre>.js         Simuladores (animaciones) reutilizables que se insertan en cualquier página (ver abajo)
+assets/diagramas/diagramas.js      Librería de diagramas: se insertan pasando solo el tipo y los parámetros (ver abajo)
 assets/examen/                     Generador de exámenes: núcleo, patrones de cada tema y la lógica de la página
 temas/<tema>/<pagina>/index.html   Páginas de cada tema (generadas desde src/)
 examen/index.html                  Generador de exámenes (generado desde src/examen/build.js)
@@ -61,7 +62,8 @@ widget: muelle {"escenario": "vertical", "m": 0.1, "h": 2, "k": 1607}
 --- resultado
 …
 --- solucion
-… (Markdown; [[diagrama:<fichero>|<pie>]] inserta un diagrama)
+… (Markdown; [[figura:<tipo>|{parámetros}|<pie>]] inserta un diagrama de la librería y
+   [[diagrama:<fichero>|<pie>]] uno dibujado a mano en diagramas/*.jsx)
 --- simulacion
 … (texto antes de la simulación)
 ```
@@ -81,9 +83,35 @@ Cada tema tiene la misma estructura, con un icono para cada página: **mapa** de
 | `energia-cuestiones.js` | Cuestiones de teoría, generadas por `src/energia/build.js` desde `08-cuestiones.md` (no editar) |
 | `pagina.js` | La página: formulario, dirección, soluciones, simulaciones e impresión |
 
-Un patrón es `{ id, titulo, peso, datos(r), enunciado(d, f), solucion(d, f), sim(d) }`: `datos` sortea los datos con `r.int`, `r.step`, `r.pick` o `r.chance` y devuelve `null` si no tienen sentido físico (por ejemplo, un bloque que debe volver a bajar necesita tg α > μ), y se vuelve a sortear; `solucion` devuelve `{ resultado, pasos, val }` (HTML de los pasos con «Qué herramienta usar», fórmulas y «¿Por qué?», y los números para comprobar); `sim` da el simulador y sus opciones. Para otro tema, se crea `assets/examen/<tema>.js` con `FisicaExamen.registrar({ tema, nombre, ruta, apartados: [{ slug, nombre, icono, patrones }] })` y se añade a la lista `TEMAS` de `src/examen/build.js`.
+Las soluciones siguen el estilo de los apuntes: datos, diagrama de la librería con los datos del ejercicio y una frase que lo explica, «Qué herramienta usar» con su porqué, fórmulas con letras antes de los números, «¿Por qué?» después de cada fórmula y una comprobación por otro método. Un patrón es `{ id, titulo, peso, datos(r), enunciado(d, f), solucion(d, f), sim(d) }`: `datos` sortea los datos con `r.int`, `r.step`, `r.pick` o `r.chance` y devuelve `null` si no tienen sentido físico (por ejemplo, un bloque que debe volver a bajar necesita tg α > μ), y se vuelve a sortear; `solucion` devuelve `{ resultado, pasos, val }` (HTML de los pasos con «Qué herramienta usar», fórmulas y «¿Por qué?», y los números para comprobar); `sim` da el simulador y sus opciones. Para otro tema, se crea `assets/examen/<tema>.js` con `FisicaExamen.registrar({ tema, nombre, ruta, apartados: [{ slug, nombre, icono, patrones }] })` y se añade a la lista `TEMAS` de `src/examen/build.js`.
 
-Cada patrón se comprueba en Node generando cientos de casos al azar: datos válidos, textos sin `NaN` y resultados iguales a los que calculan los simuladores (`analizar` y `simular`) con esos datos.
+Cada patrón se comprueba en Node generando cientos de casos al azar: datos válidos, textos y diagramas sin `NaN`, que la solución tenga datos, diagrama, herramienta, «¿Por qué?» y comprobación, y resultados iguales a los que calculan los simuladores (`analizar` y `simular`) con esos datos.
+
+## Diagramas (`assets/diagramas/diagramas.js`)
+
+Los esquemas de las soluciones (fuerzas, alturas, estados, vectores, energía) salen de una librería: cada ejercicio solo pasa el tipo y sus parámetros. Cada diagrama se ve entero y tiene un botón «Dibujarlo paso a paso» que lo construye en el orden de clase (peso, normal, fuerza aplicada y sus componentes, velocidad, rozamiento…) con una frase que explica cada paso. Sin JavaScript, al imprimir o en la vista rápida del iPad se ve entero.
+
+En los apuntes, en una línea propia de la solución:
+
+```
+[[figura:plano|{"alpha": 30, "mov": "sube", "roz": true, "v": "v₀"}|Pie opcional]]
+```
+
+En cualquier página: `<figure class="fig dg" data-diagrama="plano" data-config='{…}'></figure>` y `<script src="…/assets/diagramas/diagramas.js" defer></script>`. Desde JavaScript o Node: `FisicaDiagramas.html(tipo, parámetros, pie)` devuelve la figura y `dibujar(tipo, parámetros)` devuelve `{ svg, pasos }`.
+
+| Tipo | Qué dibuja | Parámetros principales |
+| --- | --- | --- |
+| `horizontal` | Cuerpo en un suelo horizontal | `P`, `N`, `F`, `alpha` (negativo = empuja hacia abajo), `Fr`, `frena`, `empuja`, `sinPN`, `v`, `cuerpo` |
+| `plano` | Cuerpo en un plano inclinado | `alpha`, `mov` ("sube" o "baja"), `roz`, `F` ("sube"), `Ftxt`, `v` |
+| `vertical` | Carga que sube colgada | `Ftxt`, `v`, `cuerpo` |
+| `niveles` | Alturas desde h = 0 | `puntos` [{`id`, `h`, `txt`, `v`}], `nivel0` |
+| `parabola` | Tiro oblicuo | `th`, `v0txt`, `vxtxt`, `htxt` |
+| `muelleH`, `muelleV` | Estados A y B con un muelle | `A`, `B` ({`txt`, `v`, `sep`, `comp`}), `roz`; `hTxt`, `xTxt` |
+| `vectores` | Producto escalar en el plano | `Ax`, `Ay`, `Bx`, `By`, `Fx`, `Fy` |
+| `reparto` | Energía consumida, útil y perdida | `total`, `util`, `txtTotal`, `txtUtil`, `txtPerd` |
+| `cadena` | Cálculo en cadena (unidades, coste) | `cajas`, `ops`, `textos` |
+
+Las longitudes de las fuerzas en `horizontal` siguen aproximadamente sus valores (`P`, `N`, `F`, `Fr`). Las frases del paso a paso se pueden cambiar con `pasos: [...]`. Para un tipo nuevo se añade una función en `T` que use `lienzo()` (base y pasos) y se documenta aquí.
 
 ## Simulaciones (`assets/widgets/`)
 

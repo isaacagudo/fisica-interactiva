@@ -11,6 +11,7 @@ const React = require('react');
 const { renderToStaticMarkup } = require('react-dom/server');
 const { marked } = require('marked');
 const { icono } = require('../iconos.js');
+const Dg = require('../../assets/diagramas/diagramas.js');   // librería de diagramas: [[figura:tipo|{parámetros}|pie]]
 
 const HERE = __dirname;
 const OUT = path.join(HERE, '../../temas/energia');
@@ -92,6 +93,8 @@ function render(md, { base = '', extra = {} } = {}) {
   // [[simulador:<nombre>|{json}]] -> simulador completo dentro de la teoría
   html = html.replace(/<p>\[\[simulador:([a-z]+)\|([\s\S]*?)\]\]<\/p>/g, (_, name, json) => { widgets.push(name); return divWidget(name, JSON.parse(unesc(json))); });
   html = html.replace(/<p>\[\[diagrama:([a-z0-9_]+)\|([^\]]+)\]\]<\/p>/g, (_, n, cap) => figura(n, cap));
+  // [[figura:<tipo>|{parámetros}|pie opcional]] -> diagrama de la librería (se dibuja aquí; el script añade el paso a paso)
+  html = html.replace(/<p>\[\[figura:([a-zA-Z]+)\|(\{[\s\S]*?\})(?:\|([^\]]*))?\]\]<\/p>/g, (_, tipo, json, pie) => Dg.html(tipo, JSON.parse(unesc(json)), pie ? unesc(pie) : ''));
   for (const k in extra) html = html.replace(`<p>[[${k}]]</p>`, extra[k]);
   html = html.replace(/<h2>([\s\S]*?)<\/h2>/g, (_, t) => {
     const txt = t.replace(/<[^>]+>/g, '');
@@ -126,6 +129,8 @@ const CSS = `
   --cds-chart-categorical-3:var(--c-fr);--cds-chart-categorical-4:var(--c-a);--cds-chart-categorical-5:var(--c-k);
   margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
 .fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
+.fig.dg{max-width:640px}
+.doc p.lectura{font-size:15px;color:var(--ink-2);margin:4px 0 14px}
 .fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
 header.top{display:grid;gap:8px;margin:6px 0 18px}
 header.top .txt{display:grid;gap:8px;min-width:0}
@@ -253,7 +258,7 @@ function page({ title, eyebrow, desc, body, toc, depth, current, crumbs, widgets
   const chips = `<a href="${topic}"${current === '' ? ' aria-current="page"' : ''}>${icono('mapa')}Mapa del tema</a><a class="ej" href="${topic}ejercicios/"${current === 'ejercicios' ? ' aria-current="page"' : ''}>${icono('ejercicios')}Ejercicios</a><a class="ej" href="${up}examen/?temas=energia">${icono('examen')}Examen</a>` +
     cats.map((c, i) => `<a href="${topic}${c.slug}/"${current === c.slug ? ' aria-current="page"' : ''}>${icono(c.icono)}${i + 1} · ${c.corto}</a>`).join('');
   const tocHtml = toc && toc.length ? `<aside class="toc" aria-label="En esta página"><h2>En esta página</h2><ol>${toc.map(h => `<li${h.sep ? ' class="sep"' : ''}><a href="#${h.id}">${h.txt}</a></li>`).join('')}</ol></aside>` : '';
-  const scripts = [];
+  const scripts = [], dg = body.includes('data-diagrama=');
   if (widgets.some(w => w !== 'muelle')) scripts.push('nucleo');
   for (const w of new Set(widgets)) scripts.push(w);
   return `<!doctype html>
@@ -283,7 +288,7 @@ ${body}
   </div>
   <footer>Material de estudio. Si el enunciado no da g, se usa 9,8 m/s². Para imprimir, usa la opción de imprimir del navegador.</footer>
 </div>
-${scripts.map(w => `<script src="${up}assets/widgets/${w}.js" defer></script>\n`).join('')}</body>
+${scripts.map(w => `<script src="${up}assets/widgets/${w}.js" defer></script>\n`).join('')}${dg ? `<script src="${up}assets/diagramas/diagramas.js" defer></script>\n` : ''}</body>
 </html>
 `;
 }

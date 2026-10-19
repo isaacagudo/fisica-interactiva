@@ -18,6 +18,8 @@
   --cds-chart-categorical-3:var(--c-fr);--cds-chart-categorical-4:var(--c-a);--cds-chart-categorical-5:var(--c-k);
   margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
 .fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
+.fig.dg{max-width:640px}
+.doc p.lectura{font-size:15px;color:var(--ink-2);margin:4px 0 14px}
 .fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
 header.top{display:grid;gap:8px;margin:6px 0 18px}
 header.top .txt{display:grid;gap:8px;min-width:0}
@@ -153,6 +155,8 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 </div><div class="res-box" id="resultado"><div class="lbl">Resultado</div><p>a) k = 500 N/m · b) Ep el = 1,6 J · c) v = 2,53 m/s.</p></div>
 <h2 id="solucion">Solución paso a paso</h2>
 <p>Datos: F = 40 N · x = 8 cm = 0,08 m · m = 0,5 kg · sin rozamiento.</p>
+<figure class="fig dg" data-diagrama="muelleH" data-config='{"A":{"txt":"muelle comprimido 8 cm, bloque en reposo","comp":true},"B":{"txt":"el muelle recupera su longitud y lanza el bloque","v":"izq","vtxt":"v"}}'><svg viewBox="0 0 600 380" role="img" aria-label="Estados inicial y final del muelle" style="font-family:var(--f-body)"><g class="dg-p" data-p="1"><rect x="20" y="150" width="536" height="14" rx="0" style="fill:var(--plane);stroke:none;stroke-width:1.6"/><line x1="20" y1="150" x2="556" y2="150" style="stroke:var(--plane-edge);stroke-width:2"/><rect x="556" y="66" width="18" height="98" rx="0" style="fill:var(--plane);stroke:var(--plane-edge);stroke-width:1.5"/><path d="M430 122 L440 122 L443.3 132 L449.9 112 L456.6 132 L463.2 112 L469.8 132 L476.4 112 L483.1 132 L489.7 112 L496.3 132 L502.9 112 L509.6 132 L516.2 112 L522.8 132 L529.4 112 L536.1 132 L542.7 112 L546 122 L556 122" style="fill:none;stroke:var(--c-k);stroke-width:2.4;stroke-linejoin:round"/><rect x="352" y="92" width="78" height="58" rx="3" style="fill:var(--sheet);stroke:var(--ink);stroke-width:1.6"/><line x1="366" y1="78" x2="366" y2="152" style="stroke:var(--ink-2);stroke-width:1.5;stroke-dasharray:3 3"/><line x1="366" y1="82" x2="419" y2="82" style="stroke:var(--c-k);stroke-width:1.8"/><polygon points="430,82 419,87.5 419,76.5" style="fill:var(--c-k)"/><text x="398" y="74" text-anchor="middle" style="fill:var(--c-k);font-size:17px;font-weight:700">x</text><text x="20" y="32" text-anchor="start" style="fill:var(--ink);font-size:16px;font-weight:700">A: muelle comprimido 8 cm, bloque en reposo</text></g><g class="dg-p" data-p="2"><rect x="20" y="348" width="536" height="14" rx="0" style="fill:var(--plane);stroke:none;stroke-width:1.6"/><line x1="20" y1="348" x2="556" y2="348" style="stroke:var(--plane-edge);stroke-width:2"/><rect x="556" y="264" width="18" height="98" rx="0" style="fill:var(--plane);stroke:var(--plane-edge);stroke-width:1.5"/><path d="M366 320 L376 320 L381.3 330 L391.9 310 L402.6 330 L413.2 310 L423.8 330 L434.4 310 L445.1 330 L455.7 310 L466.3 330 L476.9 310 L487.6 330 L498.2 310 L508.8 330 L519.4 310 L530.1 330 L540.7 310 L546 320 L556 320" style="fill:none;stroke:var(--c-k);stroke-width:2.4;stroke-linejoin:round"/><rect x="288" y="290" width="78" height="58" rx="3" style="fill:var(--sheet);stroke:var(--ink);stroke-width:1.6"/><line x1="358" y1="272" x2="297" y2="272" style="stroke:var(--c-v);stroke-width:2.6"/><polygon points="286,272 297,266.5 297,277.5" style="fill:var(--c-v)"/><text x="364" y="276" text-anchor="start" style="fill:var(--c-v);font-size:16px;font-weight:700">v</text><text x="20" y="230" text-anchor="start" style="fill:var(--ink);font-size:16px;font-weight:700">B: el muelle recupera su longitud y lanza el bloque</text></g></svg></figure>
+<p>Estado A: toda la energía está en el muelle. Estado B: toda es energía cinética del bloque.</p>
 <p><strong>Qué herramienta usar.</strong> a) Ley de Hooke; b) energía potencial elástica; c) conservación de la energía (solo trabaja la fuerza del muelle, que es conservativa).</p>
 <p class="sub"><strong>a) Constante elástica</strong></p>
 <p class="eq"><strong>F = k·x ⟹ k = 40 / 0,08 = 500 N/m</strong></p>
@@ -180,5 +184,6 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
   <footer>Material de estudio. Si el enunciado no da g, se usa 9,8 m/s². Para imprimir, usa la opción de imprimir del navegador.</footer>
 </div>
 <script src="../../../../assets/widgets/muelle.js" defer></script>
+<script src="../../../../assets/diagramas/diagramas.js" defer></script>
 </body>
 </html>

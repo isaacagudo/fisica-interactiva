@@ -18,6 +18,8 @@
   --cds-chart-categorical-3:var(--c-fr);--cds-chart-categorical-4:var(--c-a);--cds-chart-categorical-5:var(--c-k);
   margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
 .fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
+.fig.dg{max-width:640px}
+.doc p.lectura{font-size:15px;color:var(--ink-2);margin:4px 0 14px}
 .fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
 header.top{display:grid;gap:8px;margin:6px 0 18px}
 header.top .txt{display:grid;gap:8px;min-width:0}
@@ -153,6 +155,8 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 </div><div class="res-box" id="resultado"><div class="lbl">Resultado</div><p>a) W útil = 1,18·10⁵ J · b) P útil = 2 940 W · c) η = 65,3 % · d) se pierden 6,24·10⁴ J.</p></div>
 <h2 id="solucion">Solución paso a paso</h2>
 <p>Datos: m = 800 kg · h = 15 m · t = 40 s · P consumida = 4,5 kW = 4 500 W · g = 9,8 m/s².</p>
+<figure class="fig dg" data-diagrama="reparto" data-config='{"total":4500,"util":2940,"txtTotal":"Potencia que consume la grúa: 4 500 W","txtUtil":"útil (sube los ladrillos): 2 940 W","txtPerd":"pérdidas"}'><svg viewBox="0 0 600 160" role="img" aria-label="Reparto de la energía consumida" style="font-family:var(--f-body)"><g class="dg-p" data-p="1"><text x="20" y="30" text-anchor="start" style="fill:var(--ink);font-size:16px;font-weight:700">Potencia que consume la grúa: 4 500 W</text><rect x="20" y="44" width="560" height="46" rx="0" style="fill:none;stroke:var(--ink);stroke-width:1.2"/></g><g class="dg-p" data-p="2"><rect x="20" y="44" width="365.9" height="46" rx="0" style="fill:var(--c-n);stroke:none;stroke-width:1.6;opacity:0.85"/><text x="24" y="116" text-anchor="start" style="fill:var(--c-n);font-size:15px;font-weight:700">útil (sube los ladrillos): 2 940 W</text></g><g class="dg-p" data-p="3"><rect x="385.9" y="44" width="194.1" height="46" rx="0" style="fill:var(--c-fr);stroke:none;stroke-width:1.6;opacity:0.75"/><text x="580" y="142" text-anchor="end" style="fill:var(--c-fr);font-size:15px;font-weight:700">pérdidas</text></g></svg></figure>
+<p>De la potencia que consume la grúa, solo la parte útil sube los ladrillos; el resto se pierde.</p>
 <p><strong>Qué herramienta usar.</strong> A velocidad constante la grúa tira con una fuerza igual al peso: su trabajo útil es la energía potencial que gana la carga. Después, P = W/t y η = P útil / P total.</p>
 <p class="sub"><strong>a) Trabajo útil</strong></p>
 <p class="eq"><strong>W útil = m·g·h = 800 · 9,8 · 15 = 1,18·10⁵ J</strong></p>
@@ -182,5 +186,6 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 </div>
 <script src="../../../../assets/widgets/nucleo.js" defer></script>
 <script src="../../../../assets/widgets/potencia.js" defer></script>
+<script src="../../../../assets/diagramas/diagramas.js" defer></script>
 </body>
 </html>
