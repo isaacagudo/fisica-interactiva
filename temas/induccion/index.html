@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Demostración por inducción · Física interactiva</title>
+<meta name="description" content="La idea del dominó, la plantilla que sirve para todos los ejercicios, los tres patrones (sumas, divisibilidad y desigualdades) y los ejercicios del tema con pistas paso a paso.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../../assets/base.css">
+<style>
+:root{--c-a:#7b4fd6;--c-k:#b4407e;--axis:#8793a6}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--c-a:#b39bff;--c-k:#f08cc0;--axis:#8e9ab0}}
+:root[data-theme="dark"]{--c-a:#b39bff;--c-k:#f08cc0;--axis:#8e9ab0}
+.fig{--cds-text-primary:var(--ink);--cds-text-secondary:var(--ink-2);--cds-chart-axis:var(--axis);--cds-chart-grid:var(--rule);
+  --cds-chart-reference-tint:var(--plane);--cds-chart-categorical-1:var(--c-p);--cds-chart-categorical-2:var(--c-n);
+  --cds-chart-categorical-3:var(--c-fr);--cds-chart-categorical-4:var(--c-a);--cds-chart-categorical-5:var(--c-k);
+  margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
+.fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
+.fig.dg{max-width:640px}
+.doc p.lectura{font-size:15px;color:var(--ink-2);margin:4px 0 14px}
+.fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
+header.top{display:grid;gap:8px;margin:6px 0 18px}
+header.top .txt{display:grid;gap:8px;min-width:0}
+header.con-ico{grid-template-columns:96px minmax(0,1fr);gap:16px;align-items:center}
+.ico-top{border:1px solid var(--rule);border-radius:10px}
+@media (max-width:520px){header.con-ico{grid-template-columns:64px minmax(0,1fr);gap:12px}}
+.cats{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 22px}
+.cats a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:3px 11px 3px 5px;display:inline-flex;align-items:center;gap:6px}
+.cats .ico{width:30px;flex:none}
+.cats a[aria-current="page"] .ico .bk{fill:var(--paper)}
+.cats a:hover{border-color:var(--ink-2);color:var(--ink)}
+.cats a[aria-current="page"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+.cats a.ej{border-color:var(--c-p);color:var(--c-p)}
+.cats a.ej[aria-current="page"]{background:var(--c-p);color:var(--sheet)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+@media (min-width:1000px){.layout{grid-template-columns:minmax(0,760px) 1fr}}
+.toc{display:none}
+@media (min-width:1000px){.toc{display:block;position:sticky;top:16px;align-self:start;font-size:13.5px;max-height:calc(100vh - 32px);overflow:auto}
+  .toc h2{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:0 0 8px}
+  .toc ol{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+  .toc a{color:var(--ink-2);text-decoration:none;line-height:1.3;display:block}
+  .toc a:hover{color:var(--ink)}
+  .toc .sep{margin-top:8px;font-weight:700;color:var(--ink)}}
+.doc{min-width:0}
+.doc>h2:first-child{border-top:0;margin-top:0;padding-top:0}
+.doc h2{font-size:1.28rem;margin:38px 0 10px;padding-top:16px;border-top:1px solid var(--rule);scroll-margin-top:12px}
+.doc h3{font-size:1.06rem;margin:26px 0 8px}
+.doc p{margin:10px 0}
+.doc p.eq{background:var(--sheet);border:1px solid var(--rule);border-left:3px solid var(--c-p);border-radius:8px;padding:9px 12px;overflow-x:auto}
+.doc p.sub{margin:22px 0 4px}
+.doc p.res{background:var(--hl);border-radius:8px;padding:8px 12px}
+.doc blockquote.why{margin:10px 0 14px;padding:8px 14px;border-left:3px solid var(--rule);background:color-mix(in srgb,var(--sheet) 70%,transparent);border-radius:0 8px 8px 0;color:var(--ink)}
+.doc blockquote.why p{margin:4px 0}
+.doc ul,.doc ol{padding-left:1.3em}
+.doc li{margin:4px 0}
+.table-wrap{overflow-x:auto;margin:12px 0;border:1px solid var(--rule);border-radius:10px;background:var(--sheet)}
+.doc table{border-collapse:collapse;width:100%;font-size:14.5px}
+.doc th,.doc td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid var(--rule)}
+.doc th{font-weight:700;background:var(--paper)}
+.doc tr:last-child td{border-bottom:0}
+.grid-cats{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));margin:18px 0 8px}
+.grid-cats a{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:start;text-decoration:none;color:inherit}
+.grid-cats a:hover{border-color:var(--ink-2)}
+.grid-cats a{grid-template-columns:72px minmax(0,1fr)}
+.grid-cats .n{border-radius:8px;border:1px solid var(--rule)}
+.doc .widget[id^=simulador]{scroll-margin-top:12px}
+.grid-cats h3{font-size:1rem;line-height:1.25}
+.grid-cats p{margin:4px 0 0;font-size:13.5px;color:var(--ink-2)}
+/* ejercicios propuestos */
+.metodo{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 14px;font-size:14.5px}
+.metodo ol{margin:6px 0 2px}
+.props{display:grid;gap:14px;margin:14px 0}
+.prop{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:14px 16px;scroll-margin-top:12px}
+.prop .cab{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-bottom:6px}
+.prop .num{font:700 1.05rem var(--f-display)}
+.prop .src{font:600 12px var(--f-mono);color:var(--ink-2);letter-spacing:.02em}
+.tag{font:600 11px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;border:1px solid currentColor;border-radius:999px;padding:1px 7px}
+.tag.nuevo{color:var(--c-n)}
+.tag.sel{color:var(--c-a)}
+.tag.sim{color:var(--c-p)}
+.prop h3{font-size:1rem;margin:0 0 6px;line-height:1.3}
+.prop .enun p{margin:6px 0}
+.prop .fig{margin:10px 0 4px}
+.prop .acc{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;margin-top:10px}
+.prop details{flex:1 1 260px;min-width:0}
+.prop summary{cursor:pointer;font:600 13.5px var(--f-body);color:var(--ink-2);min-height:38px;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rule);border-radius:9px;padding:0 12px;list-style:none}
+.prop summary::-webkit-details-marker{display:none}
+.prop summary::before{content:"▸";font-size:12px}
+.prop details[open] summary::before{content:"▾"}
+.prop details[open] summary{color:var(--ink)}
+.prop details p{background:var(--hl);border-radius:8px;padding:8px 12px;margin:8px 0 0}
+.prop .btn{margin-left:auto}
+@media (max-width:520px){.prop .btn{margin-left:0;width:100%}}
+/* ejemplos resueltos dentro de cada apartado */
+.ejemplo{margin:18px 0 0;padding-top:4px}
+.ejemplo>h3{font-size:1.12rem;margin:30px 0 10px;scroll-margin-top:12px}
+.ejemplo>h3 .src{font:600 12px var(--f-mono);color:var(--ink-2);margin-left:6px}
+.ejemplo h4{font:700 .82rem var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:22px 0 6px}
+.ejemplo+.ejemplo{border-top:1px dashed var(--rule);margin-top:30px}
+.ir-ej{display:grid;gap:8px;background:var(--sheet);border:1px solid var(--c-p);border-radius:12px;padding:14px 16px;margin:14px 0}
+.ir-ej p{margin:0}
+.ir-ej .lista{font-size:14px;color:var(--ink-2);margin:0;padding-left:0;list-style:none;display:grid;gap:3px}
+.ir-ej .lista .tag{font-size:10px;padding:0 6px}
+.ir-ej .btn{justify-self:start}
+.grupo-ej{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 12px}
+.grupo-ej>span{display:inline-flex;align-items:center;gap:10px}
+.grupo-ej .ico{width:44px}
+.filtro a{display:inline-flex;align-items:center;gap:6px;padding:3px 11px 3px 5px}
+.filtro .ico{width:30px}
+.grupo-ej a{font-size:14px}
+.filtro{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.filtro a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.filtro a:hover{border-color:var(--ink-2);color:var(--ink)}
+/* página de solución */
+.enun-box{background:var(--sheet);border:1px solid var(--rule);border-left:4px solid var(--ink);border-radius:12px;padding:12px 16px}
+.enun-box .lbl{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.enun-box p{margin:6px 0}
+.res-box{background:var(--hl);border-radius:12px;padding:10px 16px;margin:14px 0}
+.res-box .lbl{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase}
+.res-box p{margin:4px 0}
+.saltos{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.saltos a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.doc .widget{margin:16px 0 8px}
+.doc .widget:empty{display:none}
+/* índice con resultados ocultos */
+.ver-res{display:inline-flex;align-items:center;gap:8px;font:600 14px var(--f-body);cursor:pointer;margin:4px 0}
+.ver-res input{width:18px;height:18px;accent-color:var(--c-p)}
+.indice td.r{transition:filter .2s}
+.indice td:first-child{white-space:nowrap}
+.indice td small{display:block;color:var(--ink-2);font-size:12px}
+.indice tr.grupo th{background:var(--plane);font-size:14px}
+.indice tr.grupo a{color:inherit}
+.ver-res:has(input:not(:checked)) + .table-wrap td.r{filter:blur(5px);user-select:none}
+.pager{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:40px;border-top:1px solid var(--rule);padding-top:16px}
+.pager a{text-decoration:none;max-width:48%}
+.pager .mid{align-self:center}
+.pager small{display:block;color:var(--ink-2);font-size:12px}
+footer{margin-top:36px;color:var(--ink-2);font-size:13px}
+@media print{.cats,.toc,.pager,.crumbs,.widget,.saltos,.prop .btn,.prop summary{display:none}.layout{display:block}.fig,.table-wrap,p.eq,.prop{break-inside:avoid}}
+
+.doc p.eq{margin:6px 0;display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 12px}
+.doc p.eq+p.eq{margin-top:-1px;border-top-left-radius:0;border-top-right-radius:0}
+.doc p.eq:has(+p.eq){margin-bottom:0;border-bottom-left-radius:0;border-bottom-right-radius:0}
+.doc p.eq .just{font-size:14px;color:var(--ink-2)}
+.doc ol[start]{margin-top:12px}
+.ficha{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14.5px;color:var(--ink-2);margin:12px 0 0}
+.ficha strong{color:var(--ink)}
+/* tabla de primeros casos */
+.explorar{margin:10px 0 6px}
+.explorar-tabla{margin-top:10px}
+.explorar td.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.explorar tr.base td{background:color-mix(in srgb,var(--c-n) 12%,transparent)}
+.explorar tr.antes td{color:var(--ink-2)}
+.explorar .si{color:var(--c-n);font-weight:700}
+.explorar .no{color:var(--c-fr);font-weight:700}
+.explorar small{color:var(--ink-2)}
+.tag-base{font:600 10.5px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;color:var(--c-n);border:1px solid currentColor;border-radius:999px;padding:0 6px;margin-left:4px;white-space:nowrap}
+.explorar-msg{font-size:14.5px;color:var(--ink-2)}
+/* pistas */
+.guia{display:grid;gap:10px;margin:14px 0}
+.guia details{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:0 14px}
+.guia summary{cursor:pointer;list-style:none;min-height:46px;display:flex;align-items:center;gap:10px;font:700 15px var(--f-body)}
+.guia summary::-webkit-details-marker{display:none}
+.guia summary::before{content:"▸";font-size:12px;color:var(--ink-2)}
+.guia details[open] summary::before{content:"▾"}
+.guia .n{font:700 12px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--c-v);border:1px solid currentColor;border-radius:999px;padding:1px 8px}
+.guia details.pista[open]{border-color:var(--c-v)}
+.guia.js details.pista:not([open]):not(.usada) .t{display:none}
+.guia.js details.pista:not([open]):not(.usada) summary::after{content:"¿Atascada? Ábrela";font:400 14px var(--f-body);color:var(--ink-2)}
+.guia .cuerpo{padding:0 0 12px}
+.guia .cuerpo p{margin:6px 0}
+.guia details.sol summary .n{color:var(--c-p)}
+.guia details.sol[open]{border-color:var(--c-p)}
+.guia .estado{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;font-size:14.5px;color:var(--ink-2);padding:4px 2px}
+.guia .estado .txt{flex:1 1 200px}
+.guia .estado .reset{background:none;border:0;color:var(--ink-2);text-decoration:underline;font:inherit;cursor:pointer;padding:0}
+.tag.hecho{color:var(--c-n)}
+.tag.empezado{color:var(--c-v)}
+/* dominó */
+.domino{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:12px 14px;margin:16px 0}
+.domino-esc,.domino-acc{display:flex;flex-wrap:wrap;gap:8px}
+.domino svg{display:block;width:100%;height:auto;margin:10px 0 0;font-family:var(--f-body)}
+.domino .suelo{stroke:var(--plane-edge);stroke-width:2}
+.domino .ficha rect{fill:var(--sheet);stroke:var(--ink);stroke-width:2}
+.domino .ficha circle{fill:var(--ink)}
+.domino .ficha line{stroke:var(--ink);stroke-width:1.2}
+.domino .ficha text{font-size:14px;fill:var(--ink-2)}
+.domino .ficha .mal{display:none;font-size:18px;font-weight:700;fill:var(--c-fr)}
+.domino .ficha.falsa rect{stroke:var(--c-fr);fill:color-mix(in srgb,var(--c-fr) 12%,var(--sheet))}
+.domino .ficha.falsa .mal{display:inline}
+.domino .ficha.fuera{opacity:.45}
+.domino .ficha.cae rect{stroke:var(--c-p);fill:color-mix(in srgb,var(--c-p) 14%,var(--sheet))}
+.domino .gira{transition:transform .32s cubic-bezier(.55,0,.9,.5)}
+@media (prefers-reduced-motion: reduce){.domino .gira{transition:none}}
+.domino .mano line{stroke:var(--c-v);stroke-width:3;stroke-linecap:round}
+.domino .mano polygon{fill:var(--c-v)}
+.domino .nadie{font-size:13px;fill:var(--c-fr);font-weight:700}
+.domino-txt{min-height:3em;margin:8px 0 10px;font-size:15px}
+</style>
+</head>
+<body>
+<div class="page">
+  <nav class="crumbs" aria-label="Ruta"><a href="../../">Física interactiva</a><span aria-hidden="true">›</span><span>Demostración por inducción</span></nav>
+  <header class="top con-ico"><div class="ico-top grid-paper"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><polygon class="pl" points="14,16 34,10 56,16 80,10 80,58 56,64 34,58 14,64"/><line class="ln q" x1="34" y1="10" x2="34" y2="58" style="stroke-width:1.2"/><line class="ln q" x1="56" y1="16" x2="56" y2="64" style="stroke-width:1.2"/>
+<path class="ln p" d="M22 52 C30 40, 40 50, 46 38 S62 26, 66 24" style="stroke-dasharray:4 4"/><path class="ffr" d="M66 12 C60 12 57 16 57 20 C57 26 66 34 66 34 C66 34 75 26 75 20 C75 16 72 12 66 12 Z"/><circle cx="66" cy="20" r="3.2" style="fill:var(--sheet)"/></svg></div><div class="txt"><div class="eyebrow">Matemáticas · Tema 1 · Secuencias, series y demostraciones</div><h1>Demostración por inducción</h1><p class="lead">La idea del dominó, la plantilla que sirve para todos los ejercicios, los tres patrones (sumas, divisibilidad y desigualdades) y los ejercicios del tema con pistas paso a paso.</p></div></header>
+  <nav class="cats" aria-label="Apartados del tema"><a href="" aria-current="page"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><polygon class="pl" points="14,16 34,10 56,16 80,10 80,58 56,64 34,58 14,64"/><line class="ln q" x1="34" y1="10" x2="34" y2="58" style="stroke-width:1.2"/><line class="ln q" x1="56" y1="16" x2="56" y2="64" style="stroke-width:1.2"/>
+<path class="ln p" d="M22 52 C30 40, 40 50, 46 38 S62 26, 66 24" style="stroke-dasharray:4 4"/><path class="ffr" d="M66 12 C60 12 57 16 57 20 C57 26 66 34 66 34 C66 34 75 26 75 20 C75 16 72 12 66 12 Z"/><circle cx="66" cy="20" r="3.2" style="fill:var(--sheet)"/></svg>Mapa del tema</a><a class="ej" href="ejercicios/"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><rect class="bk" x="20" y="8" width="44" height="58" rx="3"/><line class="ln q" x1="28" y1="22" x2="56" y2="22" style="stroke-width:1.6"/><line class="ln q" x1="28" y1="32" x2="56" y2="32" style="stroke-width:1.6"/><line class="ln q" x1="28" y1="42" x2="48" y2="42" style="stroke-width:1.6"/><line class="ln q" x1="28" y1="52" x2="44" y2="52" style="stroke-width:1.6"/>
+<g transform="rotate(38 66 40)"><rect x="61" y="14" width="10" height="40" rx="1.5" class="fv"/><rect x="61" y="14" width="10" height="6" style="fill:var(--c-fr)"/><polygon points="61,54 71,54 66,64" style="fill:var(--sheet);stroke:var(--ink);stroke-width:1.4"/><polygon points="64.4,60.8 67.6,60.8 66,64" style="fill:var(--ink)"/></g></svg>Ejercicios</a><a href="sumas/"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><line class="ln q" x1="10" y1="62" x2="86" y2="62" style="stroke-width:1.5"/><rect class="bk" x="14" y="50" width="12" height="12"/><rect class="bk" x="30" y="38" width="12" height="24"/><rect class="bk" x="46" y="26" width="12" height="36"/><rect x="62" y="14" width="12" height="48" style="fill:var(--c-p);opacity:.25;stroke:var(--c-p);stroke-width:1.8"/><path class="ln p" d="M68 4 v8 M64 8 h8" style="stroke-width:2.2"/></svg>1 · Sumas</a><a href="divisibilidad/"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><rect class="bk" x="12" y="12" width="72" height="48" rx="4"/><line class="ln q" x1="36" y1="16" x2="36" y2="56" style="stroke-width:1.2;stroke-dasharray:3 3"/><line class="ln q" x1="60" y1="16" x2="60" y2="56" style="stroke-width:1.2;stroke-dasharray:3 3"/><circle cx="18" cy="24" r="3.4" class="fn"/><circle cx="30" cy="24" r="3.4" class="fn"/><circle cx="18" cy="36" r="3.4" class="fn"/><circle cx="30" cy="36" r="3.4" class="fn"/><circle cx="18" cy="48" r="3.4" class="fn"/><circle cx="30" cy="48" r="3.4" class="fn"/><circle cx="42" cy="24" r="3.4" class="fn"/><circle cx="54" cy="24" r="3.4" class="fn"/><circle cx="42" cy="36" r="3.4" class="fn"/><circle cx="54" cy="36" r="3.4" class="fn"/><circle cx="42" cy="48" r="3.4" class="fn"/><circle cx="54" cy="48" r="3.4" class="fn"/><circle cx="66" cy="24" r="3.4" class="fn"/><circle cx="78" cy="24" r="3.4" class="fn"/><circle cx="66" cy="36" r="3.4" class="fn"/><circle cx="78" cy="36" r="3.4" class="fn"/><circle cx="66" cy="48" r="3.4" class="fn"/><circle cx="78" cy="48" r="3.4" class="fn"/></svg>2 · Divisibilidad</a><a href="desigualdades/"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><line class="ln q" x1="8" y1="62" x2="88" y2="62" style="stroke-width:1.5"/><rect x="16" y="12" width="20" height="50" rx="2" style="fill:var(--c-p);opacity:.85"/><rect x="62" y="34" width="20" height="28" rx="2" style="fill:var(--c-v);opacity:.85"/><path class="ln i" d="M42 28 l12 8 l-12 8 M42 52 h12" style="stroke-width:2.8"/></svg>3 · Desigualdades</a></nav>
+  <div class="layout">
+    <main class="doc">
+<h2 id="como-usar-esta-seccion">Cómo usar esta sección</h2>
+<p>La inducción sirve para demostrar que algo es cierto <strong>para todos los números naturales</strong> a partir de uno dado. En el Tema 1 aparece casi siempre con tres caras: <strong>sumas</strong>, <strong>divisibilidad</strong> y <strong>desigualdades</strong>. Cada una tiene su truco para el paso inductivo. El objetivo es que, al leer un enunciado, reconozcas cuál es y sepas qué hacer.</p>
+<ol>
+<li>Lee esta página: la idea y la plantilla son iguales para todos los ejercicios.</li>
+<li>Después, cada apartado explica un patrón con ejemplos resueltos paso a paso. Los ejemplos <strong>no</strong> son los ejercicios de tu profesor: esos quedan para que practiques tú.</li>
+<li>Por último, los ejercicios: cada uno tiene una tabla para explorar los primeros casos, pistas que se abren de una en una cuando te atascas y la solución completa.</li>
+</ol>
+<div class="grid-cats"><a class="card" href="ejercicios/"><span class="n grid-paper"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><rect class="bk" x="20" y="8" width="44" height="58" rx="3"/><line class="ln q" x1="28" y1="22" x2="56" y2="22" style="stroke-width:1.6"/><line class="ln q" x1="28" y1="32" x2="56" y2="32" style="stroke-width:1.6"/><line class="ln q" x1="28" y1="42" x2="48" y2="42" style="stroke-width:1.6"/><line class="ln q" x1="28" y1="52" x2="44" y2="52" style="stroke-width:1.6"/>
+<g transform="rotate(38 66 40)"><rect x="61" y="14" width="10" height="40" rx="1.5" class="fv"/><rect x="61" y="14" width="10" height="6" style="fill:var(--c-fr)"/><polygon points="61,54 71,54 66,64" style="fill:var(--sheet);stroke:var(--ink);stroke-width:1.4"/><polygon points="64.4,60.8 67.6,60.8 66,64" style="fill:var(--ink)"/></g></svg></span><span><h3>Ejercicios</h3><p>Los 11 ejercicios de inducción del Tema 1, con pistas paso a paso.</p></span></a><a class="card" href="sumas/"><span class="n grid-paper"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><line class="ln q" x1="10" y1="62" x2="86" y2="62" style="stroke-width:1.5"/><rect class="bk" x="14" y="50" width="12" height="12"/><rect class="bk" x="30" y="38" width="12" height="24"/><rect class="bk" x="46" y="26" width="12" height="36"/><rect x="62" y="14" width="12" height="48" style="fill:var(--c-p);opacity:.25;stroke:var(--c-p);stroke-width:1.8"/><path class="ln p" d="M68 4 v8 M64 8 h8" style="stroke-width:2.2"/></svg></span><span><h3>1 · Sumas de series</h3><p>El caso n + 1 es el caso n más un término. Hipótesis, término nuevo y factor común.</p></span></a><a class="card" href="divisibilidad/"><span class="n grid-paper"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><rect class="bk" x="12" y="12" width="72" height="48" rx="4"/><line class="ln q" x1="36" y1="16" x2="36" y2="56" style="stroke-width:1.2;stroke-dasharray:3 3"/><line class="ln q" x1="60" y1="16" x2="60" y2="56" style="stroke-width:1.2;stroke-dasharray:3 3"/><circle cx="18" cy="24" r="3.4" class="fn"/><circle cx="30" cy="24" r="3.4" class="fn"/><circle cx="18" cy="36" r="3.4" class="fn"/><circle cx="30" cy="36" r="3.4" class="fn"/><circle cx="18" cy="48" r="3.4" class="fn"/><circle cx="30" cy="48" r="3.4" class="fn"/><circle cx="42" cy="24" r="3.4" class="fn"/><circle cx="54" cy="24" r="3.4" class="fn"/><circle cx="42" cy="36" r="3.4" class="fn"/><circle cx="54" cy="36" r="3.4" class="fn"/><circle cx="42" cy="48" r="3.4" class="fn"/><circle cx="54" cy="48" r="3.4" class="fn"/><circle cx="66" cy="24" r="3.4" class="fn"/><circle cx="78" cy="24" r="3.4" class="fn"/><circle cx="66" cy="36" r="3.4" class="fn"/><circle cx="78" cy="36" r="3.4" class="fn"/><circle cx="66" cy="48" r="3.4" class="fn"/><circle cx="78" cy="48" r="3.4" class="fn"/></svg></span><span><h3>2 · Divisibilidad</h3><p>Escribir el caso n + 1 como algo por el caso n más un múltiplo. Con potencias y con polinomios.</p></span></a><a class="card" href="desigualdades/"><span class="n grid-paper"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><line class="ln q" x1="8" y1="62" x2="88" y2="62" style="stroke-width:1.5"/><rect x="16" y="12" width="20" height="50" rx="2" style="fill:var(--c-p);opacity:.85"/><rect x="62" y="34" width="20" height="28" rx="2" style="fill:var(--c-v);opacity:.85"/><path class="ln i" d="M42 28 l12 8 l-12 8 M42 52 h12" style="stroke-width:2.8"/></svg></span><span><h3>3 · Desigualdades (y el caso mixto)</h3><p>Una cadena de = y ≥ con la hipótesis en un eslabón y una desigualdad auxiliar al final. Incluye sumas dentro de desigualdades.</p></span></a></div>
+<h2 id="la-idea-el-efecto-domino">La idea: el efecto dominó</h2>
+<p>Para tirar una fila infinita de fichas de dominó bastan dos cosas: <strong>que caiga la primera</strong> y <strong>que cada ficha, al caer, tire a la siguiente</strong>. Si se cumplen las dos, caen todas, aunque nunca las veas caer una a una.</p>
+<p>La inducción es exactamente eso, con números en lugar de fichas:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Dominó</th>
+<th>Inducción</th>
+<th>Qué haces tú</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Empujar la primera ficha</td>
+<td><strong>Caso base</strong></td>
+<td>Comprobar que la afirmación es cierta para el primer número (casi siempre 1)</td>
+</tr>
+<tr>
+<td>Cada ficha tira a la siguiente</td>
+<td><strong>Paso inductivo</strong></td>
+<td>Demostrar que <em>si</em> es cierta para un número cualquiera n, <em>entonces</em> también lo es para n + 1</td>
+</tr>
+<tr>
+<td>Caen todas</td>
+<td><strong>Conclusión</strong></td>
+<td>Por el principio de inducción, es cierta para todos los números desde el primero</td>
+</tr>
+</tbody></table></div>
+<div class="domino" data-domino><p><strong>El dominó.</strong> Abre esta página en el navegador para ver caer las fichas en cuatro situaciones: con caso base y paso, sin caso base, con el paso roto y empezando en 4.</p></div>
+<p>Fíjate en el «si» del paso inductivo. No demuestras que la afirmación sea cierta para n: lo <strong>supones</strong> (eso es la <em>hipótesis de inducción</em>) y lo usas como herramienta para llegar a n + 1. Es como decir: «no sé si esta ficha ha caído, pero si cae, empuja a la siguiente».</p>
+<blockquote class="why">
+<p><strong>¿Por qué no basta con comprobar muchos casos?</strong> Porque hay infinitos números y no puedes probarlos todos. Hay fórmulas que funcionan durante mucho tiempo y de repente fallan: n² + n + 41 da un número primo para n = 0, 1, 2, …, 39, y para n = 40 da 1681 = 41 · 41. Comprobar casos te da confianza; solo la demostración te da la certeza.</p>
+</blockquote>
+<blockquote class="why">
+<p><strong>¿De dónde salen las fórmulas?</strong> La inducción <strong>demuestra</strong>, pero no <strong>descubre</strong>. La fórmula tiene que venir antes: normalmente de mirar una tabla con los primeros casos y adivinar el patrón. La inducción confirma que lo que has adivinado es cierto siempre.</p>
+</blockquote>
+<h3>El ejemplo de clase, visto con esta idea</h3>
+<p>Tu profesor pone este ejemplo:</p>
+<p class="eq"><strong>1 + 2 + 3 + ⋯ + (n − 1) + n + (n − 1) + ⋯ + 3 + 2 + 1 = n²</strong></p>
+<p>Primero, una tabla para ver que parece cierto:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>n</th>
+<th>Suma</th>
+<th>Resultado</th>
+<th>n²</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1 + 2 + 1</td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1 + 2 + 3 + 2 + 1</td>
+<td>9</td>
+<td>9</td>
+</tr>
+<tr>
+<td>4</td>
+<td>1 + 2 + 3 + 4 + 3 + 2 + 1</td>
+<td>16</td>
+<td>16</td>
+</tr>
+</tbody></table></div>
+<p>Ahora la pregunta clave de la inducción: <strong>¿qué cambia al pasar de n a n + 1?</strong> Compara las filas 3 y 4: la suma nueva es la vieja con dos números más en el centro, el 3 y el 4. En general, al pasar de n a n + 1 se añaden <strong>n</strong> y <strong>n + 1</strong>. Por tanto, si la suma vieja vale n²:</p>
+<p class="eq"><strong>suma nueva = n² + n + (n + 1) = n² + 2n + 1 = (n + 1)²</strong></p>
+<p>Que es justo lo que la fórmula dice para n + 1. Si es cierto para un n, es cierto para el siguiente. Y como para n = 1 es cierto, cae toda la fila.</p>
+<p>Esta es la pregunta que vas a hacerte en <strong>todos</strong> los ejercicios: <em>¿cómo se construye el caso n + 1 a partir del caso n?</em> En las sumas, añadiendo un término; en divisibilidad, multiplicando por algo; en desigualdades, multiplicando o sumando y luego acotando. Los tres apartados son tres respuestas a esa pregunta.</p>
+<h2 id="la-plantilla-y-la-notacion-de-clase">La plantilla y la notación de clase</h2>
+<p>Toda demostración por inducción tiene las mismas partes, en el mismo orden y con casi las mismas frases. Si te aprendes el esqueleto, solo tienes que pensar en una parte: el paso inductivo.</p>
+<h3>La notación de tu profesor</h3>
+<p>Tu profesor llama <strong>P(k)</strong> a la afirmación, con la letra <strong>k</strong> como variable. Luego <strong>supone que es cierta para k = n</strong> y <strong>demuestra que es cierta para k = n + 1</strong>. Así, todas las cuentas del paso inductivo se hacen con <strong>n</strong> y <strong>n + 1</strong>.</p>
+<p>Si un enunciado viene escrito con n (por ejemplo, «n! &gt; 3ⁿ para n ≥ 7»), lo primero es reescribirlo con k: <strong>P(k): k! &gt; 3ᵏ, para k ≥ 7</strong>.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Qué es</th>
+<th>Ojo</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>k</strong></td>
+<td>La variable de la afirmación P(k)</td>
+<td>Solo aparece al enunciar P(k) y en la conclusión</td>
+</tr>
+<tr>
+<td><strong>n</strong></td>
+<td>Un valor concreto para el que suponemos que P es cierta</td>
+<td>Es con lo que haces las cuentas: n y n + 1</td>
+</tr>
+<tr>
+<td><strong>r</strong></td>
+<td>El índice de un sumatorio: Σ r(r + 1), con r de 1 a n, significa 1·2 + 2·3 + ⋯ + n(n + 1)</td>
+<td>No uses k ni n como índice: se mezclarían con lo anterior</td>
+</tr>
+<tr>
+<td><strong>ℤ⁺</strong></td>
+<td>Los enteros positivos: 1, 2, 3, …</td>
+<td>Caso base en 1</td>
+</tr>
+<tr>
+<td><strong>ℕ</strong></td>
+<td>Los naturales. En el IB incluyen el 0: 0, 1, 2, …</td>
+<td>Si el enunciado dice ℕ, el caso base es k = 0</td>
+</tr>
+<tr>
+<td><strong>= 7M, con M ∈ ℤ</strong></td>
+<td>«Es múltiplo de 7»</td>
+<td>Es la forma de escribir la divisibilidad en las cuentas</td>
+</tr>
+</tbody></table></div>
+<blockquote class="why">
+<p><strong>¿Y si en un libro en inglés lo ves al revés?</strong> Muchos libros (el de Oxford, por ejemplo) escriben «assume true for n = k, prove for n = k + 1»: cambian los papeles de las letras. La idea es idéntica. Lo importante es que dentro de una misma demostración no cambies de convenio. Aquí usamos siempre el de tu profesor.</p>
+</blockquote>
+<h3>Las cinco partes</h3>
+<ol start="0">
+<li><strong>Explorar (en borrador).</strong> Calcula los primeros casos en una tabla. No es parte de la demostración, pero te dice si te crees el enunciado y desde qué número empieza.</li>
+<li><strong>Enunciado.</strong> <em>«Sea P(k) la proposición: …, para k ≥ 1.»</em></li>
+<li><strong>Caso base.</strong> <em>«Para k = 1: …»</em> Calcula <strong>cada lado por separado</strong> y comprueba que coinciden (o que se cumple la desigualdad, o que es múltiplo).</li>
+<li><strong>Hipótesis de inducción.</strong> <em>«Supongamos que P(k) es cierta para k = n, es decir: …»</em> Escríbela entera, con n.</li>
+<li><strong>Paso inductivo.</strong> <em>«Demostremos que es cierta para k = n + 1. Queremos llegar a: …»</em> Escribe el objetivo entero, con n + 1. Después parte de un lado, usa la hipótesis (y señala dónde la usas) y llega al otro.</li>
+<li><strong>Conclusión.</strong> <em>«Como P(k) es cierta para k = 1, y si es cierta para k = n también lo es para k = n + 1, por el principio de inducción P(k) es cierta para todo k ∈ ℤ⁺.»</em></li>
+</ol>
+<blockquote class="why">
+<p><strong>¿Por qué escribir el objetivo antes de operar?</strong> Porque el paso inductivo es un camino y necesitas saber adónde vas. Casi todos los atascos vienen de operar sin saber qué forma tiene que tener el resultado. Con el objetivo delante, cada cuenta se decide sola: «¿me acerca a lo que quiero?».</p>
+</blockquote>
+<blockquote class="why">
+<p><strong>¿Por qué calcular cada lado por separado en el caso base?</strong> Porque si escribes la igualdad que quieres demostrar y operas con ella, estás dando por hecho lo que quieres probar. Calcula el lado izquierdo, calcula el derecho y di que coinciden.</p>
+</blockquote>
+<blockquote class="why">
+<p><strong>¿Por qué la frase de conclusión entera?</strong> Porque es lo que justifica que caigan todas las fichas: menciona las dos piezas (caso base y paso). En los exámenes del IB esa frase tiene su propia puntuación y se pierde si falta.</p>
+</blockquote>
+<h3>Sustituir n por n + 1 sin equivocarse</h3>
+<p>Es el error más tonto y el más frecuente. Cambia <strong>cada</strong> n por <strong>(n + 1)</strong>, con paréntesis, y simplifica después:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Expresión con n</th>
+<th>Con n + 1</th>
+<th>Simplificada</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>n(n + 1)/2</td>
+<td>(n + 1)((n + 1) + 1)/2</td>
+<td>(n + 1)(n + 2)/2</td>
+</tr>
+<tr>
+<td>2ⁿ⁺²</td>
+<td>2⁽ⁿ⁺¹⁾⁺²</td>
+<td>2ⁿ⁺³</td>
+</tr>
+<tr>
+<td>3²ⁿ⁺¹</td>
+<td>3²⁽ⁿ⁺¹⁾⁺¹</td>
+<td>3²ⁿ⁺³ (¡no 3²ⁿ⁺²!)</td>
+</tr>
+<tr>
+<td>n²</td>
+<td>(n + 1)²</td>
+<td>n² + 2n + 1</td>
+</tr>
+<tr>
+<td>(2n)!</td>
+<td>(2(n + 1))!</td>
+<td>(2n + 2)!</td>
+</tr>
+</tbody></table></div>
+<h2 id="los-tres-patrones-en-una-tabla">Los tres patrones en una tabla</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Patrón</th>
+<th>Cómo se construye el caso n + 1</th>
+<th>Truco del paso</th>
+<th>Ojo con</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Sumas</strong></td>
+<td>Caso n + término nuevo</td>
+<td>Factor común de lo que tenga el objetivo</td>
+<td>El término nuevo: sustituir r = n + 1</td>
+</tr>
+<tr>
+<td><strong>Divisibilidad, potencias</strong></td>
+<td>Separar: xⁿ⁺¹ = x · xⁿ</td>
+<td>Repartir el coeficiente o despejar y sustituir</td>
+<td>El exponente 2n + 1 sube de 2 en 2</td>
+</tr>
+<tr>
+<td><strong>Divisibilidad, polinomios</strong></td>
+<td>Desarrollar (n + 1)³ con Newton</td>
+<td>Agrupar los términos de la hipótesis</td>
+<td>A veces hace falta un lema (n(n + 1) es par)</td>
+</tr>
+<tr>
+<td><strong>Desigualdades</strong></td>
+<td>Separar: 2ⁿ⁺¹ = 2 · 2ⁿ, (n + 1)! = (n + 1) · n!</td>
+<td>Hipótesis + desigualdad auxiliar</td>
+<td>Usar la condición n ≥ n₀</td>
+</tr>
+<tr>
+<td><strong>Mixto</strong></td>
+<td>Caso n + término nuevo</td>
+<td>Hipótesis + desigualdad auxiliar</td>
+<td>Los apartados previos suelen darte la auxiliar</td>
+</tr>
+</tbody></table></div>
+<h2 id="errores-tipicos">Errores típicos</h2>
+<p>Los dos primeros son errores de lógica y explican por qué hacen falta <strong>las dos</strong> piezas. Los demás son errores de ejecución que cuestan puntos aunque la idea esté bien.</p>
+<h3>Paso sin base: «n² + n es impar»</h3>
+<p>El paso inductivo funciona. Si n² + n es impar, entonces (n + 1)² + (n + 1) = (n² + n) + 2n + 2, que es impar + par = impar. Y sin embargo la afirmación es <strong>falsa</strong>: para n = 1 da 2, que es par. De hecho, n² + n = n(n + 1) es siempre par. Cada ficha tiraría a la siguiente, pero ninguna cae. <strong>Sin caso base no hay demostración.</strong></p>
+<h3>Base sin paso: «n² + n + 41 es primo»</h3>
+<p>40 casos seguidos se cumplen, y para n = 40 falla. Comprobar casos no demuestra nada. <strong>Sin paso inductivo no hay demostración.</strong></p>
+<h3>Errores de ejecución</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Error</th>
+<th>Cómo se ve</th>
+<th>Cómo evitarlo</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Sustituir mal n por n + 1</td>
+<td>3²ⁿ⁺¹ → 3²ⁿ⁺² (correcto: 3²ⁿ⁺³)</td>
+<td>Cambia cada n por (n + 1), con paréntesis, y simplifica después</td>
+</tr>
+<tr>
+<td>Término nuevo mal en una suma</td>
+<td>n(n + 1) + 1 en lugar de (n + 1)(n + 2)</td>
+<td>El término nuevo es el término general con r = n + 1</td>
+</tr>
+<tr>
+<td>No escribir el objetivo</td>
+<td>Operar sin saber adónde ir y perderse</td>
+<td>Escribe «Queremos llegar a: …» antes de la primera cuenta</td>
+</tr>
+<tr>
+<td>Partir del objetivo</td>
+<td>Escribir la igualdad que quieres probar y operar hasta 0 = 0</td>
+<td>Empieza en un lado y llega al otro; en el caso base, calcula cada lado por separado</td>
+</tr>
+<tr>
+<td>No usar la hipótesis</td>
+<td>Una demostración que nunca dice «por la hipótesis»</td>
+<td>Si no la usas, no es inducción. Marca dónde la usas</td>
+</tr>
+<tr>
+<td>Desarrollar en una suma</td>
+<td>Acabar con un polinomio de grado 3 que hay que factorizar</td>
+<td>En sumas, factor común de lo que tenga el objetivo</td>
+</tr>
+<tr>
+<td>Multiplicar por un negativo</td>
+<td>Dejar el ≥ igual tras multiplicar por un número negativo</td>
+<td>Solo se conserva el sentido multiplicando por positivos</td>
+</tr>
+<tr>
+<td>No usar n ≥ n₀</td>
+<td>Una desigualdad auxiliar «que vale siempre»</td>
+<td>Comprueba dónde entra la condición del caso base</td>
+</tr>
+<tr>
+<td>Conclusión incompleta</td>
+<td>«Por inducción, queda demostrado»</td>
+<td>Menciona caso base, paso y para qué valores es cierta</td>
+</tr>
+</tbody></table></div>
+<h2 id="frases-modelo">Frases modelo</h2>
+<p>El examen puede venir en español o en inglés, así que conviene conocer las dos versiones. En inglés, recuerda que los libros suelen cambiar las letras (n = k en vez de k = n).</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parte</th>
+<th>En español</th>
+<th>In English</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Enunciado</td>
+<td>Sea P(k) la proposición: …</td>
+<td>Let P(n) be the statement: …</td>
+</tr>
+<tr>
+<td>Caso base</td>
+<td>Para k = 1: lado izquierdo = …, lado derecho = …, luego P(1) es cierta</td>
+<td>When n = 1: LHS = …, RHS = …, so P(1) is true</td>
+</tr>
+<tr>
+<td>Hipótesis</td>
+<td>Supongamos que P(k) es cierta para k = n, es decir, …</td>
+<td>Assume P(k) is true for some k ∈ ℤ⁺, i.e. …</td>
+</tr>
+<tr>
+<td>Paso</td>
+<td>Demostremos que es cierta para k = n + 1. Queremos llegar a …</td>
+<td>Consider n = k + 1. We want to show that …</td>
+</tr>
+<tr>
+<td>Conclusión</td>
+<td>Como P(k) es cierta para k = 1, y si es cierta para k = n también lo es para k = n + 1, por el principio de inducción es cierta para todo k ∈ ℤ⁺</td>
+<td>Since P(1) is true, and P(k) true implies P(k + 1) true, then by mathematical induction P(n) is true for all n ∈ ℤ⁺</td>
+</tr>
+</tbody></table></div>
+<p>Otras palabras: <em>divisible by</em> (divisible por), <em>multiple of</em> (múltiplo de), <em>inequality</em> (desigualdad), <em>series</em> (serie), <em>proof by induction</em> (demostración por inducción), <em>inductive step</em> (paso inductivo), <em>base case</em> (caso base).</p>
+<h2 id="los-ejercicios-del-tema-1-clasificados">Los ejercicios del Tema 1, clasificados</h2>
+<p>Los 11 ejercicios de inducción de las diapositivas del Tema 1. «<a href="ejercicios/d16-4/">D16·4</a>» significa diapositiva 16, ejercicio 4. Cada número lleva a su página con pistas.</p>
+<div class="table-wrap indice"><div class="table-wrap"><table><thead><tr><th>Ejercicio</th><th>Qué se pide</th><th>Caso base</th></tr></thead><tbody><tr class="grupo"><th colspan="3"><a href="sumas/">1 · Sumas de series</a></th></tr><tr><td><a href="ejercicios/d16-9/"><a href="ejercicios/d16-9/">D16·9</a></a></td><td>1² + 2² + ⋯ + n² = n(n + 1)(2n + 1)/6</td><td>k = 1</td></tr><tr><td><a href="ejercicios/d36-18/"><a href="ejercicios/d36-18/">D36·18</a></a></td><td>1·3 + 2·4 + 3·5 + ⋯ + n(n + 2) = n(n + 1)(2n + 7)/6</td><td>k = 1</td></tr><tr><td><a href="ejercicios/d33-4/"><a href="ejercicios/d33-4/">D33·4</a></a></td><td>1·1! + 2·2! + ⋯ + n·n! = (n + 1)! − 1</td><td>k = 1</td></tr><tr><td><a href="ejercicios/d34-8/"><a href="ejercicios/d34-8/">D34·8</a></a></td><td>1 + 2·(1/2) + 3·(1/2)² + ⋯ + n·(1/2)ⁿ⁻¹ = 4 − (n + 2)/2ⁿ⁻¹</td><td>k = 1</td></tr><tr class="grupo"><th colspan="3"><a href="divisibilidad/">2 · Divisibilidad</a></th></tr><tr><td><a href="ejercicios/d16-6/"><a href="ejercicios/d16-6/">D16·6</a></a></td><td>4ⁿ + 2 es divisible por 3</td><td>k = 1</td></tr><tr><td><a href="ejercicios/d36-17/"><a href="ejercicios/d36-17/">D36·17</a></a></td><td>7ⁿ + 1 es divisible por 8, para n impar</td><td>k = 1</td></tr><tr><td><a href="ejercicios/d16-7/"><a href="ejercicios/d16-7/">D16·7</a></a></td><td>n³ + 11n es divisible por 3</td><td>k = 1</td></tr><tr><td><a href="ejercicios/d16-8/"><a href="ejercicios/d16-8/">D16·8</a></a></td><td>n(n² + 5) es divisible por 6</td><td>k = 1</td></tr><tr class="grupo"><th colspan="3"><a href="desigualdades/">3 · Desigualdades (y el caso mixto)</a></th></tr><tr><td><a href="ejercicios/d16-4/"><a href="ejercicios/d16-4/">D16·4</a></a></td><td>n! &gt; 3ⁿ, para n ≥ 7</td><td>k = 7</td></tr><tr><td><a href="ejercicios/d16-5/"><a href="ejercicios/d16-5/">D16·5</a></a></td><td>(2n)! ≥ 2ⁿ(n!)²</td><td>k = 1</td></tr><tr><td><a href="ejercicios/d35-10/"><a href="ejercicios/d35-10/">D35·10</a></a></td><td>1/√1 + 1/√2 + ⋯ + 1/√n &gt; √n, para n ≥ 2 (con dos apartados previos)</td><td>k = 2</td></tr></tbody></table></div></div>
+
+    <nav class="pager" aria-label="Anterior y siguiente"><span></span><a href="sumas/" style="text-align:right"><small>Siguiente</small>Sumas de series</a></nav>
+    </main>
+    <aside class="toc" aria-label="En esta página"><h2>En esta página</h2><ol><li><a href="#como-usar-esta-seccion">Cómo usar esta sección</a></li><li><a href="#la-idea-el-efecto-domino">La idea: el efecto dominó</a></li><li><a href="#la-plantilla-y-la-notacion-de-clase">La plantilla y la notación de clase</a></li><li><a href="#los-tres-patrones-en-una-tabla">Los tres patrones en una tabla</a></li><li><a href="#errores-tipicos">Errores típicos</a></li><li><a href="#frases-modelo">Frases modelo</a></li><li><a href="#los-ejercicios-del-tema-1-clasificados">Los ejercicios del Tema 1, clasificados</a></li></ol></aside>
+  </div>
+  <footer>Material de estudio. Las fórmulas están escritas en texto, así que las páginas se leen también sin conexión; las tablas, las pistas y el dominó necesitan abrir la página en el navegador.</footer>
+</div>
+<script src="../../assets/induccion/induccion.js" defer></script>
+</body>
+</html>

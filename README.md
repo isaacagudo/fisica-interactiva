@@ -1,6 +1,6 @@
 # Física interactiva
 
-Apuntes animados, ejercicios resueltos paso a paso y simuladores de física para 1.º de Bachillerato (Bachillerato Internacional).
+Apuntes animados, ejercicios resueltos paso a paso y simuladores de física para 1.º de Bachillerato (Bachillerato Internacional). También tiene una sección de matemáticas: demostración por inducción, con ejercicios guiados por pistas.
 
 Web: https://isaacagudo.github.io/fisica-interactiva/
 
@@ -15,7 +15,13 @@ assets/examen/                     Generador de exámenes: núcleo, patrones de 
 temas/<tema>/<pagina>/index.html   Páginas de cada tema (generadas desde src/)
 examen/index.html                  Generador de exámenes (generado desde src/examen/build.js)
 simuladores/<nombre>/index.html    Redirecciones a los simuladores, que ahora están dentro de la teoría
+assets/induccion/induccion.js      Inducción: tabla de primeros casos, pistas desbloqueables con progreso guardado y dominó
 src/                               Fuentes y scripts para generar las páginas
+  comun/estilos.js                 Estilos de las páginas de los temas (los usan energía e inducción)
+  induccion/
+    contenido/00-mapa.md           Mapa: la idea (dominó), la plantilla, los patrones, errores, frases modelo e índice
+    contenido/NN-<patrón>.md       Idea clave y ejemplos resueltos de cada patrón, y sus ejercicios con pistas
+    build.js                       Genera el mapa, los 3 apartados, la sección de ejercicios y una página por ejercicio
   package.json                     Dependencias: marked, esbuild, react (diagramas), mathjax-full y fuentes para el vídeo
   iconos.js                        Iconos SVG: mapa, ejercicios y examen (comunes a todos los temas) y uno por apartado
   examen/build.js                  Genera la página del generador de exámenes con los temas registrados
@@ -71,6 +77,28 @@ widget: muelle {"escenario": "vertical", "m": 0.1, "h": 2, "k": 1607}
 La segunda columna es el origen: `Teoría n`, `Ejercicios n`, `Cuestiones n`, `Repaso n`, `Selectividad n` o `Nuevo` (ejercicios para practicar más). La página de cada apartado lleva la idea clave, los ejemplos de `resueltos` con su solución y su simulación, y un enlace a sus ejercicios. Todos los demás van a la sección común `temas/energia/ejercicios/`, agrupados por temática: enunciado, «Ver solo el resultado» y enlace a su solución (`temas/energia/ejercicios/5-3/`), con el enunciado, la resolución y la simulación. «ejercicio 2.1» en cualquier texto se enlaza solo con esa solución. Las fórmulas van en Unicode (sin TeX), así que las páginas se ven también en la vista rápida del iPad.
 
 Cada tema tiene la misma estructura, con un icono para cada página: **mapa** del tema, **ejercicios** (todos los propuestos), **examen** (el generador) y los **apartados** de teoría, cada uno con su simulador. Los iconos son SVG de 96×72 con las variables de color de `base.css` (`src/iconos.js`); para un tema nuevo se añaden los de sus apartados.
+
+## Demostración por inducción (`temas/induccion/`)
+
+```sh
+cd src && node induccion/build.js   # mapa, 3 apartados, ejercicios, 11 ejercicios guiados y bloque de la portada
+```
+
+Cada patrón (sumas, divisibilidad, desigualdades) es un fichero de `src/induccion/contenido/` con la cabecera (`slug`, `titulo`, `nombre`, `corto`, `eyebrow`, `desc`, `icono`), la teoría con sus ejemplos resueltos y un bloque por ejercicio:
+
+```
+=== D16·9 | Diapositiva 16, ejercicio 9 | La suma de los cuadrados
+caso: k = 1
+pide: …                            (texto corto para el índice del mapa)
+--- enunciado
+--- pista El objetivo              (una por pista, en orden; el título se ve al abrirla)
+--- pista La hipótesis
+--- solucion
+```
+
+«D16·9» en cualquier texto enlaza con la página del ejercicio. Un párrafo que empieza con una fórmula en negrita que lleva =, ≥, ≤, < o > se dibuja como un eslabón de una cadena, con el resto del párrafo como justificación. Notación de clase: P(k), hipótesis para k = n, paso a k = n + 1.
+
+Cada ejercicio necesita su tabla de primeros casos en `EXPLORAR` de `assets/induccion/induccion.js` (tipo `igual`, `div`, `>` o `>=`, lados como funciones de n con BigInt; `base` marca el caso base y `impares` salta los pares). En Node, `require('./assets/induccion/induccion.js').filas(id)` da las filas para comprobarlas. Las pistas se abren de una en una; el número de pistas usadas y «Lo he resuelto» se guardan en el navegador (`localStorage`, clave `induccion:<id>`) y se ven en la lista de ejercicios. Sin JavaScript se ven todas las pistas como desplegables.
 
 ## Generador de exámenes (`examen/`, `assets/examen/`)
 

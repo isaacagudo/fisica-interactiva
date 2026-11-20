@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Desigualdades · Física interactiva</title>
+<meta name="description" content="Una cadena de = y ≥ con la hipótesis en un eslabón y una desigualdad auxiliar al final. Incluye sumas dentro de desigualdades.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../../../assets/base.css">
+<style>
+:root{--c-a:#7b4fd6;--c-k:#b4407e;--axis:#8793a6}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--c-a:#b39bff;--c-k:#f08cc0;--axis:#8e9ab0}}
+:root[data-theme="dark"]{--c-a:#b39bff;--c-k:#f08cc0;--axis:#8e9ab0}
+.fig{--cds-text-primary:var(--ink);--cds-text-secondary:var(--ink-2);--cds-chart-axis:var(--axis);--cds-chart-grid:var(--rule);
+  --cds-chart-reference-tint:var(--plane);--cds-chart-categorical-1:var(--c-p);--cds-chart-categorical-2:var(--c-n);
+  --cds-chart-categorical-3:var(--c-fr);--cds-chart-categorical-4:var(--c-a);--cds-chart-categorical-5:var(--c-k);
+  margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
+.fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
+.fig.dg{max-width:640px}
+.doc p.lectura{font-size:15px;color:var(--ink-2);margin:4px 0 14px}
+.fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
+header.top{display:grid;gap:8px;margin:6px 0 18px}
+header.top .txt{display:grid;gap:8px;min-width:0}
+header.con-ico{grid-template-columns:96px minmax(0,1fr);gap:16px;align-items:center}
+.ico-top{border:1px solid var(--rule);border-radius:10px}
+@media (max-width:520px){header.con-ico{grid-template-columns:64px minmax(0,1fr);gap:12px}}
+.cats{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 22px}
+.cats a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:3px 11px 3px 5px;display:inline-flex;align-items:center;gap:6px}
+.cats .ico{width:30px;flex:none}
+.cats a[aria-current="page"] .ico .bk{fill:var(--paper)}
+.cats a:hover{border-color:var(--ink-2);color:var(--ink)}
+.cats a[aria-current="page"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+.cats a.ej{border-color:var(--c-p);color:var(--c-p)}
+.cats a.ej[aria-current="page"]{background:var(--c-p);color:var(--sheet)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+@media (min-width:1000px){.layout{grid-template-columns:minmax(0,760px) 1fr}}
+.toc{display:none}
+@media (min-width:1000px){.toc{display:block;position:sticky;top:16px;align-self:start;font-size:13.5px;max-height:calc(100vh - 32px);overflow:auto}
+  .toc h2{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:0 0 8px}
+  .toc ol{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+  .toc a{color:var(--ink-2);text-decoration:none;line-height:1.3;display:block}
+  .toc a:hover{color:var(--ink)}
+  .toc .sep{margin-top:8px;font-weight:700;color:var(--ink)}}
+.doc{min-width:0}
+.doc>h2:first-child{border-top:0;margin-top:0;padding-top:0}
+.doc h2{font-size:1.28rem;margin:38px 0 10px;padding-top:16px;border-top:1px solid var(--rule);scroll-margin-top:12px}
+.doc h3{font-size:1.06rem;margin:26px 0 8px}
+.doc p{margin:10px 0}
+.doc p.eq{background:var(--sheet);border:1px solid var(--rule);border-left:3px solid var(--c-p);border-radius:8px;padding:9px 12px;overflow-x:auto}
+.doc p.sub{margin:22px 0 4px}
+.doc p.res{background:var(--hl);border-radius:8px;padding:8px 12px}
+.doc blockquote.why{margin:10px 0 14px;padding:8px 14px;border-left:3px solid var(--rule);background:color-mix(in srgb,var(--sheet) 70%,transparent);border-radius:0 8px 8px 0;color:var(--ink)}
+.doc blockquote.why p{margin:4px 0}
+.doc ul,.doc ol{padding-left:1.3em}
+.doc li{margin:4px 0}
+.table-wrap{overflow-x:auto;margin:12px 0;border:1px solid var(--rule);border-radius:10px;background:var(--sheet)}
+.doc table{border-collapse:collapse;width:100%;font-size:14.5px}
+.doc th,.doc td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid var(--rule)}
+.doc th{font-weight:700;background:var(--paper)}
+.doc tr:last-child td{border-bottom:0}
+.grid-cats{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));margin:18px 0 8px}
+.grid-cats a{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:start;text-decoration:none;color:inherit}
+.grid-cats a:hover{border-color:var(--ink-2)}
+.grid-cats a{grid-template-columns:72px minmax(0,1fr)}
+.grid-cats .n{border-radius:8px;border:1px solid var(--rule)}
+.doc .widget[id^=simulador]{scroll-margin-top:12px}
+.grid-cats h3{font-size:1rem;line-height:1.25}
+.grid-cats p{margin:4px 0 0;font-size:13.5px;color:var(--ink-2)}
+/* ejercicios propuestos */
+.metodo{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 14px;font-size:14.5px}
+.metodo ol{margin:6px 0 2px}
+.props{display:grid;gap:14px;margin:14px 0}
+.prop{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:14px 16px;scroll-margin-top:12px}
+.prop .cab{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-bottom:6px}
+.prop .num{font:700 1.05rem var(--f-display)}
+.prop .src{font:600 12px var(--f-mono);color:var(--ink-2);letter-spacing:.02em}
+.tag{font:600 11px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;border:1px solid currentColor;border-radius:999px;padding:1px 7px}
+.tag.nuevo{color:var(--c-n)}
+.tag.sel{color:var(--c-a)}
+.tag.sim{color:var(--c-p)}
+.prop h3{font-size:1rem;margin:0 0 6px;line-height:1.3}
+.prop .enun p{margin:6px 0}
+.prop .fig{margin:10px 0 4px}
+.prop .acc{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;margin-top:10px}
+.prop details{flex:1 1 260px;min-width:0}
+.prop summary{cursor:pointer;font:600 13.5px var(--f-body);color:var(--ink-2);min-height:38px;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rule);border-radius:9px;padding:0 12px;list-style:none}
+.prop summary::-webkit-details-marker{display:none}
+.prop summary::before{content:"▸";font-size:12px}
+.prop details[open] summary::before{content:"▾"}
+.prop details[open] summary{color:var(--ink)}
+.prop details p{background:var(--hl);border-radius:8px;padding:8px 12px;margin:8px 0 0}
+.prop .btn{margin-left:auto}
+@media (max-width:520px){.prop .btn{margin-left:0;width:100%}}
+/* ejemplos resueltos dentro de cada apartado */
+.ejemplo{margin:18px 0 0;padding-top:4px}
+.ejemplo>h3{font-size:1.12rem;margin:30px 0 10px;scroll-margin-top:12px}
+.ejemplo>h3 .src{font:600 12px var(--f-mono);color:var(--ink-2);margin-left:6px}
+.ejemplo h4{font:700 .82rem var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:22px 0 6px}
+.ejemplo+.ejemplo{border-top:1px dashed var(--rule);margin-top:30px}
+.ir-ej{display:grid;gap:8px;background:var(--sheet);border:1px solid var(--c-p);border-radius:12px;padding:14px 16px;margin:14px 0}
+.ir-ej p{margin:0}
+.ir-ej .lista{font-size:14px;color:var(--ink-2);margin:0;padding-left:0;list-style:none;display:grid;gap:3px}
+.ir-ej .lista .tag{font-size:10px;padding:0 6px}
+.ir-ej .btn{justify-self:start}
+.grupo-ej{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 12px}
+.grupo-ej>span{display:inline-flex;align-items:center;gap:10px}
+.grupo-ej .ico{width:44px}
+.filtro a{display:inline-flex;align-items:center;gap:6px;padding:3px 11px 3px 5px}
+.filtro .ico{width:30px}
+.grupo-ej a{font-size:14px}
+.filtro{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.filtro a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.filtro a:hover{border-color:var(--ink-2);color:var(--ink)}
+/* página de solución */
+.enun-box{background:var(--sheet);border:1px solid var(--rule);border-left:4px solid var(--ink);border-radius:12px;padding:12px 16px}
+.enun-box .lbl{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.enun-box p{margin:6px 0}
+.res-box{background:var(--hl);border-radius:12px;padding:10px 16px;margin:14px 0}
+.res-box .lbl{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase}
+.res-box p{margin:4px 0}
+.saltos{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.saltos a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.doc .widget{margin:16px 0 8px}
+.doc .widget:empty{display:none}
+/* índice con resultados ocultos */
+.ver-res{display:inline-flex;align-items:center;gap:8px;font:600 14px var(--f-body);cursor:pointer;margin:4px 0}
+.ver-res input{width:18px;height:18px;accent-color:var(--c-p)}
+.indice td.r{transition:filter .2s}
+.indice td:first-child{white-space:nowrap}
+.indice td small{display:block;color:var(--ink-2);font-size:12px}
+.indice tr.grupo th{background:var(--plane);font-size:14px}
+.indice tr.grupo a{color:inherit}
+.ver-res:has(input:not(:checked)) + .table-wrap td.r{filter:blur(5px);user-select:none}
+.pager{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:40px;border-top:1px solid var(--rule);padding-top:16px}
+.pager a{text-decoration:none;max-width:48%}
+.pager .mid{align-self:center}
+.pager small{display:block;color:var(--ink-2);font-size:12px}
+footer{margin-top:36px;color:var(--ink-2);font-size:13px}
+@media print{.cats,.toc,.pager,.crumbs,.widget,.saltos,.prop .btn,.prop summary{display:none}.layout{display:block}.fig,.table-wrap,p.eq,.prop{break-inside:avoid}}
+
+.doc p.eq{margin:6px 0;display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 12px}
+.doc p.eq+p.eq{margin-top:-1px;border-top-left-radius:0;border-top-right-radius:0}
+.doc p.eq:has(+p.eq){margin-bottom:0;border-bottom-left-radius:0;border-bottom-right-radius:0}
+.doc p.eq .just{font-size:14px;color:var(--ink-2)}
+.doc ol[start]{margin-top:12px}
+.ficha{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14.5px;color:var(--ink-2);margin:12px 0 0}
+.ficha strong{color:var(--ink)}
+/* tabla de primeros casos */
+.explorar{margin:10px 0 6px}
+.explorar-tabla{margin-top:10px}
+.explorar td.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.explorar tr.base td{background:color-mix(in srgb,var(--c-n) 12%,transparent)}
+.explorar tr.antes td{color:var(--ink-2)}
+.explorar .si{color:var(--c-n);font-weight:700}
+.explorar .no{color:var(--c-fr);font-weight:700}
+.explorar small{color:var(--ink-2)}
+.tag-base{font:600 10.5px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;color:var(--c-n);border:1px solid currentColor;border-radius:999px;padding:0 6px;margin-left:4px;white-space:nowrap}
+.explorar-msg{font-size:14.5px;color:var(--ink-2)}
+/* pistas */
+.guia{display:grid;gap:10px;margin:14px 0}
+.guia details{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:0 14px}
+.guia summary{cursor:pointer;list-style:none;min-height:46px;display:flex;align-items:center;gap:10px;font:700 15px var(--f-body)}
+.guia summary::-webkit-details-marker{display:none}
+.guia summary::before{content:"▸";font-size:12px;color:var(--ink-2)}
+.guia details[open] summary::before{content:"▾"}
+.guia .n{font:700 12px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--c-v);border:1px solid currentColor;border-radius:999px;padding:1px 8px}
+.guia details.pista[open]{border-color:var(--c-v)}
+.guia.js details.pista:not([open]):not(.usada) .t{display:none}
+.guia.js details.pista:not([open]):not(.usada) summary::after{content:"¿Atascada? Ábrela";font:400 14px var(--f-body);color:var(--ink-2)}
+.guia .cuerpo{padding:0 0 12px}
+.guia .cuerpo p{margin:6px 0}
+.guia details.sol summary .n{color:var(--c-p)}
+.guia details.sol[open]{border-color:var(--c-p)}
+.guia .estado{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;font-size:14.5px;color:var(--ink-2);padding:4px 2px}
+.guia .estado .txt{flex:1 1 200px}
+.guia .estado .reset{background:none;border:0;color:var(--ink-2);text-decoration:underline;font:inherit;cursor:pointer;padding:0}
+.tag.hecho{color:var(--c-n)}
+.tag.empezado{color:var(--c-v)}
+/* dominó */
+.domino{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:12px 14px;margin:16px 0}
+.domino-esc,.domino-acc{display:flex;flex-wrap:wrap;gap:8px}
+.domino svg{display:block;width:100%;height:auto;margin:10px 0 0;font-family:var(--f-body)}
+.domino .suelo{stroke:var(--plane-edge);stroke-width:2}
+.domino .ficha rect{fill:var(--sheet);stroke:var(--ink);stroke-width:2}
+.domino .ficha circle{fill:var(--ink)}
+.domino .ficha line{stroke:var(--ink);stroke-width:1.2}
+.domino .ficha text{font-size:14px;fill:var(--ink-2)}
+.domino .ficha .mal{display:none;font-size:18px;font-weight:700;fill:var(--c-fr)}
+.domino .ficha.falsa rect{stroke:var(--c-fr);fill:color-mix(in srgb,var(--c-fr) 12%,var(--sheet))}
+.domino .ficha.falsa .mal{display:inline}
+.domino .ficha.fuera{opacity:.45}
+.domino .ficha.cae rect{stroke:var(--c-p);fill:color-mix(in srgb,var(--c-p) 14%,var(--sheet))}
+.domino .gira{transition:transform .32s cubic-bezier(.55,0,.9,.5)}
+@media (prefers-reduced-motion: reduce){.domino .gira{transition:none}}
+.domino .mano line{stroke:var(--c-v);stroke-width:3;stroke-linecap:round}
+.domino .mano polygon{fill:var(--c-v)}
+.domino .nadie{font-size:13px;fill:var(--c-fr);font-weight:700}
+.domino-txt{min-height:3em;margin:8px 0 10px;font-size:15px}
+</style>
+</head>
+<body>
+<div class="page">
+  <nav class="crumbs" aria-label="Ruta"><a href="../../../">Física interactiva</a><span aria-hidden="true">›</span><a href="../">Demostración por inducción</a><span aria-hidden="true">›</span><span>Desigualdades</span></nav>
+  <header class="top con-ico"><div class="ico-top grid-paper"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><line class="ln q" x1="8" y1="62" x2="88" y2="62" style="stroke-width:1.5"/><rect x="16" y="12" width="20" height="50" rx="2" style="fill:var(--c-p);opacity:.85"/><rect x="62" y="34" width="20" height="28" rx="2" style="fill:var(--c-v);opacity:.85"/><path class="ln i" d="M42 28 l12 8 l-12 8 M42 52 h12" style="stroke-width:2.8"/></svg></div><div class="txt"><div class="eyebrow">Apartado 3 · Patrón C</div><h1>Desigualdades</h1><p class="lead">Una cadena de = y ≥ con la hipótesis en un eslabón y una desigualdad auxiliar al final. Incluye sumas dentro de desigualdades.</p></div></header>
+  <nav class="cats" aria-label="Apartados del tema"><a href="../"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><polygon class="pl" points="14,16 34,10 56,16 80,10 80,58 56,64 34,58 14,64"/><line class="ln q" x1="34" y1="10" x2="34" y2="58" style="stroke-width:1.2"/><line class="ln q" x1="56" y1="16" x2="56" y2="64" style="stroke-width:1.2"/>
+<path class="ln p" d="M22 52 C30 40, 40 50, 46 38 S62 26, 66 24" style="stroke-dasharray:4 4"/><path class="ffr" d="M66 12 C60 12 57 16 57 20 C57 26 66 34 66 34 C66 34 75 26 75 20 C75 16 72 12 66 12 Z"/><circle cx="66" cy="20" r="3.2" style="fill:var(--sheet)"/></svg>Mapa del tema</a><a class="ej" href="../ejercicios/"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><rect class="bk" x="20" y="8" width="44" height="58" rx="3"/><line class="ln q" x1="28" y1="22" x2="56" y2="22" style="stroke-width:1.6"/><line class="ln q" x1="28" y1="32" x2="56" y2="32" style="stroke-width:1.6"/><line class="ln q" x1="28" y1="42" x2="48" y2="42" style="stroke-width:1.6"/><line class="ln q" x1="28" y1="52" x2="44" y2="52" style="stroke-width:1.6"/>
+<g transform="rotate(38 66 40)"><rect x="61" y="14" width="10" height="40" rx="1.5" class="fv"/><rect x="61" y="14" width="10" height="6" style="fill:var(--c-fr)"/><polygon points="61,54 71,54 66,64" style="fill:var(--sheet);stroke:var(--ink);stroke-width:1.4"/><polygon points="64.4,60.8 67.6,60.8 66,64" style="fill:var(--ink)"/></g></svg>Ejercicios</a><a href="../sumas/"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><line class="ln q" x1="10" y1="62" x2="86" y2="62" style="stroke-width:1.5"/><rect class="bk" x="14" y="50" width="12" height="12"/><rect class="bk" x="30" y="38" width="12" height="24"/><rect class="bk" x="46" y="26" width="12" height="36"/><rect x="62" y="14" width="12" height="48" style="fill:var(--c-p);opacity:.25;stroke:var(--c-p);stroke-width:1.8"/><path class="ln p" d="M68 4 v8 M64 8 h8" style="stroke-width:2.2"/></svg>1 · Sumas</a><a href="../divisibilidad/"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><rect class="bk" x="12" y="12" width="72" height="48" rx="4"/><line class="ln q" x1="36" y1="16" x2="36" y2="56" style="stroke-width:1.2;stroke-dasharray:3 3"/><line class="ln q" x1="60" y1="16" x2="60" y2="56" style="stroke-width:1.2;stroke-dasharray:3 3"/><circle cx="18" cy="24" r="3.4" class="fn"/><circle cx="30" cy="24" r="3.4" class="fn"/><circle cx="18" cy="36" r="3.4" class="fn"/><circle cx="30" cy="36" r="3.4" class="fn"/><circle cx="18" cy="48" r="3.4" class="fn"/><circle cx="30" cy="48" r="3.4" class="fn"/><circle cx="42" cy="24" r="3.4" class="fn"/><circle cx="54" cy="24" r="3.4" class="fn"/><circle cx="42" cy="36" r="3.4" class="fn"/><circle cx="54" cy="36" r="3.4" class="fn"/><circle cx="42" cy="48" r="3.4" class="fn"/><circle cx="54" cy="48" r="3.4" class="fn"/><circle cx="66" cy="24" r="3.4" class="fn"/><circle cx="78" cy="24" r="3.4" class="fn"/><circle cx="66" cy="36" r="3.4" class="fn"/><circle cx="78" cy="36" r="3.4" class="fn"/><circle cx="66" cy="48" r="3.4" class="fn"/><circle cx="78" cy="48" r="3.4" class="fn"/></svg>2 · Divisibilidad</a><a href="../desigualdades/" aria-current="page"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><line class="ln q" x1="8" y1="62" x2="88" y2="62" style="stroke-width:1.5"/><rect x="16" y="12" width="20" height="50" rx="2" style="fill:var(--c-p);opacity:.85"/><rect x="62" y="34" width="20" height="28" rx="2" style="fill:var(--c-v);opacity:.85"/><path class="ln i" d="M42 28 l12 8 l-12 8 M42 52 h12" style="stroke-width:2.8"/></svg>3 · Desigualdades</a></nav>
+  <div class="layout">
+    <main class="doc">
+<h2 id="idea-clave-una-cadena-con-una-desigualdad-auxiliar">Idea clave: una cadena con una desigualdad auxiliar</h2>
+<p>En una desigualdad no tienes que llegar exactamente al objetivo, sino a algo <strong>mayor o igual</strong> que él. El paso inductivo es una <strong>cadena</strong>: empiezas en un lado del caso n + 1 y vas encadenando = y ≥ hasta llegar al otro lado. En un eslabón usas la hipótesis y, casi siempre, al final necesitas una <strong>desigualdad auxiliar</strong> que dependa de que n sea suficientemente grande.</p>
+<blockquote class="why">
+<p><strong>¿Por qué vale una cadena?</strong> Si A = B, B ≥ C y C ≥ D, entonces A ≥ D. Cada eslabón tiene que estar justificado. Si algún eslabón es estricto (&gt;), el resultado también lo es; si el objetivo es &gt; y todos tus eslabones son ≥, te falta algo.</p>
+</blockquote>
+<p class="sub"><strong>Método</strong></p>
+<ol>
+<li><strong>Escribe el objetivo</strong> del caso n + 1, y desarróllalo si ayuda: (n + 1)² = n² + 2n + 1.</li>
+<li><strong>Empieza por el lado que crece rápido</strong> (la potencia, el factorial) y reescríbelo para que aparezca el de la hipótesis: 2ⁿ⁺¹ = 2 · 2ⁿ, (n + 1)! = (n + 1) · n!.</li>
+<li><strong>Aplica la hipótesis</strong>, con su ≥ o su &gt;.</li>
+<li><strong>Compara con el objetivo.</strong> Lo que te falte es la desigualdad auxiliar: demuéstrala usando que n es mayor o igual que el caso base.</li>
+</ol>
+<h2 id="ejemplo-5-2-n-para-n-4">Ejemplo 5 · 2ⁿ ≥ n², para n ≥ 4</h2>
+<p><strong>Explorar.</strong> Aquí la tabla es imprescindible:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>n</th>
+<th>2ⁿ</th>
+<th>n²</th>
+<th>¿2ⁿ ≥ n²?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>2</td>
+<td>4</td>
+<td>4</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>3</td>
+<td>8</td>
+<td>9</td>
+<td><strong>No</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td>16</td>
+<td>16</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>5</td>
+<td>32</td>
+<td>25</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>6</td>
+<td>64</td>
+<td>36</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>7</td>
+<td>128</td>
+<td>49</td>
+<td>Sí</td>
+</tr>
+</tbody></table></div>
+<blockquote class="why">
+<p><strong>¿Por qué el caso base es 4 si para 1 y 2 también se cumple?</strong> Porque en 3 falla: la fila de fichas está rota en el 3. A partir del 4, 2ⁿ crece mucho más rápido que n² (se duplica en cada paso) y ya no lo pierde. Verás que el propio paso inductivo usa que n ≥ 4: el caso base y el paso tienen que encajar. Lo puedes ver en el dominó del mapa del tema.</p>
+</blockquote>
+<ol>
+<li><strong>Enunciado.</strong> Sea P(k): <strong>2ᵏ ≥ k²</strong>, para k ∈ ℤ, k ≥ 4.</li>
+<li><strong>Caso base, k = 4.</strong> Lado izquierdo: 2⁴ = 16. Lado derecho: 4² = 16. Como 16 ≥ 16, P(4) es cierta.</li>
+<li><strong>Hipótesis de inducción.</strong> Para k = n, con n ≥ 4: <strong>2ⁿ ≥ n²</strong>.</li>
+<li><strong>Paso inductivo, k = n + 1.</strong> Queremos llegar a: <strong>2ⁿ⁺¹ ≥ (n + 1)² = n² + 2n + 1</strong>.</li>
+</ol>
+<p>Empezamos por el lado de las potencias y lo escribimos de forma que aparezca 2ⁿ:</p>
+<p class="eq"><strong>2ⁿ⁺¹ = 2 · 2ⁿ</strong> <span class="just">(propiedad de las potencias)</span></p>
+<p class="eq"><strong>≥ 2 · n²</strong> <span class="just">(por la hipótesis, multiplicada por 2)</span></p>
+<p class="eq"><strong>= n² + n²</strong></p>
+<p class="eq"><strong>≥ n² + 4n</strong> <span class="just">(como n ≥ 4, n² = n · n ≥ 4 · n)</span></p>
+<p class="eq"><strong>= n² + 2n + 2n</strong></p>
+<p class="eq"><strong>≥ n² + 2n + 1</strong> <span class="just">(como n ≥ 4, 2n ≥ 8 ≥ 1)</span></p>
+<p class="eq"><strong>= (n + 1)²</strong> <span class="just">✔ es el objetivo</span></p>
+<blockquote class="why">
+<p><strong>¿Por qué puedo multiplicar la hipótesis por 2?</strong> Porque multiplicar los dos lados de una desigualdad por un número <strong>positivo</strong> no cambia su sentido. Si fuera negativo, el ≥ se daría la vuelta.</p>
+</blockquote>
+<blockquote class="why">
+<p><strong>¿Por qué partir 2n² en n² + n²?</strong> Mira el objetivo: n² + (2n + 1). Uno de los n² ya coincide con el del objetivo. El otro tiene que «ganarle» a 2n + 1. Así, todo el problema se reduce a una <strong>desigualdad auxiliar</strong>: n² ≥ 2n + 1.</p>
+</blockquote>
+<blockquote class="why">
+<p class="eq"><strong>¿Dónde se usa que n ≥ 4?</strong> <span class="just">Justo en la desigualdad auxiliar: n² ≥ 4n solo es cierto si n ≥ 4. Esto es una buena comprobación: si en tu demostración no usas la condición n ≥ 4 en ningún sitio, sospecha. El paso funcionaría para todos los n y sabemos que falla en n = 3.</span></p>
+</blockquote>
+<ol start="5">
+<li><strong>Conclusión.</strong> Como P(k) es cierta para k = 4, y si es cierta para k = n (con n ≥ 4) también lo es para k = n + 1, por el principio de inducción P(k) es cierta para todo entero k ≥ 4.</li>
+</ol>
+<h3>El mismo fenómeno en otro ejercicio</h3>
+<p>En el ejercicio <a href="../ejercicios/d16-4/">D16·4</a>, n! &gt; 3ⁿ para n ≥ 7, pasa lo mismo. Haz su tabla: para n = 6 sale 6! = 720 y 3⁶ = 729, así que falla por muy poco, y en n = 7 ya sale 5040 &gt; 2187. Por eso el caso base es 7. La técnica es la de este ejemplo, pero con factoriales: <strong>(n + 1)! = (n + 1) · n!</strong>.</p>
+<h2 id="el-caso-mixto-una-suma-dentro-de-una-desigualdad">El caso mixto: una suma dentro de una desigualdad</h2>
+<p>Cuando hay una suma en un lado de una desigualdad, el paso inductivo <strong>empieza como en las sumas</strong> (término nuevo + hipótesis) y <strong>termina como en las desigualdades</strong> (desigualdad auxiliar). No hay nada nuevo: solo hay que encadenar los dos patrones.</p>
+<h2 id="ejemplo-6-1-1-4-1-9-1-n-2-1-n-para-n">Ejemplo 6 · 1 + 1/4 + 1/9 + ⋯ + 1/n² ≤ 2 − 1/n, para n ∈ ℤ⁺</h2>
+<p><strong>Explorar.</strong> n = 1: 1 ≤ 1. n = 2: 1,25 ≤ 1,5. n = 3: 1,36… ≤ 1,67… Se cumple, y cada vez con más margen.</p>
+<ol>
+<li><strong>Enunciado.</strong> Sea P(k): <strong>1 + 1/2² + ⋯ + 1/k² ≤ 2 − 1/k</strong>, para k ∈ ℤ⁺.</li>
+<li><strong>Caso base, k = 1.</strong> Lado izquierdo: 1. Lado derecho: 2 − 1 = 1. Como 1 ≤ 1, P(1) es cierta.</li>
+<li><strong>Hipótesis de inducción.</strong> Para k = n: <strong>1 + 1/2² + ⋯ + 1/n² ≤ 2 − 1/n</strong>.</li>
+<li><strong>Paso inductivo, k = n + 1.</strong> Queremos llegar a: <strong>1 + 1/2² + ⋯ + 1/n² + 1/(n + 1)² ≤ 2 − 1/(n + 1)</strong>.</li>
+</ol>
+<p><em>Parte de suma:</em> separo el término nuevo y uso la hipótesis.</p>
+<p class="eq"><strong>1 + ⋯ + 1/n² + 1/(n + 1)² ≤ 2 − 1/n + 1/(n + 1)²</strong> <span class="just">(por la hipótesis)</span></p>
+<p><em>Parte de desigualdad:</em> comparo con el objetivo. Necesito que 2 − 1/n + 1/(n + 1)² ≤ 2 − 1/(n + 1). Quitando el 2 y pasando términos, eso es la desigualdad auxiliar:</p>
+<p class="eq"><strong>1/(n + 1)² ≤ 1/n − 1/(n + 1)</strong></p>
+<p>Y es cierta, porque el lado derecho vale <strong>1/n − 1/(n + 1) = 1/(n(n + 1))</strong>, y como n(n + 1) &lt; (n + 1)², la fracción con el denominador más pequeño es la mayor: 1/(n + 1)² &lt; 1/(n(n + 1)). Por tanto:</p>
+<p class="eq"><strong>1 + ⋯ + 1/(n + 1)² ≤ 2 − 1/n + 1/(n + 1)² ≤ 2 − 1/n + 1/n − 1/(n + 1) = 2 − 1/(n + 1)</strong> <span class="just">✔</span></p>
+<blockquote class="why">
+<p><strong>¿Cómo encuentro la desigualdad auxiliar?</strong> Pon lo que tienes después de usar la hipótesis al lado del objetivo, y pregúntate qué tendría que cumplirse para que lo primero sea ≤ que lo segundo. Eso es lo que te falta demostrar. Es exactamente lo que hicimos en el ejemplo 5 con n² ≥ 2n + 1.</p>
+</blockquote>
+<ol start="5">
+<li><strong>Conclusión.</strong> Como P(k) es cierta para k = 1, y si es cierta para k = n también lo es para k = n + 1, por el principio de inducción es cierta para todo k ∈ ℤ⁺.</li>
+</ol>
+<blockquote class="why">
+<p><strong>Pista para los exámenes del IB.</strong> Muchas veces el ejercicio tiene apartados antes de la inducción, y el último dice «a partir de lo anterior». Esos apartados suelen ser <strong>la desigualdad auxiliar</strong> que vas a necesitar. Es lo que pasa en el ejercicio <a href="../ejercicios/d35-10/">D35·10</a>: el primer apartado te prepara la herramienta para el tercero.</p>
+</blockquote>
+
+<h2 id="practicar">Ejercicios para practicar</h2>
+<div class="ir-ej"><p>Los <strong>3 ejercicios</strong> de este patrón en las diapositivas del Tema 1. Cada uno tiene una tabla con los primeros casos, pistas que se abren de una en una y la solución completa.</p>
+<ul class="lista"><li><a href="../ejercicios/d16-4/">D16·4</a> n! > 3ⁿ, para n ≥ 7</li><li><a href="../ejercicios/d16-5/">D16·5</a> (2n)! ≥ 2ⁿ(n!)²</li><li><a href="../ejercicios/d35-10/">D35·10</a> La suma de 1/√r</li></ul>
+<a class="btn primary" href="../ejercicios/#desigualdades">Ejercicios de este apartado →</a></div>
+    <nav class="pager" aria-label="Anterior y siguiente"><a href="../divisibilidad/"><small>Anterior</small>Divisibilidad</a><a href="../ejercicios/" style="text-align:right"><small>Siguiente</small>Ejercicios del tema</a></nav>
+    </main>
+    <aside class="toc" aria-label="En esta página"><h2>En esta página</h2><ol><li><a href="#idea-clave-una-cadena-con-una-desigualdad-auxiliar">Idea clave: una cadena con una desigualdad auxiliar</a></li><li><a href="#ejemplo-5-2-n-para-n-4">Ejemplo 5 · 2ⁿ ≥ n², para n ≥ 4</a></li><li><a href="#el-caso-mixto-una-suma-dentro-de-una-desigualdad">El caso mixto: una suma dentro de una desigualdad</a></li><li><a href="#ejemplo-6-1-1-4-1-9-1-n-2-1-n-para-n">Ejemplo 6 · 1 + 1/4 + 1/9 + ⋯ + 1/n² ≤ 2 − 1/n, para n ∈ ℤ⁺</a></li><li class="sep"><a href="#practicar">Para practicar</a></li></ol></aside>
+  </div>
+  <footer>Material de estudio. Las fórmulas están escritas en texto, así que las páginas se leen también sin conexión; las tablas, las pistas y el dominó necesitan abrir la página en el navegador.</footer>
+</div>
+</body>
+</html>
