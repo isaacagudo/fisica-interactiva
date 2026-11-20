@@ -17,6 +17,23 @@
 
   // Cada ejercicio: tipo 'igual' (dos lados iguales), 'div' (múltiplo de d), '>' o '>=' (desigualdad), con los lados como funciones de n.
   const EXPLORAR = {
+    // ---- nuevos, de menos a más
+    'a1': { tipo: 'igual', desde: 1, hasta: 8, base: 1, izq: '1 + 2 + ⋯ + n', der: 'n(n + 1)/2', l: n => suma(n, r => r), r: n => B(n) * B(n + 1) / 2n },
+    'a2': { tipo: 'igual', desde: 1, hasta: 8, base: 1, izq: '2 + 4 + ⋯ + 2n', der: 'n(n + 1)', l: n => suma(n, r => 2n * r), r: n => B(n) * B(n + 1) },
+    'a3': { tipo: 'igual', desde: 1, hasta: 8, base: 1, izq: '1 + 3 + ⋯ + (2n − 1)', der: 'n²', l: n => suma(n, r => 2n * r - 1n), r: n => B(n) * B(n) },
+    'a4': { tipo: 'igual', desde: 1, hasta: 8, base: 1, izq: '3 + 7 + ⋯ + (4n − 1)', der: 'n(2n + 1)', l: n => suma(n, r => 4n * r - 1n), r: n => B(n) * B(2 * n + 1) },
+    'a5': { tipo: 'igual', desde: 1, hasta: 10, base: 1, izq: '1 + 2 + 4 + ⋯ + 2ⁿ⁻¹', der: '2ⁿ − 1', l: n => suma(n, r => 2n ** (r - 1n)), r: n => 2n ** B(n) - 1n },
+    'a6': { tipo: 'igual', desde: 1, hasta: 8, base: 1, izq: '1/(1·2) + ⋯ + 1/(n(n + 1))', der: 'n/(n + 1)',
+      l: n => { let s = frac(0n, 1n); for (let r = 1; r <= n; r++) s = fsum(s, frac(1n, B(r) * B(r + 1))); return s; }, r: n => frac(B(n), B(n + 1)) },
+    'a7': { tipo: 'igual', desde: 1, hasta: 8, base: 1, izq: '1³ + 2³ + ⋯ + n³', der: 'n²(n + 1)²/4', l: n => suma(n, r => r ** 3n), r: n => (B(n) * B(n + 1)) ** 2n / 4n },
+    'b1': { tipo: 'div', d: 2, desde: 1, hasta: 8, base: 1, izq: '3ⁿ − 1', v: n => 3n ** B(n) - 1n },
+    'b2': { tipo: 'div', d: 4, desde: 1, hasta: 8, base: 1, izq: '5ⁿ − 1', v: n => 5n ** B(n) - 1n },
+    'b3': { tipo: 'div', d: 2, desde: 1, hasta: 8, base: 1, izq: 'n² + n', v: n => B(n) * B(n) + B(n) },
+    'b4': { tipo: 'div', d: 4, desde: 1, hasta: 8, base: 1, izq: '7ⁿ − 3ⁿ', v: n => 7n ** B(n) - 3n ** B(n) },
+    'c1': { tipo: '>', desde: 1, hasta: 8, base: 1, izq: '2ⁿ', der: 'n', l: n => 2n ** B(n), r: n => B(n) },
+    'c2': { tipo: '>=', desde: 1, hasta: 8, base: 1, izq: '3ⁿ', der: '2n + 1', l: n => 3n ** B(n), r: n => B(2 * n + 1) },
+    'c3': { tipo: '>=', desde: 1, hasta: 8, base: 1, izq: 'n!', der: '2ⁿ⁻¹', l: n => fact(n), r: n => 2n ** B(n - 1) },
+    // ---- diapositivas del Tema 1
     'd16-9': { tipo: 'igual', desde: 1, hasta: 8, base: 1, izq: '1² + 2² + ⋯ + n²', der: 'n(n + 1)(2n + 1)/6',
       l: n => suma(n, r => r * r), r: n => B(n) * B(n + 1) * B(2 * n + 1) / 6n },
     'd36-18': { tipo: 'igual', desde: 1, hasta: 8, base: 1, izq: '1·3 + 2·4 + ⋯ + n(n + 2)', der: 'n(n + 1)(2n + 7)/6',

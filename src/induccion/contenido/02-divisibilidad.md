@@ -97,8 +97,109 @@ Un lema es un resultado pequeño que demuestras aparte (aquí, con una demostrac
 
 Si el enunciado dice «para n impar», las fichas van de dos en dos: 1, 3, 5, … Entonces el caso base es k = 1, la hipótesis es para k = n (impar) y **el paso es a k = n + 2**, que es el siguiente impar. La técnica de potencias sigue igual, pero ahora separas xⁿ⁺² = x² · xⁿ.
 
+=== B1 | Nuevo | 3ⁿ − 1 es par
+caso: k = 1
+nivel: 1
+pide: 3ⁿ − 1 es divisible por 2
+--- enunciado
+Demuestra por inducción que **3ⁿ − 1 es divisible por 2**, para n ∈ ℤ⁺.
+--- pista Hipótesis y objetivo
+Hipótesis: **3ⁿ − 1 = 2M**. Objetivo: **3ⁿ⁺¹ − 1 = 2 · (un entero)**.
+--- pista Separar la potencia
+**3ⁿ⁺¹ = 3 · 3ⁿ**. Para que aparezca 3ⁿ − 1 entero, multiplica: 3(3ⁿ − 1) = 3 · 3ⁿ − 3.
+--- pista El truco
+Tienes −1 y no −3: compensa sumando 2. **3 · 3ⁿ − 1 = 3(3ⁿ − 1) + 2**.
+--- solucion
+1. Sea P(k): 3ᵏ − 1 es divisible por 2, para k ∈ ℤ⁺.
+2. **Caso base, k = 1.** 3 − 1 = 2 = 2·1.
+3. **Hipótesis, k = n.** 3ⁿ − 1 = 2M, con M ∈ ℤ.
+4. **Paso, k = n + 1.** Queremos llegar a 3ⁿ⁺¹ − 1 = 2 · (un entero).
+
+**3ⁿ⁺¹ − 1 = 3 · 3ⁿ − 1 = 3(3ⁿ − 1) + 2** (compenso el −3)
+
+**= 3 · 2M + 2 = 2 · (3M + 1)** (por la hipótesis) ✔
+
+5. **Conclusión.** Como P(k) es cierta para k = 1, y si es cierta para k = n también lo es para k = n + 1, por el principio de inducción es cierta para todo k ∈ ℤ⁺.
+
+=== B2 | Nuevo | 5ⁿ − 1 es divisible por 4
+caso: k = 1
+nivel: 1
+pide: 5ⁿ − 1 es divisible por 4
+--- enunciado
+Demuestra por inducción que **5ⁿ − 1 es divisible por 4**, para n ∈ ℤ⁺.
+--- pista Hipótesis y objetivo
+Hipótesis: **5ⁿ − 1 = 4M**. Objetivo: **5ⁿ⁺¹ − 1 = 4 · (un entero)**.
+--- pista El truco
+Igual que el B1: **5ⁿ⁺¹ − 1 = 5(5ⁿ − 1) + 4**. Comprueba la cuenta desarrollando el lado derecho.
+--- solucion
+1. Sea P(k): 5ᵏ − 1 es divisible por 4, para k ∈ ℤ⁺.
+2. **Caso base, k = 1.** 5 − 1 = 4 = 4·1.
+3. **Hipótesis, k = n.** 5ⁿ − 1 = 4M, con M ∈ ℤ.
+4. **Paso, k = n + 1.** Queremos llegar a 5ⁿ⁺¹ − 1 = 4 · (un entero).
+
+**5ⁿ⁺¹ − 1 = 5 · 5ⁿ − 1 = 5(5ⁿ − 1) + 4** (compenso el −5)
+
+**= 5 · 4M + 4 = 4 · (5M + 1)** (por la hipótesis) ✔
+
+5. **Conclusión.** Como P(k) es cierta para k = 1, y si es cierta para k = n también lo es para k = n + 1, por el principio de inducción es cierta para todo k ∈ ℤ⁺.
+
+> **El patrón.** En B1 sobraba 2 = 3 − 1 y aquí sobra 4 = 5 − 1. En general, aⁿ − 1 siempre es divisible por a − 1, y la demostración es la misma con a en lugar de 3 o de 5.
+
+=== B3 | Nuevo | n² + n es par
+caso: k = 1
+nivel: 1
+pide: n² + n es divisible por 2
+--- enunciado
+Demuestra por inducción que **n² + n es divisible por 2**, para n ∈ ℤ⁺.
+--- pista Hipótesis y objetivo
+Hipótesis: **n² + n = 2M**. Objetivo: **(n + 1)² + (n + 1) = 2 · (un entero)**.
+--- pista Desarrollar
+(n + 1)² = n² + 2n + 1. Desarrolla todo y junta n² y n, que son la hipótesis.
+--- pista Lo que sobra
+Sobra 2n + 2. ¿Es par?
+--- solucion
+1. Sea P(k): k² + k es divisible por 2, para k ∈ ℤ⁺.
+2. **Caso base, k = 1.** 1 + 1 = 2 = 2·1.
+3. **Hipótesis, k = n.** n² + n = 2M, con M ∈ ℤ.
+4. **Paso, k = n + 1.** Queremos llegar a (n + 1)² + (n + 1) = 2 · (un entero).
+
+**(n + 1)² + (n + 1) = n² + 2n + 1 + n + 1 = (n² + n) + 2n + 2** (agrupo la hipótesis)
+
+**= 2M + 2(n + 1) = 2 · (M + n + 1)** (por la hipótesis) ✔
+
+5. **Conclusión.** Como P(k) es cierta para k = 1, y si es cierta para k = n también lo es para k = n + 1, por el principio de inducción es cierta para todo k ∈ ℤ⁺.
+
+> **Para qué sirve.** Es el lema que necesitas en el ejercicio D16·8: n(n + 1) = n² + n es siempre par.
+
+=== B4 | Nuevo | 7ⁿ − 3ⁿ es divisible por 4
+caso: k = 1
+nivel: 2
+pide: 7ⁿ − 3ⁿ es divisible por 4
+--- enunciado
+Demuestra por inducción que **7ⁿ − 3ⁿ es divisible por 4**, para n ∈ ℤ⁺.
+--- pista Separar las potencias
+Objetivo: 7ⁿ⁺¹ − 3ⁿ⁺¹ = 4 · (un entero). Separa: **7ⁿ⁺¹ − 3ⁿ⁺¹ = 7 · 7ⁿ − 3 · 3ⁿ**.
+--- pista Repartir
+Delante hay un 7 y un 3. Para sacar la hipótesis entera, escribe 3 = 7 − 4: **7 · 7ⁿ − 7 · 3ⁿ + 4 · 3ⁿ**.
+--- pista La última cuenta
+Los dos primeros términos son 7(7ⁿ − 3ⁿ). Usa la hipótesis y saca el 4.
+--- solucion
+1. Sea P(k): 7ᵏ − 3ᵏ es divisible por 4, para k ∈ ℤ⁺.
+2. **Caso base, k = 1.** 7 − 3 = 4 = 4·1.
+3. **Hipótesis, k = n.** 7ⁿ − 3ⁿ = 4M, con M ∈ ℤ.
+4. **Paso, k = n + 1.** Queremos llegar a 7ⁿ⁺¹ − 3ⁿ⁺¹ = 4 · (un entero).
+
+**7ⁿ⁺¹ − 3ⁿ⁺¹ = 7 · 7ⁿ − 3 · 3ⁿ = 7 · 7ⁿ − 7 · 3ⁿ + 4 · 3ⁿ** (reparto: 3 = 7 − 4)
+
+**= 7(7ⁿ − 3ⁿ) + 4 · 3ⁿ = 7 · 4M + 4 · 3ⁿ = 4 · (7M + 3ⁿ)** (por la hipótesis) ✔
+
+5. **Conclusión.** Como P(k) es cierta para k = 1, y si es cierta para k = n también lo es para k = n + 1, por el principio de inducción es cierta para todo k ∈ ℤ⁺.
+
+> **Es la técnica 1 del ejemplo 3.** Dos bases distintas, un coeficiente distinto delante de cada una, y se reparte para que sobre un múltiplo del divisor: aquí 7 − 3 = 4.
+
 === D16·6 | Diapositiva 16, ejercicio 6 | 4ⁿ + 2 es divisible por 3
 caso: k = 1
+nivel: 2
 pide: 4ⁿ + 2 es divisible por 3
 --- enunciado
 Prove that **4ⁿ + 2 is divisible by 3** for n ∈ ℤ⁺.
@@ -124,6 +225,7 @@ Para que aparezca 4ⁿ + 2 entero necesitas 4·(4ⁿ + 2) = 4·4ⁿ + 8. Tienes 
 
 === D36·17 | Diapositiva 36, ejercicio 17 | 7ⁿ + 1 es divisible por 8, si n es impar
 caso: k = 1
+nivel: 3
 pide: 7ⁿ + 1 es divisible por 8, para n impar
 --- enunciado
 Demostrar por inducción que, si n es impar, **7ⁿ + 1 es divisible por 8**.
@@ -149,6 +251,7 @@ Compensa como en el ejercicio D16·6: **49 · 7ⁿ + 1 = 49(7ⁿ + 1) − 48**. 
 
 === D16·7 | Diapositiva 16, ejercicio 7 | n³ + 11n es divisible por 3
 caso: k = 1
+nivel: 2
 pide: n³ + 11n es divisible por 3
 --- enunciado
 Use mathematical induction to prove that **n³ + 11n is divisible by 3** for n ∈ ℤ⁺.
@@ -176,6 +279,7 @@ Junta n³ y 11n, que son la hipótesis. ¿Qué sobra? Tiene que ser múltiplo de
 
 === D16·8 | Diapositiva 16, ejercicio 8 | n(n² + 5) es divisible por 6
 caso: k = 1
+nivel: 3
 pide: n(n² + 5) es divisible por 6
 --- enunciado
 Prove by induction that **n(n² + 5) is divisible by 6** for n ∈ ℤ⁺.

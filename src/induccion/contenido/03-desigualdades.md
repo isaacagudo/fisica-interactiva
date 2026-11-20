@@ -100,8 +100,89 @@ Y es cierta, porque el lado derecho vale **1/n − 1/(n + 1) = 1/(n(n + 1))**, y
 
 > **Pista para los exámenes del IB.** Muchas veces el ejercicio tiene apartados antes de la inducción, y el último dice «a partir de lo anterior». Esos apartados suelen ser **la desigualdad auxiliar** que vas a necesitar. Es lo que pasa en el ejercicio D35·10: el primer apartado te prepara la herramienta para el tercero.
 
+=== C1 | Nuevo | 2ⁿ > n
+caso: k = 1
+nivel: 1
+pide: 2ⁿ > n, para n ≥ 1
+--- enunciado
+Demuestra por inducción que **2ⁿ > n**, para n ∈ ℤ⁺.
+--- pista Separar
+Objetivo: **2ⁿ⁺¹ > n + 1**. Empieza por el lado de la potencia: **2ⁿ⁺¹ = 2 · 2ⁿ**.
+--- pista La hipótesis
+Multiplica la hipótesis por 2 (positivo, no cambia el sentido): **2 · 2ⁿ > 2n**.
+--- pista La desigualdad auxiliar
+Te falta ver que 2n ≥ n + 1. Escribe 2n = n + n. ¿Es n ≥ 1?
+--- solucion
+1. Sea P(k): 2ᵏ > k, para k ∈ ℤ⁺.
+2. **Caso base, k = 1.** 2¹ = 2 > 1.
+3. **Hipótesis, k = n.** 2ⁿ > n.
+4. **Paso, k = n + 1.** Queremos llegar a 2ⁿ⁺¹ > n + 1.
+
+**2ⁿ⁺¹ = 2 · 2ⁿ** (propiedad de las potencias)
+
+**> 2n** (por la hipótesis, multiplicada por 2)
+
+**= n + n ≥ n + 1** (como n ≥ 1) ✔
+
+5. **Conclusión.** Como P(k) es cierta para k = 1, y si es cierta para k = n también lo es para k = n + 1, por el principio de inducción es cierta para todo k ∈ ℤ⁺.
+
+=== C2 | Nuevo | 3ⁿ ≥ 2n + 1
+caso: k = 1
+nivel: 1
+pide: 3ⁿ ≥ 2n + 1, para n ≥ 1
+--- enunciado
+Demuestra por inducción que **3ⁿ ≥ 2n + 1**, para n ∈ ℤ⁺.
+--- pista El objetivo
+Cambia n por n + 1 en los dos lados: **3ⁿ⁺¹ ≥ 2(n + 1) + 1 = 2n + 3**.
+--- pista La hipótesis
+3ⁿ⁺¹ = 3 · 3ⁿ ≥ 3(2n + 1) = **6n + 3**.
+--- pista La desigualdad auxiliar
+¿Es 6n + 3 ≥ 2n + 3? Resta 2n + 3 a los dos lados.
+--- solucion
+1. Sea P(k): 3ᵏ ≥ 2k + 1, para k ∈ ℤ⁺.
+2. **Caso base, k = 1.** Lado izquierdo: 3. Lado derecho: 3. Como 3 ≥ 3, P(1) es cierta.
+3. **Hipótesis, k = n.** 3ⁿ ≥ 2n + 1.
+4. **Paso, k = n + 1.** Queremos llegar a 3ⁿ⁺¹ ≥ 2n + 3.
+
+**3ⁿ⁺¹ = 3 · 3ⁿ** (propiedad de las potencias)
+
+**≥ 3(2n + 1) = 6n + 3** (por la hipótesis, multiplicada por 3)
+
+**≥ 2n + 3** (porque 6n + 3 − (2n + 3) = 4n ≥ 0) ✔
+
+5. **Conclusión.** Como P(k) es cierta para k = 1, y si es cierta para k = n también lo es para k = n + 1, por el principio de inducción es cierta para todo k ∈ ℤ⁺.
+
+=== C3 | Nuevo | n! ≥ 2ⁿ⁻¹
+caso: k = 1
+nivel: 2
+pide: n! ≥ 2ⁿ⁻¹, para n ≥ 1
+--- enunciado
+Demuestra por inducción que **n! ≥ 2ⁿ⁻¹**, para n ∈ ℤ⁺.
+--- pista Separar
+Objetivo: **(n + 1)! ≥ 2ⁿ**. Escribe **(n + 1)! = (n + 1) · n!**.
+--- pista La hipótesis
+Multiplica la hipótesis por n + 1 > 0: **(n + 1) · n! ≥ (n + 1) · 2ⁿ⁻¹**.
+--- pista La desigualdad auxiliar
+Quieres 2 · 2ⁿ⁻¹ = 2ⁿ. Basta con que n + 1 ≥ 2. ¿Es cierto si n ≥ 1?
+--- solucion
+1. Sea P(k): k! ≥ 2ᵏ⁻¹, para k ∈ ℤ⁺.
+2. **Caso base, k = 1.** 1! = 1 y 2⁰ = 1. Como 1 ≥ 1, P(1) es cierta.
+3. **Hipótesis, k = n.** n! ≥ 2ⁿ⁻¹.
+4. **Paso, k = n + 1.** Queremos llegar a (n + 1)! ≥ 2ⁿ.
+
+**(n + 1)! = (n + 1) · n!** (definición de factorial)
+
+**≥ (n + 1) · 2ⁿ⁻¹** (por la hipótesis, multiplicada por n + 1 > 0)
+
+**≥ 2 · 2ⁿ⁻¹ = 2ⁿ** (como n ≥ 1, n + 1 ≥ 2) ✔
+
+5. **Conclusión.** Como P(k) es cierta para k = 1, y si es cierta para k = n también lo es para k = n + 1, por el principio de inducción es cierta para todo k ∈ ℤ⁺.
+
+> **Prepara el D16·4.** Es el mismo esquema que n! > 3ⁿ, pero sin el problema del caso base: aquí la auxiliar (n + 1 ≥ 2) vale desde el principio.
+
 === D16·4 | Diapositiva 16, ejercicio 4 | n! > 3ⁿ, para n ≥ 7
 caso: k = 7
+nivel: 2
 pide: n! > 3ⁿ, para n ≥ 7
 --- enunciado
 Prove by induction: **n! > 3ⁿ** for n ≥ 7, n ∈ ℤ.
@@ -135,6 +216,7 @@ Quieres llegar a 3 · 3ⁿ = 3ⁿ⁺¹. Basta con que n + 1 > 3. ¿Es cierto si 
 
 === D16·5 | Diapositiva 16, ejercicio 5 | (2n)! ≥ 2ⁿ(n!)²
 caso: k = 1
+nivel: 3
 pide: (2n)! ≥ 2ⁿ(n!)²
 --- enunciado
 Prove by induction: **(2n)! ≥ 2ⁿ(n!)²**, n ∈ ℤ⁺.
@@ -168,6 +250,7 @@ Compara con el objetivo, 2ⁿ⁺¹ · (n + 1)(n + 1) · (n!)². Todo coincide sa
 
 === D35·10 | Diapositiva 35, ejercicio 10 | La suma de 1/√r
 caso: k = 2
+nivel: 3
 pide: 1/√1 + 1/√2 + ⋯ + 1/√n > √n, para n ≥ 2 (con dos apartados previos)
 --- enunciado
 1. Muestra que **1/(√n + √(n + 1)) = √(n + 1) − √n**, donde n ≥ 0, n ∈ ℤ.

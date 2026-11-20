@@ -93,6 +93,7 @@ Cada patrón (sumas, divisibilidad, desigualdades) es un fichero de `src/inducci
 ```
 === D16·9 | Diapositiva 16, ejercicio 9 | La suma de los cuadrados
 caso: k = 1
+nivel: 2                           (1 para empezar, 2 medio, 3 tipo examen; se ordenan por nivel)
 pide: …                            (texto corto para el índice del mapa)
 --- enunciado
 --- pista El objetivo              (una por pista, en orden; el título se ve al abrirla)
@@ -100,7 +101,7 @@ pide: …                            (texto corto para el índice del mapa)
 --- solucion
 ```
 
-«D16·9» en cualquier texto enlaza con la página del ejercicio. Un párrafo que empieza con una fórmula en negrita que lleva =, ≥, ≤, < o > se dibuja como un eslabón de una cadena, con el resto del párrafo como justificación. Notación de clase: P(k), hipótesis para k = n, paso a k = n + 1.
+Los ejercicios de las diapositivas se llaman D<diapositiva>·<número>; los nuevos, A1, A2… (sumas), B1… (divisibilidad) y C1… (desigualdades), con fuente `Nuevo`. «D16·9» en cualquier texto enlaza con la página del ejercicio. Un párrafo que empieza con una fórmula en negrita que lleva =, ≥, ≤, < o > se dibuja como un eslabón de una cadena, con el resto del párrafo como justificación. Notación de clase: P(k), hipótesis para k = n, paso a k = n + 1.
 
 Cada ejercicio necesita su tabla de primeros casos en `EXPLORAR` de `assets/induccion/induccion.js` (tipo `igual`, `div`, `>` o `>=`, lados como funciones de n con BigInt; `base` marca el caso base y `impares` salta los pares). En Node, `require('./assets/induccion/induccion.js').filas(id)` da las filas para comprobarlas. Las pistas se abren de una en una; el número de pistas usadas y «Lo he resuelto» se guardan en el navegador (`localStorage`, clave `induccion:<id>`) y se ven en la lista de ejercicios. Sin JavaScript se ven todas las pistas como desplegables.
 

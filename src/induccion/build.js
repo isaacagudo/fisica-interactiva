@@ -42,6 +42,8 @@ function leer(file) {
     if (!EXPLORAR[e.slug]) throw new Error(`${id}: falta su tabla en assets/induccion/induccion.js (EXPLORAR['${e.slug}'])`);
     return e;
   });
+  ejercicios.forEach((e, i) => { e.nivel = +e.nivel || 2; e.orden = i; e.nuevo = e.fuente === 'Nuevo'; });
+  ejercicios.sort((a, b) => a.nivel - b.nivel || a.orden - b.orden);   // de menos a más
   return Object.assign(meta, { intro: intro.trim(), ejercicios });
 }
 const ficheros = fs.readdirSync(path.join(HERE, 'contenido')).filter(f => f.endsWith('.md')).sort();
@@ -50,6 +52,11 @@ const cats = ficheros.slice(1).map(f => leer(path.join(HERE, 'contenido', f)));
 const porId = {};
 cats.forEach((c, i) => c.ejercicios.forEach(e => { e.cat = c; e.catN = i + 1; porId[e.id] = e; }));
 const todos = cats.flatMap(c => c.ejercicios);
+const nNuevos = todos.filter(e => e.nuevo).length, nDiapo = todos.length - nNuevos;
+const NIVEL = { 1: 'Nivel 1 · para empezar', 2: 'Nivel 2 · medio', 3: 'Nivel 3 · tipo examen' };
+const tagNivel = e => `<span class="tag nivel n${e.nivel}">${NIVEL[e.nivel]}</span>`;
+const resumen = `${todos.length} ejercicios: ${nNuevos} nuevos para empezar y ${nDiapo} de las diapositivas del Tema 1`;
+const Resumen = resumen[0].toUpperCase() + resumen.slice(1);
 
 // ---------------------------------------------------------------- Markdown -> HTML
 const slugify = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
@@ -124,6 +131,8 @@ const CSS = CSS_COMUN + `
 .guia .estado .txt{flex:1 1 200px}
 .guia .estado .reset{background:none;border:0;color:var(--ink-2);text-decoration:underline;font:inherit;cursor:pointer;padding:0}
 .tag.hecho{color:var(--c-n)}
+.tag.nivel.n1{color:var(--c-n)} .tag.nivel.n2{color:var(--c-v)} .tag.nivel.n3{color:var(--c-fr)}
+.ir-ej .lista .tag{margin-left:4px}
 .tag.empezado{color:var(--c-v)}
 /* dominó */
 .domino{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:12px 14px;margin:16px 0}
@@ -191,13 +200,13 @@ let total = 0;
 
 // ---------------------------------------------------------------- mapa del tema
 {
-  const apartados = `<div class="grid-cats"><a class="card" href="ejercicios/"><span class="n grid-paper">${icono('ejercicios')}</span><span><h3>Ejercicios</h3><p>Los ${todos.length} ejercicios de inducción del Tema 1, con pistas paso a paso.</p></span></a>${cats.map((c, i) =>
+  const apartados = `<div class="grid-cats"><a class="card" href="ejercicios/"><span class="n grid-paper">${icono('ejercicios')}</span><span><h3>Ejercicios</h3><p>${Resumen}, de menos a más y con pistas paso a paso.</p></span></a>${cats.map((c, i) =>
     `<a class="card" href="${c.slug}/"><span class="n grid-paper">${icono(c.icono)}</span><span><h3>${i + 1} · ${c.nombre}</h3><p>${c.desc}</p></span></a>`).join('')}</div>`;
   const domino = `<div class="domino" data-domino><p><strong>El dominó.</strong> Abre esta página en el navegador para ver caer las fichas en cuatro situaciones: con caso base y paso, sin caso base, con el paso roto y empezando en 4.</p></div>`;
-  const filas = cats.map((c, i) => `<tr class="grupo"><th colspan="3"><a href="${c.slug}/">${i + 1} · ${esc(c.nombre)}</a></th></tr>` + c.ejercicios.map(e =>
-    `<tr><td><a href="ejercicios/${e.slug}/">${e.id}</a></td><td>${inline(e.pide || e.titulo)}</td><td>${esc(e.caso || '')}</td></tr>`).join('')).join('');
-  const indice = `<p>Los ${todos.length} ejercicios de inducción de las diapositivas del Tema 1. «D16·4» significa diapositiva 16, ejercicio 4. Cada número lleva a su página con pistas.</p>
-<div class="table-wrap indice"><table><thead><tr><th>Ejercicio</th><th>Qué se pide</th><th>Caso base</th></tr></thead><tbody>${filas}</tbody></table></div>`;
+  const filas = cats.map((c, i) => `<tr class="grupo"><th colspan="4"><a href="${c.slug}/">${i + 1} · ${esc(c.nombre)}</a></th></tr>` + c.ejercicios.map(e =>
+    `<tr><td><a href="ejercicios/${e.slug}/">${e.id}</a></td><td>${e.nivel}</td><td>${inline(e.pide || e.titulo)}</td><td>${esc(e.caso || '')}</td></tr>`).join('')).join('');
+  const indice = `<p>${Resumen}. Los nuevos (A, B y C, uno por patrón) son más sencillos y sirven para coger soltura; «D16·4» significa diapositiva 16, ejercicio 4. Nivel 1: para empezar; 2: medio; 3: tipo examen. Cada número lleva a su página con pistas.</p>
+<div class="table-wrap indice"><table><thead><tr><th>Ejercicio</th><th>Nivel</th><th>Qué se pide</th><th>Caso base</th></tr></thead><tbody>${filas}</tbody></table></div>`;
   const r = render(mapa.intro, { base: '', extra: { apartados, domino, indice } });
   escribir('', page({ title: esc(mapa.titulo), eyebrow: mapa.eyebrow, desc: mapa.desc, body: r.html, toc: r.heads, depth: 2, current: '', ico: 'mapa',
     crumbs: [[TEMA, null]], pager: pagerHtml(null, { href: `${cats[0].slug}/`, txt: cats[0].nombre }) }));
@@ -210,8 +219,8 @@ cats.forEach((c, ci) => {
   const toc = r.heads.slice();
   let body = r.html;
   body += `\n<h2 id="practicar">Ejercicios para practicar</h2>
-<div class="ir-ej"><p>Los <strong>${c.ejercicios.length} ejercicios</strong> de este patrón en las diapositivas del Tema 1. Cada uno tiene una tabla con los primeros casos, pistas que se abren de una en una y la solución completa.</p>
-<ul class="lista">${c.ejercicios.map(e => `<li><a href="../ejercicios/${e.slug}/">${e.id}</a> ${esc(e.titulo)}</li>`).join('')}</ul>
+<div class="ir-ej"><p><strong>${c.ejercicios.length} ejercicios</strong> de este patrón, de menos a más: primero los nuevos para coger soltura y después los de las diapositivas del Tema 1. Cada uno tiene una tabla con los primeros casos, pistas que se abren de una en una y la solución completa.</p>
+<ul class="lista">${c.ejercicios.map(e => `<li><a href="../ejercicios/${e.slug}/">${e.id}</a> ${esc(e.titulo)} ${tagNivel(e)}</li>`).join('')}</ul>
 <a class="btn primary" href="../ejercicios/#${c.slug}">Ejercicios de este apartado →</a></div>`;
   toc.push({ id: 'practicar', txt: 'Para practicar', sep: true });
   const prevC = ci === 0 ? { href: '../', txt: 'Mapa del tema' } : { href: `../${cats[ci - 1].slug}/`, txt: cats[ci - 1].nombre };
@@ -224,16 +233,16 @@ cats.forEach((c, ci) => {
 // ---------------------------------------------------------------- sección de ejercicios
 {
   const base = '../';
-  const tarjeta = e => `<article class="prop" id="e-${e.slug}"><div class="cab"><span class="num">${e.id}</span><span class="src">${esc(e.fuente)}</span><span class="tag" data-estado="${e.slug}" hidden></span></div>
+  const tarjeta = e => `<article class="prop" id="e-${e.slug}"><div class="cab"><span class="num">${e.id}</span><span class="src">${esc(e.nuevo ? 'Ejercicio nuevo' : e.fuente)}</span>${tagNivel(e)}<span class="tag" data-estado="${e.slug}" hidden></span></div>
 <h3>${esc(e.titulo)}</h3><div class="enun">${enlazar(marked.parse(e.enunciado), base, e.id)}</div><div class="acc"><span class="ficha"><span>Caso base: <strong>${esc(e.caso)}</strong></span><span>${e.pistas.length} pistas</span></span><a class="btn primary" href="${e.slug}/">Resolver con pistas →</a></div></article>`;
-  let body = `<div class="metodo"><strong>Cómo practicar</strong><ol><li>Lee el enunciado y reconoce el patrón: suma, divisibilidad o desigualdad.</li><li>En la página del ejercicio, calcula los primeros casos para ver desde dónde empieza.</li><li>Escribe la demostración en la libreta con la plantilla. Si te atascas, abre <strong>solo la siguiente pista</strong> y vuelve a intentarlo.</li><li>Compara con la solución completa, sobre todo la conclusión, y márcalo como resuelto.</li></ol><p style="margin:6px 0 0">El progreso se guarda en este navegador. Si te atascas mucho, repasa la teoría del apartado: el enlace está junto a cada título.</p></div>
+  let body = `<div class="metodo"><strong>Cómo practicar</strong><ol><li>Dentro de cada patrón, los ejercicios van de menos a más: nivel 1 para empezar (nuevos), nivel 2 medio y nivel 3 tipo examen. Si uno te sale sin pistas, pasa al siguiente.</li><li>Lee el enunciado y reconoce el patrón: suma, divisibilidad o desigualdad.</li><li>En la página del ejercicio, calcula los primeros casos para ver desde dónde empieza.</li><li>Escribe la demostración en la libreta con la plantilla. Si te atascas, abre <strong>solo la siguiente pista</strong> y vuelve a intentarlo.</li><li>Compara con la solución completa, sobre todo la conclusión, y márcalo como resuelto.</li></ol><p style="margin:6px 0 0">El progreso se guarda en este navegador. Si te atascas mucho, repasa la teoría del apartado: el enlace está junto a cada título.</p></div>
 <nav class="filtro" aria-label="Ir a un patrón">${cats.map((c, i) => `<a href="#${c.slug}">${icono(c.icono)}${i + 1} · ${esc(c.corto)} (${c.ejercicios.length})</a>`).join('')}</nav>`;
   const toc = [];
   cats.forEach((c, i) => {
     body += `\n<h2 id="${c.slug}" class="grupo-ej"><span>${icono(c.icono)}${i + 1} · ${esc(c.nombre)}</span><a href="../${c.slug}/">Repasar la teoría →</a></h2>\n<div class="props">${c.ejercicios.map(tarjeta).join('\n')}</div>`;
     toc.push({ id: c.slug, txt: `${i + 1} · ${c.corto} (${c.ejercicios.length})` });
   });
-  escribir('ejercicios', page({ title: 'Ejercicios', eyebrow: TEMA, desc: `Los ${todos.length} ejercicios de inducción del Tema 1, por patrón. Cada uno con su tabla de primeros casos, pistas que se abren de una en una y la solución completa.`,
+  escribir('ejercicios', page({ title: 'Ejercicios', eyebrow: TEMA, desc: `${Resumen}, por patrón y de menos a más. Cada uno con su tabla de primeros casos, pistas que se abren de una en una y la solución completa.`,
     body, toc, depth: 3, current: 'ejercicios', crumbs: [[TEMA, '../'], ['Ejercicios', null]], ico: 'ejercicios',
     pager: pagerHtml({ href: '../', txt: 'Mapa del tema' }, { href: `../${cats[0].slug}/`, txt: cats[0].nombre }) }));
   total++;
@@ -245,8 +254,8 @@ todos.forEach((e, k) => {
   const md = s => render(s, { base: sb, propio: e.id }).html;
   const pistas = e.pistas.map((p, i) => `<details class="pista"><summary><span class="n">Pista ${i + 1}</span><span class="t">${inline(p.titulo)}</span></summary><div class="cuerpo">${md(p.cuerpo)}</div></details>`).join('\n');
   const body = `<nav class="saltos" aria-label="Saltar a"><a href="../#e-${e.slug}">Volver a los ejercicios</a><a href="../../${c.slug}/">Teoría: ${esc(c.corto)}</a><a href="../../#la-plantilla-y-la-notacion-de-clase">La plantilla</a></nav>
-<div class="enun-box" id="enunciado"><div class="lbl">Enunciado · ${esc(e.fuente)}</div>${md(e.enunciado)}</div>
-<p class="ficha"><span>Patrón: <a href="../../${c.slug}/"><strong>${esc(c.nombre)}</strong></a></span><span>Caso base: <strong>${esc(e.caso)}</strong></span></p>
+<div class="enun-box" id="enunciado"><div class="lbl">Enunciado · ${esc(e.nuevo ? 'Ejercicio nuevo' : e.fuente)}</div>${md(e.enunciado)}</div>
+<p class="ficha"><span>Patrón: <a href="../../${c.slug}/"><strong>${esc(c.nombre)}</strong></a></span><span>Caso base: <strong>${esc(e.caso)}</strong></span>${tagNivel(e)}</p>
 <h2 id="explorar">0 · Explora los primeros casos</h2>
 <p>Antes de demostrar, comprueba que te crees el enunciado y mira desde qué número se cumple.</p>
 <div class="explorar" data-explorar="${e.slug}"><p><em>La tabla se calcula al abrir la página en el navegador.</em></p></div>
@@ -280,7 +289,7 @@ ${pistas}
     <div class="topic-head"><h3 id="t-induccion">${TEMA}</h3><p>La idea del dominó, la plantilla, los tres patrones con ejemplos resueltos y los ejercicios del Tema 1 con pistas paso a paso</p></div>
     <div class="items">
 ${[item('temas/induccion/', 'domino', { txt: 'Mapa del tema', cls: 'tema' }, 'La idea y la plantilla', 'El efecto dominó, la plantilla con la notación de clase, los patrones en una tabla, errores típicos e índice de ejercicios.'),
-   item('temas/induccion/ejercicios/', 'ejercicios', { txt: 'Para practicar', cls: 'tema' }, 'Ejercicios con pistas', `Los ${todos.length} ejercicios de inducción del Tema 1: primeros casos, pistas que se abren de una en una y solución completa.`),
+   item('temas/induccion/ejercicios/', 'ejercicios', { txt: 'Para practicar', cls: 'tema' }, 'Ejercicios con pistas', `${Resumen}, de menos a más: primeros casos, pistas que se abren de una en una y solución completa.`),
    ...cats.map((c, i) => item(`temas/induccion/${c.slug}/`, c.icono, { txt: `Apartado ${i + 1}` }, c.nombre, c.desc))].join('\n')}
     </div>
   </section>
@@ -290,4 +299,4 @@ ${[item('temas/induccion/', 'domino', { txt: 'Mapa del tema', cls: 'tema' }, 'La
     : html.replace('<!-- /materia:matematicas -->', `${bloque}\n<!-- /materia:matematicas -->`);
   fs.writeFileSync(f, nuevo);
 }
-console.log(`${total} páginas: mapa, ${cats.length} apartados, la sección de ejercicios y ${todos.length} ejercicios guiados`);
+console.log(`${total} páginas: mapa, ${cats.length} apartados, la sección de ejercicios y ${todos.length} ejercicios guiados (${nNuevos} nuevos)`);

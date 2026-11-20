@@ -9,7 +9,7 @@ La inducción sirve para demostrar que algo es cierto **para todos los números 
 
 1. Lee esta página: la idea y la plantilla son iguales para todos los ejercicios.
 2. Después, cada apartado explica un patrón con ejemplos resueltos paso a paso. Los ejemplos **no** son los ejercicios de tu profesor: esos quedan para que practiques tú.
-3. Por último, los ejercicios: cada uno tiene una tabla para explorar los primeros casos, pistas que se abren de una en una cuando te atascas y la solución completa.
+3. Por último, los ejercicios, de menos a más dentro de cada patrón: primero unos nuevos y sencillos (la suma de los enteros, de los pares, de los impares…) para coger soltura, y después los de las diapositivas. Cada uno tiene una tabla para explorar los primeros casos, pistas que se abren de una en una cuando te atascas y la solución completa.
 
 [[apartados]]
 
@@ -154,6 +154,6 @@ El examen puede venir en español o en inglés, así que conviene conocer las do
 
 Otras palabras: *divisible by* (divisible por), *multiple of* (múltiplo de), *inequality* (desigualdad), *series* (serie), *proof by induction* (demostración por inducción), *inductive step* (paso inductivo), *base case* (caso base).
 
-## Los ejercicios del Tema 1, clasificados
+## Los ejercicios, clasificados
 
 [[indice]]

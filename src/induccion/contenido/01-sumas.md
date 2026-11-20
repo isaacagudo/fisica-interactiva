@@ -99,8 +99,193 @@ La estrategia es siempre la misma: **término nuevo + hipótesis, y factor comú
 - **Con potencias en el denominador**, como 1/2ⁿ⁻¹ y 1/2ⁿ. Pasa todo al denominador mayor: **1/2ⁿ⁻¹ = 2/2ⁿ**. Luego suma los numeradores.
 - **Con productos como n(n + 2).** Igual que el ejemplo 2. El término nuevo es (n + 1)(n + 3), y el factor común es (n + 1).
 
+=== A1 | Nuevo | La suma de los n primeros enteros
+caso: k = 1
+nivel: 1
+pide: 1 + 2 + 3 + ⋯ + n = n(n + 1)/2
+--- enunciado
+Demuestra por inducción que **1 + 2 + 3 + ⋯ + n = n(n + 1)/2**, para n ∈ ℤ⁺.
+
+Es el ejemplo 1 de la teoría: intenta hacerlo sin mirarlo.
+--- pista El término nuevo y el objetivo
+El término general es r, así que el término nuevo es **n + 1**. Cambiando n por n + 1 en la fórmula, el objetivo es **1 + 2 + ⋯ + n + (n + 1) = (n + 1)(n + 2)/2**.
+--- pista La hipótesis
+Todo menos el último término es la hipótesis: **n(n + 1)/2 + (n + 1)**.
+--- pista El truco
+Saca (n + 1) factor común: **(n + 1)(n/2 + 1)**. ¿Cuánto vale n/2 + 1 con denominador 2?
+--- solucion
+1. Sea P(k): 1 + 2 + ⋯ + k = k(k + 1)/2, para k ∈ ℤ⁺.
+2. **Caso base, k = 1.** Lado izquierdo: 1. Lado derecho: 1·2/2 = 1. Coinciden.
+3. **Hipótesis, k = n.** 1 + 2 + ⋯ + n = n(n + 1)/2.
+4. **Paso, k = n + 1.** Queremos llegar a (n + 1)(n + 2)/2.
+
+**1 + 2 + ⋯ + n + (n + 1) = n(n + 1)/2 + (n + 1)** (por la hipótesis)
+
+**= (n + 1)(n/2 + 1) = (n + 1)(n + 2)/2** (factor común n + 1) ✔
+
+5. **Conclusión.** Como P(k) es cierta para k = 1, y si es cierta para k = n también lo es para k = n + 1, por el principio de inducción es cierta para todo k ∈ ℤ⁺.
+
+=== A2 | Nuevo | La suma de los n primeros pares
+caso: k = 1
+nivel: 1
+pide: 2 + 4 + 6 + ⋯ + 2n = n(n + 1)
+--- enunciado
+Demuestra por inducción que **2 + 4 + 6 + ⋯ + 2n = n(n + 1)**, para n ∈ ℤ⁺.
+--- pista El término nuevo y el objetivo
+El término general es 2r. Con r = n + 1, el término nuevo es **2(n + 1) = 2n + 2**. Objetivo: **2 + 4 + ⋯ + 2n + 2(n + 1) = (n + 1)(n + 2)**.
+--- pista La hipótesis
+Sustituye todo menos el último término por la hipótesis: **n(n + 1) + 2(n + 1)**.
+--- pista El truco
+Los dos sumandos tienen el factor (n + 1), igual que el objetivo. Sácalo factor común.
+--- solucion
+1. Sea P(k): 2 + 4 + ⋯ + 2k = k(k + 1), para k ∈ ℤ⁺.
+2. **Caso base, k = 1.** Lado izquierdo: 2. Lado derecho: 1·2 = 2. Coinciden.
+3. **Hipótesis, k = n.** 2 + 4 + ⋯ + 2n = n(n + 1).
+4. **Paso, k = n + 1.** Queremos llegar a (n + 1)(n + 2).
+
+**2 + 4 + ⋯ + 2n + 2(n + 1) = n(n + 1) + 2(n + 1)** (por la hipótesis)
+
+**= (n + 1)(n + 2)** (factor común n + 1) ✔
+
+5. **Conclusión.** Como P(k) es cierta para k = 1, y si es cierta para k = n también lo es para k = n + 1, por el principio de inducción es cierta para todo k ∈ ℤ⁺.
+
+> **Otra forma de verlo.** 2 + 4 + ⋯ + 2n = 2(1 + 2 + ⋯ + n) = 2 · n(n + 1)/2 = n(n + 1). Sale lo mismo que con la fórmula del ejercicio A1, pero aquí se pide por inducción.
+
+=== A3 | Nuevo | La suma de los n primeros impares
+caso: k = 1
+nivel: 1
+pide: 1 + 3 + 5 + ⋯ + (2n − 1) = n²
+--- enunciado
+Demuestra por inducción que **1 + 3 + 5 + ⋯ + (2n − 1) = n²**, para n ∈ ℤ⁺.
+--- pista El término nuevo
+El término general es 2r − 1. Con r = n + 1: 2(n + 1) − 1 = **2n + 1**. Ojo: no es 2n − 1 + 1. Objetivo: **1 + 3 + ⋯ + (2n − 1) + (2n + 1) = (n + 1)²**.
+--- pista La hipótesis
+Queda **n² + (2n + 1)**.
+--- pista La última cuenta
+¿Reconoces n² + 2n + 1? Es el desarrollo de un cuadrado.
+--- solucion
+1. Sea P(k): 1 + 3 + ⋯ + (2k − 1) = k², para k ∈ ℤ⁺.
+2. **Caso base, k = 1.** Lado izquierdo: 1. Lado derecho: 1² = 1. Coinciden.
+3. **Hipótesis, k = n.** 1 + 3 + ⋯ + (2n − 1) = n².
+4. **Paso, k = n + 1.** El término nuevo es 2(n + 1) − 1 = 2n + 1. Queremos llegar a (n + 1)².
+
+**1 + 3 + ⋯ + (2n − 1) + (2n + 1) = n² + 2n + 1** (por la hipótesis)
+
+**= (n + 1)²** ✔
+
+5. **Conclusión.** Como P(k) es cierta para k = 1, y si es cierta para k = n también lo es para k = n + 1, por el principio de inducción es cierta para todo k ∈ ℤ⁺.
+
+> **Un dibujo.** Un cuadrado de n × n puntos se convierte en uno de (n + 1) × (n + 1) añadiendo una «L» de 2n + 1 puntos (n por arriba, n por la derecha y 1 en la esquina). Eso es exactamente el paso inductivo.
+
+=== A4 | Nuevo | Una suma aritmética: 3 + 7 + 11 + ⋯
+caso: k = 1
+nivel: 1
+pide: 3 + 7 + 11 + ⋯ + (4n − 1) = n(2n + 1)
+--- enunciado
+Demuestra por inducción que **3 + 7 + 11 + ⋯ + (4n − 1) = n(2n + 1)**, para n ∈ ℤ⁺.
+--- pista El término nuevo y el objetivo
+Con r = n + 1, el término nuevo es 4(n + 1) − 1 = **4n + 3**. Objetivo: **(n + 1)(2(n + 1) + 1) = (n + 1)(2n + 3)**.
+--- pista La hipótesis
+Queda **n(2n + 1) + 4n + 3**.
+--- pista El truco
+Aquí no hay factor común a la vista. Desarrolla: 2n² + 5n + 3. Comprueba multiplicando que es (n + 1)(2n + 3).
+--- solucion
+1. Sea P(k): 3 + 7 + ⋯ + (4k − 1) = k(2k + 1), para k ∈ ℤ⁺.
+2. **Caso base, k = 1.** Lado izquierdo: 3. Lado derecho: 1·3 = 3. Coinciden.
+3. **Hipótesis, k = n.** 3 + 7 + ⋯ + (4n − 1) = n(2n + 1).
+4. **Paso, k = n + 1.** El término nuevo es 4n + 3. Queremos llegar a (n + 1)(2n + 3).
+
+**3 + 7 + ⋯ + (4n − 1) + (4n + 3) = n(2n + 1) + 4n + 3** (por la hipótesis)
+
+**= 2n² + 5n + 3 = (n + 1)(2n + 3)** ✔
+
+5. **Conclusión.** Como P(k) es cierta para k = 1, y si es cierta para k = n también lo es para k = n + 1, por el principio de inducción es cierta para todo k ∈ ℤ⁺.
+
+> **¿Por qué aquí sí desarrollo?** Porque el término nuevo (4n + 3) no tiene el factor (n + 1). Cuando no hay factor común, desarrolla y factoriza sabiendo ya el resultado: comprobar que 2n² + 5n + 3 = (n + 1)(2n + 3) es solo multiplicar.
+
+=== A5 | Nuevo | La suma de las potencias de 2
+caso: k = 1
+nivel: 2
+pide: 1 + 2 + 4 + ⋯ + 2ⁿ⁻¹ = 2ⁿ − 1
+--- enunciado
+Demuestra por inducción que **1 + 2 + 4 + ⋯ + 2ⁿ⁻¹ = 2ⁿ − 1**, para n ∈ ℤ⁺.
+--- pista El término nuevo y el objetivo
+El término general es 2ʳ⁻¹. Con r = n + 1 el término nuevo es **2ⁿ**. Objetivo: **1 + 2 + ⋯ + 2ⁿ⁻¹ + 2ⁿ = 2ⁿ⁺¹ − 1**.
+--- pista La hipótesis
+Queda **2ⁿ − 1 + 2ⁿ**.
+--- pista El truco
+2ⁿ + 2ⁿ = 2 · 2ⁿ. ¿Qué potencia de 2 es?
+--- solucion
+1. Sea P(k): 1 + 2 + ⋯ + 2ᵏ⁻¹ = 2ᵏ − 1, para k ∈ ℤ⁺.
+2. **Caso base, k = 1.** Lado izquierdo: 2⁰ = 1. Lado derecho: 2¹ − 1 = 1. Coinciden.
+3. **Hipótesis, k = n.** 1 + 2 + ⋯ + 2ⁿ⁻¹ = 2ⁿ − 1.
+4. **Paso, k = n + 1.** Queremos llegar a 2ⁿ⁺¹ − 1.
+
+**1 + 2 + ⋯ + 2ⁿ⁻¹ + 2ⁿ = 2ⁿ − 1 + 2ⁿ** (por la hipótesis)
+
+**= 2 · 2ⁿ − 1 = 2ⁿ⁺¹ − 1** ✔
+
+5. **Conclusión.** Como P(k) es cierta para k = 1, y si es cierta para k = n también lo es para k = n + 1, por el principio de inducción es cierta para todo k ∈ ℤ⁺.
+
+> **Relación con el tema.** Es la suma de una progresión geométrica de razón 2. Con la fórmula de la diapositiva 12, Sₙ = (a₁ − aₙ·R)/(1 − R) = (1 − 2ⁿ⁻¹·2)/(1 − 2) = 2ⁿ − 1.
+
+=== A6 | Nuevo | Una suma telescópica
+caso: k = 1
+nivel: 2
+pide: 1/(1·2) + 1/(2·3) + ⋯ + 1/(n(n + 1)) = n/(n + 1)
+--- enunciado
+Demuestra por inducción que **1/(1·2) + 1/(2·3) + ⋯ + 1/(n(n + 1)) = n/(n + 1)**, para n ∈ ℤ⁺.
+--- pista El término nuevo y el objetivo
+Con r = n + 1, el término nuevo es **1/((n + 1)(n + 2))**. Objetivo: **(n + 1)/(n + 2)**.
+--- pista La hipótesis
+Queda **n/(n + 1) + 1/((n + 1)(n + 2))**. Pon denominador común (n + 1)(n + 2).
+--- pista La última cuenta
+El numerador es n(n + 2) + 1 = n² + 2n + 1. ¿Qué cuadrado es? Después simplifica un (n + 1).
+--- solucion
+1. Sea P(k): 1/(1·2) + ⋯ + 1/(k(k + 1)) = k/(k + 1), para k ∈ ℤ⁺.
+2. **Caso base, k = 1.** Lado izquierdo: 1/(1·2) = 1/2. Lado derecho: 1/2. Coinciden.
+3. **Hipótesis, k = n.** 1/(1·2) + ⋯ + 1/(n(n + 1)) = n/(n + 1).
+4. **Paso, k = n + 1.** Queremos llegar a (n + 1)/(n + 2).
+
+**1/(1·2) + ⋯ + 1/((n + 1)(n + 2)) = n/(n + 1) + 1/((n + 1)(n + 2))** (por la hipótesis)
+
+**= (n(n + 2) + 1)/((n + 1)(n + 2)) = (n + 1)²/((n + 1)(n + 2)) = (n + 1)/(n + 2)** ✔
+
+5. **Conclusión.** Como P(k) es cierta para k = 1, y si es cierta para k = n también lo es para k = n + 1, por el principio de inducción es cierta para todo k ∈ ℤ⁺.
+
+> **¿Por qué «telescópica»?** Porque 1/(r(r + 1)) = 1/r − 1/(r + 1), y al sumar se van anulando los términos de dos en dos, como un catalejo que se pliega: queda 1 − 1/(n + 1) = n/(n + 1).
+
+=== A7 | Nuevo | La suma de los cubos
+caso: k = 1
+nivel: 2
+pide: 1³ + 2³ + ⋯ + n³ = n²(n + 1)²/4
+--- enunciado
+Demuestra por inducción que **1³ + 2³ + ⋯ + n³ = n²(n + 1)²/4**, para n ∈ ℤ⁺.
+--- pista El objetivo
+El término nuevo es **(n + 1)³**. Objetivo: **(n + 1)²(n + 2)²/4**.
+--- pista La hipótesis
+Queda **n²(n + 1)²/4 + (n + 1)³**.
+--- pista El truco
+Saca factor común (n + 1)²/4: **(n + 1)²/4 · [n² + 4(n + 1)]**.
+--- pista La última cuenta
+n² + 4n + 4 es un cuadrado.
+--- solucion
+1. Sea P(k): 1³ + 2³ + ⋯ + k³ = k²(k + 1)²/4, para k ∈ ℤ⁺.
+2. **Caso base, k = 1.** Lado izquierdo: 1. Lado derecho: 1·4/4 = 1. Coinciden.
+3. **Hipótesis, k = n.** 1³ + ⋯ + n³ = n²(n + 1)²/4.
+4. **Paso, k = n + 1.** Queremos llegar a (n + 1)²(n + 2)²/4.
+
+**1³ + ⋯ + n³ + (n + 1)³ = n²(n + 1)²/4 + (n + 1)³** (por la hipótesis)
+
+**= (n + 1)²/4 · (n² + 4n + 4) = (n + 1)²(n + 2)²/4** (factor común (n + 1)²/4) ✔
+
+5. **Conclusión.** Como P(k) es cierta para k = 1, y si es cierta para k = n también lo es para k = n + 1, por el principio de inducción es cierta para todo k ∈ ℤ⁺.
+
+> **Una sorpresa.** n²(n + 1)²/4 = [n(n + 1)/2]²: la suma de los cubos es el cuadrado de la suma de los enteros. Por ejemplo, 1 + 8 + 27 = 36 = 6².
+
 === D16·9 | Diapositiva 16, ejercicio 9 | La suma de los cuadrados
 caso: k = 1
+nivel: 2
 pide: 1² + 2² + ⋯ + n² = n(n + 1)(2n + 1)/6
 --- enunciado
 Demuestra que **1² + 2² + ⋯ + n² = n(n + 1)(2n + 1)/6**, para n ∈ ℤ⁺.
@@ -128,6 +313,7 @@ El corchete vale 2n² + 7n + 6. Comprueba que es (n + 2)(2n + 3) multiplicando.
 
 === D36·18 | Diapositiva 36, ejercicio 18 | La suma de n(n + 2)
 caso: k = 1
+nivel: 2
 pide: 1·3 + 2·4 + 3·5 + ⋯ + n(n + 2) = n(n + 1)(2n + 7)/6
 --- enunciado
 Demuestra que **1·3 + 2·4 + 3·5 + ⋯ + n(n + 2) = n(n + 1)(2n + 7)/6**.
@@ -157,6 +343,7 @@ El corchete vale 2n² + 13n + 18. Comprueba que es (n + 2)(2n + 9).
 
 === D33·4 | Diapositiva 33, ejercicio 4 | Suma con factoriales
 caso: k = 1
+nivel: 3
 pide: 1·1! + 2·2! + ⋯ + n·n! = (n + 1)! − 1
 --- enunciado
 Demuestra, utilizando la inducción matemática, que **1·1! + 2·2! + ⋯ + n·n! = (n + 1)! − 1**, con n ∈ ℤ⁺.
@@ -184,6 +371,7 @@ Usa que **(n + 2) · (n + 1)! = (n + 2)!**.
 
 === D34·8 | Diapositiva 34, ejercicio 8 | Suma con potencias de 1/2
 caso: k = 1
+nivel: 3
 pide: 1 + 2·(1/2) + 3·(1/2)² + ⋯ + n·(1/2)ⁿ⁻¹ = 4 − (n + 2)/2ⁿ⁻¹
 --- enunciado
 Demuestra, utilizando inducción, que para n ∈ ℤ⁺:
