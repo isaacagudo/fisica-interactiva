@@ -1,4 +1,4 @@
-/* Física interactiva · núcleo común de los simuladores
+/* BI Ciencias · núcleo común de los simuladores
    Lo usan bloque.js, plano.js, tiro.js, potencia.js, calentador.js y vectores.js (muelle.js es independiente).
    Cada simulador define su física y su dibujo; el núcleo pone el resto: título, botones de situación y de ejemplos,
    escena SVG, lectura de valores, barra de energías, reproducción (play, tiempo, velocidad), deslizadores,

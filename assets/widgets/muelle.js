@@ -1,4 +1,4 @@
-/* Física interactiva · widget «muelle»
+/* BI Ciencias · widget «muelle»
    Simulador reutilizable de un cuerpo que comprime un muelle. Tres escenarios:
      horizontal  bloque lanzado contra un muelle horizontal (con o sin rozamiento)
      vertical    bola que cae sobre un muelle vertical

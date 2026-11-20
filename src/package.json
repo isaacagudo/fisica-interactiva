@@ -1,7 +1,7 @@
 {
   "name": "fisica-interactiva-src",
   "private": true,
-  "description": "Herramientas para generar las páginas de Física interactiva",
+  "description": "Herramientas para generar las páginas de BI Ciencias",
   "dependencies": {
     "mathjax-full": "3.2.2"
   },

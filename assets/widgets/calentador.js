@@ -1,4 +1,4 @@
-/* Física interactiva · simulador «calentador»: energía eléctrica, rendimiento y coste.
+/* BI Ciencias · simulador «calentador»: energía eléctrica, rendimiento y coste.
    Escenarios:
      agua     un aparato de potencia P calienta m kg de agua de T0 a Tf en un tiempo t con rendimiento η
               opciones: P (W), m, T0, Tf, t (s), eta, precio (€/kWh), incognita ("P" | "eta" | "t")

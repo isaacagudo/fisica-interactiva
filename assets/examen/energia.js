@@ -1,4 +1,4 @@
-/* Física interactiva · patrones de ejercicios del tema «Trabajo, potencia y energía» para el generador de exámenes.
+/* BI Ciencias · patrones de ejercicios del tema «Trabajo, potencia y energía» para el generador de exámenes.
    Cada patrón elige datos al azar con sentido físico (si no los tiene, devuelve null y se vuelve a sortear),
    escribe el enunciado y la solución paso a paso y, cuando hay simulador, su configuración con esos datos.
    Las soluciones siguen el estilo de los apuntes y llevan su diagrama, dibujado con la librería assets/diagramas/

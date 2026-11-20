@@ -1,4 +1,4 @@
-/* Física interactiva · simulador «vectores»: trabajo de una fuerza constante con el producto escalar.
+/* BI Ciencias · simulador «vectores»: trabajo de una fuerza constante con el producto escalar.
    Una fuerza F = Fx·i + Fy·j actúa sobre un cuerpo que va del punto A al punto B.
    Opciones: Fx, Fy (N), Ax, Ay, Bx, By (m), curvo (true: el cuerpo va por un camino curvo; el trabajo es el mismo)
    Necesita nucleo.js. */

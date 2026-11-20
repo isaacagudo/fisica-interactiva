@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Física interactiva</title>
-<meta name="description" content="Apuntes animados, ejercicios resueltos paso a paso y simuladores de física para 1.º de Bachillerato.">
+<title>BI Ciencias</title>
+<meta name="description" content="Apuntes, ejercicios resueltos paso a paso y simuladores de física y matemáticas para 1.º de Bachillerato Internacional.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=JetBrains+Mono:wght@400;600&display=swap">
@@ -13,6 +13,13 @@
 header.top{display:grid;gap:8px;margin:12px 0 28px}
 header.top h1{font-size:clamp(2rem,1.2rem + 3.4vw,3.1rem)}
 .topic{display:grid;gap:12px;margin-bottom:28px}
+.materias{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.materias a{font:600 14px var(--f-body);text-decoration:none;color:var(--ink);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:6px 14px}
+.materias a:hover{border-color:var(--ink-2)}
+.materia{display:grid;gap:18px;margin:8px 0 40px;scroll-margin-top:12px}
+.materia-head{display:grid;gap:6px;border-bottom:2px solid var(--ink);padding-bottom:8px}
+.materia-head h2{font-size:clamp(1.5rem,1.1rem + 1.6vw,2rem)}
+.topic-head h3{font-size:1.2rem}
 .topic-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--rule);padding-bottom:6px}
 .topic-head p{margin:0;color:var(--ink-2);font-size:14.5px}
 .items{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr))}
@@ -48,19 +55,23 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 <div class="page">
   <header class="top">
     <div class="eyebrow">1.º de Bachillerato · Bachillerato Internacional</div>
-    <h1>Física interactiva</h1>
-    <p class="lead">Cada tema tiene su mapa, sus ejercicios para practicar, un generador de exámenes y la teoría por apartados, con ejemplos resueltos paso a paso y simuladores para cambiar las condiciones de un problema y ver qué pasa.</p>
+    <h1>BI Ciencias</h1>
+    <p class="lead">Apuntes, ejercicios resueltos paso a paso y simuladores, organizados por materias. Cada tema tiene su mapa, sus ejercicios para practicar y la teoría por apartados con ejemplos resueltos.</p>
+    <nav class="materias" aria-label="Materias"><a href="#fisica">Física</a><a href="#matematicas">Matemáticas</a></nav>
+  </header>
+
+<!-- materia:fisica -->
+  <section class="materia" id="fisica" aria-labelledby="m-fisica">
+    <div class="materia-head"><h2 id="m-fisica">Física</h2>
     <div class="colors" aria-label="Código de colores">
       <span><i style="background:var(--c-p)"></i>Peso y energía potencial</span>
       <span><i style="background:var(--c-fr)"></i>Rozamiento y calor</span>
       <span><i style="background:var(--c-v)"></i>Velocidad y energía cinética</span>
       <span><i style="background:var(--c-n)"></i>Normal</span>
-    </div>
-  </header>
-
+    </div></div>
 <!-- tema:energia -->
   <section class="topic" aria-labelledby="t-energia">
-    <div class="topic-head"><h2 id="t-energia">Trabajo, potencia y energía</h2><p>Mapa del tema, ejercicios para practicar, generador de exámenes y teoría por apartados con ejemplos resueltos y simuladores</p></div>
+    <div class="topic-head"><h3 id="t-energia">Trabajo, potencia y energía</h3><p>Mapa del tema, ejercicios para practicar, generador de exámenes y teoría por apartados con ejemplos resueltos y simuladores</p></div>
     <div class="items">
       <a class="item card" href="temas/energia/">
         <div class="thumb grid-paper" aria-hidden="true"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><polygon class="pl" points="14,16 34,10 56,16 80,10 80,58 56,64 34,58 14,64"/><line class="ln q" x1="34" y1="10" x2="34" y2="58" style="stroke-width:1.2"/><line class="ln q" x1="56" y1="16" x2="56" y2="64" style="stroke-width:1.2"/>
@@ -112,10 +123,17 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
     </div>
   </section>
   <!-- /tema:energia -->
+  </section>
+<!-- /materia:fisica -->
+
+<!-- materia:matematicas -->
+  <section class="materia" id="matematicas" aria-labelledby="m-matematicas">
+    <div class="materia-head"><h2 id="m-matematicas">Matemáticas</h2></div>
+
 
   <!-- tema:induccion -->
   <section class="topic" aria-labelledby="t-induccion">
-    <div class="topic-head"><h2 id="t-induccion">Matemáticas · Demostración por inducción</h2><p>La idea del dominó, la plantilla, los tres patrones con ejemplos resueltos y los ejercicios del Tema 1 con pistas paso a paso</p></div>
+    <div class="topic-head"><h3 id="t-induccion">Demostración por inducción</h3><p>La idea del dominó, la plantilla, los tres patrones con ejemplos resueltos y los ejercicios del Tema 1 con pistas paso a paso</p></div>
     <div class="items">
       <a class="item card" href="temas/induccion/">
         <div class="thumb grid-paper" aria-hidden="true"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><line class="ln q" x1="6" y1="62" x2="90" y2="62" style="stroke-width:1.5"/><rect class="bk" x="12" y="26" width="9" height="36" rx="1.5" transform="rotate(56 21 62)"/><rect class="bk" x="28" y="26" width="9" height="36" rx="1.5" transform="rotate(40 37 62)"/><rect class="bk" x="44" y="26" width="9" height="36" rx="1.5" transform="rotate(22 53 62)" style="stroke:var(--c-p)"/><rect class="bk" x="60" y="26" width="9" height="36" rx="1.5" transform="rotate(0 69 62)"/><rect class="bk" x="76" y="26" width="9" height="36" rx="1.5" transform="rotate(0 85 62)"/></svg></div>
@@ -141,6 +159,8 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
     </div>
   </section>
   <!-- /tema:induccion -->
+  </section>
+<!-- /materia:matematicas -->
 
   <footer>Material de estudio. Cada página funciona en el navegador del ordenador, la tableta o el móvil.</footer>
 </div>

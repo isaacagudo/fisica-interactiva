@@ -136,7 +136,7 @@ function page({ title, eyebrow, desc, body, toc, depth, current, crumbs, widgets
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>${esc(title)} · Física interactiva</title>
+<title>${esc(title)} · BI Ciencias</title>
 <meta name="description" content="${esc(desc)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -146,7 +146,7 @@ function page({ title, eyebrow, desc, body, toc, depth, current, crumbs, widgets
 </head>
 <body>
 <div class="page">
-  <nav class="crumbs" aria-label="Ruta"><a href="${up}">Física interactiva</a>${crumbs.map(([t, h]) => `<span aria-hidden="true">›</span>${h ? `<a href="${h}">${esc(t)}</a>` : `<span>${esc(t)}</span>`}`).join('')}</nav>
+  <nav class="crumbs" aria-label="Ruta"><a href="${up}">BI Ciencias</a><span aria-hidden="true">›</span><a href="${up}#fisica">Física</a>${crumbs.map(([t, h]) => `<span aria-hidden="true">›</span>${h ? `<a href="${h}">${esc(t)}</a>` : `<span>${esc(t)}</span>`}`).join('')}</nav>
   <header class="top${ico ? ' con-ico' : ''}">${ico ? `<div class="ico-top grid-paper">${icono(ico)}</div>` : ''}<div class="txt"><div class="eyebrow">${esc(eyebrow)}</div><h1>${title}</h1>${desc ? `<p class="lead">${esc(desc)}</p>` : ''}</div></header>
   <nav class="cats" aria-label="Categorías del tema">${chips}</nav>
   <div class="layout">
@@ -275,7 +275,7 @@ practica.forEach((e, k) => {
   const nEj = practica.length;
   const bloque = `<!-- tema:energia -->
   <section class="topic" aria-labelledby="t-energia">
-    <div class="topic-head"><h2 id="t-energia">${TEMA}</h2><p>Mapa del tema, ejercicios para practicar, generador de exámenes y teoría por apartados con ejemplos resueltos y simuladores</p></div>
+    <div class="topic-head"><h3 id="t-energia">${TEMA}</h3><p>Mapa del tema, ejercicios para practicar, generador de exámenes y teoría por apartados con ejemplos resueltos y simuladores</p></div>
     <div class="items">
 ${[item('temas/energia/', 'mapa', { txt: 'Mapa del tema', cls: 'tema' }, 'Mapa del tema', 'Qué herramienta usar en cada caso, índice de todos los ejercicios con su resultado (oculto), formulario y errores frecuentes.'),
    item('temas/energia/ejercicios/', 'ejercicios', { txt: 'Para practicar', cls: 'tema' }, 'Ejercicios', `Los ${nEj} ejercicios y cuestiones para practicar, por temática y sin teoría en medio, con su resultado y su solución paso a paso.`),
@@ -293,7 +293,7 @@ ${[item('temas/energia/', 'mapa', { txt: 'Mapa del tema', cls: 'tema' }, 'Mapa d
 {
   const base = '../temas/energia/', c = cats.find(esCuestion);
   const banco = c.ejercicios.map(e => ({ id: 'c' + dash(e.id), titulo: e.titulo, enunciado: enlazar(marked.parse(e.enunciado), base) + (e.figura ? figura(e.figura, '') : ''), pasos: render(e.solucion, { base }).html }));
-  const js = `/* Física interactiva · cuestiones de teoría del tema «${TEMA}» para el generador de exámenes.
+  const js = `/* BI Ciencias · cuestiones de teoría del tema «${TEMA}» para el generador de exámenes.
    Generado por src/energia/build.js a partir de contenido/08-cuestiones.md: no editar a mano. */
 (function (root) {
   'use strict';

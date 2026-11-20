@@ -1,4 +1,4 @@
-/* Física interactiva · página del generador de exámenes (examen/index.html).
+/* BI Ciencias · página del generador de exámenes (examen/index.html).
    La dirección guarda el examen: ?sel=energia:1,2,5&n=6&s=48213 (apartados por número, ejercicios y número de examen).
    ?temas=energia marca solo los apartados de esos temas. Sin número de examen se genera uno nuevo al entrar. */
 (function () {

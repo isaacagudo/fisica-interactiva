@@ -1,4 +1,4 @@
-/* Física interactiva · simulador «bloque»: un cuerpo que se mueve sobre una superficie horizontal.
+/* BI Ciencias · simulador «bloque»: un cuerpo que se mueve sobre una superficie horizontal.
    Escenarios:
      arrastre    se tira del bloque con una fuerza F que forma un ángulo α con la horizontal (con rozamiento μ);
                  α negativo = se empuja hacia abajo. opciones: m, F, alpha, mu, v0, hasta ("d" | "t" | "parar"), d, t, g,

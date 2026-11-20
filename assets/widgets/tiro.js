@@ -1,4 +1,4 @@
-/* Física interactiva · simulador «tiro»: lanzamientos sin rozamiento del aire (se conserva la energía mecánica).
+/* BI Ciencias · simulador «tiro»: lanzamientos sin rozamiento del aire (se conserva la energía mecánica).
    Escenarios:
      tiro      un lanzamiento desde una altura h0 con velocidad v0 y ángulo θ (90° hacia arriba, −90° hacia abajo, 0° horizontal)
                opciones: m, h0, v0, angulo

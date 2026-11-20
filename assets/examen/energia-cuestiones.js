@@ -1,4 +1,4 @@
-/* Física interactiva · cuestiones de teoría del tema «Trabajo, potencia y energía» para el generador de exámenes.
+/* BI Ciencias · cuestiones de teoría del tema «Trabajo, potencia y energía» para el generador de exámenes.
    Generado por src/energia/build.js a partir de contenido/08-cuestiones.md: no editar a mano. */
 (function (root) {
   'use strict';

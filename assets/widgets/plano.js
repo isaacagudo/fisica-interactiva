@@ -1,4 +1,4 @@
-/* Física interactiva · simulador «plano»: bloque en un plano inclinado con rozamiento.
+/* BI Ciencias · simulador «plano»: bloque en un plano inclinado con rozamiento.
    Escenarios:
      sube     se lanza hacia arriba desde la base (opcional: un tramo horizontal L0 antes de la rampa)
               opciones: m, alpha, mu, v0, L0, Lr (largo de la rampa; si no se da, la necesaria)

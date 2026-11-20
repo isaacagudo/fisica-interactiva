@@ -159,7 +159,7 @@ function page({ title, eyebrow, desc, body, toc, depth, current, crumbs, pager, 
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>${esc(title.replace(/<[^>]+>/g, ''))} · Física interactiva</title>
+<title>${esc(title.replace(/<[^>]+>/g, ''))} · BI Ciencias</title>
 <meta name="description" content="${esc(desc || TEMA)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -169,7 +169,7 @@ function page({ title, eyebrow, desc, body, toc, depth, current, crumbs, pager, 
 </head>
 <body>
 <div class="page">
-  <nav class="crumbs" aria-label="Ruta"><a href="${up}">Física interactiva</a>${crumbs.map(([t, h]) => `<span aria-hidden="true">›</span>${h ? `<a href="${h}">${esc(t)}</a>` : `<span>${esc(t)}</span>`}`).join('')}</nav>
+  <nav class="crumbs" aria-label="Ruta"><a href="${up}">BI Ciencias</a><span aria-hidden="true">›</span><a href="${up}#matematicas">Matemáticas</a>${crumbs.map(([t, h]) => `<span aria-hidden="true">›</span>${h ? `<a href="${h}">${esc(t)}</a>` : `<span>${esc(t)}</span>`}`).join('')}</nav>
   <header class="top${ico ? ' con-ico' : ''}">${ico ? `<div class="ico-top grid-paper">${icono(ico)}</div>` : ''}<div class="txt"><div class="eyebrow">${esc(eyebrow)}</div><h1>${title}</h1>${desc ? `<p class="lead">${esc(desc)}</p>` : ''}</div></header>
   <nav class="cats" aria-label="Apartados del tema">${chips}</nav>
   <div class="layout">
@@ -277,7 +277,7 @@ ${pistas}
       </a>`;
   const bloque = `<!-- tema:induccion -->
   <section class="topic" aria-labelledby="t-induccion">
-    <div class="topic-head"><h2 id="t-induccion">Matemáticas · ${TEMA}</h2><p>La idea del dominó, la plantilla, los tres patrones con ejemplos resueltos y los ejercicios del Tema 1 con pistas paso a paso</p></div>
+    <div class="topic-head"><h3 id="t-induccion">${TEMA}</h3><p>La idea del dominó, la plantilla, los tres patrones con ejemplos resueltos y los ejercicios del Tema 1 con pistas paso a paso</p></div>
     <div class="items">
 ${[item('temas/induccion/', 'domino', { txt: 'Mapa del tema', cls: 'tema' }, 'La idea y la plantilla', 'El efecto dominó, la plantilla con la notación de clase, los patrones en una tabla, errores típicos e índice de ejercicios.'),
    item('temas/induccion/ejercicios/', 'ejercicios', { txt: 'Para practicar', cls: 'tema' }, 'Ejercicios con pistas', `Los ${todos.length} ejercicios de inducción del Tema 1: primeros casos, pistas que se abren de una en una y solución completa.`),
@@ -287,7 +287,7 @@ ${[item('temas/induccion/', 'domino', { txt: 'Mapa del tema', cls: 'tema' }, 'La
   <!-- /tema:induccion -->`;
   const i = html.indexOf('<!-- tema:induccion -->'), j = html.indexOf('<!-- /tema:induccion -->');
   const nuevo = i >= 0 && j >= 0 ? html.slice(0, i) + bloque + html.slice(j + '<!-- /tema:induccion -->'.length)
-    : html.replace('  <footer>', `  ${bloque}\n\n  <footer>`);
+    : html.replace('<!-- /materia:matematicas -->', `${bloque}\n<!-- /materia:matematicas -->`);
   fs.writeFileSync(f, nuevo);
 }
 console.log(`${total} páginas: mapa, ${cats.length} apartados, la sección de ejercicios y ${todos.length} ejercicios guiados`);

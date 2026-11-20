@@ -1,4 +1,4 @@
-/* Física interactiva · librería de diagramas
+/* BI Ciencias · librería de diagramas
    Dibuja en SVG el esquema de cada ejercicio a partir de sus datos: fuerzas con sus colores (P azul, N verde,
    rozamiento rojo, fuerza aplicada morada, velocidad ámbar, muelle rosa), alturas con su nivel h = 0, estados inicial
    y final, vectores en el plano y reparto de energía. Cada diagrama se puede ver entero o «paso a paso», en el

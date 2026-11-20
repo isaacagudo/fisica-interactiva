@@ -1,4 +1,4 @@
-/* Física interactiva · simulador «potencia»: subir cargas a velocidad constante con un motor (o una persona).
+/* BI Ciencias · simulador «potencia»: subir cargas a velocidad constante con un motor (o una persona).
    Opciones: m (kg de cada carga), n (número de cargas, una detrás de otra), h (m), t (s, tiempo total), eta (rendimiento, 0–1),
              cuerpo ("carga" | "sacos" | "agua"), incognita ("P": se calcula la potencia | "m": se calcula la masa que sube un motor de potencia Pcv)
              Pcv (potencia del motor en CV, solo con incognita "m")

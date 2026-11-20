@@ -134,7 +134,7 @@ const html = `<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Generador de exámenes · Física interactiva</title>
+<title>Generador de exámenes · BI Ciencias</title>
 <meta name="description" content="Exámenes de física con datos aleatorios: eliges los apartados y cuántos ejercicios, y cada examen trae su puntuación y sus soluciones paso a paso con simulación.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -144,7 +144,7 @@ const html = `<!doctype html>
 </head>
 <body>
 <div class="page">
-  <nav class="crumbs" aria-label="Ruta"><a href="../">Física interactiva</a><span aria-hidden="true">›</span><span>Generador de exámenes</span></nav>
+  <nav class="crumbs" aria-label="Ruta"><a href="../">BI Ciencias</a><span aria-hidden="true">›</span><span>Generador de exámenes</span></nav>
   <header class="top"><div class="ico-top grid-paper">${icono('examen')}</div><div class="txt"><div class="eyebrow">Para practicar</div><h1>Generador de exámenes</h1><p class="lead">Elige los apartados y cuántos ejercicios quieres. Cada examen tiene datos nuevos, la puntuación sobre 10 y la solución paso a paso de cada ejercicio, con la simulación de esos mismos datos.</p></div></header>
   <main>
     <form class="config card" id="cfg" aria-labelledby="cfg-h">

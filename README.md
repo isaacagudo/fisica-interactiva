@@ -1,13 +1,13 @@
-# Física interactiva
+# BI Ciencias
 
-Apuntes animados, ejercicios resueltos paso a paso y simuladores de física para 1.º de Bachillerato (Bachillerato Internacional). También tiene una sección de matemáticas: demostración por inducción, con ejercicios guiados por pistas.
+Apuntes, ejercicios resueltos paso a paso y simuladores para 1.º de Bachillerato Internacional, organizados por materias. Por ahora: **Física** (trabajo, potencia y energía) y **Matemáticas** (demostración por inducción, con ejercicios guiados por pistas).
 
 Web: https://isaacagudo.github.io/fisica-interactiva/
 
 ## Estructura
 
 ```
-index.html                         Portada: un bloque por tema (mapa, ejercicios, examen y apartados; generado)
+index.html                         Portada: una sección por materia (Física, Matemáticas) y dentro un bloque por tema (generado por el build de cada tema)
 assets/base.css                    Estilos comunes (colores, tipografía, tarjetas, iconos)
 assets/widgets/<nombre>.js         Simuladores (animaciones) reutilizables que se insertan en cualquier página (ver abajo)
 assets/diagramas/diagramas.js      Librería de diagramas: se insertan pasando solo el tipo y los parámetros (ver abajo)
@@ -37,7 +37,11 @@ src/                               Fuentes y scripts para generar las páginas
     make_video.py                  Genera un MP4 de la animación para iPad o WhatsApp
 ```
 
-## Código de colores (en toda la web)
+## Portada y materias
+
+La portada (`index.html`) tiene una sección por materia, entre las marcas `<!-- materia:fisica -->` … `<!-- /materia:fisica -->` y `<!-- materia:matematicas -->` … `<!-- /materia:matematicas -->`, con un enlace a cada una en la cabecera. Dentro, cada tema escribe su bloque entre sus propias marcas (`<!-- tema:energia -->`, `<!-- tema:induccion -->`). Para una materia nueva se copia una sección con sus marcas y su enlace; para un tema nuevo, su build escribe el bloque dentro de la sección de su materia.
+
+## Código de colores (en física)
 
 | Color | Significado |
 | --- | --- |

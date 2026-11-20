@@ -1,4 +1,4 @@
-/* Física interactiva · generador de exámenes (núcleo)
+/* BI Ciencias · generador de exámenes (núcleo)
    Cada tema registra sus apartados y sus patrones de ejercicio (assets/examen/<tema>.js):
      FisicaExamen.registrar({ tema: 'energia', nombre: '…', apartados: [{ slug, nombre, icono, patrones: [patrón, …] }] })
    Un patrón es un tipo de ejercicio con datos aleatorios:

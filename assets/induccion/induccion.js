@@ -1,4 +1,4 @@
-/* Física interactiva · Demostración por inducción
+/* BI Ciencias · Demostración por inducción
    Tres piezas que se montan solas al cargar la página (sin dependencias):
    - [data-explorar="<id>"]  tabla con los primeros casos de un ejercicio (aritmética exacta con BigInt)
    - .guia[data-ej="<id>"]    pistas que se desbloquean de una en una, solución y progreso guardado
