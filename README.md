@@ -18,6 +18,7 @@ simuladores/<nombre>/index.html    Redirecciones a los simuladores, que ahora es
 assets/induccion/induccion.js      Inducción: tabla de primeros casos, pistas desbloqueables con progreso guardado y dominó
 src/                               Fuentes y scripts para generar las páginas
   comun/estilos.js                 Estilos de las páginas de los temas (los usan energía e inducción)
+  comun/mates.js                   Fórmulas en texto -> KaTeX al generar (fracciones apiladas, exponentes, raíces)
   induccion/
     contenido/00-mapa.md           Mapa: la idea (dominó), la plantilla, los patrones, errores, frases modelo e índice
     contenido/NN-<patrón>.md       Idea clave y ejemplos resueltos de cada patrón, y sus ejercicios con pistas
@@ -102,6 +103,8 @@ pide: …                            (texto corto para el índice del mapa)
 ```
 
 Los ejercicios de las diapositivas se llaman D<diapositiva>·<número>; los nuevos, A1, A2… (sumas), B1… (divisibilidad) y C1… (desigualdades), con fuente `Nuevo`. «D16·9» en cualquier texto enlaza con la página del ejercicio. Un párrafo que empieza con una fórmula en negrita que lleva =, ≥, ≤, < o > se dibuja como un eslabón de una cadena, con el resto del párrafo como justificación. Notación de clase: P(k), hipótesis para k = n, paso a k = n + 1.
+
+Las fórmulas se siguen escribiendo en texto (n(n + 1)/2, 2ⁿ⁺¹, √(n + 1)…) y el build las compone con KaTeX (`src/comun/mates.js`, CSS y fuentes en `assets/katex/`): una negrita que es solo fórmula se compone entera, y en el resto del texto cada fórmula que lleva una fracción. Si KaTeX no puede con alguna, el build la deja en texto y lo avisa al terminar.
 
 Cada ejercicio necesita su tabla de primeros casos en `EXPLORAR` de `assets/induccion/induccion.js` (tipo `igual`, `div`, `>` o `>=`, lados como funciones de n con BigInt; `base` marca el caso base y `impares` salta los pares). En Node, `require('./assets/induccion/induccion.js').filas(id)` da las filas para comprobarlas. Las pistas se abren de una en una; el número de pistas usadas y «Lo he resuelto» se guardan en el navegador (`localStorage`, clave `induccion:<id>`) y se ven en la lista de ejercicios. Sin JavaScript se ven todas las pistas como desplegables.
 

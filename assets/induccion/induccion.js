@@ -57,7 +57,7 @@
   const grupos = s => { const neg = s[0] === '-', d = neg ? s.slice(1) : s; const t = d.length > 4 ? d.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : d; return (neg ? '−' : '') + t; };
   const fmt = (x, real) => {
     if (real) return x.toFixed(4).replace('.', ',');
-    if (typeof x === 'object') return x.q === 1n ? grupos(String(x.p)) : `${grupos(String(x.p))}/${grupos(String(x.q))}`;
+    if (typeof x === 'object') return x.q === 1n ? grupos(String(x.p)) : `<span class="fr"><span class="nu">${grupos(String(x.p))}</span><span class="de">${grupos(String(x.q))}</span></span>`;
     return grupos(String(x));
   };
   const cmp = (a, b, real) => {
@@ -95,11 +95,13 @@
     const id = el.dataset.explorar, e = EXPLORAR[id];
     if (!e) return;
     const signo = { igual: '=', '>': '>', '>=': '≥' }[e.tipo];
+    const tpl = c => { const t = el.querySelector('template.' + c); return t ? t.innerHTML : null; };   // cabeceras ya compuestas (KaTeX) por el generador
+    const izq = tpl('izq') || e.izq, der = tpl('der') || e.der;
     const btn = h('button', { type: 'button', class: 'btn primary' }, 'Calcular los primeros casos');
     const caja = h('div', { class: 'explorar-tabla', hidden: '' });
     const cab = e.tipo === 'div'
-      ? `<tr><th>n</th><th>${e.izq}</th><th>Dividido entre ${e.d}</th><th>¿Múltiplo de ${e.d}?</th></tr>`
-      : `<tr><th>n</th><th>${e.izq}</th><th>${e.der}</th><th>¿Izquierda ${signo} derecha?</th></tr>`;
+      ? `<tr><th>n</th><th>${izq}</th><th>Dividido entre ${e.d}</th><th>¿Múltiplo de ${e.d}?</th></tr>`
+      : `<tr><th>n</th><th>${izq}</th><th>${der}</th><th>¿Izquierda ${signo} derecha?</th></tr>`;
     const cuerpo = filas(id).map(f => {
       const cls = [f.n === e.base ? 'base' : '', f.ok ? '' : 'falla', f.n < e.base ? 'antes' : ''].filter(Boolean).join(' ');
       const marca = f.ok ? '<span class="si">Sí</span>' : '<span class="no">No</span>';

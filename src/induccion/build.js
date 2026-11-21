@@ -10,6 +10,7 @@ const { marked } = require('marked');
 const { icono } = require('../iconos.js');
 const CSS_COMUN = require('../comun/estilos.js');
 const { EXPLORAR } = require('../../assets/induccion/induccion.js');
+const { mates, katexHtml, errores } = require('../comun/mates.js');
 
 const HERE = __dirname;
 const OUT = path.join(HERE, '../../temas/induccion');
@@ -98,6 +99,12 @@ const CSS = CSS_COMUN + `
 .doc p.eq+p.eq{margin-top:-1px;border-top-left-radius:0;border-top-right-radius:0}
 .doc p.eq:has(+p.eq){margin-bottom:0;border-bottom-left-radius:0;border-bottom-right-radius:0}
 .doc p.eq .just{font-size:14px;color:var(--ink-2)}
+.doc p.eq .f .katex{font-size:1.12em}
+.doc strong.f{font-weight:inherit}
+.katex{font-size:1.08em}
+.katex-display{margin:.4em 0}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.82em;line-height:1.15}
+.fr .nu{border-bottom:1px solid currentColor;padding:0 3px}
 .doc ol[start]{margin-top:12px}
 .ficha{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14.5px;color:var(--ink-2);margin:12px 0 0}
 .ficha strong{color:var(--ink)}
@@ -163,7 +170,7 @@ function page({ title, eyebrow, desc, body, toc, depth, current, crumbs, pager, 
     cats.map((c, i) => `<a href="${topic}${c.slug}/"${current === c.slug ? ' aria-current="page"' : ''}>${icono(c.icono)}${i + 1} · ${c.corto}</a>`).join('');
   const tocHtml = toc && toc.length ? `<aside class="toc" aria-label="En esta página"><h2>En esta página</h2><ol>${toc.map(h => `<li${h.sep ? ' class="sep"' : ''}><a href="#${h.id}">${h.txt}</a></li>`).join('')}</ol></aside>` : '';
   const js = /data-explorar=|class="guia|data-domino|data-estado=/.test(body);
-  return `<!doctype html>
+  return mates(`<!doctype html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
@@ -174,6 +181,7 @@ function page({ title, eyebrow, desc, body, toc, depth, current, crumbs, pager, 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=JetBrains+Mono:wght@400;600&display=swap">
 <link rel="stylesheet" href="${up}assets/base.css">
+<link rel="stylesheet" href="${up}assets/katex/katex.min.css">
 <style>${CSS}</style>
 </head>
 <body>
@@ -188,11 +196,11 @@ ${body}
     </main>
     ${tocHtml}
   </div>
-  <footer>Material de estudio. Las fórmulas están escritas en texto, así que las páginas se leen también sin conexión; las tablas, las pistas y el dominó necesitan abrir la página en el navegador.</footer>
+  <footer>Material de estudio. Abre las páginas en el navegador (ordenador, tableta o móvil): las fórmulas, las tablas, las pistas y el dominó necesitan la web, no la vista previa de WhatsApp o de Archivos.</footer>
 </div>
 ${js ? `<script src="${up}assets/induccion/induccion.js" defer></script>\n` : ''}</body>
 </html>
-`;
+`);
 }
 const pagerHtml = (prev, next, mid) => `<nav class="pager" aria-label="Anterior y siguiente">${prev ? `<a href="${prev.href}"><small>Anterior</small>${prev.txt}</a>` : '<span></span>'}${mid ? `<a class="mid" href="${mid.href}">${mid.txt}</a>` : ''}${next ? `<a href="${next.href}" style="text-align:right"><small>Siguiente</small>${next.txt}</a>` : '<span></span>'}</nav>`;
 const escribir = (rel, html) => { const f = path.join(OUT, rel, 'index.html'); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, html); return f; };
@@ -258,7 +266,7 @@ todos.forEach((e, k) => {
 <p class="ficha"><span>Patrón: <a href="../../${c.slug}/"><strong>${esc(c.nombre)}</strong></a></span><span>Caso base: <strong>${esc(e.caso)}</strong></span>${tagNivel(e)}</p>
 <h2 id="explorar">0 · Explora los primeros casos</h2>
 <p>Antes de demostrar, comprueba que te crees el enunciado y mira desde qué número se cumple.</p>
-<div class="explorar" data-explorar="${e.slug}"><p><em>La tabla se calcula al abrir la página en el navegador.</em></p></div>
+<div class="explorar" data-explorar="${e.slug}"><template class="izq">${katexHtml(EXPLORAR[e.slug].izq) || esc(EXPLORAR[e.slug].izq)}</template>${EXPLORAR[e.slug].der ? `<template class="der">${katexHtml(EXPLORAR[e.slug].der) || esc(EXPLORAR[e.slug].der)}</template>` : ''}<p><em>La tabla se calcula al abrir la página en el navegador.</em></p></div>
 <h2 id="resolver">Resuélvelo con pistas</h2>
 <p>Escribe la demostración en la libreta con las cinco partes de la plantilla: enunciado, caso base, hipótesis (k = n), paso (k = n + 1) y conclusión. Si te atascas, abre la siguiente pista: cada una te deja un poco más cerca, pero no lo resuelve todo.</p>
 <section class="guia" data-ej="${e.slug}" aria-label="Pistas y solución">
@@ -299,4 +307,5 @@ ${[item('temas/induccion/', 'domino', { txt: 'Mapa del tema', cls: 'tema' }, 'La
     : html.replace('<!-- /materia:matematicas -->', `${bloque}\n<!-- /materia:matematicas -->`);
   fs.writeFileSync(f, nuevo);
 }
+if (errores.length) { console.error('Fórmulas que KaTeX no ha podido componer (se dejan en texto):\n' + errores.join('\n')); process.exitCode = 1; }
 console.log(`${total} páginas: mapa, ${cats.length} apartados, la sección de ejercicios y ${todos.length} ejercicios guiados (${nNuevos} nuevos)`);

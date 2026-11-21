@@ -3,6 +3,7 @@
   "private": true,
   "description": "Herramientas para generar las páginas de BI Ciencias",
   "dependencies": {
+    "katex": "^0.16.11",
     "mathjax-full": "3.2.2"
   },
   "devDependencies": {
