@@ -15,10 +15,15 @@ assets/examen/                     Generador de exámenes: núcleo, patrones de 
 temas/<tema>/<pagina>/index.html   Páginas de cada tema (generadas desde src/)
 examen/index.html                  Generador de exámenes (generado desde src/examen/build.js)
 simuladores/<nombre>/index.html    Redirecciones a los simuladores, que ahora están dentro de la teoría
+assets/mates/mates.js              Matemáticas: pistas desbloqueables, progreso guardado y los widgets de las secciones del Tema 1
 assets/induccion/induccion.js      Inducción: tabla de primeros casos, pistas desbloqueables con progreso guardado y dominó
 src/                               Fuentes y scripts para generar las páginas
   comun/estilos.js                 Estilos de las páginas de los temas (los usan energía e inducción)
-  comun/mates.js                   Fórmulas en texto -> KaTeX al generar (fracciones apiladas, exponentes, raíces)
+  comun/mates.js                   Fórmulas en texto -> KaTeX al generar (fracciones apiladas, exponentes, raíces, C(n, r))
+  comun/tema1.js                   Matemáticas · Tema 1: lista de secciones (0 a 4), navegación común y su CSS
+  comun/estilos-mates.js           Estilos de las fórmulas, las pistas y los widgets de matemáticas
+  mates/build.js                   Generador común de las secciones del Tema 1 (ver «Matemáticas · Tema 1»)
+  mates/<sección>/contenido/       Mapa y apartados de cada sección: repaso-algebra, sucesiones, demostraciones, recuento, binomio
   induccion/
     contenido/00-mapa.md           Mapa: la idea (dominó), la plantilla, los patrones, errores, frases modelo e índice
     contenido/NN-<patrón>.md       Idea clave y ejemplos resueltos de cada patrón, y sus ejercicios con pistas
@@ -107,6 +112,47 @@ Los ejercicios de las diapositivas se llaman D<diapositiva>·<número>; los nuev
 Las fórmulas se siguen escribiendo en texto (n(n + 1)/2, 2ⁿ⁺¹, √(n + 1)…) y el build las compone con KaTeX (`src/comun/mates.js`, CSS y fuentes en `assets/katex/`): una negrita que es solo fórmula se compone entera, y en el resto del texto cada fórmula que lleva una fracción. Si KaTeX no puede con alguna, el build la deja en texto y lo avisa al terminar.
 
 Cada ejercicio necesita su tabla de primeros casos en `EXPLORAR` de `assets/induccion/induccion.js` (tipo `igual`, `div`, `>` o `>=`, lados como funciones de n con BigInt; `base` marca el caso base y `impares` salta los pares). En Node, `require('./assets/induccion/induccion.js').filas(id)` da las filas para comprobarlas. Las pistas se abren de una en una; el número de pistas usadas y «Lo he resuelto» se guardan en el navegador (`localStorage`, clave `induccion:<id>`) y se ven en la lista de ejercicios. Sin JavaScript se ven todas las pistas como desplegables.
+
+## Matemáticas · Tema 1 (`temas/<sección>/`)
+
+```sh
+cd src && node mates/build.js [sección…]   # sin argumentos, todas las que tienen contenido
+node induccion/build.js                    # después, para que la inducción enlace con Demostraciones
+```
+
+El tema sigue el orden de las diapositivas en cinco secciones (`src/comun/tema1.js`): 0 · Repaso previo (`repaso-algebra`), 1 · Sucesiones, 2 · Demostraciones (la inducción es su apartado 3, con sección propia en `temas/induccion/`), 3 · Recuento y 4 · Binomio. Una sección sin ficheros en `contenido/` sale en la navegación como «próximamente».
+
+Cada sección tiene `00-mapa.md` (cabecera `titulo`, `corto`, `eyebrow`, `desc`, `portada`, `icono`; `[[apartados]]` pone las tarjetas de los apartados e `[[indice]]` la tabla de ejercicios) y un fichero por apartado (`slug`, `titulo`, `nombre`, `corto`, `eyebrow`, `desc`, `icono`; con `enlace: temas/induccion/` el apartado apunta a otra sección y no tiene página propia). Los ejercicios van como en inducción, con dos campos más:
+
+```
+=== C8 | Nuevo | Anagramas de CASA
+nivel: 1
+pide: Palabras con las letras de CASA
+resultado: **4!/2! = 12**              (la pestaña «Resultado», para comprobar sin ver la solución)
+widget: enumerar {"tipo":"PR","palabra":"CASA"}
+--- enunciado
+--- pista …
+--- solucion
+```
+
+Identificadores: D<diapositiva>·<n> para los de clase y R…, S…, M…, C…, B… para los nuevos de cada sección. Dentro del texto, `[[widget:<tipo>|{json}]]` inserta un widget. Progreso en `localStorage` con la clave `mates:<sección>:<id>`.
+
+Widgets (`assets/mates/mates.js`; en Node exporta `F`, `leeF`, `fmtF`, `binom`, `ruffini`, `termino` y `contraejemplos` para comprobar resultados):
+
+| Widget | Configuración | Qué hace |
+| --- | --- | --- |
+| `ruffini` | `coef`, `a` | Ruffini paso a paso con fracciones exactas y teorema del resto |
+| `serie` | `a1`, `R` | Sumas parciales de una serie geométrica frente a S∞ |
+| `fractal` | `tipo` (`koch`…), `lado` | Iteraciones de un fractal con perímetro y área |
+| `metodo` | enlaces por método | Elegir el método de demostración |
+| `contraejemplo` | `id` o `ids` | Probar valores hasta encontrar un contraejemplo |
+| `cuadro` | — | Cuadro resumen de recuento (D22) como preguntas sí/no |
+| `enumerar` | `tipo` (P, PR, V, VR, C), `elementos` o `palabra`, `r` | Lista todos los casos pequeños para comprobar la fórmula |
+| `pascal` | `filas`, `n` | Triángulo de Pascal; al pulsar una fila sale (a + b)ⁿ |
+| `termino` | `ca`, `ea`, `cb`, `eb`, `n`, `k` | Coeficiente de xᵏ en (ca·x^ea + cb·x^eb)ⁿ con el término general |
+| `generalizado` | `alfas`, `N` | (1 + x)^α frente a la serie cortada, con la franja |x| < 1 |
+
+Fórmulas: en negrita, con exponentes Unicode (x², aⁿ⁻ʳ, x⁻³, (1 + x)ᵅ) o `^(…)` para exponentes con fracción; `C(n, r)` se dibuja como número combinatorio y `VR`, `PR` en redonda. Fuera de la negrita conviene usar solo exponentes Unicode.
 
 ## Generador de exámenes (`examen/`, `assets/examen/`)
 
