@@ -27,12 +27,13 @@ function analizar(s) {
       if (c === ')' || c === ']') return out;
       let p;
       if (c === '(' || c === '[') { i++; const h = lista(); const cierra = s[i] || ''; i++; p = { t: 'grupo', abre: c, cierra, hijos: h }; }
-      else if (c === '^' && out.length) {   // exponente escrito a mano: x^(1/2), a^n
+      else if ((c === '^' || c === '_') && out.length) {   // exponente o subíndice escrito a mano: x^(1/2), Σ_(r=1)^(28)
+        const campo = c === '^' ? 'supTex' : 'subTex';
         i++;
         let t;
         if (s[i] === '(') { i++; const h = lista(); i++; t = tex(h); }
         else { let v = ''; if (s[i] === '−' || s[i] === '-') v += s[i++]; while (i < s.length && /[0-9A-Za-z]/.test(s[i])) v += s[i++]; if (!v.replace(/[−-]/, '')) v += s[i++] || ''; t = tex(analizar(v)); }
-        out[out.length - 1].supTex = t;
+        out[out.length - 1][campo] = t;
         continue;
       }
       else if (c === '√' || c === '∛') {
@@ -83,6 +84,8 @@ function pieza(p) {
     case 'op': case 'otro': base = SIMB[p.v] !== undefined ? SIMB[p.v] : p.v === '!' ? '!' : p.v === '✔' ? '' : p.v.replace(/([%&#_{}$])/g, '\\$1'); break;
   }
   if (p.sub) base += `_{${p.sub}}`;
+  if (p.v === 'Σ' && (p.subTex || p.supTex)) return `\\sum${p.subTex ? `_{${p.subTex}}` : ''}${p.supTex ? `^{${p.supTex}}` : ''} `;
+  if (p.subTex) base += `_{${p.subTex}}`;
   if (p.sup) base = (p.t === 'op' || p.t === 'otro' ? `{${base}}` : base) + supTex(p.sup);
   if (p.supTex) base = `{${base}}^{${p.supTex}}`;
   return base;
@@ -170,7 +173,7 @@ function ampliar(s, a0, b0, min) {
     const c = s[a - 1];
     if (c === ',' && /\d/.test(s[a - 2] || '') && /\d/.test(s[a] || '')) { a--; continue; }
     if (!MATE.test(c)) break;
-    if (LETRA.test(c) && palabra(a - 1, -1)) break;
+    if (LETRA.test(c) && palabra(a - 1, -1) && !/[₀₁₂₃ₙₖᵣ²³ⁿ]/.test(s[a] || '')) break;   // «a₁» es una variable, no la palabra «a»
     if (c === '·' && s[a - 2] === ' ' && s[a] === ' ') break;   // « · » separa partes de un título
     a--;
   }
@@ -179,7 +182,7 @@ function ampliar(s, a0, b0, min) {
     const c = s[b];
     if (c === ',' && /\d/.test(s[b - 1] || '') && /\d/.test(s[b + 1] || '')) { b++; continue; }
     if (!MATE.test(c)) break;
-    if (LETRA.test(c) && palabra(b, 1)) break;
+    if (LETRA.test(c) && palabra(b, 1) && !/[₀₁₂₃ₙₖᵣ²³ⁿ]/.test(s[b + 1] || '')) break;
     if (c === '·' && s[b - 1] === ' ' && s[b + 1] === ' ') break;
     b++;
   }
@@ -191,7 +194,7 @@ function ampliar(s, a0, b0, min) {
 }
 
 // fracciones sueltas dentro de un texto sin etiquetas
-const IZQ = /[0-9A-Za-z·!√²³ⁿᵏʳ⁺⁻⁰¹⁴⁵⁶⁷⁸⁹₀₁ₙ]/;
+const IZQ = /[0-9A-Za-z·!√²³ⁿᵏʳ⁺⁻⁰¹⁴⁵⁶⁷⁸⁹₀₁₂₃ₙₖᵣ₊₋]/;
 function fraccionesEnTexto(txt) {
   let out = '', i = 0;
   const s = desentidad(txt);
@@ -213,7 +216,7 @@ function fraccionesEnTexto(txt) {
     if (s[b] === '√') b++;
     if (s[b] === '(') { let d = 0; for (; b < s.length; b++) { if (s[b] === '(') d++; else if (s[b] === ')') { d--; if (!d) { b++; break; } } } }
     else while (b < s.length && /[0-9A-Za-z]/.test(s[b])) { b++; if (/[A-Za-z]/.test(s[b - 1])) break; }
-    while (b < s.length && /[²³ⁿᵏʳ⁺⁻⁰¹⁴⁵⁶⁷⁸⁹!]/.test(s[b])) b++;
+    while (b < s.length && /[²³ⁿᵏʳ⁺⁻⁰¹⁴⁵⁶⁷⁸⁹!₀₁₂₃ₙₖᵣ₊₋]/.test(s[b])) b++;
     if (a >= i || b <= i + 1 || /^\d+$/.test(s.slice(a, i)) && /^\d{4}$/.test(s.slice(i + 1, b))) continue;
     [a, b] = ampliar(s, a, b, ultimo);   // toda la fórmula que rodea a la fracción, no solo la fracción
     const k = katexHtml(s.slice(a, b), { display: true });
