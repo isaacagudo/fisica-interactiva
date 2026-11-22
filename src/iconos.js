@@ -8,6 +8,8 @@ const flecha = (x1, y1, x2, y2, c, w = 2.6) => {
 const suelo = (y = 56, x1 = 6, x2 = 90) => `<rect class="pl" x="${x1}" y="${y}" width="${x2 - x1}" height="8" style="stroke:none"/><line class="ln q" x1="${x1}" y1="${y}" x2="${x2}" y2="${y}" style="stroke-width:1.5"/>`;
 const zig = (x1, y, x2, n = 5, a = 6) => { let d = `M${x1} ${y}`; const L = x2 - x1, s = L / (2 * n + 2); d += ` L${x1 + s} ${y}`; for (let i = 0; i < 2 * n; i++) d += ` L${(x1 + s * (i + 1.5)).toFixed(1)} ${y + (i % 2 ? a : -a)}`; return d + ` L${x2 - s} ${y} L${x2} ${y}`; };
 
+const glifo = (t, size = 24, c = 'n', x = 48, y = 46) => `<text x="${x}" y="${y}" text-anchor="middle" style="font:700 ${size}px var(--f-display, sans-serif);fill:var(--${c === 'n' ? 'ink' : 'c-' + c})">${t}</text>`;
+
 const ICONOS = {
   // ---- comunes a todos los temas
   mapa: `<polygon class="pl" points="14,16 34,10 56,16 80,10 80,58 56,64 34,58 14,64"/><line class="ln q" x1="34" y1="10" x2="34" y2="58" style="stroke-width:1.2"/><line class="ln q" x1="56" y1="16" x2="56" y2="64" style="stroke-width:1.2"/>
@@ -30,6 +32,27 @@ const ICONOS = {
   divisibilidad: `<rect class="bk" x="12" y="12" width="72" height="48" rx="4"/><line class="ln q" x1="36" y1="16" x2="36" y2="56" style="stroke-width:1.2;stroke-dasharray:3 3"/><line class="ln q" x1="60" y1="16" x2="60" y2="56" style="stroke-width:1.2;stroke-dasharray:3 3"/>${[0, 1, 2].map(g => [[-6, 26], [6, 26], [-6, 38], [6, 38], [-6, 50], [6, 50]].map(([dx, y]) => `<circle cx="${24 + g * 24 + dx}" cy="${y - 2}" r="3.4" class="fn"/>`).join('')).join('')}`,
   desigualdades: `<line class="ln q" x1="8" y1="62" x2="88" y2="62" style="stroke-width:1.5"/><rect x="16" y="12" width="20" height="50" rx="2" style="fill:var(--c-p);opacity:.85"/><rect x="62" y="34" width="20" height="28" rx="2" style="fill:var(--c-v);opacity:.85"/><path class="ln i" d="M42 28 l12 8 l-12 8 M42 52 h12" style="stroke-width:2.8"/>`,
   domino: `<line class="ln q" x1="6" y1="62" x2="90" y2="62" style="stroke-width:1.5"/>${[0, 1, 2, 3, 4].map(i => { const x = 12 + i * 16, a = [56, 40, 22, 0, 0][i]; return `<rect class="bk" x="${x}" y="26" width="9" height="36" rx="1.5" transform="rotate(${a} ${x + 9} 62)"${i === 2 ? ' style="stroke:var(--c-p)"' : ''}/>`; }).join('')}`,
+  // ---- matemáticas · Tema 1 (iconos de texto: un símbolo grande sobre la cuadrícula)
+  repaso: glifo('P(a)', 26, 'n', 44, 30) + glifo('÷', 26, 'p', 48, 60),
+  ecuaciones: glifo('x = ?', 26, 'n'),
+  ruffini: `<line class="ln q" x1="24" y1="14" x2="24" y2="60" style="stroke-width:1.6"/><line class="ln q" x1="18" y1="44" x2="88" y2="44" style="stroke-width:1.6"/>${glifo('1 −2 3', 15, 'n', 56, 26)}${glifo('2', 15, 'p', 15, 40)}${glifo('1  0  3', 15, 'p', 56, 60)}`,
+  resto: glifo('P(a) = r', 20, 'n', 48, 44),
+  sucesiones: `${[0, 1, 2, 3, 4].map(i => `<circle cx="${16 + i * 16}" cy="${54 - i * 9}" r="4.5" style="fill:var(--c-p)"/>`).join('')}${glifo('aₙ', 18, 'n', 22, 22)}`,
+  aritmetica: `${[0, 1, 2, 3].map(i => `<rect x="${14 + i * 18}" y="${58 - 10 - i * 10}" width="12" height="${10 + i * 10}" rx="1.5" style="fill:var(--c-p);opacity:.8"/>`).join('')}${glifo('+d', 16, 'n', 70, 18)}`,
+  geometrica: `${[0, 1, 2, 3].map(i => `<rect x="${14 + i * 18}" y="${58 - 3 * 2 ** i}" width="12" height="${3 * 2 ** i}" rx="1.5" style="fill:var(--c-v);opacity:.85"/>`).join('')}${glifo('·R', 16, 'n', 30, 18)}`,
+  fractal: `<path d="M48 8 L60 30 L84 30 L66 46 L74 68 L48 54 L22 68 L30 46 L12 30 L36 30 Z" style="fill:none;stroke:var(--c-p);stroke-width:2"/><path d="M48 22 L60 44 L36 44 Z" style="fill:var(--c-p);opacity:.3"/>`,
+  demostraciones: glifo('∎', 40, 'n', 48, 52),
+  directa: glifo('p ⟹ q', 22, 'n'),
+  contradiccion: glifo('⟂', 40, 'fr', 48, 52),
+  contraejemplo: glifo('∃ ✗', 30, 'fr'),
+  recuento: glifo('n!', 34, 'n'),
+  orden: `${['A', 'B', 'C'].map((t, i) => `<rect class="bk" x="${12 + i * 26}" y="20" width="20" height="26" rx="3"/>${glifo(t, 16, 'n', 22 + i * 26, 39)}`).join('')}<path class="ln p" d="M18 56 C34 66, 60 66, 76 56" style="stroke-width:2"/>`,
+  repeticion: `${['A', 'A', 'B'].map((t, i) => `<rect class="bk" x="${12 + i * 26}" y="22" width="20" height="26" rx="3"${i < 2 ? ' style="stroke:var(--c-v)"' : ''}/>${glifo(t, 16, i < 2 ? 'v' : 'n', 22 + i * 26, 41)}`).join('')}`,
+  condiciones: glifo('≥ 1', 28, 'n', 48, 46),
+  binomio: glifo('(a+b)ⁿ', 24, 'n'),
+  pascal: `${[0, 1, 2, 3].map(f => Array.from({ length: f + 1 }, (_, k) => `<circle cx="${48 + (k - f / 2) * 16}" cy="${12 + f * 15}" r="5.5" style="fill:${f === 3 ? 'var(--c-p)' : 'var(--sheet)'};stroke:var(--ink);stroke-width:1.4"/>`).join('')).join('')}`,
+  termino: glifo('Tᵣ₊₁', 26, 'n'),
+  generalizado: `<path d="M8 56 C30 54, 44 40, 52 30 S70 12, 88 8" style="fill:none;stroke:var(--c-p);stroke-width:2.4"/><path d="M8 62 L88 22" style="fill:none;stroke:var(--c-v);stroke-width:2;stroke-dasharray:4 3"/>${glifo('|x|<1', 13, 'n', 30, 20)}`,
 };
 const icono = (nombre, extra = '') => ICONOS[nombre] ? `<svg class="ico${extra ? ' ' + extra : ''}" viewBox="0 0 96 72" aria-hidden="true" focusable="false">${ICONOS[nombre]}</svg>` : '';
 module.exports = { icono, ICONOS };

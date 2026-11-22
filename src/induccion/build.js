@@ -11,6 +11,7 @@ const { icono } = require('../iconos.js');
 const CSS_COMUN = require('../comun/estilos.js');
 const { EXPLORAR } = require('../../assets/induccion/induccion.js');
 const { mates, katexHtml, errores } = require('../comun/mates.js');
+const TEMA1 = require('../comun/tema1.js');
 
 const HERE = __dirname;
 const OUT = path.join(HERE, '../../temas/induccion');
@@ -94,7 +95,7 @@ function render(md, { base = '', extra = {}, propio = '' } = {}) {
 const inline = md => marked.parseInline(md);
 
 // ---------------------------------------------------------------- estilos propios (además de los comunes)
-const CSS = CSS_COMUN + `
+const CSS = CSS_COMUN + TEMA1.css + `
 .doc p.eq{margin:6px 0;display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 12px}
 .doc p.eq+p.eq{margin-top:-1px;border-top-left-radius:0;border-top-right-radius:0}
 .doc p.eq:has(+p.eq){margin-bottom:0;border-bottom-left-radius:0;border-bottom-right-radius:0}
@@ -186,7 +187,8 @@ function page({ title, eyebrow, desc, body, toc, depth, current, crumbs, pager, 
 </head>
 <body>
 <div class="page">
-  <nav class="crumbs" aria-label="Ruta"><a href="${up}">BI Ciencias</a><span aria-hidden="true">›</span><a href="${up}#matematicas">Matemáticas</a>${crumbs.map(([t, h]) => `<span aria-hidden="true">›</span>${h ? `<a href="${h}">${esc(t)}</a>` : `<span>${esc(t)}</span>`}`).join('')}</nav>
+  <nav class="crumbs" aria-label="Ruta"><a href="${up}">BI Ciencias</a><span aria-hidden="true">›</span><a href="${up}#matematicas">Matemáticas</a><span aria-hidden="true">›</span><a href="${up}${TEMA1.existe('demostraciones') ? 'temas/demostraciones/' : '#matematicas'}">2 · Demostraciones</a>${crumbs.map(([t, h]) => `<span aria-hidden="true">›</span>${h ? `<a href="${h}">${esc(t)}</a>` : `<span>${esc(t)}</span>`}`).join('')}</nav>
+  ${TEMA1.nav(up, 'demostraciones')}
   <header class="top${ico ? ' con-ico' : ''}">${ico ? `<div class="ico-top grid-paper">${icono(ico)}</div>` : ''}<div class="txt"><div class="eyebrow">${esc(eyebrow)}</div><h1>${title}</h1>${desc ? `<p class="lead">${esc(desc)}</p>` : ''}</div></header>
   <nav class="cats" aria-label="Apartados del tema">${chips}</nav>
   <div class="layout">
@@ -284,28 +286,6 @@ ${pistas}
   total++;
 });
 
-// ---------------------------------------------------------------- bloque del tema en la portada (entre <!-- tema:induccion --> y <!-- /tema:induccion -->)
-{
-  const f = path.join(HERE, '../../index.html');
-  const html = fs.readFileSync(f, 'utf8');
-  const item = (href, ico, badge, h3, p) => `      <a class="item card" href="${href}">
-        <div class="thumb grid-paper" aria-hidden="true">${icono(ico)}</div>
-        <div><span class="badge${badge.cls ? ' ' + badge.cls : ''}">${badge.txt}</span><h3>${h3}</h3><p>${p}</p></div>
-      </a>`;
-  const bloque = `<!-- tema:induccion -->
-  <section class="topic" aria-labelledby="t-induccion">
-    <div class="topic-head"><h3 id="t-induccion">${TEMA}</h3><p>La idea del dominó, la plantilla, los tres patrones con ejemplos resueltos y los ejercicios del Tema 1 con pistas paso a paso</p></div>
-    <div class="items">
-${[item('temas/induccion/', 'domino', { txt: 'Mapa del tema', cls: 'tema' }, 'La idea y la plantilla', 'El efecto dominó, la plantilla con la notación de clase, los patrones en una tabla, errores típicos e índice de ejercicios.'),
-   item('temas/induccion/ejercicios/', 'ejercicios', { txt: 'Para practicar', cls: 'tema' }, 'Ejercicios con pistas', `${Resumen}, de menos a más: primeros casos, pistas que se abren de una en una y solución completa.`),
-   ...cats.map((c, i) => item(`temas/induccion/${c.slug}/`, c.icono, { txt: `Apartado ${i + 1}` }, c.nombre, c.desc))].join('\n')}
-    </div>
-  </section>
-  <!-- /tema:induccion -->`;
-  const i = html.indexOf('<!-- tema:induccion -->'), j = html.indexOf('<!-- /tema:induccion -->');
-  const nuevo = i >= 0 && j >= 0 ? html.slice(0, i) + bloque + html.slice(j + '<!-- /tema:induccion -->'.length)
-    : html.replace('<!-- /materia:matematicas -->', `${bloque}\n<!-- /materia:matematicas -->`);
-  fs.writeFileSync(f, nuevo);
-}
+// La portada la escribe src/mates/build.js: inducción aparece dentro del bloque del Tema 1, junto a Demostraciones.
 if (errores.length) { console.error('Fórmulas que KaTeX no ha podido componer (se dejan en texto):\n' + errores.join('\n')); process.exitCode = 1; }
 console.log(`${total} páginas: mapa, ${cats.length} apartados, la sección de ejercicios y ${todos.length} ejercicios guiados (${nNuevos} nuevos)`);

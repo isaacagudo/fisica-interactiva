@@ -8,10 +8,13 @@
 const katex = require('katex');
 
 const SUP = { '⁰': '0', '¹': '1', '²': '2', '³': '3', '⁴': '4', '⁵': '5', '⁶': '6', '⁷': '7', '⁸': '8', '⁹': '9', 'ⁿ': 'n', 'ᵏ': 'k', 'ʳ': 'r', '⁺': '+', '⁻': '-', '⁽': '(', '⁾': ')' };
-const SUB = { '₀': '0', '₁': '1', '₂': '2', 'ₙ': 'n', 'ₖ': 'k' };
-const SIMB = { '·': '\\cdot ', '−': '-', '≥': '\\geq ', '≤': '\\leq ', '⋯': '\\cdots ', '…': '\\ldots ', '∈': '\\in ', 'ℤ': '\\mathbb{Z}', 'ℕ': '\\mathbb{N}', '⟹': '\\Rightarrow ', '×': '\\times ', 'Σ': '\\sum ', '<': '<', '>': '>' };
+const SUB = { '₀': '0', '₁': '1', '₂': '2', '₃': '3', 'ₙ': 'n', 'ₖ': 'k', 'ᵣ': 'r', '₊': '+', '₋': '-' };
+const SIMB = { '·': '\\cdot ', '−': '-', '≥': '\\geq ', '≤': '\\leq ', '⋯': '\\cdots ', '…': '\\ldots ', '∈': '\\in ', 'ℤ': '\\mathbb{Z}', 'ℕ': '\\mathbb{N}', '⟹': '\\Rightarrow ', '×': '\\times ', 'Σ': '\\sum ', '<': '<', '>': '>', '≠': '\\neq ', '⟺': '\\iff ', '∞': '\\infty ', '→': '\\to ', '÷': '\\div ', 'π': '\\pi ', 'α': '\\alpha ', '⇒': '\\Rightarrow ', '±': '\\pm ' };
 const CORTE = new Set(['+', '−', '-', '=', '≥', '≤', '<', '>', ',', ':', '⟹', '∈', ';']);   // fin del numerador hacia la izquierda
 const LETRA = /[A-Za-zÁÉÍÓÚáéíóúÑñüÜ]/;
+// palabras cortas que sí son texto dentro de una fórmula (las de 4 letras o más lo son siempre)
+const CORTAS = new Set(['y', 'o', 'a', 'e', 'es', 'por', 'con', 'de', 'un', 'la', 'el', 'si', 'no', 'en', 'que', 'los', 'las', 'del', 'al', 'una', 'son', 'par', 'sea', 'sin', 'cm', 'mod', 'vez', 'ni']);
+const esPalabra = v => v.length >= 4 || CORTAS.has(v.toLowerCase());
 
 // ---------------------------------------------------------------- análisis: texto -> lista de piezas
 // pieza: {t:'num'|'var'|'pal'|'grupo'|'raiz'|'op'|'esp'|'otro', v, hijos, abre, cierra, sup, sub}
@@ -24,13 +27,26 @@ function analizar(s) {
       if (c === ')' || c === ']') return out;
       let p;
       if (c === '(' || c === '[') { i++; const h = lista(); const cierra = s[i] || ''; i++; p = { t: 'grupo', abre: c, cierra, hijos: h }; }
-      else if (c === '√') {
+      else if (c === '^' && out.length) {   // exponente escrito a mano: x^(1/2), a^n
         i++;
-        if (s[i] === '(') { i++; const h = lista(); i++; p = { t: 'raiz', hijos: h }; }
-        else { let v = ''; while (i < s.length && /[0-9A-Za-z]/.test(s[i])) { v += s[i++]; if (/[A-Za-z]/.test(v)) break; } p = { t: 'raiz', hijos: [{ t: /\d/.test(v) ? 'num' : 'var', v }] }; }
+        let t;
+        if (s[i] === '(') { i++; const h = lista(); i++; t = tex(h); }
+        else { let v = ''; if (s[i] === '−' || s[i] === '-') v += s[i++]; while (i < s.length && /[0-9A-Za-z]/.test(s[i])) v += s[i++]; if (!v.replace(/[−-]/, '')) v += s[i++] || ''; t = tex(analizar(v)); }
+        out[out.length - 1].supTex = t;
+        continue;
+      }
+      else if (c === '√' || c === '∛') {
+        const idx = c === '∛' ? 3 : 0;
+        i++;
+        if (s[i] === '(') { i++; const h = lista(); i++; p = { t: 'raiz', idx, hijos: h }; }
+        else { let v = ''; while (i < s.length && /[0-9A-Za-z]/.test(s[i])) { v += s[i++]; if (/[A-Za-z]/.test(v)) break; } p = { t: 'raiz', idx, hijos: [{ t: /\d/.test(v) ? 'num' : 'var', v }] }; }
       }
       else if (/\d/.test(c)) { let v = ''; while (i < s.length && /[\d,]/.test(s[i]) && !(s[i] === ',' && !/\d/.test(s[i + 1] || ''))) v += s[i++]; p = { t: 'num', v }; }
-      else if (LETRA.test(c)) { let v = ''; while (i < s.length && LETRA.test(s[i])) v += s[i++]; p = v.length > 1 ? { t: 'pal', v } : { t: 'var', v }; }
+      else if (LETRA.test(c)) {
+        let v = ''; while (i < s.length && LETRA.test(s[i])) v += s[i++];
+        if (v.length > 1 && !esPalabra(v) && /^[A-Za-z]+$/.test(v)) { for (const ch of v.slice(0, -1)) out.push({ t: 'var', v: ch }); p = { t: 'var', v: v.slice(-1) }; }   // kx², ab: producto de variables
+        else p = v.length > 1 ? { t: 'pal', v } : { t: 'var', v };
+      }
       else if (c === ' ') { while (s[i] === ' ') i++; p = { t: 'esp' }; }
       else if (c === '/') { i++; p = { t: 'op', v: '/' }; }
       else { i++; p = { t: CORTE.has(c) ? 'op' : 'otro', v: c }; }
@@ -57,7 +73,7 @@ function pieza(p) {
     case 'var': base = p.v; break;
     case 'pal': base = `\\text{${p.v}}`; break;
     case 'esp': return ' ';
-    case 'raiz': base = `\\sqrt{${tex(p.hijos)}}`; break;
+    case 'raiz': base = `\\sqrt${p.idx ? `[${p.idx}]` : ''}{${tex(p.hijos)}}`; break;
     case 'grupo': {
       const dentro = tex(p.hijos), grande = tieneFrac(p.hijos) || p.hijos.some(h => h.t === 'raiz');
       const a = p.abre === '(' ? '(' : '[', b = p.cierra === ')' ? ')' : p.cierra === ']' ? ']' : '.';
@@ -68,6 +84,7 @@ function pieza(p) {
   }
   if (p.sub) base += `_{${p.sub}}`;
   if (p.sup) base = (p.t === 'op' || p.t === 'otro' ? `{${base}}` : base) + supTex(p.sup);
+  if (p.supTex) base = `{${base}}^{${p.supTex}}`;
   return base;
 }
 // un operando sin el paréntesis de fuera: (n + 2)/2 -> \frac{n+2}{2}
@@ -78,6 +95,21 @@ const operando = ps => {
 };
 function tex(ps) {
   ps = ps.slice();
+  // S∞ -> S con subíndice infinito
+  for (let k = 0; k < ps.length - 1; k++) if (ps[k].t === 'var' && ps[k + 1].t === 'otro' && ps[k + 1].v === '∞' && !ps[k].sub) { ps[k] = Object.assign({}, ps[k], { sub: '\\infty' }); ps.splice(k + 1, 1); }
+  // C(n, r) -> número combinatorio
+  for (let k = 0; k < ps.length - 1; k++) {
+    const g = ps[k + 1];
+    if (ps[k].t === 'var' && ps[k].v === 'C' && !ps[k].sup && !ps[k].sub && g.t === 'grupo' && g.abre === '(') {
+      const comas = g.hijos.map((h, j) => h.t === 'op' && h.v === ',' ? j : -1).filter(j => j >= 0);
+      if (comas.length === 1) {
+        const arriba = g.hijos.slice(0, comas[0]), abajo = g.hijos.slice(comas[0] + 1);
+        let t = `\\binom{${tex(arriba)}}{${tex(abajo)}}`;
+        if (g.sup) t = `{${t}}^{${g.sup}}`;
+        ps.splice(k, 2, { t: 'frac', tex: t });
+      }
+    }
+  }
   // fracciones: el numerador es el producto que hay a la izquierda (hasta + − = …); el denominador, un solo factor
   for (let k = ps.findIndex(p => p.t === 'op' && p.v === '/'); k >= 0; k = ps.findIndex(p => p.t === 'op' && p.v === '/')) {
     let a = k - 1;
@@ -91,6 +123,7 @@ function tex(ps) {
     let b = k + 1;
     if (ps[b] && ps[b].t === 'esp') b++;
     const den = ps[b] ? [ps[b]] : [];
+    if (ps[b + 1] && ps[b + 1].t === 'otro' && ps[b + 1].v === '!') { den.push(ps[b + 1]); b++; }   // 2! en el denominador
     const f = { t: 'frac', tex: `\\frac{${operando(num) || '\\,'}}{${operando(den) || '\\,'}}` };
     ps.splice(a + 1, b - a, f);
   }
@@ -130,7 +163,7 @@ function ampliar(s, a0, b0, min) {
   const palabra = (j, paso) => {   // ¿empieza en j (hacia paso) una palabra?
     let x = j, t = '';
     while (x >= 0 && x < s.length && LETRA.test(s[x])) { t = paso < 0 ? s[x] + t : t + s[x]; x += paso; }
-    return t.length >= 2 || NEXOS.has(t);
+    return t.length >= 2 ? esPalabra(t) || !/^[A-Za-z]+$/.test(t) : NEXOS.has(t);
   };
   let a = a0;
   while (a - 1 >= min) {
