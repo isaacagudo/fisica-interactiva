@@ -46,6 +46,7 @@ const ICONOS = {
   contradiccion: glifo('⟂', 40, 'fr', 48, 52),
   contraejemplo: glifo('∃ ✗', 30, 'fr'),
   recuento: glifo('n!', 34, 'n'),
+  factorial: glifo('C(n,r)', 20, 'n'),
   orden: `${['A', 'B', 'C'].map((t, i) => `<rect class="bk" x="${12 + i * 26}" y="20" width="20" height="26" rx="3"/>${glifo(t, 16, 'n', 22 + i * 26, 39)}`).join('')}<path class="ln p" d="M18 56 C34 66, 60 66, 76 56" style="stroke-width:2"/>`,
   repeticion: `${['A', 'A', 'B'].map((t, i) => `<rect class="bk" x="${12 + i * 26}" y="22" width="20" height="26" rx="3"${i < 2 ? ' style="stroke:var(--c-v)"' : ''}/>${glifo(t, 16, i < 2 ? 'v' : 'n', 22 + i * 26, 41)}`).join('')}`,
   condiciones: glifo('≥ 1', 28, 'n', 48, 46),

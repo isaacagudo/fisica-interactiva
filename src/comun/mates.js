@@ -14,6 +14,7 @@ const CORTE = new Set(['+', '−', '-', '=', '≥', '≤', '<', '>', ',', ':', '
 const LETRA = /[A-Za-zÁÉÍÓÚáéíóúÑñüÜ]/;
 // palabras cortas que sí son texto dentro de una fórmula (las de 4 letras o más lo son siempre)
 const CORTAS = new Set(['y', 'o', 'a', 'e', 'es', 'por', 'con', 'de', 'un', 'la', 'el', 'si', 'no', 'en', 'que', 'los', 'las', 'del', 'al', 'una', 'son', 'par', 'sea', 'sin', 'cm', 'mod', 'vez', 'ni']);
+const ROMANAS = new Set(['VR', 'PR']);   // nombres de fórmulas que no son producto de variables
 const esPalabra = v => v.length >= 4 || CORTAS.has(v.toLowerCase());
 
 // ---------------------------------------------------------------- análisis: texto -> lista de piezas
@@ -45,7 +46,8 @@ function analizar(s) {
       else if (/\d/.test(c)) { let v = ''; while (i < s.length && /[\d,]/.test(s[i]) && !(s[i] === ',' && !/\d/.test(s[i + 1] || ''))) v += s[i++]; p = { t: 'num', v }; }
       else if (LETRA.test(c)) {
         let v = ''; while (i < s.length && LETRA.test(s[i])) v += s[i++];
-        if (v.length > 1 && !esPalabra(v) && /^[A-Za-z]+$/.test(v)) { for (const ch of v.slice(0, -1)) out.push({ t: 'var', v: ch }); p = { t: 'var', v: v.slice(-1) }; }   // kx², ab: producto de variables
+        if (ROMANAS.has(v)) p = { t: 'rom', v };
+        else if (v.length > 1 && !esPalabra(v) && /^[A-Za-z]+$/.test(v)) { for (const ch of v.slice(0, -1)) out.push({ t: 'var', v: ch }); p = { t: 'var', v: v.slice(-1) }; }   // kx², ab: producto de variables
         else p = v.length > 1 ? { t: 'pal', v } : { t: 'var', v };
       }
       else if (c === ' ') { while (s[i] === ' ') i++; p = { t: 'esp' }; }
@@ -73,6 +75,7 @@ function pieza(p) {
     case 'num': base = p.v.replace(/,/g, '{,}'); break;
     case 'var': base = p.v; break;
     case 'pal': base = `\\text{${p.v}}`; break;
+    case 'rom': base = `\\mathrm{${p.v}}`; break;
     case 'esp': return ' ';
     case 'raiz': base = `\\sqrt${p.idx ? `[${p.idx}]` : ''}{${tex(p.hijos)}}`; break;
     case 'grupo': {

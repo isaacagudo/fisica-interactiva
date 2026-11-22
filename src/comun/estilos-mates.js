@@ -50,6 +50,7 @@ module.exports = TEMA1.css + `
 .widget .w-msg{font-size:14.5px;color:var(--ink-2);margin:0}
 .widget svg{display:block;width:100%;height:auto}
 .widget table{font-variant-numeric:tabular-nums}
+.table-wrap{position:relative}
 .widget td.num,.widget th.num{font-family:var(--f-mono);text-align:right;white-space:nowrap}
 .widget .ok{color:var(--c-n);font-weight:700} .widget .mal{color:var(--c-fr);font-weight:700}
 .widget tr.marca td{background:color-mix(in srgb,var(--c-fr) 12%,transparent)}
