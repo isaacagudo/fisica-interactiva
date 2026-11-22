@@ -69,6 +69,7 @@ module.exports = TEMA1.css + `
 .pascal .fila{display:flex;gap:4px;cursor:pointer;border-radius:8px;padding:2px 4px}
 .pascal .fila:hover,.pascal .fila[aria-pressed=true]{background:color-mix(in srgb,var(--c-p) 14%,transparent)}
 .pascal .fila span{min-width:2.4em;text-align:center;border:1px solid var(--rule);border-radius:6px;padding:2px 0;background:var(--paper)}
+@media (max-width:560px){.pascal{font-size:11px;gap:3px}.pascal .fila{gap:2px;padding:2px 1px}.pascal .fila span{min-width:2.1em}}
 .arbol{display:grid;gap:8px}
 .arbol .preg{font-weight:700}
 .arbol .res{border:1px solid var(--c-p);border-radius:10px;padding:10px 12px;background:color-mix(in srgb,var(--c-p) 6%,var(--sheet))}

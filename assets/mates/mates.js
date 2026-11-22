@@ -334,7 +334,7 @@
 <line x1="40" y1="${Y(0)}" x2="620" y2="${Y(0)}" style="stroke:var(--ink-2)"/><line x1="${X(0)}" y1="0" x2="${X(0)}" y2="300" style="stroke:var(--ink-2)"/>
 <path d="${path(f)}" style="fill:none;stroke:var(--c-p);stroke-width:2.6"/><path d="${path(s)}" style="fill:none;stroke:var(--c-v);stroke-width:2;stroke-dasharray:6 4"/>
 <text x="48" y="20" style="font-size:13px;fill:var(--c-p);font-weight:700">(1 + x)^α</text><text x="48" y="38" style="font-size:13px;fill:var(--c-v);font-weight:700">serie con ${N} términos</text>`;
-      const cs = coef.map((ck, k) => `${k === 0 ? '' : ck < 0 ? ' − ' : ' + '}${k === 0 ? fmtN(ck, 4) : fmtN(Math.abs(ck), 4)}${k ? 'x' + (k > 1 ? sup(k) : '') : ''}`).join('');
+      const cs = coef.map((ck, k) => `${k === 0 ? '' : ck < 0 ? ' − ' : ' + '}${k === 0 ? fmtN(ck, 4) : Math.abs(Math.abs(ck) - 1) < 1e-12 ? '' : fmtN(Math.abs(ck), 4)}${k ? 'x' + (k > 1 ? sup(k) : '') : ''}`).join('');
       out.innerHTML = `(1 + x)<sup>${alfa.replace('-', '−')}</sup> ≈ ${cs}${Number.isInteger(a) && a >= 0 ? '' : ' + ⋯'}<br><small>Dentro de la franja verde (|x| &lt; 1), al añadir términos la serie se pega a la función; fuera, se separa por mucho que añadas.</small>`;
     };
     el.querySelectorAll('[data-a]').forEach(b => b.onclick = () => { alfa = b.dataset.a; el.querySelectorAll('[data-a]').forEach(x => x.setAttribute('aria-pressed', x === b)); pintar(); });
