@@ -14,10 +14,10 @@ const PAGINAS = [
     lead: 'Elige los apartados y cuántos ejercicios quieres. Cada examen tiene datos nuevos, la puntuación sobre 10 y la solución paso a paso de cada ejercicio, con la simulación de esos mismos datos.',
     nota: 'Toma g = 9,8 m/s². Explica cada paso: el dibujo con las fuerzas, la ley que aplicas, las ecuaciones y las unidades.',
     pie: 'Material de estudio. Si el enunciado no da g, se usa 9,8 m/s². El enlace de cada examen lo vuelve a abrir igual, con los mismos datos.' },
-  { materia: 'matematicas', out: 'examen/matematicas/index.html', up: '../../', ficheros: ['mates-t1.js'], katex: true,
-    titulo: 'Generador de exámenes · Matemáticas', h2: 'Examen de Matemáticas · Tema 1', ruta: 'Examen de Matemáticas',
-    desc: 'Exámenes del Tema 1 de Matemáticas (sucesiones, demostraciones, recuento y binomio) con datos aleatorios, puntuación y soluciones paso a paso.',
-    lead: 'Tema 1 · Secuencias, series y demostraciones. Elige las secciones y apartados y cuántos ejercicios quieres: cada examen tiene datos nuevos, la puntuación sobre 10 y la solución paso a paso de cada ejercicio, con el porqué de cada paso.',
+  { materia: 'matematicas', out: 'examen/matematicas/index.html', up: '../../', ficheros: ['mates-t1.js', 'mates-t2.js'], katex: true,
+    titulo: 'Generador de exámenes · Matemáticas', h2: 'Examen de Matemáticas', ruta: 'Examen de Matemáticas',
+    desc: 'Exámenes de Matemáticas (Tema 1: sucesiones, demostraciones, recuento y binomio; Tema 2: geometría y trigonometría) con datos aleatorios, puntuación y soluciones paso a paso.',
+    lead: 'Temas 1 y 2. Elige las secciones y apartados y cuántos ejercicios quieres: cada examen tiene datos nuevos, la puntuación sobre 10 y la solución paso a paso de cada ejercicio, con el porqué de cada paso.',
     nota: 'Explica cada paso: qué método usas y por qué. Da los resultados exactos (fracciones, raíces) salvo que se pida una aproximación.',
     pie: 'Material de estudio. Los tipos de ejercicio siguen los de las diapositivas y los ejercicios propuestos. El enlace de cada examen lo vuelve a abrir igual, con los mismos datos.' },
 ];
@@ -37,6 +37,7 @@ main{max-width:860px}
 .config{padding:16px 18px;display:grid;gap:14px}
 .config h2{font-size:1.15rem;margin:0}
 .tema{border:1px solid var(--rule);border-radius:12px;padding:10px 14px 14px;margin:0;min-width:0}
+.grupo-ex{font:700 1.05rem var(--f-display);margin:6px 0 -4px}
 .tema legend{font:700 1rem var(--f-display);padding:0 6px}
 .tema-acc{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:0 0 10px;font-size:14px}
 .mini{font:600 13px var(--f-body);color:var(--ink-2);background:var(--sheet);border:1px solid var(--rule);border-radius:999px;padding:4px 12px;min-height:32px;cursor:pointer}
@@ -141,7 +142,7 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 
 for (const P of PAGINAS) {
 const temas = Object.values(X.temas).filter(T => (T.materia || 'fisica') === P.materia);
-const arbol = temas.map(T => `<fieldset class="tema" data-tema="${T.tema}">
+const arbol = temas.map((T, i) => `${T.grupo && T.grupo !== (temas[i - 1] || {}).grupo ? `<h3 class="grupo-ex">${esc(T.grupo)}</h3>` : ''}<fieldset class="tema" data-tema="${T.tema}">
   <legend>${esc(T.nombre)}</legend>
   <div class="tema-acc"><button type="button" class="mini" data-todos="${T.tema}">Todos</button><button type="button" class="mini" data-ninguno="${T.tema}">Ninguno</button><a href="${P.up}${T.ruta}">Mapa</a><a href="${P.up}${T.ruta}ejercicios/">Ejercicios</a></div>
   <div class="aps">${T.apartados.map((a, i) => a.patrones.length ? `<label class="ap" data-ap="${T.tema}:${i + 1}"><input type="checkbox" value="${i + 1}" checked>${icono(a.icono)}<span><b>${i + 1} · ${esc(a.nombre)}</b><small>${a.patrones.length} ${a.patrones[0].cuestion ? 'cuestiones' : a.patrones.length === 1 ? 'tipo de ejercicio' : 'tipos de ejercicio'}</small></span></label>` : '').join('')}</div>
@@ -159,7 +160,7 @@ const html = `<!doctype html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=JetBrains+Mono:wght@400;600&display=swap">
 <link rel="stylesheet" href="${P.up}assets/base.css">${P.katex ? `\n<link rel="stylesheet" href="${P.up}assets/katex/katex.min.css">` : ''}
-<style>${CSS}</style>
+<style>${CSS}${P.katex ? require('../comun/figuras.js').CSS : ''}</style>
 </head>
 <body>
 <div class="page">
@@ -181,7 +182,7 @@ const html = `<!doctype html>
   </main>
   <footer>${P.pie}</footer>
 </div>
-${P.fisica ? WIDGETS.map(w => `<script src="${P.up}assets/widgets/${w}.js" defer></script>`).join('\n') + `\n<script src="${P.up}assets/diagramas/diagramas.js" defer></script>` : `<script src="${P.up}assets/katex/katex.min.js" defer></script>`}
+${P.fisica ? WIDGETS.map(w => `<script src="${P.up}assets/widgets/${w}.js" defer></script>`).join('\n') + `\n<script src="${P.up}assets/diagramas/diagramas.js" defer></script>` : `<script src="${P.up}assets/katex/katex.min.js" defer></script>\n<script src="${P.up}assets/mates/figuras.js" defer></script>`}
 <script src="${P.up}assets/examen/generador.js" defer></script>
 ${P.ficheros.map(f => `<script src="${P.up}assets/examen/${f}" defer></script>`).join('\n')}
 <script src="${P.up}assets/examen/pagina.js" defer></script>

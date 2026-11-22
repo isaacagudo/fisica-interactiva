@@ -16,11 +16,15 @@ temas/<tema>/<pagina>/index.html   Páginas de cada tema (generadas desde src/)
 examen/index.html                  Generador de exámenes (generado desde src/examen/build.js)
 simuladores/<nombre>/index.html    Redirecciones a los simuladores, que ahora están dentro de la teoría
 assets/mates/mates.js              Matemáticas: pistas desbloqueables, progreso guardado y los widgets de las secciones del Tema 1
+assets/mates/figuras.js            Figuras SVG de geometría y trigonometría (Node y navegador, window.MatesFig)
+assets/mates/trig.js               Simuladores del Tema 2 (dibujan con figuras.js)
 assets/induccion/induccion.js      Inducción: tabla de primeros casos, pistas desbloqueables con progreso guardado y dominó
 src/                               Fuentes y scripts para generar las páginas
   comun/estilos.js                 Estilos de las páginas de los temas (los usan energía e inducción)
   comun/mates.js                   Fórmulas en texto -> KaTeX al generar (fracciones apiladas, exponentes, raíces, C(n, r))
-  comun/tema1.js                   Matemáticas · Tema 1: lista de secciones (0 a 4), navegación común y su CSS
+  comun/temas-mates.js             Temas de Matemáticas (1 y 2): secciones en orden, navegación común, enlace al examen y su CSS
+  comun/tema1.js                   Atajo al Tema 1 de temas-mates.js (lo usa la inducción)
+  comun/figuras.js                 Atajo a assets/mates/figuras.js para dibujar las figuras al generar
   comun/estilos-mates.js           Estilos de las fórmulas, las pistas y los widgets de matemáticas
   mates/build.js                   Generador común de las secciones del Tema 1 (ver «Matemáticas · Tema 1»)
   mates/<sección>/contenido/       Mapa y apartados de cada sección: repaso-algebra, sucesiones, demostraciones, recuento, binomio
@@ -154,9 +158,35 @@ Widgets (`assets/mates/mates.js`; en Node exporta `F`, `leeF`, `fmtF`, `binom`, 
 
 Fórmulas: en negrita, con exponentes Unicode (x², aⁿ⁻ʳ, x⁻³, (1 + x)ᵅ) o `^(…)` para exponentes con fracción; `C(n, r)` se dibuja como número combinatorio y `VR`, `PR` en redonda. Fuera de la negrita conviene usar solo exponentes Unicode.
 
+## Matemáticas · Tema 2 (geometría y trigonometría)
+
+Mismo generador y mismo formato que el Tema 1 (`node mates/build.js`); las secciones son `repaso-geometria`, `geometria-analitica`, `razones-trigonometricas`, `volumenes`, `triangulos` e `identidades`, y los ejercicios nuevos llevan P, A, T, V, R y E. Cada ejercicio tiene un diagrama: la primera pista pide dibujarlo y lo enseña tras «Ver mi dibujo».
+
+Figuras (en una línea propia del Markdown; se dibujan al generar la página, sin JavaScript):
+
+```
+[[figura:<tipo>|{json}|pie]]    visible (teoría y soluciones)
+[[dibujo:<tipo>|{json}|pie]]    oculta tras «Ver mi dibujo» (pistas)
+```
+
+| Tipo | Parámetros | Qué dibuja |
+| --- | --- | --- |
+| `geo` | `pts` con nombre, `el` (seg, pol, pt, txt, cota, ang, recto, flecha, circ, recta, curva, norte, rumbo), `ejes` | Cualquier figura plana, con ejes o sin ellos |
+| `tri` | `a`, `b`, `c` (o `b`, `c`, `A`), `etq`, `foco` (en rojo), `recto` | Triángulo con sus lados y ángulos |
+| `alturas` | `h`, `d` (distancias), `ang`, `etqh`, `etqd`, `arriba` (depresión), `objeto`, `lago` | Problemas de elevación y depresión |
+| `caja` | `a`, `b`, `c`, `diag`, `angulo`, `etq` | Ortoedro con una diagonal y su proyección |
+| `solido` | `tipo` (cono, cilindro, tubo, esfera, semiesfera, piramide), `r`, `h`, `etq` | Cuerpos geométricos |
+| `sector` | `r`, `ang` (grados), `etq` | Sector circular |
+| `unidad` | `ang`, `ref`, `otros`, `cuadrantes` | Circunferencia unidad |
+| `grafica` | `f` (sen, cos, tan), `rad`, `x`, `a`, `b`, `c`, `d`, `k`, `sol`, `lineas` | Gráficas trigonométricas con soluciones marcadas |
+
+Simuladores del Tema 2 (`assets/mates/trig.js`; en Node exporta `resolver`, `notables` y `soluciones`): `elevacion`, `interes`, `recta`, `unidad`, `ecuacion`, `sector`, `semejanza`, `triangulo` y `sinusoide`.
+
+En las fórmulas, sen, cos, tan… y las unidades de varias letras (cm, km, rad) se escriben en redonda, y «y»/«o» sueltas entre términos se leen como palabras. Las unidades de una letra (m, L) y el símbolo € van fuera de la negrita.
+
 ## Generador de exámenes (`examen/`, `assets/examen/`)
 
-Hay una página por materia, generadas por `src/examen/build.js` (lista `PAGINAS`): `examen/` (Física) y `examen/matematicas/` (Tema 1 de Matemáticas, con los patrones en `assets/examen/mates-t1.js`, un «tema» del generador por sección y las fórmulas en TeX compuestas con KaTeX en el navegador). Un tema se registra con `materia` (por defecto `fisica`) para salir en su página. Antes de subir cambios en los patrones de matemáticas, comprobar cientos de casos por patrón en Node (cada solución devuelve `val`).
+Hay una página por materia, generadas por `src/examen/build.js` (lista `PAGINAS`): `examen/` (Física) y `examen/matematicas/` (Matemáticas, con los patrones en `assets/examen/mates-t1.js` y `mates-t2.js`, un «tema» del generador por sección y las fórmulas en TeX compuestas con KaTeX en el navegador). Un tema se registra con `materia` (por defecto `fisica`) para salir en su página. Antes de subir cambios en los patrones de matemáticas, comprobar cientos de casos por patrón en Node (cada solución devuelve `val`).
 
 `examen/?temas=energia` abre el generador con los apartados de ese tema. Se eligen los apartados y el número de ejercicios; cada examen sale de patrones de ejercicio con datos aleatorios, se reparte entre los apartados elegidos (sin repetir un tipo hasta haber salido todos los de su apartado), lleva la puntuación sobre 10 en cuartos de punto y, para cada ejercicio, el resultado, la solución paso a paso y la simulación con esos mismos datos. Se imprime solo el examen o el examen y, en otra página, las soluciones. La dirección guarda el examen (`?sel=energia:1,4,6&n=6&s=48213`: apartados, número de ejercicios y número de examen), así que el enlace lo vuelve a abrir igual.
 

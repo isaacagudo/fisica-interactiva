@@ -777,30 +777,30 @@
   ];
 
   // ================================================================ registro
-  const MAT = 'matematicas';
-  X.registrar({ tema: 'repaso', materia: MAT, nombre: '0 · Repaso previo', ruta: 'temas/repaso-algebra/', apartados: [
+  const MAT = 'matematicas', G = 'Tema 1 · Secuencias, series y demostraciones';
+  X.registrar({ tema: 'repaso', grupo: G, materia: MAT, nombre: '0 · Repaso previo', ruta: 'temas/repaso-algebra/', apartados: [
     { slug: 'ecuaciones', nombre: 'Ecuaciones', icono: 'ecuaciones', patrones: ecuaciones },
     { slug: 'ruffini', nombre: 'Ruffini y factorización', icono: 'ruffini', patrones: ruffiniP },
     { slug: 'teorema-del-resto', nombre: 'Teorema del resto', icono: 'resto', patrones: resto },
   ] });
-  X.registrar({ tema: 'sucesiones', materia: MAT, nombre: '1 · Sucesiones', ruta: 'temas/sucesiones/', apartados: [
+  X.registrar({ tema: 'sucesiones', grupo: G, materia: MAT, nombre: '1 · Sucesiones', ruta: 'temas/sucesiones/', apartados: [
     { slug: 'sucesiones-y-sumatorios', nombre: 'Sumatorios', icono: 'sucesiones', patrones: sumatorios },
     { slug: 'aritmeticas', nombre: 'Progresiones aritméticas', icono: 'aritmetica', patrones: aritmeticas },
     { slug: 'geometricas', nombre: 'Progresiones geométricas', icono: 'geometrica', patrones: geometricas },
   ] });
-  X.registrar({ tema: 'demostraciones', materia: MAT, nombre: '2 · Demostraciones', ruta: 'temas/demostraciones/', apartados: [
+  X.registrar({ tema: 'demostraciones', grupo: G, materia: MAT, nombre: '2 · Demostraciones', ruta: 'temas/demostraciones/', apartados: [
     { slug: 'directa', nombre: 'Directa', icono: 'directa', patrones: directa },
     { slug: 'contradiccion', nombre: 'Por contradicción', icono: 'contradiccion', patrones: contradiccion },
     { slug: 'induccion', nombre: 'Por inducción', icono: 'domino', patrones: induccion },
     { slug: 'contraejemplo', nombre: 'Contraejemplos', icono: 'contraejemplo', patrones: contraejemplo },
   ] });
-  X.registrar({ tema: 'recuento', materia: MAT, nombre: '3 · Recuento', ruta: 'temas/recuento/', apartados: [
+  X.registrar({ tema: 'recuento', grupo: G, materia: MAT, nombre: '3 · Recuento', ruta: 'temas/recuento/', apartados: [
     { slug: 'factorial', nombre: 'Factorial y combinatorio', icono: 'factorial', patrones: factorialP },
     { slug: 'orden', nombre: 'P, V y C', icono: 'orden', patrones: ordenP },
     { slug: 'repeticion', nombre: 'Con repetición', icono: 'repeticion', patrones: repeticionP },
     { slug: 'condiciones', nombre: 'Con condiciones', icono: 'condiciones', patrones: condicionesP },
   ] });
-  X.registrar({ tema: 'binomio', materia: MAT, nombre: '4 · Binomio', ruta: 'temas/binomio/', apartados: [
+  X.registrar({ tema: 'binomio', grupo: G, materia: MAT, nombre: '4 · Binomio', ruta: 'temas/binomio/', apartados: [
     { slug: 'pascal', nombre: 'Combinatorios', icono: 'pascal', patrones: pascalP },
     { slug: 'desarrollo', nombre: 'Desarrollo', icono: 'binomio', patrones: desarrolloP },
     { slug: 'termino', nombre: 'Término general', icono: 'termino', patrones: terminoP },
