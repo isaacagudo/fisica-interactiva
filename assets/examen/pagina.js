@@ -40,7 +40,9 @@
     estado = st; examen = generar(st);
     if (!examen.length) { out.innerHTML = '<p class="vacio">Elige al menos un apartado con ejercicios.</p>'; return; }
     const temasTxt = Object.keys(st.sel).map(t => X.temas[t].nombre).join(' · ');
-    const apsTxt = Object.entries(st.sel).map(([t, v]) => v.length === X.temas[t].apartados.filter(a => a.patrones.length).length ? 'todos los apartados' : `apartado${v.length > 1 ? 's' : ''} ${v.join(', ')}`).join(' · ');
+    const enteros = Object.entries(st.sel).filter(([t, v]) => v.length === X.temas[t].apartados.filter(a => a.patrones.length).length).length;
+    const apsTxt = enteros === Object.keys(st.sel).length ? 'todos los apartados' : Object.entries(st.sel).map(([t, v]) => v.length === X.temas[t].apartados.filter(a => a.patrones.length).length ? `${X.temas[t].nombre}: todos` : `${Object.keys(st.sel).length > 1 ? X.temas[t].nombre + ': ' : ''}apartado${v.length > 1 ? 's' : ''} ${v.join(', ')}`).join(' · ');
+    const temasTxt2 = enteros === Object.keys(st.sel).length ? temasTxt : '';
     const items = examen.map((e, i) => {
       const k = e.tema.apartados.indexOf(e.apartado) + 1, cu = e.patron.cuestion;
       return `<li class="ex-ej" id="ej-${i + 1}">
@@ -60,11 +62,11 @@
 </div>
 <div class="hoja">
   <header class="ex-cab">
-    <h2>Examen de Física</h2>
-    <p class="sub">${temasTxt} · ${apsTxt} · ${examen.length} ${examen.length === 1 ? 'ejercicio' : 'ejercicios'} · puntuación sobre 10</p>
+    <h2>${out.dataset.titulo || 'Examen'}</h2>
+    <p class="sub">${temasTxt2 ? temasTxt2 + ' · ' : ''}${apsTxt} · ${examen.length} ${examen.length === 1 ? 'ejercicio' : 'ejercicios'} · puntuación sobre 10</p>
     <p class="ex-n">Examen n.º ${st.s}</p>
     <div class="ex-alumno"><span>Nombre:</span><span>Fecha:</span><span>Nota:</span></div>
-    <p class="sub">Toma g = 9,8 m/s². Explica cada paso: el dibujo con las fuerzas, la ley que aplicas, las ecuaciones y las unidades.</p>
+    ${out.dataset.nota ? `<p class="sub">${out.dataset.nota}</p>` : ''}
   </header>
   <ol class="ex-lista">${items}</ol>
   <section class="solucionario" aria-hidden="true"><div class="ex-cab"><h2>Soluciones · Examen n.º ${st.s}</h2></div>${sols}</section>

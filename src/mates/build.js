@@ -241,6 +241,7 @@ SECC.filter(S => lista.includes(S.slug)).forEach(construir);
     if (S) items.push(item(`temas/${S.slug}/`, S.mapa.icono, { txt: `Sección ${S.num}`, cls: 'tema' }, S.mapa.titulo, S.mapa.portada || S.mapa.desc));
     if (s.slug === 'demostraciones') items.push(item('temas/induccion/', 'domino', { txt: 'Sección 2 · inducción' }, 'Demostración por inducción', 'El dominó, la plantilla, sumas, divisibilidad y desigualdades, con 25 ejercicios guiados.'));
   }
+  if (fs.existsSync(path.join(__dirname, '../../examen/matematicas/index.html'))) items.push(item('examen/matematicas/', 'examen', { txt: 'Generador', cls: 'tema' }, 'Generar un examen', 'Elige secciones y apartados y cuántos ejercicios: datos nuevos cada vez, con la puntuación y las soluciones paso a paso.'));
   const bloque = `<!-- tema:t1-mates -->
   <section class="topic" aria-labelledby="t-t1-mates">
     <div class="topic-head"><h3 id="t-t1-mates">${TEMA1.titulo}</h3><p>Repaso para el examen, en el orden de las diapositivas: teoría con ejemplos resueltos y ejercicios de menos a más con pistas paso a paso</p></div>

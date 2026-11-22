@@ -6,19 +6,24 @@ const fs = require('fs'), path = require('path');
 const { icono } = require('../iconos.js');
 const A = path.join(__dirname, '../../assets');
 const X = require(path.join(A, 'examen/generador.js'));
-// temas con generador: [fichero de patrones, ficheros extra generados]
-const TEMAS = [['energia.js', 'energia-cuestiones.js']];
-for (const fs_ of TEMAS) for (const f of fs_) require(path.join(A, 'examen', f));
+// una página por materia: ficheros de patrones que carga y textos propios
+const PAGINAS = [
+  { materia: 'fisica', out: 'examen/index.html', up: '../', ficheros: ['energia.js', 'energia-cuestiones.js'], fisica: true,
+    titulo: 'Generador de exámenes', h2: 'Examen de Física', ruta: 'Generador de exámenes',
+    desc: 'Exámenes de física con datos aleatorios: eliges los apartados y cuántos ejercicios, y cada examen trae su puntuación y sus soluciones paso a paso con simulación.',
+    lead: 'Elige los apartados y cuántos ejercicios quieres. Cada examen tiene datos nuevos, la puntuación sobre 10 y la solución paso a paso de cada ejercicio, con la simulación de esos mismos datos.',
+    nota: 'Toma g = 9,8 m/s². Explica cada paso: el dibujo con las fuerzas, la ley que aplicas, las ecuaciones y las unidades.',
+    pie: 'Material de estudio. Si el enunciado no da g, se usa 9,8 m/s². El enlace de cada examen lo vuelve a abrir igual, con los mismos datos.' },
+  { materia: 'matematicas', out: 'examen/matematicas/index.html', up: '../../', ficheros: ['mates-t1.js'], katex: true,
+    titulo: 'Generador de exámenes · Matemáticas', h2: 'Examen de Matemáticas · Tema 1', ruta: 'Examen de Matemáticas',
+    desc: 'Exámenes del Tema 1 de Matemáticas (sucesiones, demostraciones, recuento y binomio) con datos aleatorios, puntuación y soluciones paso a paso.',
+    lead: 'Tema 1 · Secuencias, series y demostraciones. Elige las secciones y apartados y cuántos ejercicios quieres: cada examen tiene datos nuevos, la puntuación sobre 10 y la solución paso a paso de cada ejercicio, con el porqué de cada paso.',
+    nota: 'Explica cada paso: qué método usas y por qué. Da los resultados exactos (fracciones, raíces) salvo que se pida una aproximación.',
+    pie: 'Material de estudio. Los tipos de ejercicio siguen los de las diapositivas y los ejercicios propuestos. El enlace de cada examen lo vuelve a abrir igual, con los mismos datos.' },
+];
+for (const P of PAGINAS) for (const f of P.ficheros) require(path.join(A, 'examen', f));
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 const WIDGETS = ['nucleo', 'bloque', 'plano', 'tiro', 'potencia', 'calentador', 'vectores', 'muelle'];
-
-const temas = Object.values(X.temas);
-const arbol = temas.map(T => `<fieldset class="tema" data-tema="${T.tema}">
-  <legend>${esc(T.nombre)}</legend>
-  <div class="tema-acc"><button type="button" class="mini" data-todos="${T.tema}">Todos</button><button type="button" class="mini" data-ninguno="${T.tema}">Ninguno</button><a href="../${T.ruta}">Mapa del tema</a><a href="../${T.ruta}ejercicios/">Ejercicios</a></div>
-  <div class="aps">${T.apartados.map((a, i) => a.patrones.length ? `<label class="ap" data-ap="${T.tema}:${i + 1}"><input type="checkbox" value="${i + 1}" checked>${icono(a.icono)}<span><b>${i + 1} · ${esc(a.nombre)}</b><small>${a.patrones.length} ${a.patrones[0].cuestion ? 'cuestiones' : 'tipos de ejercicio'}</small></span></label>` : '').join('')}</div>
-</fieldset>`).join('\n');
-const nTipos = temas.reduce((s, T) => s + T.apartados.reduce((t, a) => t + (a.patrones[0] && a.patrones[0].cuestion ? 0 : a.patrones.length), 0), 0);
 
 const CSS = `
 :root{--c-a:#7b4fd6;--c-k:#b4407e}
@@ -91,13 +96,13 @@ main{max-width:860px}
 .ex-sol{margin-top:12px;border:1px solid var(--rule);border-left:3px solid var(--c-p);border-radius:10px;padding:4px 14px 12px;background:var(--paper)}
 .ex-sol h3,.sol-imp h3{font:700 .82rem var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:12px 0 4px}
 .paso p{margin:8px 0}
-.paso p.eq{background:var(--sheet);border:1px solid var(--rule);border-left:3px solid var(--c-p);border-radius:8px;padding:8px 12px;overflow-x:auto}
+.paso p.eq{position:relative;background:var(--sheet);border:1px solid var(--rule);border-left:3px solid var(--c-p);border-radius:8px;padding:8px 12px;overflow-x:auto}
 .paso p.sub{margin:18px 0 4px}
 .paso blockquote.why{margin:8px 0 12px;padding:6px 12px;border-left:3px solid var(--rule);background:var(--sheet);border-radius:0 8px 8px 0}
 .paso blockquote.why p{margin:3px 0}
 .paso .res{background:var(--hl);border-radius:8px;padding:8px 12px}
 .paso ul{padding-left:1.3em}
-.table-wrap{overflow-x:auto;margin:10px 0;border:1px solid var(--rule);border-radius:10px;background:var(--sheet)}
+.table-wrap{position:relative;overflow-x:auto;margin:10px 0;border:1px solid var(--rule);border-radius:10px;background:var(--sheet)}
 .table-wrap table{border-collapse:collapse;width:100%;font-size:14px}
 .table-wrap th,.table-wrap td{text-align:left;vertical-align:top;padding:6px 9px;border-bottom:1px solid var(--rule)}
 .table-wrap th{background:var(--paper)}
@@ -112,6 +117,11 @@ main{max-width:860px}
 .ex-sim .widget{margin-top:10px}
 .solucionario{display:none}
 .vacio{color:var(--ink-2)}
+table.ruffini td{text-align:center;min-width:2.6em}
+table.ruffini tr:nth-child(2) td{border-bottom:2px solid var(--ink)}
+table.ruffini td:first-child{border-right:2px solid var(--ink)}
+.ex-enun ol,.paso ol{padding-left:1.4em}
+.ex-enun .eq{margin:8px 0}
 footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 @media print{
   body{background:#fff}
@@ -129,23 +139,32 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 }
 `;
 
+for (const P of PAGINAS) {
+const temas = Object.values(X.temas).filter(T => (T.materia || 'fisica') === P.materia);
+const arbol = temas.map(T => `<fieldset class="tema" data-tema="${T.tema}">
+  <legend>${esc(T.nombre)}</legend>
+  <div class="tema-acc"><button type="button" class="mini" data-todos="${T.tema}">Todos</button><button type="button" class="mini" data-ninguno="${T.tema}">Ninguno</button><a href="${P.up}${T.ruta}">Mapa</a><a href="${P.up}${T.ruta}ejercicios/">Ejercicios</a></div>
+  <div class="aps">${T.apartados.map((a, i) => a.patrones.length ? `<label class="ap" data-ap="${T.tema}:${i + 1}"><input type="checkbox" value="${i + 1}" checked>${icono(a.icono)}<span><b>${i + 1} · ${esc(a.nombre)}</b><small>${a.patrones.length} ${a.patrones[0].cuestion ? 'cuestiones' : a.patrones.length === 1 ? 'tipo de ejercicio' : 'tipos de ejercicio'}</small></span></label>` : '').join('')}</div>
+</fieldset>`).join('\n');
+const nTipos = temas.reduce((s, T) => s + T.apartados.reduce((t, a) => t + (a.patrones[0] && a.patrones[0].cuestion ? 0 : a.patrones.length), 0), 0);
+
 const html = `<!doctype html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Generador de exámenes · BI Ciencias</title>
-<meta name="description" content="Exámenes de física con datos aleatorios: eliges los apartados y cuántos ejercicios, y cada examen trae su puntuación y sus soluciones paso a paso con simulación.">
+<title>${P.titulo} · BI Ciencias</title>
+<meta name="description" content="${esc(P.desc)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=JetBrains+Mono:wght@400;600&display=swap">
-<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="${P.up}assets/base.css">${P.katex ? `\n<link rel="stylesheet" href="${P.up}assets/katex/katex.min.css">` : ''}
 <style>${CSS}</style>
 </head>
 <body>
 <div class="page">
-  <nav class="crumbs" aria-label="Ruta"><a href="../">BI Ciencias</a><span aria-hidden="true">›</span><span>Generador de exámenes</span></nav>
-  <header class="top"><div class="ico-top grid-paper">${icono('examen')}</div><div class="txt"><div class="eyebrow">Para practicar</div><h1>Generador de exámenes</h1><p class="lead">Elige los apartados y cuántos ejercicios quieres. Cada examen tiene datos nuevos, la puntuación sobre 10 y la solución paso a paso de cada ejercicio, con la simulación de esos mismos datos.</p></div></header>
+  <nav class="crumbs" aria-label="Ruta"><a href="${P.up}">BI Ciencias</a><span aria-hidden="true">›</span>${P.materia === 'matematicas' ? `<a href="${P.up}#matematicas">Matemáticas</a><span aria-hidden="true">›</span>` : ''}<span>${P.ruta}</span></nav>
+  <header class="top"><div class="ico-top grid-paper">${icono('examen')}</div><div class="txt"><div class="eyebrow">Para practicar</div><h1>${P.h2.replace('Examen', 'Generador de exámenes').replace(' · Tema 1', '')}</h1><p class="lead">${P.lead}</p></div></header>
   <main>
     <form class="config card" id="cfg" aria-labelledby="cfg-h">
       <h2 id="cfg-h">Prepara el examen</h2>
@@ -156,21 +175,21 @@ const html = `<!doctype html>
         <button type="submit" class="btn primary" id="gen">Generar examen</button>
       </div>
       <p class="aviso" id="aviso" hidden>Elige al menos un apartado.</p>
-      <p class="nota-cfg">Hay ${nTipos} tipos de ejercicio con datos aleatorios y un banco de cuestiones de teoría. Los ejercicios se reparten entre los apartados elegidos y no se repite un tipo hasta haber salido todos los de su apartado.</p>
+      <p class="nota-cfg">Hay ${nTipos} tipos de ejercicio con datos aleatorios${P.fisica ? ' y un banco de cuestiones de teoría' : ''}. Los ejercicios se reparten entre los apartados elegidos y no se repite un tipo hasta haber salido todos los de su apartado.</p>
     </form>
-    <section class="examen" id="examen" aria-live="polite"><noscript><p>El generador necesita JavaScript.</p></noscript></section>
+    <section class="examen" id="examen" aria-live="polite" data-titulo="${esc(P.h2)}" data-nota="${esc(P.nota)}"><noscript><p>El generador necesita JavaScript.</p></noscript></section>
   </main>
-  <footer>Material de estudio. Si el enunciado no da g, se usa 9,8 m/s². El enlace de cada examen lo vuelve a abrir igual, con los mismos datos.</footer>
+  <footer>${P.pie}</footer>
 </div>
-${WIDGETS.map(w => `<script src="../assets/widgets/${w}.js" defer></script>`).join('\n')}
-<script src="../assets/diagramas/diagramas.js" defer></script>
-<script src="../assets/examen/generador.js" defer></script>
-${TEMAS.flat().map(f => `<script src="../assets/examen/${f}" defer></script>`).join('\n')}
-<script src="../assets/examen/pagina.js" defer></script>
+${P.fisica ? WIDGETS.map(w => `<script src="${P.up}assets/widgets/${w}.js" defer></script>`).join('\n') + `\n<script src="${P.up}assets/diagramas/diagramas.js" defer></script>` : `<script src="${P.up}assets/katex/katex.min.js" defer></script>`}
+<script src="${P.up}assets/examen/generador.js" defer></script>
+${P.ficheros.map(f => `<script src="${P.up}assets/examen/${f}" defer></script>`).join('\n')}
+<script src="${P.up}assets/examen/pagina.js" defer></script>
 </body>
 </html>
 `;
-const out = path.join(__dirname, '../../examen/index.html');
+const out = path.join(__dirname, '../..', P.out);
 fs.mkdirSync(path.dirname(out), { recursive: true });
 fs.writeFileSync(out, html);
-console.log('examen/index.html:', temas.length, 'tema(s),', nTipos, 'tipos de ejercicio');
+console.log(`${P.out}: ${temas.length} tema(s), ${nTipos} tipos de ejercicio`);
+}

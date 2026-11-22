@@ -156,6 +156,8 @@ Fórmulas: en negrita, con exponentes Unicode (x², aⁿ⁻ʳ, x⁻³, (1 + x)�
 
 ## Generador de exámenes (`examen/`, `assets/examen/`)
 
+Hay una página por materia, generadas por `src/examen/build.js` (lista `PAGINAS`): `examen/` (Física) y `examen/matematicas/` (Tema 1 de Matemáticas, con los patrones en `assets/examen/mates-t1.js`, un «tema» del generador por sección y las fórmulas en TeX compuestas con KaTeX en el navegador). Un tema se registra con `materia` (por defecto `fisica`) para salir en su página. Antes de subir cambios en los patrones de matemáticas, comprobar cientos de casos por patrón en Node (cada solución devuelve `val`).
+
 `examen/?temas=energia` abre el generador con los apartados de ese tema. Se eligen los apartados y el número de ejercicios; cada examen sale de patrones de ejercicio con datos aleatorios, se reparte entre los apartados elegidos (sin repetir un tipo hasta haber salido todos los de su apartado), lleva la puntuación sobre 10 en cuartos de punto y, para cada ejercicio, el resultado, la solución paso a paso y la simulación con esos mismos datos. Se imprime solo el examen o el examen y, en otra página, las soluciones. La dirección guarda el examen (`?sel=energia:1,4,6&n=6&s=48213`: apartados, número de ejercicios y número de examen), así que el enlace lo vuelve a abrir igual.
 
 | Fichero | Qué hace |
