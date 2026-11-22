@@ -220,12 +220,35 @@ footer{margin-top:36px;color:var(--ink-2);font-size:13px}
 .arbol .preg{font-weight:700}
 .arbol .res{border:1px solid var(--c-p);border-radius:10px;padding:10px 12px;background:color-mix(in srgb,var(--c-p) 6%,var(--sheet))}
 .arbol .camino{font-size:13.5px;color:var(--ink-2)}
+
+.fig-m{margin:14px 0;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px;text-align:center}
+.fig-m svg{display:block;width:100%;height:auto;margin:0 auto;overflow:visible}
+.fig-m figcaption{font-size:13.5px;color:var(--ink-2);padding:6px 4px 0;text-align:left}
+.fig-m .l{stroke:var(--ink);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.fig-m .l.sin{fill:none}
+.fig-m .dash{stroke-dasharray:6 5}
+.fig-m .c-p{stroke:var(--c-p);fill:var(--c-p)} .fig-m .c-n{stroke:var(--c-n);fill:var(--c-n)} .fig-m .c-fr{stroke:var(--c-fr);fill:var(--c-fr)} .fig-m .c-v{stroke:var(--c-v);fill:var(--c-v)} .fig-m .c-eje{stroke:var(--ink-2);fill:var(--ink-2)}
+.fig-m .l.c-p,.fig-m .l.c-n,.fig-m .l.c-fr,.fig-m .l.c-v,.fig-m .l.c-eje{fill:none}
+.fig-m .f-p{fill:color-mix(in srgb,var(--c-p) 12%,transparent);stroke:none} .fig-m .f-n{fill:color-mix(in srgb,var(--c-n) 16%,transparent);stroke:none} .fig-m .f-v{fill:color-mix(in srgb,var(--c-v) 22%,transparent);stroke:none} .fig-m .f-fr{fill:color-mix(in srgb,var(--c-fr) 30%,transparent);stroke:none}
+.fig-m .pt{fill:var(--ink);stroke:var(--sheet);stroke-width:1.5}
+.fig-m .pt.c-p{fill:var(--c-p)} .fig-m .pt.c-fr{fill:var(--c-fr)} .fig-m .pt.c-n{fill:var(--c-n)}
+.fig-m .punta{fill:var(--ink);stroke:none} .fig-m .punta.c-eje{fill:var(--ink-2)} .fig-m .punta.c-p{fill:var(--c-p)} .fig-m .punta.c-fr{fill:var(--c-fr)}
+.fig-m .grid{stroke:var(--rule);stroke-width:1}
+.fig-m .t{font:600 14px var(--f-body);fill:var(--ink);stroke:none;paint-order:stroke;stroke:var(--sheet);stroke-width:4px;stroke-linejoin:round}
+.fig-m .t.b{font-weight:700}
+.fig-m .t.c-p{fill:var(--c-p)} .fig-m .t.c-n{fill:var(--c-n)} .fig-m .t.c-fr{fill:var(--c-fr)} .fig-m .t.c-v{fill:var(--c-v)} .fig-m .t.c-eje{fill:var(--ink-2)}
+.fig-m .t.c-p,.fig-m .t.c-n,.fig-m .t.c-fr,.fig-m .t.c-v,.fig-m .t.c-eje{stroke:var(--sheet)}
+details.dibujo{margin:10px 0}
+details.dibujo>summary{cursor:pointer;display:inline-flex;align-items:center;gap:8px;font:600 14px var(--f-body);border:1px dashed var(--c-p);color:var(--c-p);border-radius:9px;padding:6px 12px;list-style:none;min-height:38px}
+details.dibujo>summary::-webkit-details-marker{display:none}
+details.dibujo>summary::before{content:"✎"}
+details.dibujo[open]>summary{border-style:solid}
 </style>
 </head>
 <body>
 <div class="page">
   <nav class="crumbs" aria-label="Ruta"><a href="../../../../">BI Ciencias</a><span aria-hidden="true">›</span><a href="../../../../#matematicas">Matemáticas</a><span aria-hidden="true">›</span><a href="../../">0 · Repaso previo</a><span aria-hidden="true">›</span><a href="../">Ejercicios</a><span aria-hidden="true">›</span><span>D4·3</span></nav>
-  <nav class="tema-nav" aria-label="Secciones del Tema 1"><span class="lbl">Tema 1</span><a href="../../../../temas/repaso-algebra/" aria-current="true">0 · Repaso previo</a><a href="../../../../temas/sucesiones/">1 · Sucesiones</a><a href="../../../../temas/demostraciones/">2 · Demostraciones</a><a href="../../../../temas/recuento/">3 · Recuento</a><a href="../../../../temas/binomio/">4 · Binomio</a><a class="ex" href="../../../../examen/matematicas/">Examen</a></nav>
+  <nav class="tema-nav" aria-label="Secciones del Tema 1"><span class="lbl">Tema 1</span><a href="../../../../temas/repaso-algebra/" aria-current="true">0 · Repaso previo</a><a href="../../../../temas/sucesiones/">1 · Sucesiones</a><a href="../../../../temas/demostraciones/">2 · Demostraciones</a><a href="../../../../temas/recuento/">3 · Recuento</a><a href="../../../../temas/binomio/">4 · Binomio</a><a class="ex" href="../../../../examen/matematicas/?temas=repaso,sucesiones,demostraciones,recuento,binomio">Examen</a></nav>
   <header class="top"><div class="txt"><div class="eyebrow">Ejercicio guiado · Ecuaciones, fracciones y raíces</div><h1>D4·3 · Racionalizar <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle scriptlevel="0" displaystyle="true"><mfrac><mrow><mn>2</mn><msqrt><mn>2</mn></msqrt></mrow><mrow><mn>1</mn><mo>−</mo><msqrt><mn>3</mn></msqrt></mrow></mfrac></mstyle></mrow><annotation encoding="application/x-tex">\displaystyle \frac{2\sqrt{2}}{1 - \sqrt{3}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.5142em;vertical-align:-0.93em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.5842em;"><span style="top:-2.2028em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9072em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord">3</span></span></span><span style="top:-2.8672em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
 c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
 c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54

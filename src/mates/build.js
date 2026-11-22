@@ -1,17 +1,18 @@
-// Genera las secciones de Matemáticas · Tema 1 (todas menos inducción, que tiene su propio build):
+// Genera las secciones de los temas de Matemáticas (comun/temas-mates.js; todas menos inducción, que tiene su propio build):
 //   ../../temas/<sección>/index.html                    mapa: idea, método, errores, índice de ejercicios
 //   ../../temas/<sección>/<apartado>/index.html         teoría con ejemplos resueltos + enlace a sus ejercicios
 //   ../../temas/<sección>/ejercicios/index.html         ejercicios por apartado y de menos a más
 //   ../../temas/<sección>/ejercicios/<id>/index.html    cada ejercicio: widget (si lo tiene), pistas de una en una, resultado y solución
-// y el bloque «Tema 1» de la portada (entre <!-- tema:t1-mates --> y <!-- /tema:t1-mates -->).
+// y el bloque de cada tema en la portada (entre <!-- tema:tN-mates --> y <!-- /tema:tN-mates -->).
 // Fuentes: src/mates/<sección>/contenido/*.md (formato en el README). Widgets: assets/mates/mates.js.
 // Uso: cd src && node mates/build.js [sección …]
 const fs = require('fs'), path = require('path');
 const { marked } = require('marked');
 const { icono } = require('../iconos.js');
-const CSS = require('../comun/estilos.js') + require('../comun/estilos-mates.js');
-const TEMA1 = require('../comun/tema1.js');
+const CSS = require('../comun/estilos.js') + require('../comun/estilos-mates.js') + require('../comun/figuras.js').CSS;
+const TEMAS = require('../comun/temas-mates.js');
 const { mates, errores } = require('../comun/mates.js');
+const FIG = require('../comun/figuras.js');
 
 const HERE = __dirname, ROOT = path.join(HERE, '../..');
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
@@ -53,16 +54,18 @@ function leerSeccion(slug) {
   const todos = cats.flatMap(c => c.ejercicios);
   return { slug, mapa, cats, todos, propias: cats.filter(c => !c.enlace) };
 }
-const lista = process.argv.slice(2).length ? process.argv.slice(2) : TEMA1.secciones.map(s => s.slug);
-const SECC = TEMA1.secciones.filter(s => fs.existsSync(path.join(HERE, s.slug, 'contenido')) && fs.readdirSync(path.join(HERE, s.slug, 'contenido')).some(f => f.endsWith('.md'))).map(s => Object.assign(leerSeccion(s.slug), { num: s.num, corto: s.corto }));
+const TODAS = TEMAS.flatMap(T => T.secciones.map(s => Object.assign({ tema: T }, s)));
+const lista = process.argv.slice(2).length ? process.argv.slice(2) : TODAS.map(s => s.slug);
+const SECC = TODAS.filter(s => fs.existsSync(path.join(HERE, s.slug, 'contenido')) && fs.readdirSync(path.join(HERE, s.slug, 'contenido')).some(f => f.endsWith('.md'))).map(s => Object.assign(leerSeccion(s.slug), { num: s.num, corto: s.corto, tema: s.tema }));
 
-// todos los ejercicios del tema por id, para enlazar «D33·1» desde cualquier página (inducción incluida)
-const porId = {};
-SECC.forEach(S => S.todos.forEach(e => { porId[e.id] = `temas/${S.slug}/ejercicios/${e.slug}/`; }));
+// los ejercicios de cada tema por id, para enlazar «D33·1» desde cualquier página del mismo tema (inducción va con el Tema 1)
+const porTema = {};
+SECC.forEach(S => S.todos.forEach(e => { (porTema[S.tema.id] = porTema[S.tema.id] || {})[e.id] = `temas/${S.slug}/ejercicios/${e.slug}/`; }));
 {
-  const dir = path.join(HERE, '../induccion/contenido');
-  for (const f of fs.readdirSync(dir)) for (const m of fs.readFileSync(path.join(dir, f), 'utf8').matchAll(/^=== (\S+) \|/gm)) porId[m[1]] = porId[m[1]] || `temas/induccion/ejercicios/${slugId(m[1])}/`;
+  const dir = path.join(HERE, '../induccion/contenido'), t1 = porTema.t1 = porTema.t1 || {};
+  for (const f of fs.readdirSync(dir)) for (const m of fs.readFileSync(path.join(dir, f), 'utf8').matchAll(/^=== (\S+) \|/gm)) t1[m[1]] = t1[m[1]] || `temas/induccion/ejercicios/${slugId(m[1])}/`;
 }
+let porId = {};
 
 // ---------------------------------------------------------------- Markdown -> HTML
 const slugify = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
@@ -72,8 +75,17 @@ const widgetHtml = (tipo, cfg = '{}') => {
   return `<div class="widget" data-w="${tipo}" data-cfg="${esc(cfg)}"><p class="w-msg"><em>Este simulador se abre al cargar la página en el navegador.</em></p></div>`;
 };
 function render(md, { up = '', extra = {}, propio = '' } = {}) {
-  const heads = [];
+  const heads = [], figs = [];
+  // figuras en una línea propia: [[figura:tipo|{json}|pie]] (visible) o [[dibujo:tipo|{json}|pie]] (oculta tras «Ver mi dibujo»)
+  md = md.replace(/^\[\[(figura|dibujo):(\w+)\|(.*)\]\]$/gm, (_, modo, tipo, resto) => {
+    const j = resto.lastIndexOf('}|'), json = j >= 0 ? resto.slice(0, j + 1) : resto, pie = j >= 0 ? resto.slice(j + 2) : '';
+    let par; try { par = JSON.parse(json); } catch (e) { throw new Error(`figura ${tipo}: JSON mal escrito: ${json}`); }
+    const svg = FIG.figura(tipo, par, pie ? marked.parseInline(pie) : '');
+    figs.push(modo === 'dibujo' ? `<details class="dibujo"><summary>Ver mi dibujo</summary>${svg}</details>` : svg);
+    return `\n@@FIG${figs.length - 1}@@\n`;
+  });
   let html = marked.parse(md, { gfm: true });
+  html = html.replace(/<p>@@FIG(\d+)@@<\/p>/g, (_, n) => figs[+n]);
   for (const k in extra) html = html.replace(`<p>[[${k}]]</p>`, extra[k]);
   html = html.replace(/<p>\[\[widget:(\w+)(?:\|([\s\S]*?))?\]\]<\/p>/g, (_, t, c) => widgetHtml(t, (c || '{}').replace(/&quot;/g, '"').replace(/&amp;/g, '&')));
   html = html.replace(/<h2>([\s\S]*?)<\/h2>/g, (_, t) => {
@@ -124,7 +136,7 @@ function page(S, { title, h1, eyebrow, desc, body, toc, depth, current, crumbs, 
 <body>
 <div class="page">
   <nav class="crumbs" aria-label="Ruta"><a href="${up}">BI Ciencias</a><span aria-hidden="true">›</span><a href="${up}#matematicas">Matemáticas</a>${crumbs.map(([t, h]) => `<span aria-hidden="true">›</span>${h ? `<a href="${h}">${esc(t)}</a>` : `<span>${esc(t)}</span>`}`).join('')}</nav>
-  ${TEMA1.nav(up, S.slug)}
+  ${S.tema.nav(up, S.slug)}
   <header class="top${ico ? ' con-ico' : ''}">${ico ? `<div class="ico-top grid-paper">${icono(ico)}</div>` : ''}<div class="txt"><div class="eyebrow">${esc(eyebrow)}</div><h1>${h1 || esc(title)}</h1>${desc ? `<p class="lead">${esc(desc)}</p>` : ''}</div></header>
   <nav class="cats" aria-label="Apartados de la sección">${chips}</nav>
   <div class="layout">
@@ -134,9 +146,9 @@ ${body}
     </main>
     ${tocHtml}
   </div>
-  <footer>Material de repaso del ${esc(TEMA1.titulo)}. Abre las páginas en el navegador (ordenador, tableta o móvil): las fórmulas, los simuladores y las pistas necesitan la web, no la vista previa de WhatsApp o de Archivos.</footer>
+  <footer>Material de repaso del ${esc(S.tema.titulo)}. Abre las páginas en el navegador (ordenador, tableta o móvil): las fórmulas, los simuladores y las pistas necesitan la web, no la vista previa de WhatsApp o de Archivos.</footer>
 </div>
-${js ? `<script src="${up}assets/mates/mates.js" defer></script>\n` : ''}</body>
+${js ? `<script src="${up}assets/mates/mates.js" defer></script>\n` : ''}${S.tema.id !== 't1' && /data-w=/.test(body) ? `<script src="${up}assets/mates/figuras.js" defer></script>\n<script src="${up}assets/mates/trig.js" defer></script>\n` : ''}</body>
 </html>
 `);
 }
@@ -145,6 +157,7 @@ const pagerHtml = (prev, next, mid) => `<nav class="pager" aria-label="Anterior 
 // ---------------------------------------------------------------- una sección
 let total = 0;
 function construir(S) {
+  porId = porTema[S.tema.id] || {};
   const OUT = path.join(ROOT, 'temas', S.slug);
   const escribir = (rel, html) => { const f = path.join(OUT, rel, 'index.html'); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, html); total++; };
   const { mapa, cats, todos } = S;
@@ -227,7 +240,7 @@ ${e.resultado ? `<details class="res"><summary><span class="n">Resultado</span><
 }
 SECC.filter(S => lista.includes(S.slug)).forEach(construir);
 
-// ---------------------------------------------------------------- portada: bloque del Tema 1
+// ---------------------------------------------------------------- portada: un bloque por tema
 {
   const f = path.join(ROOT, 'index.html');
   let html = fs.readFileSync(f, 'utf8');
@@ -235,25 +248,29 @@ SECC.filter(S => lista.includes(S.slug)).forEach(construir);
         <div class="thumb grid-paper" aria-hidden="true">${icono(ico)}</div>
         <div><span class="badge${badge.cls ? ' ' + badge.cls : ''}">${badge.txt}</span><h3>${h3}</h3><p>${p}</p></div>
       </a>`;
-  const items = [];
-  for (const s of TEMA1.secciones) {
-    const S = SECC.find(x => x.slug === s.slug);
-    if (S) items.push(item(`temas/${S.slug}/`, S.mapa.icono, { txt: `Sección ${S.num}`, cls: 'tema' }, S.mapa.titulo, S.mapa.portada || S.mapa.desc));
-    if (s.slug === 'demostraciones') items.push(item('temas/induccion/', 'domino', { txt: 'Sección 2 · inducción' }, 'Demostración por inducción', 'El dominó, la plantilla, sumas, divisibilidad y desigualdades, con 25 ejercicios guiados.'));
-  }
-  if (fs.existsSync(path.join(__dirname, '../../examen/matematicas/index.html'))) items.push(item('examen/matematicas/', 'examen', { txt: 'Generador', cls: 'tema' }, 'Generar un examen', 'Elige secciones y apartados y cuántos ejercicios: datos nuevos cada vez, con la puntuación y las soluciones paso a paso.'));
-  const bloque = `<!-- tema:t1-mates -->
-  <section class="topic" aria-labelledby="t-t1-mates">
-    <div class="topic-head"><h3 id="t-t1-mates">${TEMA1.titulo}</h3><p>Repaso para el examen, en el orden de las diapositivas: teoría con ejemplos resueltos y ejercicios de menos a más con pistas paso a paso</p></div>
+  html = html.replace(/\s*<!-- tema:induccion -->[\s\S]*?<!-- \/tema:induccion -->/, '');   // inducción va ahora dentro del Tema 1
+  for (const T of TEMAS) {
+    const items = [];
+    for (const s of T.secciones) {
+      const S = SECC.find(x => x.slug === s.slug);
+      if (S) items.push(item(`temas/${S.slug}/`, S.mapa.icono, { txt: `Sección ${S.num}`, cls: 'tema' }, S.mapa.titulo, S.mapa.portada || S.mapa.desc));
+      if (s.slug === 'demostraciones') items.push(item('temas/induccion/', 'domino', { txt: 'Sección 2 · inducción' }, 'Demostración por inducción', 'El dominó, la plantilla, sumas, divisibilidad y desigualdades, con 25 ejercicios guiados.'));
+    }
+    if (!items.length) continue;
+    if (fs.existsSync(path.join(ROOT, 'examen/matematicas/index.html'))) items.push(item(`examen/matematicas/?temas=${T.examen}`, 'examen', { txt: 'Generador', cls: 'tema' }, 'Generar un examen', 'Elige secciones y apartados y cuántos ejercicios: datos nuevos cada vez, con la puntuación y las soluciones paso a paso.'));
+    const ini = `<!-- tema:${T.id}-mates -->`, fin = `<!-- /tema:${T.id}-mates -->`;
+    const bloque = `${ini}
+  <section class="topic" aria-labelledby="t-${T.id}-mates">
+    <div class="topic-head"><h3 id="t-${T.id}-mates">${T.titulo}</h3><p>${T.lema}</p></div>
     <div class="items">
 ${items.join('\n')}
     </div>
   </section>
-  <!-- /tema:t1-mates -->`;
-  html = html.replace(/\s*<!-- tema:induccion -->[\s\S]*?<!-- \/tema:induccion -->/, '');   // inducción va ahora dentro del Tema 1
-  const i = html.indexOf('<!-- tema:t1-mates -->'), j = html.indexOf('<!-- /tema:t1-mates -->');
-  html = i >= 0 && j >= 0 ? html.slice(0, i) + bloque + html.slice(j + '<!-- /tema:t1-mates -->'.length)
-    : html.replace(/\n\s*<\/section>\s*\n<!-- \/materia:matematicas -->/, `\n  ${bloque}\n  </section>\n<!-- /materia:matematicas -->`);
+  ${fin}`;
+    const a = html.indexOf(ini), b = html.indexOf(fin);
+    html = a >= 0 && b >= 0 ? html.slice(0, a) + bloque + html.slice(b + fin.length)
+      : html.replace(/\n\s*<\/section>\s*\n<!-- \/materia:matematicas -->/, `\n  ${bloque}\n  </section>\n<!-- /materia:matematicas -->`);
+  }
   fs.writeFileSync(f, html);
 }
 if (errores.length) { console.error('Fórmulas que KaTeX no ha podido componer (se dejan en texto):\n' + errores.join('\n')); process.exitCode = 1; }

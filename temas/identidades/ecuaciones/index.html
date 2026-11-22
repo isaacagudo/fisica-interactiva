@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ecuaciones trigonométricas · Identidades y ecuaciones · BI Ciencias</title>
+<meta name="description" content="Dejar una sola razón, factorizar y buscar todas las soluciones del intervalo, no solo la de la calculadora.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../../../assets/base.css">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<style>
+:root{--c-a:#7b4fd6;--c-k:#b4407e;--axis:#8793a6}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--c-a:#b39bff;--c-k:#f08cc0;--axis:#8e9ab0}}
+:root[data-theme="dark"]{--c-a:#b39bff;--c-k:#f08cc0;--axis:#8e9ab0}
+.fig{--cds-text-primary:var(--ink);--cds-text-secondary:var(--ink-2);--cds-chart-axis:var(--axis);--cds-chart-grid:var(--rule);
+  --cds-chart-reference-tint:var(--plane);--cds-chart-categorical-1:var(--c-p);--cds-chart-categorical-2:var(--c-n);
+  --cds-chart-categorical-3:var(--c-fr);--cds-chart-categorical-4:var(--c-a);--cds-chart-categorical-5:var(--c-k);
+  margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
+.fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
+.fig.dg{max-width:640px}
+.doc p.lectura{font-size:15px;color:var(--ink-2);margin:4px 0 14px}
+.fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
+header.top{display:grid;gap:8px;margin:6px 0 18px}
+header.top .txt{display:grid;gap:8px;min-width:0}
+header.con-ico{grid-template-columns:96px minmax(0,1fr);gap:16px;align-items:center}
+.ico-top{border:1px solid var(--rule);border-radius:10px}
+@media (max-width:520px){header.con-ico{grid-template-columns:64px minmax(0,1fr);gap:12px}}
+.cats{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 22px}
+.cats a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:3px 11px 3px 5px;display:inline-flex;align-items:center;gap:6px}
+.cats .ico{width:30px;flex:none}
+.cats a[aria-current="page"] .ico .bk{fill:var(--paper)}
+.cats a:hover{border-color:var(--ink-2);color:var(--ink)}
+.cats a[aria-current="page"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+.cats a.ej{border-color:var(--c-p);color:var(--c-p)}
+.cats a.ej[aria-current="page"]{background:var(--c-p);color:var(--sheet)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+@media (min-width:1000px){.layout{grid-template-columns:minmax(0,760px) 1fr}}
+.toc{display:none}
+@media (min-width:1000px){.toc{display:block;position:sticky;top:16px;align-self:start;font-size:13.5px;max-height:calc(100vh - 32px);overflow:auto}
+  .toc h2{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:0 0 8px}
+  .toc ol{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+  .toc a{color:var(--ink-2);text-decoration:none;line-height:1.3;display:block}
+  .toc a:hover{color:var(--ink)}
+  .toc .sep{margin-top:8px;font-weight:700;color:var(--ink)}}
+.doc{min-width:0}
+.doc>h2:first-child{border-top:0;margin-top:0;padding-top:0}
+.doc h2{font-size:1.28rem;margin:38px 0 10px;padding-top:16px;border-top:1px solid var(--rule);scroll-margin-top:12px}
+.doc h3{font-size:1.06rem;margin:26px 0 8px}
+.doc p{margin:10px 0}
+.doc p.eq{background:var(--sheet);border:1px solid var(--rule);border-left:3px solid var(--c-p);border-radius:8px;padding:9px 12px;overflow-x:auto}
+.doc p.sub{margin:22px 0 4px}
+.doc p.res{background:var(--hl);border-radius:8px;padding:8px 12px}
+.doc blockquote.why{margin:10px 0 14px;padding:8px 14px;border-left:3px solid var(--rule);background:color-mix(in srgb,var(--sheet) 70%,transparent);border-radius:0 8px 8px 0;color:var(--ink)}
+.doc blockquote.why p{margin:4px 0}
+.doc ul,.doc ol{padding-left:1.3em}
+.doc li{margin:4px 0}
+.table-wrap{overflow-x:auto;margin:12px 0;border:1px solid var(--rule);border-radius:10px;background:var(--sheet)}
+.doc table{border-collapse:collapse;width:100%;font-size:14.5px}
+.doc th,.doc td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid var(--rule)}
+.doc th{font-weight:700;background:var(--paper)}
+.doc tr:last-child td{border-bottom:0}
+.grid-cats{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));margin:18px 0 8px}
+.grid-cats a{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:start;text-decoration:none;color:inherit}
+.grid-cats a:hover{border-color:var(--ink-2)}
+.grid-cats a{grid-template-columns:72px minmax(0,1fr)}
+.grid-cats .n{border-radius:8px;border:1px solid var(--rule)}
+.doc .widget[id^=simulador]{scroll-margin-top:12px}
+.grid-cats h3{font-size:1rem;line-height:1.25}
+.grid-cats p{margin:4px 0 0;font-size:13.5px;color:var(--ink-2)}
+/* ejercicios propuestos */
+.metodo{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 14px;font-size:14.5px}
+.metodo ol{margin:6px 0 2px}
+.props{display:grid;gap:14px;margin:14px 0}
+.prop{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:14px 16px;scroll-margin-top:12px}
+.prop .cab{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-bottom:6px}
+.prop .num{font:700 1.05rem var(--f-display)}
+.prop .src{font:600 12px var(--f-mono);color:var(--ink-2);letter-spacing:.02em}
+.tag{font:600 11px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;border:1px solid currentColor;border-radius:999px;padding:1px 7px}
+.tag.nuevo{color:var(--c-n)}
+.tag.sel{color:var(--c-a)}
+.tag.sim{color:var(--c-p)}
+.prop h3{font-size:1rem;margin:0 0 6px;line-height:1.3}
+.prop .enun p{margin:6px 0}
+.prop .fig{margin:10px 0 4px}
+.prop .acc{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;margin-top:10px}
+.prop details{flex:1 1 260px;min-width:0}
+.prop summary{cursor:pointer;font:600 13.5px var(--f-body);color:var(--ink-2);min-height:38px;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rule);border-radius:9px;padding:0 12px;list-style:none}
+.prop summary::-webkit-details-marker{display:none}
+.prop summary::before{content:"▸";font-size:12px}
+.prop details[open] summary::before{content:"▾"}
+.prop details[open] summary{color:var(--ink)}
+.prop details p{background:var(--hl);border-radius:8px;padding:8px 12px;margin:8px 0 0}
+.prop .btn{margin-left:auto}
+@media (max-width:520px){.prop .btn{margin-left:0;width:100%}}
+/* ejemplos resueltos dentro de cada apartado */
+.ejemplo{margin:18px 0 0;padding-top:4px}
+.ejemplo>h3{font-size:1.12rem;margin:30px 0 10px;scroll-margin-top:12px}
+.ejemplo>h3 .src{font:600 12px var(--f-mono);color:var(--ink-2);margin-left:6px}
+.ejemplo h4{font:700 .82rem var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:22px 0 6px}
+.ejemplo+.ejemplo{border-top:1px dashed var(--rule);margin-top:30px}
+.ir-ej{display:grid;gap:8px;background:var(--sheet);border:1px solid var(--c-p);border-radius:12px;padding:14px 16px;margin:14px 0}
+.ir-ej p{margin:0}
+.ir-ej .lista{font-size:14px;color:var(--ink-2);margin:0;padding-left:0;list-style:none;display:grid;gap:3px}
+.ir-ej .lista .tag{font-size:10px;padding:0 6px}
+.ir-ej .btn{justify-self:start}
+.grupo-ej{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 12px}
+.grupo-ej>span{display:inline-flex;align-items:center;gap:10px}
+.grupo-ej .ico{width:44px}
+.filtro a{display:inline-flex;align-items:center;gap:6px;padding:3px 11px 3px 5px}
+.filtro .ico{width:30px}
+.grupo-ej a{font-size:14px}
+.filtro{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.filtro a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.filtro a:hover{border-color:var(--ink-2);color:var(--ink)}
+/* página de solución */
+.enun-box{background:var(--sheet);border:1px solid var(--rule);border-left:4px solid var(--ink);border-radius:12px;padding:12px 16px}
+.enun-box .lbl{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.enun-box p{margin:6px 0}
+.res-box{background:var(--hl);border-radius:12px;padding:10px 16px;margin:14px 0}
+.res-box .lbl{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase}
+.res-box p{margin:4px 0}
+.saltos{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.saltos a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.doc .widget{margin:16px 0 8px}
+.doc .widget:empty{display:none}
+/* índice con resultados ocultos */
+.ver-res{display:inline-flex;align-items:center;gap:8px;font:600 14px var(--f-body);cursor:pointer;margin:4px 0}
+.ver-res input{width:18px;height:18px;accent-color:var(--c-p)}
+.indice td.r{transition:filter .2s}
+.indice td:first-child{white-space:nowrap}
+.indice td small{display:block;color:var(--ink-2);font-size:12px}
+.indice tr.grupo th{background:var(--plane);font-size:14px}
+.indice tr.grupo a{color:inherit}
+.ver-res:has(input:not(:checked)) + .table-wrap td.r{filter:blur(5px);user-select:none}
+.pager{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:40px;border-top:1px solid var(--rule);padding-top:16px}
+.pager a{text-decoration:none;max-width:48%}
+.pager .mid{align-self:center}
+.pager small{display:block;color:var(--ink-2);font-size:12px}
+footer{margin-top:36px;color:var(--ink-2);font-size:13px}
+@media print{.cats,.toc,.pager,.crumbs,.widget,.saltos,.prop .btn,.prop summary{display:none}.layout{display:block}.fig,.table-wrap,p.eq,.prop{break-inside:avoid}}
+.tema-nav{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font-size:13.5px;margin:0 0 10px;padding:6px 0;border-bottom:1px solid var(--rule)}
+.tema-nav .lbl{font:600 11.5px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.tema-nav a{color:var(--ink-2);text-decoration:none;white-space:nowrap}
+.tema-nav a:hover{color:var(--ink);text-decoration:underline}
+.tema-nav a[aria-current]{color:var(--ink);font-weight:700}
+.tema-nav a.ex{margin-left:auto;font-weight:700;color:var(--c-p)}
+.tema-nav .pronto{color:var(--ink-2);opacity:.55;white-space:nowrap}
+.doc p.eq{margin:6px 0;display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 12px}
+.doc p.eq+p.eq{margin-top:-1px;border-top-left-radius:0;border-top-right-radius:0}
+.doc p.eq:has(+p.eq){margin-bottom:0;border-bottom-left-radius:0;border-bottom-right-radius:0}
+.doc p.eq .just{font-size:14px;color:var(--ink-2)}
+.doc p.eq .f .katex{font-size:1.12em}
+.doc strong.f{font-weight:inherit}
+.katex{font-size:1.08em}
+.katex-display{margin:.4em 0}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.82em;line-height:1.15}
+.fr .nu{border-bottom:1px solid currentColor;padding:0 3px}
+.doc ol[start]{margin-top:12px}
+.ficha{display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px;font-size:14.5px;color:var(--ink-2);margin:12px 0 0}
+.ficha strong{color:var(--ink)}
+/* pistas */
+.guia{display:grid;gap:10px;margin:14px 0}
+.guia details{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:0 14px}
+.guia summary{cursor:pointer;list-style:none;min-height:46px;display:flex;align-items:center;gap:10px;font:700 15px var(--f-body)}
+.guia summary::-webkit-details-marker{display:none}
+.guia summary::before{content:"▸";font-size:12px;color:var(--ink-2)}
+.guia details[open] summary::before{content:"▾"}
+.guia .n{font:700 12px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--c-v);border:1px solid currentColor;border-radius:999px;padding:1px 8px;white-space:nowrap}
+.guia details.pista[open]{border-color:var(--c-v)}
+.guia.js details.pista:not([open]):not(.usada) .t{display:none}
+.guia.js details.pista:not([open]):not(.usada) summary::after{content:"¿Atascada? Ábrela";font:400 14px var(--f-body);color:var(--ink-2)}
+.guia .cuerpo{padding:0 0 12px;min-width:0;overflow-x:auto}
+.guia .cuerpo p{margin:6px 0}
+.guia details.res summary .n{color:var(--c-n)}
+.guia details.res[open]{border-color:var(--c-n)}
+.guia details.sol summary .n{color:var(--c-p)}
+.guia details.sol[open]{border-color:var(--c-p)}
+.guia .estado{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;font-size:14.5px;color:var(--ink-2);padding:4px 2px}
+.guia .estado .txt{flex:1 1 200px}
+.guia .estado .reset{background:none;border:0;color:var(--ink-2);text-decoration:underline;font:inherit;cursor:pointer;padding:0}
+.tag.hecho{color:var(--c-n)}
+.tag.empezado{color:var(--c-v)}
+.tag.nivel.n1{color:var(--c-n)} .tag.nivel.n2{color:var(--c-v)} .tag.nivel.n3{color:var(--c-fr)}
+.ir-ej .lista .tag{margin-left:4px}
+/* widgets */
+.widget{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:12px 14px;margin:14px 0;display:grid;gap:10px;grid-template-columns:minmax(0,1fr)}
+.widget .w-tit{font:700 14px var(--f-body);margin:0}
+.widget .w-ctl{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;font-size:14.5px}
+.widget .w-ctl label{display:inline-flex;align-items:center;gap:6px}
+.widget input[type=number],.widget input[type=text]{font:inherit;width:6.5em;padding:6px 8px;border:1px solid var(--rule);border-radius:8px;background:var(--paper);color:var(--ink)}
+.widget input[type=text].largo{width:14em}
+.widget input[type=range]{width:min(220px,60vw)}
+.widget .w-out{font-size:15px}
+.widget .w-msg{font-size:14.5px;color:var(--ink-2);margin:0}
+.widget svg{display:block;width:100%;height:auto}
+.widget table{font-variant-numeric:tabular-nums}
+.table-wrap{position:relative}
+.widget td.num,.widget th.num{font-family:var(--f-mono);text-align:right;white-space:nowrap}
+.widget .ok{color:var(--c-n);font-weight:700} .widget .mal{color:var(--c-fr);font-weight:700}
+.widget tr.marca td{background:color-mix(in srgb,var(--c-fr) 12%,transparent)}
+.widget tr.base td{background:color-mix(in srgb,var(--c-n) 12%,transparent)}
+.widget .chips{display:flex;flex-wrap:wrap;gap:6px}
+.widget .chips .btn[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.rf{border-collapse:collapse;font-family:var(--f-mono);font-size:16px;margin:4px 0}
+.rf td{padding:6px 10px;text-align:right;min-width:2.6em}
+.rf td.a{border-right:2px solid var(--ink);color:var(--c-p);font-weight:700}
+.rf tr.suma td{border-top:2px solid var(--ink)}
+.rf td.r{background:color-mix(in srgb,var(--c-n) 16%,transparent);font-weight:700}
+.rf td.nuevo{color:var(--c-v);font-weight:700}
+.lista-enum{display:flex;flex-wrap:wrap;gap:6px;font-family:var(--f-mono);font-size:14px;max-height:260px;overflow:auto}
+.lista-enum span{border:1px solid var(--rule);border-radius:6px;padding:2px 7px;background:var(--paper)}
+.pascal{display:grid;gap:4px;justify-items:center;font-family:var(--f-mono);font-size:14px}
+.pascal .fila{display:flex;gap:4px;cursor:pointer;border-radius:8px;padding:2px 4px}
+.pascal .fila:hover,.pascal .fila[aria-pressed=true]{background:color-mix(in srgb,var(--c-p) 14%,transparent)}
+.pascal .fila span{min-width:2.4em;text-align:center;border:1px solid var(--rule);border-radius:6px;padding:2px 0;background:var(--paper)}
+@media (max-width:560px){.pascal{font-size:11px;gap:3px}.pascal .fila{gap:2px;padding:2px 1px}.pascal .fila span{min-width:2.1em}}
+.arbol{display:grid;gap:8px}
+.arbol .preg{font-weight:700}
+.arbol .res{border:1px solid var(--c-p);border-radius:10px;padding:10px 12px;background:color-mix(in srgb,var(--c-p) 6%,var(--sheet))}
+.arbol .camino{font-size:13.5px;color:var(--ink-2)}
+
+.fig-m{margin:14px 0;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px;text-align:center}
+.fig-m svg{display:block;width:100%;height:auto;margin:0 auto;overflow:visible}
+.fig-m figcaption{font-size:13.5px;color:var(--ink-2);padding:6px 4px 0;text-align:left}
+.fig-m .l{stroke:var(--ink);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.fig-m .l.sin{fill:none}
+.fig-m .dash{stroke-dasharray:6 5}
+.fig-m .c-p{stroke:var(--c-p);fill:var(--c-p)} .fig-m .c-n{stroke:var(--c-n);fill:var(--c-n)} .fig-m .c-fr{stroke:var(--c-fr);fill:var(--c-fr)} .fig-m .c-v{stroke:var(--c-v);fill:var(--c-v)} .fig-m .c-eje{stroke:var(--ink-2);fill:var(--ink-2)}
+.fig-m .l.c-p,.fig-m .l.c-n,.fig-m .l.c-fr,.fig-m .l.c-v,.fig-m .l.c-eje{fill:none}
+.fig-m .f-p{fill:color-mix(in srgb,var(--c-p) 12%,transparent);stroke:none} .fig-m .f-n{fill:color-mix(in srgb,var(--c-n) 16%,transparent);stroke:none} .fig-m .f-v{fill:color-mix(in srgb,var(--c-v) 22%,transparent);stroke:none} .fig-m .f-fr{fill:color-mix(in srgb,var(--c-fr) 30%,transparent);stroke:none}
+.fig-m .pt{fill:var(--ink);stroke:var(--sheet);stroke-width:1.5}
+.fig-m .pt.c-p{fill:var(--c-p)} .fig-m .pt.c-fr{fill:var(--c-fr)} .fig-m .pt.c-n{fill:var(--c-n)}
+.fig-m .punta{fill:var(--ink);stroke:none} .fig-m .punta.c-eje{fill:var(--ink-2)} .fig-m .punta.c-p{fill:var(--c-p)} .fig-m .punta.c-fr{fill:var(--c-fr)}
+.fig-m .grid{stroke:var(--rule);stroke-width:1}
+.fig-m .t{font:600 14px var(--f-body);fill:var(--ink);stroke:none;paint-order:stroke;stroke:var(--sheet);stroke-width:4px;stroke-linejoin:round}
+.fig-m .t.b{font-weight:700}
+.fig-m .t.c-p{fill:var(--c-p)} .fig-m .t.c-n{fill:var(--c-n)} .fig-m .t.c-fr{fill:var(--c-fr)} .fig-m .t.c-v{fill:var(--c-v)} .fig-m .t.c-eje{fill:var(--ink-2)}
+.fig-m .t.c-p,.fig-m .t.c-n,.fig-m .t.c-fr,.fig-m .t.c-v,.fig-m .t.c-eje{stroke:var(--sheet)}
+details.dibujo{margin:10px 0}
+details.dibujo>summary{cursor:pointer;display:inline-flex;align-items:center;gap:8px;font:600 14px var(--f-body);border:1px dashed var(--c-p);color:var(--c-p);border-radius:9px;padding:6px 12px;list-style:none;min-height:38px}
+details.dibujo>summary::-webkit-details-marker{display:none}
+details.dibujo>summary::before{content:"✎"}
+details.dibujo[open]>summary{border-style:solid}
+</style>
+</head>
+<body>
+<div class="page">
+  <nav class="crumbs" aria-label="Ruta"><a href="../../../">BI Ciencias</a><span aria-hidden="true">›</span><a href="../../../#matematicas">Matemáticas</a><span aria-hidden="true">›</span><a href="../">5 · Identidades y ecuaciones</a><span aria-hidden="true">›</span><span>Ecuaciones</span></nav>
+  <nav class="tema-nav" aria-label="Secciones del Tema 2"><span class="lbl">Tema 2</span><a href="../../../temas/repaso-geometria/">0 · Repaso previo</a><a href="../../../temas/geometria-analitica/">1 · Geometría analítica</a><a href="../../../temas/razones-trigonometricas/">2 · Razones trigonométricas</a><a href="../../../temas/volumenes/">3 · Volúmenes y sectores</a><a href="../../../temas/triangulos/">4 · Triángulos</a><a href="../../../temas/identidades/" aria-current="true">5 · Identidades y ecuaciones</a><a class="ex" href="../../../examen/matematicas/?temas=repaso-t2,analitica,razones,volumenes,triangulos,identidades">Examen</a></nav>
+  <header class="top con-ico"><div class="ico-top grid-paper"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><path d="M8 40 C20 6, 32 6, 44 40 S68 74, 88 40" style="fill:none;stroke:var(--c-p);stroke-width:2.6"/><line x1="8" y1="24" x2="88" y2="24" style="stroke:var(--c-fr);stroke-width:2;stroke-dasharray:5 4"/><circle cx="20" cy="24" r="3.6" style="fill:var(--c-fr)"/><circle cx="32" cy="24" r="3.6" style="fill:var(--c-fr)"/></svg></div><div class="txt"><div class="eyebrow">Apartado 3 · diapositivas 25 a 27</div><h1>Ecuaciones trigonométricas</h1><p class="lead">Dejar una sola razón, factorizar y buscar todas las soluciones del intervalo, no solo la de la calculadora.</p></div></header>
+  <nav class="cats" aria-label="Apartados de la sección"><a href="../../../temas/identidades/"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><polygon class="pl" points="14,16 34,10 56,16 80,10 80,58 56,64 34,58 14,64"/><line class="ln q" x1="34" y1="10" x2="34" y2="58" style="stroke-width:1.2"/><line class="ln q" x1="56" y1="16" x2="56" y2="64" style="stroke-width:1.2"/>
+<path class="ln p" d="M22 52 C30 40, 40 50, 46 38 S62 26, 66 24" style="stroke-dasharray:4 4"/><path class="ffr" d="M66 12 C60 12 57 16 57 20 C57 26 66 34 66 34 C66 34 75 26 75 20 C75 16 72 12 66 12 Z"/><circle cx="66" cy="20" r="3.2" style="fill:var(--sheet)"/></svg>Mapa</a><a class="ej" href="../../../temas/identidades/ejercicios/"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><rect class="bk" x="20" y="8" width="44" height="58" rx="3"/><line class="ln q" x1="28" y1="22" x2="56" y2="22" style="stroke-width:1.6"/><line class="ln q" x1="28" y1="32" x2="56" y2="32" style="stroke-width:1.6"/><line class="ln q" x1="28" y1="42" x2="48" y2="42" style="stroke-width:1.6"/><line class="ln q" x1="28" y1="52" x2="44" y2="52" style="stroke-width:1.6"/>
+<g transform="rotate(38 66 40)"><rect x="61" y="14" width="10" height="40" rx="1.5" class="fv"/><rect x="61" y="14" width="10" height="6" style="fill:var(--c-fr)"/><polygon points="61,54 71,54 66,64" style="fill:var(--sheet);stroke:var(--ink);stroke-width:1.4"/><polygon points="64.4,60.8 67.6,60.8 66,64" style="fill:var(--ink)"/></g></svg>Ejercicios</a><a href="../../../temas/identidades/identidades/"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><text x="48" y="46" text-anchor="middle" style="font:700 15px var(--f-display, sans-serif);fill:var(--ink)">sen² + cos²</text></svg>1 · Identidades</a><a href="../../../temas/identidades/suma-y-doble/"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><text x="48" y="46" text-anchor="middle" style="font:700 24px var(--f-display, sans-serif);fill:var(--ink)">sen 2θ</text></svg>2 · Ángulo doble</a><a href="../../../temas/identidades/ecuaciones/" aria-current="page"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><path d="M8 40 C20 6, 32 6, 44 40 S68 74, 88 40" style="fill:none;stroke:var(--c-p);stroke-width:2.6"/><line x1="8" y1="24" x2="88" y2="24" style="stroke:var(--c-fr);stroke-width:2;stroke-dasharray:5 4"/><circle cx="20" cy="24" r="3.6" style="fill:var(--c-fr)"/><circle cx="32" cy="24" r="3.6" style="fill:var(--c-fr)"/></svg>3 · Ecuaciones</a><a href="../../../temas/identidades/sinusoide/"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><line x1="8" y1="36" x2="88" y2="36" style="stroke:var(--ink-2);stroke-width:1.6;stroke-dasharray:4 3"/><path d="M8 36 C18 8, 28 8, 38 36 S58 64, 68 36 S84 14, 88 22" style="fill:none;stroke:var(--c-p);stroke-width:2.6"/><text x="24" y="64" text-anchor="middle" style="font:700 12px var(--f-display, sans-serif);fill:var(--c-v)">a</text></svg>4 · Sinusoide</a></nav>
+  <div class="layout">
+    <main class="doc">
+<h2 id="idea-clave-una-sola-razon-y-todas-las-soluciones">Idea clave: una sola razón y todas las soluciones</h2>
+<ol>
+<li><strong>Una sola razón</strong>: con sen² + cos² = 1, el ángulo doble o <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle scriptlevel="0" displaystyle="true"><mi mathvariant="normal">tan</mi><mo>⁡</mo><mo>=</mo><mfrac><mi mathvariant="normal">sen</mi><mo>⁡</mo><mi mathvariant="normal">cos</mi><mo>⁡</mo></mfrac></mstyle></mrow><annotation encoding="application/x-tex">\displaystyle \operatorname{tan} = \frac{\operatorname{sen}}{\operatorname{cos}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mop"><span class="mord mathrm">tan</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.7936em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1076em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mord mathrm">cos</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mord mathrm">sen</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>, deja la ecuación en sen x, en cos x o en tan x.</li>
+<li><strong>Factoriza o resuelve como una ecuación de 2.º grado</strong> (llamando, por ejemplo, s = sen x). <strong>Nunca dividas</strong> entre algo que puede valer 0.</li>
+<li><strong>Cada valor da dos ángulos por vuelta</strong>: sen x = k da α y 180° − α; cos x = k da α y 360° − α; tan x = k da α y α + 180°.</li>
+<li><strong>Comprueba</strong> que ninguna solución anula un denominador.</li>
+</ol>
+<div class="widget" data-w="ecuacion" data-cfg="{&quot;f&quot;:&quot;sen&quot;,&quot;k&quot;:-0.5}"><p class="w-msg"><em>Este simulador se abre al cargar la página en el navegador.</em></p></div>
+<h2 id="ejemplo-2sen-x-sen-x-1-0-en-0-360">Ejemplo · 2sen²x − sen x − 1 = 0 en [0°, 360°)</h2>
+<p>Con s = sen x: <strong class="f"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle scriptlevel="0" displaystyle="true"><mn>2</mn><msup><mi>s</mi><mn>2</mn></msup><mo>−</mo><mi>s</mi><mo>−</mo><mn>1</mn><mo>=</mo><mn>0</mn><mo>⇒</mo><mo stretchy="false">(</mo><mn>2</mn><mi>s</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>s</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn><mo>⇒</mo><mi>s</mi><mo>=</mo><mn>1</mn><mtext> o </mtext><mi>s</mi><mo>=</mo><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mstyle></mrow><annotation encoding="application/x-tex">\displaystyle 2s^{2} - s - 1 = 0 \Rightarrow (2s + 1)(s - 1) = 0 \Rightarrow s = 1\ \text{o}\ s = -\frac{1}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9474em;vertical-align:-0.0833em;"></span><span class="mord">2</span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">⇒</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">2</span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">⇒</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mspace"> </span><span class="mord text"><span class="mord">o</span></span><span class="mspace"> </span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0074em;vertical-align:-0.686em;"></span><span class="mord">−</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></strong></p>
+<figure class="fig-m"><svg viewBox="0 0 560 268.3" role="img" aria-label="sen x = 1 da 90°; sen x = −1/2 da 210° y 330°." style="max-width:560px"><line class="l c-eje" x1="30" y1="134.2" x2="530" y2="134.2"/><path class="punta c-eje" d="M530 134.2 L521.7 137.7 L521.7 130.7Z"/><line class="l c-eje" x1="30" y1="238.3" x2="30" y2="30"/><path class="punta c-eje" d="M30 30 L33.5 38.3 L26.5 38.3Z"/><text class="t c-eje" x="521" y="146.2" text-anchor="end">x</text><text class="t c-eje" x="42" y="34" text-anchor="start">y</text><line class="l c-eje" x1="155" y1="130.2" x2="155" y2="138.2"/><text class="t c-eje" x="155" y="146.2" text-anchor="middle" style="font-size:12px">90°</text><line class="l c-eje" x1="280" y1="130.2" x2="280" y2="138.2"/><text class="t c-eje" x="280" y="146.2" text-anchor="middle" style="font-size:12px">180°</text><line class="l c-eje" x1="405" y1="130.2" x2="405" y2="138.2"/><text class="t c-eje" x="405" y="146.2" text-anchor="middle" style="font-size:12px">270°</text><line class="l c-eje" x1="530" y1="130.2" x2="530" y2="138.2"/><text class="t c-eje" x="530" y="146.2" text-anchor="middle" style="font-size:12px">360°</text><line class="l c-eje" x1="26" y1="59.8" x2="34" y2="59.8"/><text class="t c-eje" x="22" y="63.8" text-anchor="end" style="font-size:12px">1</text><line class="l c-eje" x1="26" y1="208.6" x2="34" y2="208.6"/><text class="t c-eje" x="22" y="212.6" text-anchor="end" style="font-size:12px">−1</text><path class="l sin c-p" style="stroke-width:2.4" d="M30 134.2L30.6 133.6L31.3 133L31.9 132.4L32.5 131.8L33.1 131.2L33.8 130.7L34.4 130.1L35 129.5L35.6 128.9L36.3 128.3L36.9 127.7L37.5 127.2L38.1 126.6L38.8 126L39.4 125.4L40 124.8L40.6 124.3L41.3 123.7L41.9 123.1L42.5 122.5L43.1 122L43.8 121.4L44.4 120.8L45 120.2L45.6 119.7L46.3 119.1L46.9 118.5L47.5 117.9L48.1 117.4L48.8 116.8L49.4 116.2L50 115.7L50.6 115.1L51.3 114.5L51.9 114L52.5 113.4L53.1 112.8L53.8 112.3L54.4 111.7L55 111.2L55.6 110.6L56.3 110.1L56.9 109.5L57.5 109L58.1 108.4L58.8 107.9L59.4 107.3L60 106.8L60.6 106.2L61.3 105.7L61.9 105.2L62.5 104.6L63.1 104.1L63.8 103.5L64.4 103L65 102.5L65.6 102L66.3 101.4L66.9 100.9L67.5 100.4L68.1 99.9L68.8 99.4L69.4 98.8L70 98.3L70.6 97.8L71.3 97.3L71.9 96.8L72.5 96.3L73.1 95.8L73.8 95.3L74.4 94.8L75 94.3L75.6 93.8L76.3 93.3L76.9 92.8L77.5 92.3L78.1 91.9L78.8 91.4L79.4 90.9L80 90.4L80.6 90L81.3 89.5L81.9 89L82.5 88.6L83.1 88.1L83.8 87.6L84.4 87.2L85 86.7L85.6 86.3L86.3 85.8L86.9 85.4L87.5 85L88.1 84.5L88.8 84.1L89.4 83.7L90 83.2L90.6 82.8L91.3 82.4L91.9 82L92.5 81.6L93.1 81.1L93.8 80.7L94.4 80.3L95 79.9L95.6 79.5L96.3 79.1L96.9 78.7L97.5 78.4L98.1 78L98.8 77.6L99.4 77.2L100 76.8L100.6 76.5L101.3 76.1L101.9 75.7L102.5 75.4L103.1 75L103.8 74.7L104.4 74.3L105 74L105.6 73.6L106.3 73.3L106.9 73L107.5 72.6L108.1 72.3L108.7 72L109.4 71.7L110 71.3L110.6 71L111.3 70.7L111.9 70.4L112.5 70.1L113.1 69.8L113.8 69.5L114.4 69.2L115 69L115.6 68.7L116.3 68.4L116.9 68.1L117.5 67.9L118.1 67.6L118.8 67.3L119.4 67.1L120 66.8L120.6 66.6L121.3 66.4L121.9 66.1L122.5 65.9L123.1 65.7L123.8 65.4L124.4 65.2L125 65L125.6 64.8L126.3 64.6L126.9 64.4L127.5 64.2L128.1 64L128.8 63.8L129.4 63.6L130 63.4L130.6 63.2L131.3 63.1L131.9 62.9L132.5 62.7L133.1 62.6L133.8 62.4L134.4 62.2L135 62.1L135.6 62L136.3 61.8L136.9 61.7L137.5 61.6L138.1 61.4L138.8 61.3L139.4 61.2L140 61.1L140.6 61L141.3 60.9L141.9 60.8L142.5 60.7L143.1 60.6L143.8 60.5L144.4 60.4L145 60.3L145.6 60.3L146.3 60.2L146.9 60.1L147.5 60.1L148.1 60L148.8 60L149.4 59.9L150 59.9L150.6 59.9L151.3 59.8L151.9 59.8L152.5 59.8L153.1 59.8L153.8 59.8L154.4 59.8L155 59.8L155.6 59.8L156.3 59.8L156.9 59.8L157.5 59.8L158.1 59.8L158.8 59.8L159.4 59.9L160 59.9L160.6 59.9L161.3 60L161.9 60L162.5 60.1L163.1 60.1L163.8 60.2L164.4 60.3L165 60.3L165.6 60.4L166.3 60.5L166.9 60.6L167.5 60.7L168.1 60.8L168.8 60.9L169.4 61L170 61.1L170.6 61.2L171.3 61.3L171.9 61.4L172.5 61.6L173.1 61.7L173.8 61.8L174.4 62L175 62.1L175.6 62.2L176.3 62.4L176.9 62.6L177.5 62.7L178.1 62.9L178.8 63.1L179.4 63.2L180 63.4L180.6 63.6L181.3 63.8L181.9 64L182.5 64.2L183.1 64.4L183.8 64.6L184.4 64.8L185 65L185.6 65.2L186.3 65.4L186.9 65.7L187.5 65.9L188.1 66.1L188.8 66.4L189.4 66.6L190 66.8L190.6 67.1L191.3 67.3L191.9 67.6L192.5 67.9L193.1 68.1L193.8 68.4L194.4 68.7L195 69L195.6 69.2L196.3 69.5L196.9 69.8L197.5 70.1L198.1 70.4L198.8 70.7L199.4 71L200 71.3L200.6 71.7L201.3 72L201.9 72.3L202.5 72.6L203.1 73L203.8 73.3L204.4 73.6L205 74L205.6 74.3L206.3 74.7L206.9 75L207.5 75.4L208.1 75.7L208.8 76.1L209.4 76.5L210 76.8L210.6 77.2L211.3 77.6L211.9 78L212.5 78.4L213.1 78.7L213.8 79.1L214.4 79.5L215 79.9L215.6 80.3L216.3 80.7L216.9 81.1L217.5 81.6L218.1 82L218.8 82.4L219.4 82.8L220 83.2L220.6 83.7L221.3 84.1L221.9 84.5L222.5 85L223.1 85.4L223.8 85.8L224.4 86.3L225 86.7L225.6 87.2L226.3 87.6L226.9 88.1L227.5 88.6L228.1 89L228.8 89.5L229.4 90L230 90.4L230.6 90.9L231.3 91.4L231.9 91.9L232.5 92.3L233.1 92.8L233.8 93.3L234.4 93.8L235 94.3L235.6 94.8L236.3 95.3L236.9 95.8L237.5 96.3L238.1 96.8L238.8 97.3L239.4 97.8L240 98.3L240.6 98.8L241.3 99.4L241.9 99.9L242.5 100.4L243.1 100.9L243.8 101.4L244.4 102L245 102.5L245.6 103L246.3 103.5L246.9 104.1L247.5 104.6L248.1 105.2L248.8 105.7L249.4 106.2L250 106.8L250.6 107.3L251.3 107.9L251.9 108.4L252.5 109L253.1 109.5L253.8 110.1L254.4 110.6L255 111.2L255.6 111.7L256.3 112.3L256.9 112.8L257.5 113.4L258.1 114L258.8 114.5L259.4 115.1L260 115.7L260.6 116.2L261.3 116.8L261.9 117.4L262.5 117.9L263.1 118.5L263.8 119.1L264.4 119.7L265 120.2L265.6 120.8L266.3 121.4L266.9 122L267.5 122.5L268.1 123.1L268.8 123.7L269.4 124.3L270 124.8L270.6 125.4L271.3 126L271.9 126.6L272.5 127.2L273.1 127.7L273.8 128.3L274.4 128.9L275 129.5L275.6 130.1L276.3 130.7L276.9 131.2L277.5 131.8L278.1 132.4L278.8 133L279.4 133.6L280 134.2L280.6 134.8L281.3 135.3L281.9 135.9L282.5 136.5L283.1 137.1L283.8 137.7L284.4 138.3L285 138.8L285.6 139.4L286.3 140L286.9 140.6L287.5 141.2L288.1 141.8L288.8 142.3L289.4 142.9L290 143.5L290.6 144.1L291.3 144.7L291.9 145.2L292.5 145.8L293.1 146.4L293.8 147L294.4 147.5L295 148.1L295.6 148.7L296.3 149.3L296.9 149.8L297.5 150.4L298.1 151L298.8 151.5L299.4 152.1L300 152.7L300.6 153.2L301.3 153.8L301.9 154.4L302.5 154.9L303.1 155.5L303.8 156L304.4 156.6L305 157.2L305.6 157.7L306.3 158.3L306.9 158.8L307.5 159.4L308.1 159.9L308.8 160.5L309.4 161L310 161.6L310.6 162.1L311.3 162.6L311.9 163.2L312.5 163.7L313.1 164.3L313.8 164.8L314.4 165.3L315 165.8L315.6 166.4L316.3 166.9L316.9 167.4L317.5 167.9L318.1 168.5L318.8 169L319.4 169.5L320 170L320.6 170.5L321.3 171L321.9 171.5L322.5 172L323.1 172.5L323.8 173L324.4 173.5L325 174L325.6 174.5L326.3 175L326.9 175.5L327.5 176L328.1 176.5L328.8 176.9L329.4 177.4L330 177.9L330.6 178.4L331.3 178.8L331.9 179.3L332.5 179.8L333.1 180.2L333.8 180.7L334.4 181.1L335 181.6L335.6 182L336.3 182.5L336.9 182.9L337.5 183.4L338.1 183.8L338.8 184.2L339.4 184.7L340 185.1L340.6 185.5L341.3 185.9L341.9 186.4L342.5 186.8L343.1 187.2L343.8 187.6L344.4 188L345 188.4L345.6 188.8L346.3 189.2L346.9 189.6L347.5 190L348.1 190.4L348.8 190.7L349.4 191.1L350 191.5L350.6 191.9L351.3 192.2L351.9 192.6L352.5 193L353.1 193.3L353.8 193.7L354.4 194L355 194.4L355.6 194.7L356.3 195L356.9 195.4L357.5 195.7L358.1 196L358.8 196.4L359.4 196.7L360 197L360.6 197.3L361.3 197.6L361.9 197.9L362.5 198.2L363.1 198.5L363.8 198.8L364.4 199.1L365 199.4L365.6 199.6L366.3 199.9L366.9 200.2L367.5 200.5L368.1 200.7L368.8 201L369.4 201.2L370 201.5L370.6 201.7L371.3 202L371.9 202.2L372.5 202.5L373.1 202.7L373.8 202.9L374.4 203.1L375 203.3L375.6 203.6L376.3 203.8L376.9 204L377.5 204.2L378.1 204.4L378.8 204.6L379.4 204.7L380 204.9L380.6 205.1L381.3 205.3L381.9 205.5L382.5 205.6L383.1 205.8L383.8 205.9L384.4 206.1L385 206.2L385.6 206.4L386.3 206.5L386.9 206.6L387.5 206.8L388.1 206.9L388.8 207L389.4 207.1L390 207.3L390.6 207.4L391.3 207.5L391.9 207.6L392.5 207.7L393.1 207.7L393.8 207.8L394.4 207.9L395 208L395.6 208.1L396.3 208.1L396.9 208.2L397.5 208.2L398.1 208.3L398.8 208.3L399.4 208.4L400 208.4L400.6 208.5L401.3 208.5L401.9 208.5L402.5 208.5L403.1 208.6L403.8 208.6L404.4 208.6L405 208.6L405.6 208.6L406.3 208.6L406.9 208.6L407.5 208.5L408.1 208.5L408.8 208.5L409.4 208.5L410 208.4L410.6 208.4L411.3 208.3L411.9 208.3L412.5 208.2L413.1 208.2L413.8 208.1L414.4 208.1L415 208L415.6 207.9L416.3 207.8L416.9 207.7L417.5 207.7L418.1 207.6L418.8 207.5L419.4 207.4L420 207.3L420.6 207.1L421.3 207L421.9 206.9L422.5 206.8L423.1 206.6L423.7 206.5L424.4 206.4L425 206.2L425.6 206.1L426.3 205.9L426.9 205.8L427.5 205.6L428.1 205.5L428.8 205.3L429.4 205.1L430 204.9L430.6 204.7L431.3 204.6L431.9 204.4L432.5 204.2L433.1 204L433.8 203.8L434.4 203.6L435 203.3L435.6 203.1L436.3 202.9L436.9 202.7L437.5 202.5L438.1 202.2L438.8 202L439.4 201.7L440 201.5L440.6 201.2L441.3 201L441.9 200.7L442.5 200.5L443.1 200.2L443.8 199.9L444.4 199.6L445 199.4L445.6 199.1L446.3 198.8L446.9 198.5L447.5 198.2L448.1 197.9L448.8 197.6L449.4 197.3L450 197L450.6 196.7L451.3 196.4L451.9 196L452.5 195.7L453.1 195.4L453.8 195L454.4 194.7L455 194.4L455.6 194L456.3 193.7L456.9 193.3L457.5 193L458.1 192.6L458.8 192.2L459.4 191.9L460 191.5L460.6 191.1L461.3 190.7L461.9 190.4L462.5 190L463.1 189.6L463.8 189.2L464.4 188.8L465 188.4L465.6 188L466.3 187.6L466.9 187.2L467.5 186.8L468.1 186.4L468.8 185.9L469.4 185.5L470 185.1L470.6 184.7L471.3 184.2L471.9 183.8L472.5 183.4L473.1 182.9L473.8 182.5L474.4 182L475 181.6L475.6 181.1L476.3 180.7L476.9 180.2L477.5 179.8L478.1 179.3L478.8 178.8L479.4 178.4L480 177.9L480.6 177.4L481.3 176.9L481.9 176.5L482.5 176L483.1 175.5L483.8 175L484.4 174.5L485 174L485.6 173.5L486.3 173L486.9 172.5L487.5 172L488.1 171.5L488.8 171L489.4 170.5L490 170L490.6 169.5L491.3 169L491.9 168.5L492.5 167.9L493.1 167.4L493.8 166.9L494.4 166.4L495 165.8L495.6 165.3L496.3 164.8L496.9 164.3L497.5 163.7L498.1 163.2L498.8 162.6L499.4 162.1L500 161.6L500.6 161L501.3 160.5L501.9 159.9L502.5 159.4L503.1 158.8L503.8 158.3L504.4 157.7L505 157.2L505.6 156.6L506.3 156L506.9 155.5L507.5 154.9L508.1 154.4L508.8 153.8L509.4 153.2L510 152.7L510.6 152.1L511.3 151.5L511.9 151L512.5 150.4L513.1 149.8L513.8 149.3L514.4 148.7L515 148.1L515.6 147.5L516.3 147L516.9 146.4L517.5 145.8L518.1 145.2L518.8 144.7L519.4 144.1L520 143.5L520.6 142.9L521.3 142.3L521.9 141.8L522.5 141.2L523.1 140.6L523.8 140L524.4 139.4L525 138.8L525.6 138.3L526.3 137.7L526.9 137.1L527.5 136.5L528.1 135.9L528.8 135.3L529.4 134.8L530 134.2"/><line class="l c-v dash" x1="155" y1="134.2" x2="155" y2="59.8"/><circle class="pt c-fr" cx="155" cy="59.8" r="3.6"/><text class="t c-v b" x="155" y="148.2" text-anchor="middle" style="font-size:12px">90°</text><line class="l c-v dash" x1="321.7" y1="134.2" x2="321.7" y2="171.4"/><circle class="pt c-fr" cx="321.7" cy="171.4" r="3.6"/><text class="t c-v b" x="321.7" y="124.2" text-anchor="middle" style="font-size:12px">210°</text><line class="l c-v dash" x1="488.3" y1="134.2" x2="488.3" y2="171.4"/><circle class="pt c-fr" cx="488.3" cy="171.4" r="3.6"/><text class="t c-v b" x="488.3" y="124.2" text-anchor="middle" style="font-size:12px">330°</text><line class="l c-n dash" x1="30" y1="59.8" x2="530" y2="59.8"/><text class="t c-n" x="534.5" y="56.2" text-anchor="start" style="font-size:12px">y = 1</text><line class="l c-n dash" x1="30" y1="171.4" x2="530" y2="171.4"/><text class="t c-n" x="534.5" y="167.8" text-anchor="start" style="font-size:12px">y = −1/2</text></svg><figcaption>sen x = 1 da 90°; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle scriptlevel="0" displaystyle="true"><mi mathvariant="normal">sen</mi><mo>⁡</mo><mi>x</mi><mo>=</mo><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>d</mi></mstyle></mrow><annotation encoding="application/x-tex">\displaystyle \operatorname{sen} x = -\frac{1}{2} d</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mop"><span class="mord mathrm">sen</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0074em;vertical-align:-0.686em;"></span><span class="mord">−</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathnormal">d</span></span></span></span>a 210° y 330°.</figcaption></figure>
+<p class="eq"><span class="f"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle scriptlevel="0" displaystyle="true"><mi>x</mi><mo>=</mo><mn>90</mn><mi mathvariant="normal">°</mi><mo separator="true">,</mo><mn>210</mn><mi mathvariant="normal">°</mi><mtext> y </mtext><mn>330</mn><mi mathvariant="normal">°</mi></mstyle></mrow><annotation encoding="application/x-tex">\displaystyle x = 90°, 210°\ \text{y}\ 330°</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord">90°</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">210°</span><span class="mspace"> </span><span class="mord text"><span class="mord">y</span></span><span class="mspace"> </span><span class="mord">330°</span></span></span></span></span></p>
+
+<h2 id="practicar">Ejercicios para practicar</h2>
+<div class="ir-ej"><p><strong>8 ejercicios</strong> de este apartado, de menos a más: primero los nuevos para coger soltura y después los de las diapositivas.</p>
+<ul class="lista"><li><a href="../ejercicios/e1/">E1</a> Un seno <span class="tag nivel n1">Nivel 1 · para empezar</span></li><li><a href="../ejercicios/e2/">E2</a> Un coseno <span class="tag nivel n1">Nivel 1 · para empezar</span></li><li><a href="../ejercicios/d25-4/">D25·4</a> Tres ecuaciones <span class="tag nivel n2">Nivel 2 · medio</span></li><li><a href="../ejercicios/e4/">E4</a> Ángulo doble en una ecuación <span class="tag nivel n2">Nivel 2 · medio</span></li><li><a href="../ejercicios/e7/">E7</a> Pasar a una sola razón <span class="tag nivel n3">Nivel 3 · tipo examen</span></li><li><a href="../ejercicios/d25-5/">D25·5</a> Con secante y tangente <span class="tag nivel n3">Nivel 3 · tipo examen</span></li><li><a href="../ejercicios/d27-2/">D27·2</a> Identidad y ecuación <span class="tag nivel n3">Nivel 3 · tipo examen</span></li><li><a href="../ejercicios/d27-3/">D27·3</a> 2cos²x = sen 2x <span class="tag nivel n3">Nivel 3 · tipo examen</span></li></ul>
+<a class="btn primary" href="../ejercicios/#ecuaciones">Ejercicios de este apartado →</a></div>
+    <nav class="pager" aria-label="Anterior y siguiente"><a href="../suma-y-doble/"><small>Anterior</small>Suma, resta y ángulo doble</a><a href="../sinusoide/" style="text-align:right"><small>Siguiente</small>Sinusoides</a></nav>
+    </main>
+    <aside class="toc" aria-label="En esta página"><h2>En esta página</h2><ol><li><a href="#idea-clave-una-sola-razon-y-todas-las-soluciones">Idea clave: una sola razón y todas las soluciones</a></li><li><a href="#ejemplo-2sen-x-sen-x-1-0-en-0-360">Ejemplo · 2sen²x − sen x − 1 = 0 en [0°, 360°)</a></li><li class="sep"><a href="#practicar">Para practicar</a></li></ol></aside>
+  </div>
+  <footer>Material de repaso del Tema 2 · Geometría y trigonometría. Abre las páginas en el navegador (ordenador, tableta o móvil): las fórmulas, los simuladores y las pistas necesitan la web, no la vista previa de WhatsApp o de Archivos.</footer>
+</div>
+<script src="../../../assets/mates/mates.js" defer></script>
+<script src="../../../assets/mates/figuras.js" defer></script>
+<script src="../../../assets/mates/trig.js" defer></script>
+</body>
+</html>

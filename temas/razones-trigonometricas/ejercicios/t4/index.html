@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>T4 · ¿Par, impar o ninguna? · BI Ciencias</title>
+<meta name="description" content="Razones trigonométricas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../../../../assets/base.css">
+<link rel="stylesheet" href="../../../../assets/katex/katex.min.css">
+<style>
+:root{--c-a:#7b4fd6;--c-k:#b4407e;--axis:#8793a6}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--c-a:#b39bff;--c-k:#f08cc0;--axis:#8e9ab0}}
+:root[data-theme="dark"]{--c-a:#b39bff;--c-k:#f08cc0;--axis:#8e9ab0}
+.fig{--cds-text-primary:var(--ink);--cds-text-secondary:var(--ink-2);--cds-chart-axis:var(--axis);--cds-chart-grid:var(--rule);
+  --cds-chart-reference-tint:var(--plane);--cds-chart-categorical-1:var(--c-p);--cds-chart-categorical-2:var(--c-n);
+  --cds-chart-categorical-3:var(--c-fr);--cds-chart-categorical-4:var(--c-a);--cds-chart-categorical-5:var(--c-k);
+  margin:18px 0 6px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 10px 6px}
+.fig svg{display:block;width:100%;height:auto;font-family:var(--f-body)}
+.fig.dg{max-width:640px}
+.doc p.lectura{font-size:15px;color:var(--ink-2);margin:4px 0 14px}
+.fig figcaption{font-size:13px;color:var(--ink-2);padding:4px 4px 2px}
+header.top{display:grid;gap:8px;margin:6px 0 18px}
+header.top .txt{display:grid;gap:8px;min-width:0}
+header.con-ico{grid-template-columns:96px minmax(0,1fr);gap:16px;align-items:center}
+.ico-top{border:1px solid var(--rule);border-radius:10px}
+@media (max-width:520px){header.con-ico{grid-template-columns:64px minmax(0,1fr);gap:12px}}
+.cats{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 22px}
+.cats a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:3px 11px 3px 5px;display:inline-flex;align-items:center;gap:6px}
+.cats .ico{width:30px;flex:none}
+.cats a[aria-current="page"] .ico .bk{fill:var(--paper)}
+.cats a:hover{border-color:var(--ink-2);color:var(--ink)}
+.cats a[aria-current="page"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+.cats a.ej{border-color:var(--c-p);color:var(--c-p)}
+.cats a.ej[aria-current="page"]{background:var(--c-p);color:var(--sheet)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+@media (min-width:1000px){.layout{grid-template-columns:minmax(0,760px) 1fr}}
+.toc{display:none}
+@media (min-width:1000px){.toc{display:block;position:sticky;top:16px;align-self:start;font-size:13.5px;max-height:calc(100vh - 32px);overflow:auto}
+  .toc h2{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:0 0 8px}
+  .toc ol{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+  .toc a{color:var(--ink-2);text-decoration:none;line-height:1.3;display:block}
+  .toc a:hover{color:var(--ink)}
+  .toc .sep{margin-top:8px;font-weight:700;color:var(--ink)}}
+.doc{min-width:0}
+.doc>h2:first-child{border-top:0;margin-top:0;padding-top:0}
+.doc h2{font-size:1.28rem;margin:38px 0 10px;padding-top:16px;border-top:1px solid var(--rule);scroll-margin-top:12px}
+.doc h3{font-size:1.06rem;margin:26px 0 8px}
+.doc p{margin:10px 0}
+.doc p.eq{background:var(--sheet);border:1px solid var(--rule);border-left:3px solid var(--c-p);border-radius:8px;padding:9px 12px;overflow-x:auto}
+.doc p.sub{margin:22px 0 4px}
+.doc p.res{background:var(--hl);border-radius:8px;padding:8px 12px}
+.doc blockquote.why{margin:10px 0 14px;padding:8px 14px;border-left:3px solid var(--rule);background:color-mix(in srgb,var(--sheet) 70%,transparent);border-radius:0 8px 8px 0;color:var(--ink)}
+.doc blockquote.why p{margin:4px 0}
+.doc ul,.doc ol{padding-left:1.3em}
+.doc li{margin:4px 0}
+.table-wrap{overflow-x:auto;margin:12px 0;border:1px solid var(--rule);border-radius:10px;background:var(--sheet)}
+.doc table{border-collapse:collapse;width:100%;font-size:14.5px}
+.doc th,.doc td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid var(--rule)}
+.doc th{font-weight:700;background:var(--paper)}
+.doc tr:last-child td{border-bottom:0}
+.grid-cats{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));margin:18px 0 8px}
+.grid-cats a{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:start;text-decoration:none;color:inherit}
+.grid-cats a:hover{border-color:var(--ink-2)}
+.grid-cats a{grid-template-columns:72px minmax(0,1fr)}
+.grid-cats .n{border-radius:8px;border:1px solid var(--rule)}
+.doc .widget[id^=simulador]{scroll-margin-top:12px}
+.grid-cats h3{font-size:1rem;line-height:1.25}
+.grid-cats p{margin:4px 0 0;font-size:13.5px;color:var(--ink-2)}
+/* ejercicios propuestos */
+.metodo{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 14px;font-size:14.5px}
+.metodo ol{margin:6px 0 2px}
+.props{display:grid;gap:14px;margin:14px 0}
+.prop{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:14px 16px;scroll-margin-top:12px}
+.prop .cab{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-bottom:6px}
+.prop .num{font:700 1.05rem var(--f-display)}
+.prop .src{font:600 12px var(--f-mono);color:var(--ink-2);letter-spacing:.02em}
+.tag{font:600 11px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;border:1px solid currentColor;border-radius:999px;padding:1px 7px}
+.tag.nuevo{color:var(--c-n)}
+.tag.sel{color:var(--c-a)}
+.tag.sim{color:var(--c-p)}
+.prop h3{font-size:1rem;margin:0 0 6px;line-height:1.3}
+.prop .enun p{margin:6px 0}
+.prop .fig{margin:10px 0 4px}
+.prop .acc{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;margin-top:10px}
+.prop details{flex:1 1 260px;min-width:0}
+.prop summary{cursor:pointer;font:600 13.5px var(--f-body);color:var(--ink-2);min-height:38px;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rule);border-radius:9px;padding:0 12px;list-style:none}
+.prop summary::-webkit-details-marker{display:none}
+.prop summary::before{content:"▸";font-size:12px}
+.prop details[open] summary::before{content:"▾"}
+.prop details[open] summary{color:var(--ink)}
+.prop details p{background:var(--hl);border-radius:8px;padding:8px 12px;margin:8px 0 0}
+.prop .btn{margin-left:auto}
+@media (max-width:520px){.prop .btn{margin-left:0;width:100%}}
+/* ejemplos resueltos dentro de cada apartado */
+.ejemplo{margin:18px 0 0;padding-top:4px}
+.ejemplo>h3{font-size:1.12rem;margin:30px 0 10px;scroll-margin-top:12px}
+.ejemplo>h3 .src{font:600 12px var(--f-mono);color:var(--ink-2);margin-left:6px}
+.ejemplo h4{font:700 .82rem var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:22px 0 6px}
+.ejemplo+.ejemplo{border-top:1px dashed var(--rule);margin-top:30px}
+.ir-ej{display:grid;gap:8px;background:var(--sheet);border:1px solid var(--c-p);border-radius:12px;padding:14px 16px;margin:14px 0}
+.ir-ej p{margin:0}
+.ir-ej .lista{font-size:14px;color:var(--ink-2);margin:0;padding-left:0;list-style:none;display:grid;gap:3px}
+.ir-ej .lista .tag{font-size:10px;padding:0 6px}
+.ir-ej .btn{justify-self:start}
+.grupo-ej{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 12px}
+.grupo-ej>span{display:inline-flex;align-items:center;gap:10px}
+.grupo-ej .ico{width:44px}
+.filtro a{display:inline-flex;align-items:center;gap:6px;padding:3px 11px 3px 5px}
+.filtro .ico{width:30px}
+.grupo-ej a{font-size:14px}
+.filtro{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.filtro a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.filtro a:hover{border-color:var(--ink-2);color:var(--ink)}
+/* página de solución */
+.enun-box{background:var(--sheet);border:1px solid var(--rule);border-left:4px solid var(--ink);border-radius:12px;padding:12px 16px}
+.enun-box .lbl{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.enun-box p{margin:6px 0}
+.res-box{background:var(--hl);border-radius:12px;padding:10px 16px;margin:14px 0}
+.res-box .lbl{font:700 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase}
+.res-box p{margin:4px 0}
+.saltos{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.saltos a{font:600 13px var(--f-body);text-decoration:none;color:var(--ink-2);border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 11px}
+.doc .widget{margin:16px 0 8px}
+.doc .widget:empty{display:none}
+/* índice con resultados ocultos */
+.ver-res{display:inline-flex;align-items:center;gap:8px;font:600 14px var(--f-body);cursor:pointer;margin:4px 0}
+.ver-res input{width:18px;height:18px;accent-color:var(--c-p)}
+.indice td.r{transition:filter .2s}
+.indice td:first-child{white-space:nowrap}
+.indice td small{display:block;color:var(--ink-2);font-size:12px}
+.indice tr.grupo th{background:var(--plane);font-size:14px}
+.indice tr.grupo a{color:inherit}
+.ver-res:has(input:not(:checked)) + .table-wrap td.r{filter:blur(5px);user-select:none}
+.pager{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:40px;border-top:1px solid var(--rule);padding-top:16px}
+.pager a{text-decoration:none;max-width:48%}
+.pager .mid{align-self:center}
+.pager small{display:block;color:var(--ink-2);font-size:12px}
+footer{margin-top:36px;color:var(--ink-2);font-size:13px}
+@media print{.cats,.toc,.pager,.crumbs,.widget,.saltos,.prop .btn,.prop summary{display:none}.layout{display:block}.fig,.table-wrap,p.eq,.prop{break-inside:avoid}}
+.tema-nav{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font-size:13.5px;margin:0 0 10px;padding:6px 0;border-bottom:1px solid var(--rule)}
+.tema-nav .lbl{font:600 11.5px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.tema-nav a{color:var(--ink-2);text-decoration:none;white-space:nowrap}
+.tema-nav a:hover{color:var(--ink);text-decoration:underline}
+.tema-nav a[aria-current]{color:var(--ink);font-weight:700}
+.tema-nav a.ex{margin-left:auto;font-weight:700;color:var(--c-p)}
+.tema-nav .pronto{color:var(--ink-2);opacity:.55;white-space:nowrap}
+.doc p.eq{margin:6px 0;display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 12px}
+.doc p.eq+p.eq{margin-top:-1px;border-top-left-radius:0;border-top-right-radius:0}
+.doc p.eq:has(+p.eq){margin-bottom:0;border-bottom-left-radius:0;border-bottom-right-radius:0}
+.doc p.eq .just{font-size:14px;color:var(--ink-2)}
+.doc p.eq .f .katex{font-size:1.12em}
+.doc strong.f{font-weight:inherit}
+.katex{font-size:1.08em}
+.katex-display{margin:.4em 0}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.82em;line-height:1.15}
+.fr .nu{border-bottom:1px solid currentColor;padding:0 3px}
+.doc ol[start]{margin-top:12px}
+.ficha{display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px;font-size:14.5px;color:var(--ink-2);margin:12px 0 0}
+.ficha strong{color:var(--ink)}
+/* pistas */
+.guia{display:grid;gap:10px;margin:14px 0}
+.guia details{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:0 14px}
+.guia summary{cursor:pointer;list-style:none;min-height:46px;display:flex;align-items:center;gap:10px;font:700 15px var(--f-body)}
+.guia summary::-webkit-details-marker{display:none}
+.guia summary::before{content:"▸";font-size:12px;color:var(--ink-2)}
+.guia details[open] summary::before{content:"▾"}
+.guia .n{font:700 12px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--c-v);border:1px solid currentColor;border-radius:999px;padding:1px 8px;white-space:nowrap}
+.guia details.pista[open]{border-color:var(--c-v)}
+.guia.js details.pista:not([open]):not(.usada) .t{display:none}
+.guia.js details.pista:not([open]):not(.usada) summary::after{content:"¿Atascada? Ábrela";font:400 14px var(--f-body);color:var(--ink-2)}
+.guia .cuerpo{padding:0 0 12px;min-width:0;overflow-x:auto}
+.guia .cuerpo p{margin:6px 0}
+.guia details.res summary .n{color:var(--c-n)}
+.guia details.res[open]{border-color:var(--c-n)}
+.guia details.sol summary .n{color:var(--c-p)}
+.guia details.sol[open]{border-color:var(--c-p)}
+.guia .estado{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;font-size:14.5px;color:var(--ink-2);padding:4px 2px}
+.guia .estado .txt{flex:1 1 200px}
+.guia .estado .reset{background:none;border:0;color:var(--ink-2);text-decoration:underline;font:inherit;cursor:pointer;padding:0}
+.tag.hecho{color:var(--c-n)}
+.tag.empezado{color:var(--c-v)}
+.tag.nivel.n1{color:var(--c-n)} .tag.nivel.n2{color:var(--c-v)} .tag.nivel.n3{color:var(--c-fr)}
+.ir-ej .lista .tag{margin-left:4px}
+/* widgets */
+.widget{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:12px 14px;margin:14px 0;display:grid;gap:10px;grid-template-columns:minmax(0,1fr)}
+.widget .w-tit{font:700 14px var(--f-body);margin:0}
+.widget .w-ctl{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;font-size:14.5px}
+.widget .w-ctl label{display:inline-flex;align-items:center;gap:6px}
+.widget input[type=number],.widget input[type=text]{font:inherit;width:6.5em;padding:6px 8px;border:1px solid var(--rule);border-radius:8px;background:var(--paper);color:var(--ink)}
+.widget input[type=text].largo{width:14em}
+.widget input[type=range]{width:min(220px,60vw)}
+.widget .w-out{font-size:15px}
+.widget .w-msg{font-size:14.5px;color:var(--ink-2);margin:0}
+.widget svg{display:block;width:100%;height:auto}
+.widget table{font-variant-numeric:tabular-nums}
+.table-wrap{position:relative}
+.widget td.num,.widget th.num{font-family:var(--f-mono);text-align:right;white-space:nowrap}
+.widget .ok{color:var(--c-n);font-weight:700} .widget .mal{color:var(--c-fr);font-weight:700}
+.widget tr.marca td{background:color-mix(in srgb,var(--c-fr) 12%,transparent)}
+.widget tr.base td{background:color-mix(in srgb,var(--c-n) 12%,transparent)}
+.widget .chips{display:flex;flex-wrap:wrap;gap:6px}
+.widget .chips .btn[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.rf{border-collapse:collapse;font-family:var(--f-mono);font-size:16px;margin:4px 0}
+.rf td{padding:6px 10px;text-align:right;min-width:2.6em}
+.rf td.a{border-right:2px solid var(--ink);color:var(--c-p);font-weight:700}
+.rf tr.suma td{border-top:2px solid var(--ink)}
+.rf td.r{background:color-mix(in srgb,var(--c-n) 16%,transparent);font-weight:700}
+.rf td.nuevo{color:var(--c-v);font-weight:700}
+.lista-enum{display:flex;flex-wrap:wrap;gap:6px;font-family:var(--f-mono);font-size:14px;max-height:260px;overflow:auto}
+.lista-enum span{border:1px solid var(--rule);border-radius:6px;padding:2px 7px;background:var(--paper)}
+.pascal{display:grid;gap:4px;justify-items:center;font-family:var(--f-mono);font-size:14px}
+.pascal .fila{display:flex;gap:4px;cursor:pointer;border-radius:8px;padding:2px 4px}
+.pascal .fila:hover,.pascal .fila[aria-pressed=true]{background:color-mix(in srgb,var(--c-p) 14%,transparent)}
+.pascal .fila span{min-width:2.4em;text-align:center;border:1px solid var(--rule);border-radius:6px;padding:2px 0;background:var(--paper)}
+@media (max-width:560px){.pascal{font-size:11px;gap:3px}.pascal .fila{gap:2px;padding:2px 1px}.pascal .fila span{min-width:2.1em}}
+.arbol{display:grid;gap:8px}
+.arbol .preg{font-weight:700}
+.arbol .res{border:1px solid var(--c-p);border-radius:10px;padding:10px 12px;background:color-mix(in srgb,var(--c-p) 6%,var(--sheet))}
+.arbol .camino{font-size:13.5px;color:var(--ink-2)}
+
+.fig-m{margin:14px 0;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px;text-align:center}
+.fig-m svg{display:block;width:100%;height:auto;margin:0 auto;overflow:visible}
+.fig-m figcaption{font-size:13.5px;color:var(--ink-2);padding:6px 4px 0;text-align:left}
+.fig-m .l{stroke:var(--ink);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.fig-m .l.sin{fill:none}
+.fig-m .dash{stroke-dasharray:6 5}
+.fig-m .c-p{stroke:var(--c-p);fill:var(--c-p)} .fig-m .c-n{stroke:var(--c-n);fill:var(--c-n)} .fig-m .c-fr{stroke:var(--c-fr);fill:var(--c-fr)} .fig-m .c-v{stroke:var(--c-v);fill:var(--c-v)} .fig-m .c-eje{stroke:var(--ink-2);fill:var(--ink-2)}
+.fig-m .l.c-p,.fig-m .l.c-n,.fig-m .l.c-fr,.fig-m .l.c-v,.fig-m .l.c-eje{fill:none}
+.fig-m .f-p{fill:color-mix(in srgb,var(--c-p) 12%,transparent);stroke:none} .fig-m .f-n{fill:color-mix(in srgb,var(--c-n) 16%,transparent);stroke:none} .fig-m .f-v{fill:color-mix(in srgb,var(--c-v) 22%,transparent);stroke:none} .fig-m .f-fr{fill:color-mix(in srgb,var(--c-fr) 30%,transparent);stroke:none}
+.fig-m .pt{fill:var(--ink);stroke:var(--sheet);stroke-width:1.5}
+.fig-m .pt.c-p{fill:var(--c-p)} .fig-m .pt.c-fr{fill:var(--c-fr)} .fig-m .pt.c-n{fill:var(--c-n)}
+.fig-m .punta{fill:var(--ink);stroke:none} .fig-m .punta.c-eje{fill:var(--ink-2)} .fig-m .punta.c-p{fill:var(--c-p)} .fig-m .punta.c-fr{fill:var(--c-fr)}
+.fig-m .grid{stroke:var(--rule);stroke-width:1}
+.fig-m .t{font:600 14px var(--f-body);fill:var(--ink);stroke:none;paint-order:stroke;stroke:var(--sheet);stroke-width:4px;stroke-linejoin:round}
+.fig-m .t.b{font-weight:700}
+.fig-m .t.c-p{fill:var(--c-p)} .fig-m .t.c-n{fill:var(--c-n)} .fig-m .t.c-fr{fill:var(--c-fr)} .fig-m .t.c-v{fill:var(--c-v)} .fig-m .t.c-eje{fill:var(--ink-2)}
+.fig-m .t.c-p,.fig-m .t.c-n,.fig-m .t.c-fr,.fig-m .t.c-v,.fig-m .t.c-eje{stroke:var(--sheet)}
+details.dibujo{margin:10px 0}
+details.dibujo>summary{cursor:pointer;display:inline-flex;align-items:center;gap:8px;font:600 14px var(--f-body);border:1px dashed var(--c-p);color:var(--c-p);border-radius:9px;padding:6px 12px;list-style:none;min-height:38px}
+details.dibujo>summary::-webkit-details-marker{display:none}
+details.dibujo>summary::before{content:"✎"}
+details.dibujo[open]>summary{border-style:solid}
+</style>
+</head>
+<body>
+<div class="page">
+  <nav class="crumbs" aria-label="Ruta"><a href="../../../../">BI Ciencias</a><span aria-hidden="true">›</span><a href="../../../../#matematicas">Matemáticas</a><span aria-hidden="true">›</span><a href="../../">2 · Razones trigonométricas</a><span aria-hidden="true">›</span><a href="../">Ejercicios</a><span aria-hidden="true">›</span><span>T4</span></nav>
+  <nav class="tema-nav" aria-label="Secciones del Tema 2"><span class="lbl">Tema 2</span><a href="../../../../temas/repaso-geometria/">0 · Repaso previo</a><a href="../../../../temas/geometria-analitica/">1 · Geometría analítica</a><a href="../../../../temas/razones-trigonometricas/" aria-current="true">2 · Razones trigonométricas</a><a href="../../../../temas/volumenes/">3 · Volúmenes y sectores</a><a href="../../../../temas/triangulos/">4 · Triángulos</a><a href="../../../../temas/identidades/">5 · Identidades y ecuaciones</a><a class="ex" href="../../../../examen/matematicas/?temas=repaso-t2,analitica,razones,volumenes,triangulos,identidades">Examen</a></nav>
+  <header class="top"><div class="txt"><div class="eyebrow">Ejercicio guiado · Funciones par e impar</div><h1>T4 · ¿Par, impar o ninguna?</h1></div></header>
+  <nav class="cats" aria-label="Apartados de la sección"><a href="../../../../temas/razones-trigonometricas/"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><polygon class="pl" points="14,16 34,10 56,16 80,10 80,58 56,64 34,58 14,64"/><line class="ln q" x1="34" y1="10" x2="34" y2="58" style="stroke-width:1.2"/><line class="ln q" x1="56" y1="16" x2="56" y2="64" style="stroke-width:1.2"/>
+<path class="ln p" d="M22 52 C30 40, 40 50, 46 38 S62 26, 66 24" style="stroke-dasharray:4 4"/><path class="ffr" d="M66 12 C60 12 57 16 57 20 C57 26 66 34 66 34 C66 34 75 26 75 20 C75 16 72 12 66 12 Z"/><circle cx="66" cy="20" r="3.2" style="fill:var(--sheet)"/></svg>Mapa</a><a class="ej" href="../../../../temas/razones-trigonometricas/ejercicios/" aria-current="page"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><rect class="bk" x="20" y="8" width="44" height="58" rx="3"/><line class="ln q" x1="28" y1="22" x2="56" y2="22" style="stroke-width:1.6"/><line class="ln q" x1="28" y1="32" x2="56" y2="32" style="stroke-width:1.6"/><line class="ln q" x1="28" y1="42" x2="48" y2="42" style="stroke-width:1.6"/><line class="ln q" x1="28" y1="52" x2="44" y2="52" style="stroke-width:1.6"/>
+<g transform="rotate(38 66 40)"><rect x="61" y="14" width="10" height="40" rx="1.5" class="fv"/><rect x="61" y="14" width="10" height="6" style="fill:var(--c-fr)"/><polygon points="61,54 71,54 66,64" style="fill:var(--sheet);stroke:var(--ink);stroke-width:1.4"/><polygon points="64.4,60.8 67.6,60.8 66,64" style="fill:var(--ink)"/></g></svg>Ejercicios</a><a href="../../../../temas/razones-trigonometricas/par-impar/"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><text x="48" y="46" text-anchor="middle" style="font:700 22px var(--f-display, sans-serif);fill:var(--ink)">f(−x)</text></svg>1 · Par e impar</a><a href="../../../../temas/razones-trigonometricas/razones/"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><path d="M14 60 L82 60 L82 16 Z" style="fill:color-mix(in srgb,var(--c-p) 14%,transparent);stroke:var(--ink);stroke-width:2"/><path d="M30 60 A16 16 0 0 0 27 51" style="fill:none;stroke:var(--c-v);stroke-width:2.4"/><text x="36" y="56" text-anchor="middle" style="font:700 14px var(--f-display, sans-serif);fill:var(--c-v)">θ</text></svg>2 · Razones</a><a href="../../../../temas/razones-trigonometricas/radianes/"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><text x="48" y="46" text-anchor="middle" style="font:700 22px var(--f-display, sans-serif);fill:var(--ink)">π rad</text></svg>3 · Radianes</a><a href="../../../../temas/razones-trigonometricas/cuadrantes/"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><circle cx="48" cy="36" r="26" style="fill:none;stroke:var(--ink-2);stroke-width:2"/><line x1="16" y1="36" x2="80" y2="36" style="stroke:var(--ink-2);stroke-width:1.6"/><line x1="48" y1="6" x2="48" y2="66" style="stroke:var(--ink-2);stroke-width:1.6"/><line x1="48" y1="36" x2="26" y2="23" style="stroke:var(--c-p);stroke-width:2.6"/><circle cx="26" cy="23" r="3.6" style="fill:var(--c-p)"/></svg>4 · Cuadrantes</a><a href="../../../../temas/razones-trigonometricas/inversas/"><svg class="ico" viewBox="0 0 96 72" aria-hidden="true" focusable="false"><text x="48" y="46" text-anchor="middle" style="font:700 24px var(--f-display, sans-serif);fill:var(--ink)">sen⁻¹</text></svg>5 · Inversas</a></nav>
+  <div class="layout">
+    <main class="doc">
+<nav class="saltos" aria-label="Saltar a"><a href="../#e-t4">Volver a los ejercicios</a><a href="../../par-impar/">Teoría: Par e impar</a></nav>
+<div class="enun-box" id="enunciado"><div class="lbl">Enunciado · Ejercicio nuevo</div><p>Estudia si son pares, impares o ninguna de las dos:</p>
+<p>a) f(x) = x³ − x   b) g(x) = x² + cos x   c) h(x) = x + 1</p>
+</div>
+<p class="ficha"><span>Apartado: <a href="../../par-impar/"><strong>Funciones par e impar</strong></a></span><span class="tag nivel n1">Nivel 1 · para empezar</span></p>
+
+<h2 id="resolver">Resuélvelo con pistas</h2>
+<p>Hazlo primero en la libreta. Si te atascas, abre la siguiente pista: cada una te deja un poco más cerca, pero no lo resuelve todo.</p>
+<section class="guia" data-ej="razones-trigonometricas:t4" aria-label="Pistas y solución">
+<details class="pista"><summary><span class="n">Pista 1</span><span class="t">Haz el dibujo</span></summary><div class="cuerpo"><p>Esboza las tres gráficas (o usa la calculadora) y mira la simetría: ¿espejo respecto al eje Y, media vuelta respecto al origen o ninguna?</p>
+<details class="dibujo"><summary>Ver mi dibujo</summary><figure class="fig-m"><svg viewBox="0 0 226.4 320" role="img" aria-label="f gira con media vuelta; g es un espejo; h no tiene ninguna de las dos simetrías." style="max-width:226.4px"><line class="l c-eje" x1="34" y1="178" x2="192.4" y2="178"/><path class="punta c-eje" d="M192.4 178 L184.1 181.5 L184.1 174.5Z"/><line class="l c-eje" x1="113.2" y1="286" x2="113.2" y2="34"/><path class="punta c-eje" d="M113.2 34 L116.7 42.3 L109.7 42.3Z"/><text class="t c-eje" x="183.4" y="190" text-anchor="end">x</text><text class="t c-eje" x="125.2" y="38" text-anchor="start">y</text><path class="l sin c-p" style="stroke-width:2.4" d="M53.4 283.2L53.8 280.3L54.2 277.5L54.6 274.7L55 272L55.4 269.3L55.8 266.7L56.2 264.1L56.6 261.5L57 259L57.4 256.5L57.8 254L58.2 251.6L58.6 249.3L58.9 247L59.3 244.7L59.7 242.4L60.1 240.2L60.5 238.1L60.9 235.9L61.3 233.8L61.7 231.8L62.1 229.8L62.5 227.8L62.9 225.9L63.3 224L63.7 222.1L64.1 220.3L64.5 218.5L64.9 216.7L65.3 215L65.7 213.3L66.1 211.6L66.5 210L66.9 208.4L67.3 206.9L67.7 205.3L68.1 203.8L68.5 202.4L68.8 201L69.2 199.6L69.6 198.2L70 196.9L70.4 195.6L70.8 194.3L71.2 193.1L71.6 191.9L72 190.7L72.4 189.6L72.8 188.5L73.2 187.4L73.6 186.3L74 185.3L74.4 184.3L74.8 183.3L75.2 182.4L75.6 181.5L76 180.6L76.4 179.7L76.8 178.9L77.2 178.1L77.6 177.3L78 176.5L78.4 175.8L78.7 175.1L79.1 174.4L79.5 173.8L79.9 173.1L80.3 172.5L80.7 171.9L81.1 171.4L81.5 170.9L81.9 170.3L82.3 169.9L82.7 169.4L83.1 168.9L83.5 168.5L83.9 168.1L84.3 167.7L84.7 167.4L85.1 167L85.5 166.7L85.9 166.4L86.3 166.1L86.7 165.9L87.1 165.6L87.5 165.4L87.9 165.2L88.3 165L88.6 164.9L89 164.7L89.4 164.6L89.8 164.5L90.2 164.4L90.6 164.3L91 164.2L91.4 164.2L91.8 164.2L92.2 164.1L92.6 164.1L93 164.2L93.4 164.2L93.8 164.2L94.2 164.3L94.6 164.4L95 164.4L95.4 164.5L95.8 164.7L96.2 164.8L96.6 164.9L97 165.1L97.4 165.2L97.8 165.4L98.2 165.6L98.5 165.8L98.9 166L99.3 166.2L99.7 166.4L100.1 166.7L100.5 166.9L100.9 167.2L101.3 167.4L101.7 167.7L102.1 168L102.5 168.3L102.9 168.5L103.3 168.8L103.7 169.2L104.1 169.5L104.5 169.8L104.9 170.1L105.3 170.5L105.7 170.8L106.1 171.2L106.5 171.5L106.9 171.9L107.3 172.2L107.7 172.6L108.1 173L108.4 173.3L108.8 173.7L109.2 174.1L109.6 174.5L110 174.9L110.4 175.2L110.8 175.6L111.2 176L111.6 176.4L112 176.8L112.4 177.2L112.8 177.6L113.2 178L113.6 178.4L114 178.8L114.4 179.2L114.8 179.6L115.2 180L115.6 180.4L116 180.8L116.4 181.1L116.8 181.5L117.2 181.9L117.6 182.3L118 182.7L118.3 183L118.7 183.4L119.1 183.8L119.5 184.1L119.9 184.5L120.3 184.8L120.7 185.2L121.1 185.5L121.5 185.9L121.9 186.2L122.3 186.5L122.7 186.8L123.1 187.2L123.5 187.5L123.9 187.7L124.3 188L124.7 188.3L125.1 188.6L125.5 188.8L125.9 189.1L126.3 189.3L126.7 189.6L127.1 189.8L127.5 190L127.9 190.2L128.2 190.4L128.6 190.6L129 190.8L129.4 190.9L129.8 191.1L130.2 191.2L130.6 191.3L131 191.5L131.4 191.6L131.8 191.6L132.2 191.7L132.6 191.8L133 191.8L133.4 191.8L133.8 191.9L134.2 191.9L134.6 191.8L135 191.8L135.4 191.8L135.8 191.7L136.2 191.6L136.6 191.5L137 191.4L137.4 191.3L137.8 191.1L138.1 191L138.5 190.8L138.9 190.6L139.3 190.4L139.7 190.1L140.1 189.9L140.5 189.6L140.9 189.3L141.3 189L141.7 188.6L142.1 188.3L142.5 187.9L142.9 187.5L143.3 187.1L143.7 186.6L144.1 186.1L144.5 185.7L144.9 185.1L145.3 184.6L145.7 184.1L146.1 183.5L146.5 182.9L146.9 182.2L147.3 181.6L147.7 180.9L148 180.2L148.4 179.5L148.8 178.7L149.2 177.9L149.6 177.1L150 176.3L150.4 175.4L150.8 174.5L151.2 173.6L151.6 172.7L152 171.7L152.4 170.7L152.8 169.7L153.2 168.6L153.6 167.5L154 166.4L154.4 165.3L154.8 164.1L155.2 162.9L155.6 161.7L156 160.4L156.4 159.1L156.8 157.8L157.2 156.4L157.6 155L157.9 153.6L158.3 152.2L158.7 150.7L159.1 149.1L159.5 147.6L159.9 146L160.3 144.4L160.7 142.7L161.1 141L161.5 139.3L161.9 137.5L162.3 135.7L162.7 133.9L163.1 132L163.5 130.1L163.9 128.2L164.3 126.2L164.7 124.2L165.1 122.2L165.5 120.1L165.9 117.9L166.3 115.8L166.7 113.6L167.1 111.3L167.5 109L167.8 106.7L168.2 104.4L168.6 102L169 99.5L169.4 97L169.8 94.5L170.2 91.9L170.6 89.3L171 86.7L171.4 84L171.8 81.3L172.2 78.5L172.6 75.7L173 72.8L173.4 69.9L173.8 67L174.2 64L174.6 60.9L175 57.9L175.4 54.7L175.8 51.6L176.2 48.4L176.6 45.1L177 41.8L177.4 38.4L177.7 35"/><path class="l sin c-n" style="stroke-width:2.4" d="M36.8 34.6L37.2 36L37.6 37.3L38 38.6L38.4 39.9L38.8 41.2L39.1 42.5L39.5 43.8L39.9 45L40.3 46.3L40.7 47.5L41.1 48.8L41.5 50L41.9 51.2L42.3 52.4L42.7 53.6L43.1 54.8L43.5 55.9L43.9 57.1L44.3 58.2L44.7 59.4L45.1 60.5L45.5 61.6L45.9 62.7L46.3 63.8L46.7 64.9L47.1 66L47.5 67.1L47.9 68.1L48.3 69.2L48.7 70.2L49 71.2L49.4 72.2L49.8 73.3L50.2 74.3L50.6 75.2L51 76.2L51.4 77.2L51.8 78.2L52.2 79.1L52.6 80.1L53 81L53.4 81.9L53.8 82.8L54.2 83.7L54.6 84.6L55 85.5L55.4 86.4L55.8 87.3L56.2 88.1L56.6 89L57 89.8L57.4 90.7L57.8 91.5L58.2 92.3L58.6 93.1L58.9 93.9L59.3 94.7L59.7 95.5L60.1 96.3L60.5 97.1L60.9 97.8L61.3 98.6L61.7 99.3L62.1 100.1L62.5 100.8L62.9 101.5L63.3 102.2L63.7 102.9L64.1 103.6L64.5 104.3L64.9 105L65.3 105.7L65.7 106.3L66.1 107L66.5 107.6L66.9 108.3L67.3 108.9L67.7 109.6L68.1 110.2L68.5 110.8L68.8 111.4L69.2 112L69.6 112.6L70 113.2L70.4 113.7L70.8 114.3L71.2 114.9L71.6 115.4L72 116L72.4 116.5L72.8 117.1L73.2 117.6L73.6 118.1L74 118.6L74.4 119.1L74.8 119.6L75.2 120.1L75.6 120.6L76 121.1L76.4 121.6L76.8 122L77.2 122.5L77.6 123L78 123.4L78.4 123.9L78.7 124.3L79.1 124.7L79.5 125.2L79.9 125.6L80.3 126L80.7 126.4L81.1 126.8L81.5 127.2L81.9 127.6L82.3 128L82.7 128.3L83.1 128.7L83.5 129.1L83.9 129.4L84.3 129.8L84.7 130.1L85.1 130.5L85.5 130.8L85.9 131.1L86.3 131.5L86.7 131.8L87.1 132.1L87.5 132.4L87.9 132.7L88.3 133L88.6 133.3L89 133.6L89.4 133.9L89.8 134.2L90.2 134.4L90.6 134.7L91 135L91.4 135.2L91.8 135.5L92.2 135.7L92.6 136L93 136.2L93.4 136.4L93.8 136.6L94.2 136.9L94.6 137.1L95 137.3L95.4 137.5L95.8 137.7L96.2 137.9L96.6 138.1L97 138.3L97.4 138.5L97.8 138.6L98.2 138.8L98.5 139L98.9 139.1L99.3 139.3L99.7 139.5L100.1 139.6L100.5 139.7L100.9 139.9L101.3 140L101.7 140.2L102.1 140.3L102.5 140.4L102.9 140.5L103.3 140.6L103.7 140.7L104.1 140.8L104.5 140.9L104.9 141L105.3 141.1L105.7 141.2L106.1 141.3L106.5 141.4L106.9 141.4L107.3 141.5L107.7 141.6L108.1 141.6L108.4 141.7L108.8 141.7L109.2 141.8L109.6 141.8L110 141.9L110.4 141.9L110.8 141.9L111.2 141.9L111.6 142L112 142L112.4 142L112.8 142L113.2 142L113.6 142L114 142L114.4 142L114.8 142L115.2 141.9L115.6 141.9L116 141.9L116.4 141.9L116.8 141.8L117.2 141.8L117.6 141.7L118 141.7L118.3 141.6L118.7 141.6L119.1 141.5L119.5 141.4L119.9 141.4L120.3 141.3L120.7 141.2L121.1 141.1L121.5 141L121.9 140.9L122.3 140.8L122.7 140.7L123.1 140.6L123.5 140.5L123.9 140.4L124.3 140.3L124.7 140.2L125.1 140L125.5 139.9L125.9 139.7L126.3 139.6L126.7 139.5L127.1 139.3L127.5 139.1L127.9 139L128.2 138.8L128.6 138.6L129 138.5L129.4 138.3L129.8 138.1L130.2 137.9L130.6 137.7L131 137.5L131.4 137.3L131.8 137.1L132.2 136.9L132.6 136.6L133 136.4L133.4 136.2L133.8 136L134.2 135.7L134.6 135.5L135 135.2L135.4 135L135.8 134.7L136.2 134.4L136.6 134.2L137 133.9L137.4 133.6L137.8 133.3L138.1 133L138.5 132.7L138.9 132.4L139.3 132.1L139.7 131.8L140.1 131.5L140.5 131.1L140.9 130.8L141.3 130.5L141.7 130.1L142.1 129.8L142.5 129.4L142.9 129.1L143.3 128.7L143.7 128.3L144.1 128L144.5 127.6L144.9 127.2L145.3 126.8L145.7 126.4L146.1 126L146.5 125.6L146.9 125.2L147.3 124.7L147.7 124.3L148 123.9L148.4 123.4L148.8 123L149.2 122.5L149.6 122L150 121.6L150.4 121.1L150.8 120.6L151.2 120.1L151.6 119.6L152 119.1L152.4 118.6L152.8 118.1L153.2 117.6L153.6 117.1L154 116.5L154.4 116L154.8 115.4L155.2 114.9L155.6 114.3L156 113.7L156.4 113.2L156.8 112.6L157.2 112L157.6 111.4L157.9 110.8L158.3 110.2L158.7 109.6L159.1 108.9L159.5 108.3L159.9 107.6L160.3 107L160.7 106.3L161.1 105.7L161.5 105L161.9 104.3L162.3 103.6L162.7 102.9L163.1 102.2L163.5 101.5L163.9 100.8L164.3 100.1L164.7 99.3L165.1 98.6L165.5 97.8L165.9 97.1L166.3 96.3L166.7 95.5L167.1 94.7L167.5 93.9L167.8 93.1L168.2 92.3L168.6 91.5L169 90.7L169.4 89.8L169.8 89L170.2 88.1L170.6 87.3L171 86.4L171.4 85.5L171.8 84.6L172.2 83.7L172.6 82.8L173 81.9L173.4 81L173.8 80.1L174.2 79.1L174.6 78.2L175 77.2L175.4 76.2L175.8 75.2L176.2 74.3L176.6 73.3L177 72.2L177.4 71.2L177.7 70.2L178.1 69.2L178.5 68.1L178.9 67.1L179.3 66L179.7 64.9L180.1 63.8L180.5 62.7L180.9 61.6L181.3 60.5L181.7 59.4L182.1 58.2L182.5 57.1L182.9 55.9L183.3 54.8L183.7 53.6L184.1 52.4L184.5 51.2L184.9 50L185.3 48.8L185.7 47.5L186.1 46.3L186.5 45L186.9 43.8L187.3 42.5L187.6 41.2L188 39.9L188.4 38.6L188.8 37.3L189.2 36L189.6 34.6"/><path class="l sin c-fr" style="stroke-width:2.4" d="M34 221.2L34.4 220.8L34.8 220.4L35.2 220L35.6 219.6L36 219.2L36.4 218.8L36.8 218.4L37.2 218L37.6 217.6L38 217.2L38.4 216.8L38.8 216.4L39.1 216.1L39.5 215.7L39.9 215.3L40.3 214.9L40.7 214.5L41.1 214.1L41.5 213.7L41.9 213.3L42.3 212.9L42.7 212.5L43.1 212.1L43.5 211.7L43.9 211.3L44.3 210.9L44.7 210.5L45.1 210.1L45.5 209.7L45.9 209.3L46.3 208.9L46.7 208.5L47.1 208.1L47.5 207.7L47.9 207.3L48.3 206.9L48.7 206.5L49 206.2L49.4 205.8L49.8 205.4L50.2 205L50.6 204.6L51 204.2L51.4 203.8L51.8 203.4L52.2 203L52.6 202.6L53 202.2L53.4 201.8L53.8 201.4L54.2 201L54.6 200.6L55 200.2L55.4 199.8L55.8 199.4L56.2 199L56.6 198.6L57 198.2L57.4 197.8L57.8 197.4L58.2 197L58.6 196.6L58.9 196.3L59.3 195.9L59.7 195.5L60.1 195.1L60.5 194.7L60.9 194.3L61.3 193.9L61.7 193.5L62.1 193.1L62.5 192.7L62.9 192.3L63.3 191.9L63.7 191.5L64.1 191.1L64.5 190.7L64.9 190.3L65.3 189.9L65.7 189.5L66.1 189.1L66.5 188.7L66.9 188.3L67.3 187.9L67.7 187.5L68.1 187.1L68.5 186.7L68.8 186.4L69.2 186L69.6 185.6L70 185.2L70.4 184.8L70.8 184.4L71.2 184L71.6 183.6L72 183.2L72.4 182.8L72.8 182.4L73.2 182L73.6 181.6L74 181.2L74.4 180.8L74.8 180.4L75.2 180L75.6 179.6L76 179.2L76.4 178.8L76.8 178.4L77.2 178L77.6 177.6L78 177.2L78.4 176.8L78.7 176.5L79.1 176.1L79.5 175.7L79.9 175.3L80.3 174.9L80.7 174.5L81.1 174.1L81.5 173.7L81.9 173.3L82.3 172.9L82.7 172.5L83.1 172.1L83.5 171.7L83.9 171.3L84.3 170.9L84.7 170.5L85.1 170.1L85.5 169.7L85.9 169.3L86.3 168.9L86.7 168.5L87.1 168.1L87.5 167.7L87.9 167.3L88.3 166.9L88.6 166.6L89 166.2L89.4 165.8L89.8 165.4L90.2 165L90.6 164.6L91 164.2L91.4 163.8L91.8 163.4L92.2 163L92.6 162.6L93 162.2L93.4 161.8L93.8 161.4L94.2 161L94.6 160.6L95 160.2L95.4 159.8L95.8 159.4L96.2 159L96.6 158.6L97 158.2L97.4 157.8L97.8 157.4L98.2 157L98.5 156.7L98.9 156.3L99.3 155.9L99.7 155.5L100.1 155.1L100.5 154.7L100.9 154.3L101.3 153.9L101.7 153.5L102.1 153.1L102.5 152.7L102.9 152.3L103.3 151.9L103.7 151.5L104.1 151.1L104.5 150.7L104.9 150.3L105.3 149.9L105.7 149.5L106.1 149.1L106.5 148.7L106.9 148.3L107.3 147.9L107.7 147.5L108.1 147.1L108.4 146.8L108.8 146.4L109.2 146L109.6 145.6L110 145.2L110.4 144.8L110.8 144.4L111.2 144L111.6 143.6L112 143.2L112.4 142.8L112.8 142.4L113.2 142L113.6 141.6L114 141.2L114.4 140.8L114.8 140.4L115.2 140L115.6 139.6L116 139.2L116.4 138.8L116.8 138.4L117.2 138L117.6 137.6L118 137.2L118.3 136.9L118.7 136.5L119.1 136.1L119.5 135.7L119.9 135.3L120.3 134.9L120.7 134.5L121.1 134.1L121.5 133.7L121.9 133.3L122.3 132.9L122.7 132.5L123.1 132.1L123.5 131.7L123.9 131.3L124.3 130.9L124.7 130.5L125.1 130.1L125.5 129.7L125.9 129.3L126.3 128.9L126.7 128.5L127.1 128.1L127.5 127.7L127.9 127.3L128.2 127L128.6 126.6L129 126.2L129.4 125.8L129.8 125.4L130.2 125L130.6 124.6L131 124.2L131.4 123.8L131.8 123.4L132.2 123L132.6 122.6L133 122.2L133.4 121.8L133.8 121.4L134.2 121L134.6 120.6L135 120.2L135.4 119.8L135.8 119.4L136.2 119L136.6 118.6L137 118.2L137.4 117.8L137.8 117.4L138.1 117.1L138.5 116.7L138.9 116.3L139.3 115.9L139.7 115.5L140.1 115.1L140.5 114.7L140.9 114.3L141.3 113.9L141.7 113.5L142.1 113.1L142.5 112.7L142.9 112.3L143.3 111.9L143.7 111.5L144.1 111.1L144.5 110.7L144.9 110.3L145.3 109.9L145.7 109.5L146.1 109.1L146.5 108.7L146.9 108.3L147.3 107.9L147.7 107.5L148 107.2L148.4 106.8L148.8 106.4L149.2 106L149.6 105.6L150 105.2L150.4 104.8L150.8 104.4L151.2 104L151.6 103.6L152 103.2L152.4 102.8L152.8 102.4L153.2 102L153.6 101.6L154 101.2L154.4 100.8L154.8 100.4L155.2 100L155.6 99.6L156 99.2L156.4 98.8L156.8 98.4L157.2 98L157.6 97.6L157.9 97.3L158.3 96.9L158.7 96.5L159.1 96.1L159.5 95.7L159.9 95.3L160.3 94.9L160.7 94.5L161.1 94.1L161.5 93.7L161.9 93.3L162.3 92.9L162.7 92.5L163.1 92.1L163.5 91.7L163.9 91.3L164.3 90.9L164.7 90.5L165.1 90.1L165.5 89.7L165.9 89.3L166.3 88.9L166.7 88.5L167.1 88.1L167.5 87.7L167.8 87.4L168.2 87L168.6 86.6L169 86.2L169.4 85.8L169.8 85.4L170.2 85L170.6 84.6L171 84.2L171.4 83.8L171.8 83.4L172.2 83L172.6 82.6L173 82.2L173.4 81.8L173.8 81.4L174.2 81L174.6 80.6L175 80.2L175.4 79.8L175.8 79.4L176.2 79L176.6 78.6L177 78.2L177.4 77.8L177.7 77.5L178.1 77.1L178.5 76.7L178.9 76.3L179.3 75.9L179.7 75.5L180.1 75.1L180.5 74.7L180.9 74.3L181.3 73.9L181.7 73.5L182.1 73.1L182.5 72.7L182.9 72.3L183.3 71.9L183.7 71.5L184.1 71.1L184.5 70.7L184.9 70.3L185.3 69.9L185.7 69.5L186.1 69.1L186.5 68.7L186.9 68.3L187.3 67.9L187.6 67.6L188 67.2L188.4 66.8L188.8 66.4L189.2 66L189.6 65.6L190 65.2L190.4 64.8L190.8 64.4L191.2 64L191.6 63.6L192 63.2L192.4 62.8"/><text class="t c-n" x="174.4" y="63.2" text-anchor="middle">g</text><text class="t c-p" x="185.2" y="128" text-anchor="middle">f</text><text class="t c-fr" x="41.2" y="203.6" text-anchor="middle">h</text></svg><figcaption>f gira con media vuelta; g es un espejo; h no tiene ninguna de las dos simetrías.</figcaption></figure></details>
+</div></details>
+<details class="pista"><summary><span class="n">Pista 2</span><span class="t">Sustituye −x</span></summary><div class="cuerpo"><p>Calcula f(−x), g(−x) y h(−x) y compáralas con la función y con su opuesta.</p>
+</div></details>
+<details class="res"><summary><span class="n">Resultado</span><span class="t">Solo para comprobar</span></summary><div class="cuerpo"><p class="sub"><strong>x³ − x impar · x² + cos x par · x + 1 ninguna</strong></p>
+</div></details>
+<details class="sol" id="solucion"><summary><span class="n">Solución completa</span><span class="t">Paso a paso</span></summary><div class="cuerpo"><p>a) <strong class="f"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mo>−</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mo>−</mo><mi>x</mi><msup><mo stretchy="false">)</mo><mn>3</mn></msup><mo>−</mo><mo stretchy="false">(</mo><mo>−</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mo>−</mo><msup><mi>x</mi><mn>3</mn></msup><mo>+</mo><mi>x</mi><mo>=</mo><mo>−</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(-x) = (-x)^{3} - (-x) = -x^{3} + x = -f(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord">−</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">−</span><span class="mord mathnormal">x</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">−</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">−</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span></strong>: <strong>impar</strong>.</p>
+<p>b) <strong class="f"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi><mo stretchy="false">(</mo><mo>−</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mo>−</mo><mi>x</mi><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mi mathvariant="normal">cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mo>−</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi mathvariant="normal">cos</mi><mo>⁡</mo><mi>x</mi><mo>=</mo><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">g(-x) = (-x)^{2} + \operatorname{cos} (-x) = x^{2} + \operatorname{cos} x = g(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord">−</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">−</span><span class="mord mathnormal">x</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop"><span class="mord mathrm">cos</span></span><span class="mopen">(</span><span class="mord">−</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mop"><span class="mord mathrm">cos</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span></strong>: <strong>par</strong> (el coseno es par).</p>
+<p>c) <strong class="f"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo stretchy="false">(</mo><mo>−</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mo>−</mo><mi>x</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">h(-x) = -x + 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">h</span><span class="mopen">(</span><span class="mord">−</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord">−</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></strong>, que no es ni h(x) = x + 1 ni −h(x) = −x − 1: <strong>ninguna</strong>.</p>
+<blockquote class="why">
+<p><strong>¿Basta con un valor?</strong> Para probar que es par o impar hay que hacerlo con x genérico. Para probar que no lo es, basta un contraejemplo: h(1) = 2 y h(−1) = 0.</p>
+</blockquote>
+</div></details>
+<div class="estado" hidden><span class="txt"></span><button type="button" class="btn hecho">Lo he resuelto</button><button type="button" class="reset">Empezar de cero</button></div>
+</section>
+    <nav class="pager" aria-label="Anterior y siguiente"><span></span><a class="mid" href="../#e-t4">Todos los ejercicios</a><a href="../t1/" style="text-align:right"><small>Siguiente</small>T1 · El triángulo 3-4-5</a></nav>
+    </main>
+    <aside class="toc" aria-label="En esta página"><h2>En esta página</h2><ol><li><a href="#enunciado">Enunciado</a></li><li><a href="#resolver">Pistas y solución</a></li></ol></aside>
+  </div>
+  <footer>Material de repaso del Tema 2 · Geometría y trigonometría. Abre las páginas en el navegador (ordenador, tableta o móvil): las fórmulas, los simuladores y las pistas necesitan la web, no la vista previa de WhatsApp o de Archivos.</footer>
+</div>
+<script src="../../../../assets/mates/mates.js" defer></script>
+</body>
+</html>

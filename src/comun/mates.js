@@ -14,7 +14,9 @@ const CORTE = new Set(['+', '−', '-', '=', '≥', '≤', '<', '>', ',', ':', '
 const LETRA = /[A-Za-zÁÉÍÓÚáéíóúÑñüÜ]/;
 // palabras cortas que sí son texto dentro de una fórmula (las de 4 letras o más lo son siempre)
 const CORTAS = new Set(['y', 'o', 'a', 'e', 'es', 'por', 'con', 'de', 'un', 'la', 'el', 'si', 'no', 'en', 'que', 'los', 'las', 'del', 'al', 'una', 'son', 'par', 'sea', 'sin', 'cm', 'mod', 'vez', 'ni']);
-const ROMANAS = new Set(['VR', 'PR']);   // nombres de fórmulas que no son producto de variables
+const ROMANAS = new Set(['VR', 'PR']);
+const UNIDADES = new Set(['rad', 'cm', 'mm', 'km', 'dm']);   // unidades de varias letras, en redonda
+const FUNCIONES = new Set(['sen', 'cos', 'tan', 'sec', 'cosec', 'csc', 'cot', 'arcsen', 'arccos', 'arctan', 'log', 'ln', 'lím', 'máx', 'mín']);   // se escriben en redonda: sen x, tan α   // nombres de fórmulas que no son producto de variables
 const esPalabra = v => v.length >= 4 || CORTAS.has(v.toLowerCase());
 
 // ---------------------------------------------------------------- análisis: texto -> lista de piezas
@@ -45,8 +47,10 @@ function analizar(s) {
       }
       else if (/\d/.test(c)) { let v = ''; while (i < s.length && /[\d,]/.test(s[i]) && !(s[i] === ',' && !/\d/.test(s[i + 1] || ''))) v += s[i++]; p = { t: 'num', v }; }
       else if (LETRA.test(c)) {
-        let v = ''; while (i < s.length && LETRA.test(s[i])) v += s[i++];
-        if (ROMANAS.has(v)) p = { t: 'rom', v };
+        const ini = i; let v = ''; while (i < s.length && LETRA.test(s[i])) v += s[i++];
+        if (FUNCIONES.has(v)) p = { t: 'fun', v };
+        else if (UNIDADES.has(v) && s[ini - 1] === ' ') p = { t: 'uni', v };   // «17,32 km» sí; «4km» es 4·k·m
+        else if (ROMANAS.has(v)) p = { t: 'rom', v };
         else if (v.length > 1 && !esPalabra(v) && /^[A-Za-z]+$/.test(v)) { for (const ch of v.slice(0, -1)) out.push({ t: 'var', v: ch }); p = { t: 'var', v: v.slice(-1) }; }   // kx², ab: producto de variables
         else p = v.length > 1 ? { t: 'pal', v } : { t: 'var', v };
       }
@@ -76,6 +80,9 @@ function pieza(p) {
     case 'var': base = p.v; break;
     case 'pal': base = `\\text{${p.v}}`; break;
     case 'rom': base = `\\mathrm{${p.v}}`; break;
+    case 'fun': base = `\\operatorname{${p.v}}`; break;
+    case 'ap': return p.tex;
+    case 'uni': base = `\\,\\mathrm{${p.v}}`; break;
     case 'esp': return ' ';
     case 'raiz': base = `\\sqrt${p.idx ? `[${p.idx}]` : ''}{${tex(p.hijos)}}`; break;
     case 'grupo': {
@@ -115,6 +122,25 @@ function tex(ps) {
         ps.splice(k, 2, { t: 'frac', tex: t });
       }
     }
+  }
+  // «y» u «o» sueltas entre dos términos son conjunciones: 18° y 162°, π/8 o 7π/8
+  const noEsp = (k, paso) => { for (let j = k + paso; j >= 0 && j < ps.length; j += paso) if (ps[j].t !== 'esp') return ps[j]; return null; };
+  for (let k = 1; k < ps.length - 1; k++) {
+    const p = ps[k];
+    if (p.t !== 'var' || !['y', 'o'].includes(p.v) || p.sup || p.sub || ps[k - 1].t !== 'esp' || ps[k + 1].t !== 'esp') continue;
+    const a = noEsp(k, -1), b = noEsp(k, 1);
+    if (a && b && a.t !== 'op' && b.t !== 'op') ps[k] = { t: 'pal', v: p.v };
+  }
+  // funciones aplicadas: «sen 40°», «tan α», «cos²x» forman un solo factor (para que una fracción no las parta)
+  for (let k = 0; k < ps.length; k++) {
+    if (ps[k].t !== 'fun') continue;
+    let j = k + 1;
+    if (ps[j] && ps[j].t === 'esp') j++;
+    const arg = ps[j];
+    if (!arg || !(['var', 'num', 'grupo'].includes(arg.t) || (arg.t === 'otro' && /^[α-ωϑϕ]$/.test(arg.v))) || (arg.t === 'var' && FUNCIONES.has(arg.v))) continue;
+    let fin = j;
+    if (ps[j + 1] && ps[j + 1].t === 'otro' && ps[j + 1].v === '°') fin = j + 1;
+    ps.splice(k, fin - k + 1, { t: 'ap', tex: `${pieza(ps[k])} ${ps.slice(j, fin + 1).map(pieza).join('')}` });
   }
   // fracciones: el numerador es el producto que hay a la izquierda (hasta + − = …); el denominador, un solo factor
   for (let k = ps.findIndex(p => p.t === 'op' && p.v === '/'); k >= 0; k = ps.findIndex(p => p.t === 'op' && p.v === '/')) {
@@ -163,12 +189,15 @@ const esFormula = s => {
 
 // Amplía [a, b) a la fórmula completa que la rodea: símbolos, números, variables de una letra y espacios,
 // hasta una palabra (2 letras o más, o «y», «o», «a», «e» sueltas), una coma o punto seguidos de espacio, «:» …
-const MATE = /[0-9A-Za-z +\-−=≥≤<>·⋯…()\[\]²³ⁿᵏʳ⁺⁻⁰¹⁴⁵⁶⁷⁸⁹₀₁₂ₙₖ√!∈ℤℕ/]/;
+const MATE = /[0-9A-Za-z +\-−=≥≤<>·⋯…()\[\]²³ⁿᵏʳ⁺⁻⁰¹⁴⁵⁶⁷⁸⁹₀₁₂ₙₖ√!∈ℤℕ/α-ωϑϕ°]/;
 const NEXOS = new Set(['y', 'o', 'a', 'e']);
 function ampliar(s, a0, b0, min) {
   const palabra = (j, paso) => {   // ¿empieza en j (hacia paso) una palabra?
     let x = j, t = '';
     while (x >= 0 && x < s.length && LETRA.test(s[x])) { t = paso < 0 ? s[x] + t : t + s[x]; x += paso; }
+    let y = j - paso, u = t;   // la palabra entera, también lo que queda hacia el otro lado («s|en» es «sen»)
+    while (y >= 0 && y < s.length && LETRA.test(s[y])) { u = paso < 0 ? u + s[y] : s[y] + u; y -= paso; }
+    if (FUNCIONES.has(u) || UNIDADES.has(u)) return false;
     return t.length >= 2 ? esPalabra(t) || !/^[A-Za-z]+$/.test(t) : NEXOS.has(t);
   };
   let a = a0;
@@ -230,7 +259,7 @@ function fraccionesEnTexto(txt) {
   return out + esc(s.slice(ultimo));
 }
 
-// HTML de una página -> con las fórmulas compuestas (no toca scripts, estilos, <title> ni <template>)
+// HTML de una página -> con las fórmulas compuestas (no toca scripts, estilos, <title>, <template> ni los SVG de las figuras)
 function mates(html) {
   const guardado = [];
   const guarda = h => `\u0000${guardado.push(h) - 1}\u0000`;
@@ -247,7 +276,7 @@ function mates(html) {
     return k ? `<strong class="f">${guarda(k)}</strong>` : m;
   });
   // 3) fracciones sueltas en el texto (fuera de etiquetas, scripts, estilos y lo ya compuesto)
-  html = html.replace(/(<(script|style|title|template)[\s\S]*?<\/\2>)|(<[^>]+>)|([^<]+)/g, (m, bloque, _t, etiqueta, texto) => {
+  html = html.replace(/(<(script|style|title|template|svg)[\s\S]*?<\/\2>)|(<[^>]+>)|([^<]+)/g, (m, bloque, _t, etiqueta, texto) => {
     if (bloque || etiqueta) return m;
     if (!texto.includes('/')) return m;
     return texto.split(/(\u0000\d+\u0000)/).map(t => /^\u0000\d+\u0000$/.test(t) ? t : fraccionesEnTexto(t)).join('');
