@@ -1,5 +1,5 @@
 {
-  "name": "fisica-interactiva-src",
+  "name": "bi-ciencias-src",
   "private": true,
   "description": "Herramientas para generar las páginas de BI Ciencias",
   "dependencies": {

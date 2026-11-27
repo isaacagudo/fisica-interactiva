@@ -2,7 +2,7 @@
 
 Apuntes, ejercicios resueltos paso a paso y simuladores para 1.º de Bachillerato Internacional, organizados por materias. Por ahora: **Física** (trabajo, potencia y energía) y **Matemáticas** (demostración por inducción, con ejercicios guiados por pistas).
 
-Web: https://isaacagudo.github.io/fisica-interactiva/
+Web: https://isaacagudo.github.io/bi-ciencias/
 
 ## Estructura
 
